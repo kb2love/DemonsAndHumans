@@ -122,7 +122,7 @@ namespace UnityEditor.PostProcessing
                 );
         }
 
-        // Update internal state with a given bloom instance
+        // Update internal state with a given bloom diaInst
         public void PrepareGraph()
         {
             var bloom = (BloomModel)target;
