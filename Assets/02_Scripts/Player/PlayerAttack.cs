@@ -1,0 +1,159 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAttack : MonoBehaviour
+{
+    [SerializeField] PlayerData playerData;
+    Animator animator;
+    PlayerController controller;
+    PlayerDamage plDamage;
+    PlayerAniEvent aniEvent;
+    private int attackCount = 0;
+    private float comboResetTime = 1.0f; // 연속 공격을 초기화하는 시간
+    private float stopAttackTime = 1.25f; // 시간이 지나면 공격카운트를 초기화할 시간
+    //어택 시간
+    private float lastAttackTime;       // 현재시간을 저장할 공격한 시간
+    private float stopLastAttackTime;   // 현재시간을 저장할 공격을 멈출 시간
+    //스킬 시간
+    [SerializeField] private float level5SkillTime = 10.0f; // 스킬 쿨타임
+    private float level5LastSkilTime;      // 얼음 스킬을 날린 마지막시간을 저장할 시간
+    SkillManager skillManager;
+    private bool isStop;
+    private bool isEquip;
+    private bool isInven;
+    bool isSword;
+    bool isShield;
+    void Start()
+    {
+        animator = transform.GetChild(0).GetComponent<Animator>();
+        aniEvent = GetComponentInChildren<PlayerAniEvent>();
+        controller = GetComponent<PlayerController>();
+        plDamage = GetComponent<PlayerDamage>();
+        skillManager = SkillManager.skillInst;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(!isInven && !isEquip)
+        {
+            if(isSword)
+                SwordAttack();
+            if(isShield)
+                ShieldBlock();
+            if(isSword || isShield)
+                Skill();
+        }
+    }
+
+    private void SwordAttack()
+    {
+        if (Input.GetMouseButton(0) && Time.time - lastAttackTime > comboResetTime)
+        {
+            attackCount++;
+            controller.IsStop(true);
+            animator.SetBool("IsAttack", true);
+            TriggerAttackAnimation();
+            lastAttackTime = Time.time;
+            stopLastAttackTime = Time.time;
+        }
+        else if (Time.time - stopLastAttackTime > stopAttackTime && isStop)
+        {
+            attackCount = 0;
+            controller.IsStop(false);
+            animator.SetBool("IsAttack", false);
+            stopLastAttackTime = Time.time;
+            isStop = false;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            isStop = true;
+        }
+    }
+
+    private void ShieldBlock()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            if (!plDamage.IsHit)
+            {
+                animator.SetBool("IsShield", true);
+                plDamage.IsShieldOnOff(true);
+                controller.IsStop(true);
+            }
+            else
+            {
+                animator.SetBool("IsShield", false);
+                controller.IsStop(true);
+            }
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            animator.SetBool("IsShield", false);
+            plDamage.IsShieldOnOff(false);
+            controller.IsStop(false);
+        }
+    }
+    private void Skill()
+    {
+        if(skillManager.skillList[0].sprite == skillManager.skillImageList[playerData.level05SkillIdx] && Input.GetKeyDown(KeyCode.Q))
+        {
+
+        }
+        else if(skillManager.skillList[1].sprite == skillManager.skillImageList[playerData.level05SkillIdx] && Input.GetKeyDown(KeyCode.E))
+        {
+
+        }
+        for(int i = 1; i < 4; i++)
+        {
+            if (playerData.level05SkillIdx == i && Input.GetKeyDown(KeyCode.E) && Time.time - level5LastSkilTime > level5SkillTime)
+            {
+                controller.IsStop(true);
+                aniEvent.Level05SkillChange(i);
+                animator.SetTrigger("CastingTrigger");
+                Invoke("IsMove", 1.0f);
+                level5LastSkilTime = Time.time;
+                break;
+            }
+        }
+    }
+    void TriggerAttackAnimation()
+    {
+        switch (attackCount)
+        {
+            case 1:
+                animator.SetTrigger("AttackDown");
+                break;
+            case 2:
+                animator.SetTrigger("AttackUp");
+                break;
+            case 3:
+                animator.SetTrigger("AttackRotate");
+                attackCount = 0;
+                break;
+        }
+    }
+    public void IsInventory(bool _isInven)
+    {
+        isInven = _isInven;
+    }
+    public void IsEquipment(bool _isEquip)
+    {
+        isEquip = _isEquip;
+    }
+    void IsMove()
+    {
+        controller.IsStop(false);
+    }
+    public void IsSword(bool _IsSword)
+    {
+        animator.SetBool("GetSword", _IsSword);
+        isSword = _IsSword;
+    }
+    public void IsShield(bool _IsShield)
+    {
+        animator.SetBool("GetShield", _IsShield);
+        isShield = _IsShield;
+    }   
+}
