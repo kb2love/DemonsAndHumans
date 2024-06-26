@@ -7,47 +7,76 @@ public class ObjectPoolingManager : MonoBehaviour
     public static ObjectPoolingManager objInst;
     [SerializeField] PlayerData playerData;
     [SerializeField] MutantData mutantData;
+    [SerializeField] ItemData itemData;
+    [SerializeField] Transform items;
     List<GameObject> hitEffList = new List<GameObject>();
+    List<GameObject> goldList = new List<GameObject>();
+    List<GameObject> normalItemList = new List<GameObject>();
+    List<GameObject> equipmentItemList = new List<GameObject>();
     private void Awake()
     {
         objInst = this;
     }
     private void Start()
     {
-        CreateHitEffect();
+        CreateObejct("HitEffGroup", playerData.hitEff, 10, "HitEff", hitEffList);
+        CreateObejct("GoldGroup", itemData.gold, 10, "Gold", goldList);
+        CreateObejct("NormalItemGroup", itemData.normalItem, 10, "NormalItem", normalItemList);
+        CreateObejct("EquipmentItemGroup", itemData.equipmentItem, 10, "EquipmentItem", equipmentItemList);
     }
-
-    private void CreateHitEffect()
+    private void CreateObejct(string parentName, GameObject creatObj, int itemCount, string objName, List<GameObject> addList)
     {
-        GameObject hitEffGroup = new GameObject("HitEffGroup");
-        for (int i = 0; i < 10; i++)
+        GameObject objParentGroup = new GameObject(parentName);
+        objParentGroup.transform.SetParent(items.transform);
+        for (int i = 0; i < itemCount; i++)
         {
-            GameObject _hitEff = Instantiate(playerData.hitEff, hitEffGroup.transform);
-            _hitEff.name = "HitEffect" + i.ToString() + "°³";
-            _hitEff.SetActive(false);
-            hitEffList.Add(_hitEff);
+            GameObject _obj = Instantiate(creatObj, objParentGroup.transform);
+            _obj.name = objName + i.ToString() + "°³";
+            _obj.SetActive(false);
+            addList.Add(_obj);
         }
     }
-    private void CreateGoldt()
-    {
-        GameObject hitEffGroup = new GameObject("HitEffGroup");
-        for (int i = 0; i < 10; i++)
-        {
-            GameObject _hitEff = Instantiate(playerData.hitEff, hitEffGroup.transform);
-            _hitEff.name = "HitEffect" + i.ToString() + "°³";
-            _hitEff.SetActive(false);
-            hitEffList.Add(_hitEff);
-        }
-    }
-
 
     public GameObject GetHitEff()
     {
-        foreach(GameObject hitEff in hitEffList)
+        foreach (GameObject hitEff in hitEffList)
         {
-            if(!hitEff.activeSelf)
+            if (!hitEff.activeSelf)
             {
                 return hitEff;
+            }
+        }
+        return null;
+    }
+    public GameObject GetGold()
+    {
+        foreach (GameObject gold in goldList)
+        {
+            if (!gold.activeSelf)
+            {
+                return gold;
+            }
+        }
+        return null;
+    }
+    public GameObject GetNormalItem()
+    {
+        foreach (GameObject normalItem in normalItemList)
+        {
+            if (!normalItem.activeSelf)
+            {
+                return normalItem;
+            }
+        }
+        return null;
+    }
+    public GameObject GetEquipmentItem()
+    {
+        foreach (GameObject equipmentItem in equipmentItemList)
+        {
+            if (!equipmentItem.activeSelf)
+            {
+                return equipmentItem;
             }
         }
         return null;

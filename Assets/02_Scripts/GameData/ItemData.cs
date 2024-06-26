@@ -9,6 +9,9 @@ public class ItemData : ScriptableObject
     public Sprite goldImage;
     public Sprite hpImage;
     public Sprite mpImage;
+    public GameObject gold;
+    public GameObject normalItem;
+    public GameObject equipmentItem;
     public float swordDamage;
     public int swordIdx;
     public int shieldIdx;

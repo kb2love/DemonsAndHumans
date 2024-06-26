@@ -16,7 +16,9 @@ public class SkillManager : MonoBehaviour
     [SerializeField] List<Image> electroSkillImageList = new List<Image>();
     public List<Image> skillList = new List<Image>();
     public List<Sprite> skillImageList = new List<Sprite>();
-    List<Image> lastList = new List<Image>();
+    [SerializeField] List<Image> lastList = new List<Image>();
+    [SerializeField] Image lastImage;
+    int levelSkillIdx;
     PlayerAniEvent aniEvent;
     bool isSelec = false;
     private void Awake()
@@ -45,19 +47,21 @@ public class SkillManager : MonoBehaviour
     }
     public void Level5()
     {
-        LevelSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 0);
+        playerData.levelSkillPoint++;
+        levelSkillIdx = 0;
+        LevelSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, levelSkillIdx);
     }
     public void IceSpear()
     {
-        playerData.level05SkillIdx = Level05Skill(fireSkillImageList, electroSkillImageList, iceSkillImageList, 0, 1);
+        playerData.level05SkillIdx = Level05Skill(fireSkillImageList, electroSkillImageList, iceSkillImageList, levelSkillIdx, 1);
     }
     public void FireBall()
     {
-        playerData.level05SkillIdx = Level05Skill(iceSkillImageList, electroSkillImageList, fireSkillImageList, 0, 2);
+        playerData.level05SkillIdx = Level05Skill(iceSkillImageList, electroSkillImageList, fireSkillImageList, levelSkillIdx, 2);
     }
     public void ElectroBall()
     {
-        playerData.level05SkillIdx = Level05Skill(fireSkillImageList, iceSkillImageList, electroSkillImageList, 0, 3);
+        playerData.level05SkillIdx = Level05Skill(fireSkillImageList, iceSkillImageList, electroSkillImageList, levelSkillIdx, 3);
     }
     int Level05Skill(List<Image> firstList, List<Image> secondList, List<Image> thirdList, int idx, int playerSkillIdx)
     {
@@ -66,15 +70,26 @@ public class SkillManager : MonoBehaviour
         firstList[idx].GetComponent<Button>().enabled = false;
         secondList[idx].GetComponent<Button>().enabled = false;
         isSelec = false;
-        thirdList[idx].GetComponent<Button>().onClick.AddListener(SkillSelec);
         lastList = thirdList;
+        thirdList[idx].GetComponent<Button>().onClick.AddListener(SkillSelec);
         aniEvent.Level05SkillChange(playerSkillIdx);
         playerData.levelSkillPoint--;
         return playerSkillIdx;
     }
+    void LevelSkill(List<Image> iceList, List<Image> fireList, List<Image> electroList, int idx)
+    {
+        iceList[idx].color = new Color(1, 1, 1, 1);
+        fireList[idx].color = new Color(1, 1, 1, 1);
+        electroList[idx].color = new Color(1, 1, 1, 1);
+        iceList[idx].GetComponent<Button>().enabled = true;
+        fireList[idx].GetComponent<Button>().enabled = true;
+        electroList[idx].GetComponent<Button>().enabled = true;
+    }
     public void SkillSelec()
     {
         StartCoroutine(SkillSelecButton(playerData.level05SkillIdx - 1));
+        // 스타트 코루틴을 시작하는동안 추가 코루틴을 발생시키지 않도록 버튼에 코루틴 추가 리스너를 삭제한다
+        lastList[levelSkillIdx].GetComponent<Button>().onClick.RemoveListener(SkillSelec);
     }
     IEnumerator SkillSelecButton(int skillSelecIdx)
     {
@@ -126,20 +141,16 @@ public class SkillManager : MonoBehaviour
     }
 
     private void Selec(int skillListIdx ,int skillSelecIdx)
-    {
+    {   // 스킬을 이미 배치해논적이 있다면 그전에 배치했던곳은 빈칸으로 채운다
+        if (lastImage != null)
+        {
+            lastImage.sprite = skillImageList[15];
+        }
         skillList[skillListIdx].sprite = skillImageList[skillSelecIdx];
-        lastList[0].GetComponent<Button>().enabled = false;
+        lastImage = skillList[skillListIdx];
+        lastList[levelSkillIdx].GetComponent<Button>().onClick.AddListener(SkillSelec);
         isSelec = true;
     }
 
-    void LevelSkill(List<Image> iceList, List<Image> fireList, List<Image> electroList, int idx)
-    {
-        iceList[idx].color = new Color(1, 1, 1, 1);
-        fireList[idx].color = new Color(1, 1, 1, 1);
-        electroList[idx].color = new Color(1, 1, 1, 1);
-        iceList[idx].GetComponent<Button>().enabled = true;
-        fireList[idx].GetComponent<Button>().enabled = true;
-        electroList[idx].GetComponent<Button>().enabled = true;
-    }
 
 }

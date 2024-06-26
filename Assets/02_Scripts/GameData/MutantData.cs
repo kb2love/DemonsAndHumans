@@ -8,7 +8,4 @@ public class MutantData : ScriptableObject
     [Header("Skeleton")]
     public float skMaxHp;
     public float skDamage;
-    public GameObject gold;
-    public GameObject normalItem;
-    public GameObject equipmentItem;
 }

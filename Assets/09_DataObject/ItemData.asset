@@ -18,6 +18,13 @@ MonoBehaviour:
   goldImage: {fileID: 21300000, guid: b66d8031b76d04f4ca3ed2d13014244a, type: 3}
   hpImage: {fileID: 21300000, guid: ea126fc2939bf9348abfef4fe0f11ff2, type: 3}
   mpImage: {fileID: 21300000, guid: 83d1bcbe07da25a4fb82c2f8fba80166, type: 3}
+  gold: {fileID: 8571124780063614803, guid: adacffbec1c9dce4f83770d480f30b7e, type: 3}
+  normalItem: {fileID: 6780659873956747697, guid: e37f700b790654b499540d4a19142d2d, type: 3}
+  equipmentItem: {fileID: 6780659873956747697, guid: 767099b65c3ec3f4593b0848effc2e01, type: 3}
   swordDamage: 10
+  goldCoin: 0
   swordIdx: 0
   shieldIdx: 0
+  goldIdx: 0
+  hpIdx: 0
+  mpIdx: 0

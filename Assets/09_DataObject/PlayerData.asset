@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904822520bffef54a97977d50238ab49, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  HP: 110
+  HP: 105
   MaxHP: 110
   MP: 110
   MaxMP: 110
@@ -29,8 +29,9 @@ MonoBehaviour:
   level15_1MagicDamage: 0
   level15_2MagicDamage: 0
   level25MagicDamage: 0
-  levelSkillPoint: -10
-  level05SkillIdx: 1
+  GoldValue: 25
+  levelSkillPoint: -11
+  level05SkillIdx: 3
   level10SkillIdx: 0
   level15_1SkillIdx: 0
   level15_2SkillIdx: 0

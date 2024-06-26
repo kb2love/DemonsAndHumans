@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] ItemData itemData;
     [SerializeField] Transform inventory;
     [SerializeField] PlayerData playerData;
-    [SerializeField] List<Text> state = new List<Text>();
+    [SerializeField] List<Text> stateText = new List<Text>();
     [SerializeField] List<GameObject> items;
     [SerializeField] Image expImage;
     Transform itemGroup;
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
                 GetShield();
                 break;
             case ItemData.ItemType.Gold:
-                GetItemCase(itemData.swordImage, ItemData.ItemType.Gold, itemData.swordIdx);
+                GetGold();  
                 break;
         }
     }
@@ -60,32 +61,32 @@ public class GameManager : MonoBehaviour
         switch (playerStat)
         {
             case PlayerData.PlayerStat.Level:
-                state[0].text = "Level : " + playerData.Level.ToString();
-                state[9].text = "Lev : " + playerData.Level.ToString(); 
+                stateText[0].text = "Level : " + playerData.Level.ToString();
+                stateText[9].text = "Lev : " + playerData.Level.ToString(); 
                 break;
             case PlayerData.PlayerStat.HP:
-                state[1].text = "HP : " + playerData.HP.ToString("0");
+                stateText[1].text = "HP : " + playerData.HP.ToString("0");
                 break;
             case PlayerData.PlayerStat.MP:
-                state[2].text = "MP : " + playerData.MP.ToString("0");
+                stateText[2].text = "MP : " + playerData.MP.ToString("0");
                 break;
             case PlayerData.PlayerStat.MaxHP:
-                state[3].text = "MaxHP : " + playerData.MaxHP.ToString("0");
+                stateText[3].text = "MaxHP : " + playerData.MaxHP.ToString("0");
                 break;
             case PlayerData.PlayerStat.MaxMP:
-                state[4].text = "MaxMP : " + playerData.MaxMP.ToString("0");
+                stateText[4].text = "MaxMP : " + playerData.MaxMP.ToString("0");
                 break;
             case PlayerData.PlayerStat.AttackValue:
-                state[5].text = "공격력 : " + playerData.AttackValue.ToString("0");
+                stateText[5].text = "공격력 : " + playerData.AttackValue.ToString("0");
                 break;
             case PlayerData.PlayerStat.DefenceValue:
-                state[6].text = "방어력 : " + playerData.DefenceValue.ToString("0");
+                stateText[6].text = "방어력 : " + playerData.DefenceValue.ToString("0");
                 break;
             case PlayerData.PlayerStat.FatalProbability:
-                state[7].text = "치명타 확률 : " + (playerData.FatalProbability * 100).ToString("0.0") + "%";
+                stateText[7].text = "치명타 확률 : " + (playerData.FatalProbability * 100).ToString("0.0") + "%";
                 break;
             case PlayerData.PlayerStat.FatalValue:
-                state[8].text = "치명타 공격력 : " + playerData.FatalValue.ToString("0") + "%";
+                stateText[8].text = "치명타 공격력 : " + playerData.FatalValue.ToString("0") + "%";
                 break;
         }
     }
@@ -111,6 +112,10 @@ public class GameManager : MonoBehaviour
         playerData.FatalValue *= 1.05f;
         playerData.FatalProbability *= 1.1f;
         playerData.Level++;
+        if(playerData.Level == 5)
+        {
+            SkillManager.skillInst.Level5();
+        }
         for(int i = 0; i < 10; i++)
         {
             AllStatUpdata();
@@ -130,7 +135,11 @@ public class GameManager : MonoBehaviour
         StatUpdate(PlayerData.PlayerStat.FatalValue);
         StatUpdate(PlayerData.PlayerStat.FatalProbability);
     }
-
+    public void GetGold()
+    {
+        playerData.GoldValue += Random.Range(1, 10);
+        stateText[10].text = playerData.GoldValue.ToString();
+    }
     private void GetSword()
     {
         GetItemCase(itemData.swordImage, ItemData.ItemType.Sword, itemData.swordIdx);

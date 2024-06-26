@@ -22,6 +22,7 @@ public class PlayerData : ScriptableObject
     public float level15_1MagicDamage;
     public float level15_2MagicDamage;
     public float level25MagicDamage;
+    public int GoldValue;
     public int levelSkillPoint;
     public int level05SkillIdx;
     public int level10SkillIdx;

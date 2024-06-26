@@ -77,7 +77,7 @@ namespace UnityEngine.PostProcessing
             m_Dithering = AddComponent(new DitheringComponent());
             m_Fxaa = AddComponent(new FxaaComponent());
 
-            // Prepare state observers
+            // Prepare stateText observers
             m_ComponentStates = new Dictionary<PostProcessingComponentBase, bool>();
 
             foreach (var component in m_Components)
@@ -132,7 +132,7 @@ namespace UnityEngine.PostProcessing
             m_Dithering.Init(context, profile.dithering);
             m_Fxaa.Init(context, profile.antialiasing);
 
-            // Handles profile change and 'enable' state observers
+            // Handles profile change and 'enable' stateText observers
             if (m_PreviousProfile != profile)
             {
                 DisableComponents();

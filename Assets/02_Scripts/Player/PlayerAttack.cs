@@ -97,17 +97,26 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Skill()
     {
-        if(skillManager.skillList[0].sprite == skillManager.skillImageList[playerData.level05SkillIdx] && Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Q) && Level05(0))
         {
-
+            Level05SkillCasting();
         }
-        else if(skillManager.skillList[1].sprite == skillManager.skillImageList[playerData.level05SkillIdx] && Input.GetKeyDown(KeyCode.E))
+        else if(Input.GetKeyDown(KeyCode.E) && Level05(1))
         {
-
+            Level05SkillCasting();
         }
-        for(int i = 1; i < 4; i++)
+        else if (Input.GetKeyDown(KeyCode.R) && Level05(1))
         {
-            if (playerData.level05SkillIdx == i && Input.GetKeyDown(KeyCode.E) && Time.time - level5LastSkilTime > level5SkillTime)
+            Level05SkillCasting();
+        }
+
+    }
+
+    private void Level05SkillCasting()
+    {
+        for (int i = 1; i < 4; i++)
+        {
+            if (playerData.level05SkillIdx == i && Time.time - level5LastSkilTime > level5SkillTime)
             {
                 controller.IsStop(true);
                 aniEvent.Level05SkillChange(i);
@@ -117,6 +126,13 @@ public class PlayerAttack : MonoBehaviour
                 break;
             }
         }
+    }
+
+    bool Level05(int skillListIdx)
+    {
+        Debug.Log(skillManager.skillList[skillListIdx].sprite.name);
+        Debug.Log(skillManager.skillImageList[playerData.level05SkillIdx - 1].name);
+        return skillManager.skillList[skillListIdx].sprite == skillManager.skillImageList[playerData.level05SkillIdx - 1];
     }
     void TriggerAttackAnimation()
     {
