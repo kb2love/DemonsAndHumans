@@ -7,11 +7,8 @@ public class PlayerDialogue : MonoBehaviour
     bool isNPC = false;
     bool isDialogue = false;
     GameObject npc;
-    string night = "Night";
-    string paladin = "Paladin";
     public IEnumerator NPCSearch()
     {
-        Debug.Log("qwe");
         while (isNPC)
         {
             yield return new WaitForSeconds(0.05f);
@@ -24,7 +21,6 @@ public class PlayerDialogue : MonoBehaviour
                     isDialogue = true;
                     StartCoroutine(DialogueOn());
                     npc = hit.transform.GetComponentInParent<NPCOutLineOnOff>().gameObject;
-                    Debug.Log(npc.name);
                 }
             }
             else
@@ -43,13 +39,19 @@ public class PlayerDialogue : MonoBehaviour
     {
         while (isDialogue)
         {
-            yield return new WaitForSeconds(0.005f);
+            yield return null;
             if (Input.GetKeyDown(KeyCode.G))
             {
-                 if(npc != null && npc.tag == night)
-                    npc.transform.GetComponentInParent<NPCDialogue>().TextBox();
-                 else if(npc != null && npc.tag == paladin)
+                 if(npc != null && npc.tag == "Leader")
+                    npc.transform.GetComponentInParent<NPCLeader>().TextBox();
+                 else if(npc != null && npc.tag == "Maria")
+                    npc.transform.GetComponentInParent<NPCMaria>().TextBox();
+                 else if(npc != null && npc.tag == "Paladin")
                     npc.transform.GetComponentInParent<NPCPaladinDialouge>().TextBox();
+                 else if(npc != null && npc.tag == "Store")
+                {
+                    npc.transform.GetComponentInParent<NPCSotre>().TextBox();
+                }
             }
         }
     }

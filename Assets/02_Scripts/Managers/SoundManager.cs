@@ -10,12 +10,24 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         if (soundInst == null)
+        {
             soundInst = this;
-        else if(soundInst != this)
-            Destroy(soundInst);
-        DontDestroyOnLoad(soundInst);
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (soundInst != this)
+        {
+            Destroy(gameObject);
+        }
+        bgAudioSource = GetComponent<AudioSource>();
     }
-    public void BackGroundMusic(float volum)
+    private void Start()
+    {
+        if(GameObject.FindWithTag("Player").gameObject != null)
+        {
+            effAudioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
+        }
+    }
+    public void BackGroundVolume(float volum)
     {
         bgAudioSource.volume = volum;
     }
@@ -24,15 +36,14 @@ public class SoundManager : MonoBehaviour
         bgAudio.clip = audioClip;
         bgAudio.loop = true;
         bgAudioSource = bgAudio;
-        bgAudio.Play();
+        bgAudioSource.Play();
     }
-    public void EffectSound(float volum)
+    public void EffectSoundVolum(float volum)
     {
         effAudioSource.volume = volum;
     }
-    public void EffectSound(AudioSource audioSource, AudioClip audioClip)
+    public void EffectSoundPlay(AudioClip audioClip)
     {
-        audioSource.PlayOneShot(audioClip);
-        effAudioSource = audioSource;
+        effAudioSource.PlayOneShot(audioClip);
     }
 }

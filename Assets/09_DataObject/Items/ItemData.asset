@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 823597e6fc041a242ae8ce2c70530a5d, type: 3}
+  m_Name: ItemData
+  m_EditorClassIdentifier: 
+  Type: 0
+  goldImage: {fileID: 21300000, guid: b66d8031b76d04f4ca3ed2d13014244a, type: 3}
+  hpImage: {fileID: 21300000, guid: 5938952edc9df3e4396c65d0a0817633, type: 3}
+  mpImage: {fileID: 21300000, guid: 18b28b957486808468b2d629dcc1efed, type: 3}
+  gold: {fileID: 8571124780063614803, guid: adacffbec1c9dce4f83770d480f30b7e, type: 3}
+  normalItem: {fileID: 6780659873956747697, guid: e37f700b790654b499540d4a19142d2d, type: 3}
+  equipmentItem: {fileID: 6780659873956747697, guid: 767099b65c3ec3f4593b0848effc2e01, type: 3}
+  itemCountText: {fileID: 8037952964665120812, guid: 3616aa16f6f2ee547bad7a0622accc72, type: 3}
+  goldIdx: 0
+  hpIdx: 0
+  mpIdx: 0

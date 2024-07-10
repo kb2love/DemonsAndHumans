@@ -24,10 +24,14 @@ public class SkillManager : MonoBehaviour
     private void Awake()
     {
         if (skillInst == null)
+        {
             skillInst = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else if (skillInst != this)
-            Destroy(skillInst);
-        DontDestroyOnLoad(skillInst);
+        {
+            Destroy(gameObject);
+        }
     }
     private void Start()
     {

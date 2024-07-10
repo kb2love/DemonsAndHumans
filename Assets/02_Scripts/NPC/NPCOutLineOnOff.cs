@@ -1,4 +1,3 @@
-using cakeslice;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,14 +16,14 @@ public class NPCOutLineOnOff : MonoBehaviour
     {
         for(int i = 0;i < npcOutLine.Count;i++)
         {
-            npcOutLine[i].eraseRenderer = false;
+            npcOutLine[i].enabled = true;
         }
     }
     public void OutLineOff()
     {
         for (int i = 0; i < npcOutLine.Count; i++)
         {
-            npcOutLine[i].eraseRenderer = true;
+            npcOutLine[i].enabled = false;
         }
     }
 }

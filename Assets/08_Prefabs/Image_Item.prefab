@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7638851872611769048}
   - component: {fileID: 5331028913359851076}
   - component: {fileID: 4855274409310271543}
+  - component: {fileID: 2537287736147241682}
   m_Layer: 5
   m_Name: Image_Item
   m_TagString: Untagged
@@ -28,7 +29,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6431809671389374895}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -102,8 +103,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6836440bbdd2c4c9c2dc7603b12938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 68fe155a7592f7248aa1ad60a9f939ae, type: 2}
   inventoryTr: {fileID: 0}
+  equipmentTr: {fileID: 0}
   origPos: {x: 0, y: 0}
+  hp: 0
+  mp: 0
+  damage: 0
+  defence: 0
+  magicDamage: 0
+  fatalProbabillity: 0
+  fatalValue: 0
 --- !u!114 &4855274409310271543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,4 +126,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156b5961e6c04064a844b054401e548c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 13
+  itemName: 
+--- !u!114 &2537287736147241682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431809671389374895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17fed42ac379474290aa9d664a39026, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 0}
+  itemName: 
+  itemExplain: 
+  toolTipName: {fileID: 0}
+  toolTipExplain: {fileID: 0}

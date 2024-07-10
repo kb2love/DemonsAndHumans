@@ -10,7 +10,7 @@ public class PlayerData : ScriptableObject
     public float MP;                //마나
     public float MaxMP;             //최대마나
     public float AttackValue;            //데미지
-    public float EelectroAttackValue;
+    public float MagicAttackValue;
     public float expValue;        //경험치
     public float maxExpValue;     //최대경험치
     public int Level;             //레벨

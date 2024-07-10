@@ -22,8 +22,16 @@ public class PlayerAttack : MonoBehaviour
     private bool isStop;
     private bool isEquip;
     private bool isInven;
-    bool isSword;
-    bool isShield;
+    public bool isSword
+    {
+        get { return _isSword; }
+    }
+    private bool _isSword;
+    public bool isShield
+    {
+        get { return _isShield; }
+    }
+    private bool _isShield;
     void Start()
     {
         animator = transform.GetChild(0).GetComponent<Animator>();
@@ -165,11 +173,11 @@ public class PlayerAttack : MonoBehaviour
     public void IsSword(bool _IsSword)
     {
         animator.SetBool("GetSword", _IsSword);
-        isSword = _IsSword;
+        _isSword = _IsSword;
     }
     public void IsShield(bool _IsShield)
     {
         animator.SetBool("GetShield", _IsShield);
-        isShield = _IsShield;
+        _isShield = _IsShield;
     }   
 }

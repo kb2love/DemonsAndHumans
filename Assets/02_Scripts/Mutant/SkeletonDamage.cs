@@ -82,41 +82,41 @@ public class SkeletonDamage : MonoBehaviour
     {
         float randomValue = Random.Range(0f, 100f);
 
-        if (randomValue < 11.11f)
+        if (randomValue < 11.5f)
         {
             return ItemData.ItemType.Hat;
         }
-        else if (randomValue < 22.22f)
+        else if (randomValue < 24f)
         {
-            return ItemData.ItemType.Cloak;
+            return ItemData.ItemType.Kloak;
         }
-        else if (randomValue < 33.33f)
+        else if (randomValue < 36.5f)
         {
             return ItemData.ItemType.Sword;
         }
-        else if (randomValue < 44.44f)
+        else if (randomValue < 49f)
         {
             return ItemData.ItemType.Shield;
         }
-        else if (randomValue < 55.55f)
+        else if (randomValue < 61.5f)
         {
             return ItemData.ItemType.Cloth;
         }
-        else if (randomValue < 66.66f)
+        else if (randomValue < 74f)
         {
-            return ItemData.ItemType.Ring;
+            return ItemData.ItemType.Shoes;
         }
-        else if (randomValue < 77.77f)
+        else if (randomValue < 86.5f)
         {
             return ItemData.ItemType.Pants;
         }
-        else if (randomValue < 88.88f)
+        else if (randomValue < 99f)
         {
-            return ItemData.ItemType.Necklace;
+            return ItemData.ItemType.Neck;
         }
         else
         {
-            return ItemData.ItemType.Shoes;
+            return ItemData.ItemType.Ring;
         }
     }
     private void ItemDrop(GameObject obj, ItemData.ItemType itemType)

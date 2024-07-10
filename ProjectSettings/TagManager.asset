@@ -6,11 +6,13 @@ TagManager:
   tags:
   - CinemachineTarget
   - NPC
-  - Night
   - Paladin
   - NextStep
   - Skeleton
   - Item
+  - Store
+  - Maria
+  - Leader
   layers:
   - Default
   - TransparentFX
@@ -19,9 +21,9 @@ TagManager:
   - Water
   - UI
   - NPC
-  - 
-  - 
-  - 
+  - MinimapIcon
+  - MainCamera
+  - NotGround
   - 
   - 
   - 

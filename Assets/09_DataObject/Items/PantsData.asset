@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376646f39110c204188207bd4145af5e, type: 3}
+  m_Name: PantsData
+  m_EditorClassIdentifier: 
+  pants01: {fileID: 21300000, guid: 0ca148c4e1f725040ac96b38ebd132d8, type: 3}
+  pants01HP: 10
+  pants01Defence: 5
+  pants01Idx: 0
+  pants01Name: "\uBAA8\uD5D8\uAC00\uC758 \uBC14\uC9C0"
+  pants01Explain: "\uD3C9\uBC94\uD55C \uBAA8\uD5D8\uAC00\uC758 \uBC14\uC9C0\uC774\uB2E4"
+  pants02: {fileID: 21300000, guid: 863e0b6f04bae9d43a7a963d60b4abae, type: 3}
+  pants02HP: 50
+  pants02Defence: 25
+  pants02Idx: 0
+  pants02Name: "\uC554\uC0B4\uC790\uC758 \uBC14\uC9C0"
+  pants02Explain: "\uC554\uC0B4\uC655\uC774 \uC785\uC5C8\uB358 \uBC14\uC9C0\uC774\uB2E4"
+  pants03: {fileID: 21300000, guid: caee86a9dac044b46ba2bff3d4342fbe, type: 3}
+  pants03HP: 100
+  pants03Defence: 50
+  pants03Idx: 0
+  pants03Name: "\uC601\uC6C5\uC758 \uBC14\uC9C0"
+  pants03Explain: "\uC601\uC6C5\uC774 \uC785\uC5C8\uB358 \uBC14\uC9C0\uC774\uB2E4"

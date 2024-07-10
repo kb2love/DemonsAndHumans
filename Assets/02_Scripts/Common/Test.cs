@@ -13,8 +13,8 @@ public class Test : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-            SkillManager.skillInst.Level5();
+        if (Input.GetKeyDown(KeyCode.P))
+            Debug.Log(Input.mousePosition);
     }
     void StatInitialization()
     {
@@ -28,6 +28,6 @@ public class Test : MonoBehaviour
         playerData.DefenceValue = 5;
         playerData.FatalValue = 150;
         playerData.FatalProbability = 0.05f;
-        playerData.GoldValue = 10;
+        playerData.GoldValue = 10000000;
     }
 }

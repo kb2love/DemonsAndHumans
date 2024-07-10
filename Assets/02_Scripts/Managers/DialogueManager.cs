@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager instance;
+    public static DialogueManager dialogueInst;
     [SerializeField] private TextAsset dialogueData; // 대화 데이터를 담은 텍스트 에셋
 
     // 대화 데이터를 저장할 딕셔너리
@@ -12,13 +12,13 @@ public class DialogueManager : MonoBehaviour
     // Awake에서 대화 데이터 로드
     private void Awake()
     {
-        if (instance == null)
+        if (dialogueInst == null)
         {
-            instance = this;
+            dialogueInst = this;
             LoadDialogueData();
             DontDestroyOnLoad(gameObject);
         }
-        else
+        else if (dialogueInst != this)
         {
             Destroy(gameObject);
         }

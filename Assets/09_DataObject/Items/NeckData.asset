@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf7bdb0e2dac534f8d35bcc32ac464b, type: 3}
+  m_Name: NeckData
+  m_EditorClassIdentifier: 
+  neck01: {fileID: 21300000, guid: 83851ce23cb97864ea5a4468878bbed3, type: 3}
+  neck01MP: 20
+  neck01Damage: 5
+  neck01MagicDamage: 5
+  neck01Idx: 6
+  neck01Count: 1
+  neck01Name: "\uB9C8\uBC95\uC0AC\uC758 \uBAA9\uAC78\uC774"
+  neck01Explain: "\uB9C8\uBC95\uC0AC\uAC00 \uB418\uBA74 \uAC00\uC7A5\uBA3C\uC800
+    \uCC28\uB294 \uBAA9\uAC78\uC774\uC774\uB2E4"
+  neck02: {fileID: 21300000, guid: 41a6fa5a46c35bd40945f6a423a2edd4, type: 3}
+  neck02MP: 50
+  neck02Damage: 15
+  neck02MagicDamage: 15
+  neck02Idx: 7
+  neck02Count: 1
+  neck02Name: "\uC554\uC0B4\uC790\uC758 \uBAA9\uAC78\uC774"
+  neck02Explain: "\uC554\uC0B4\uC655\uC774 \uCC29\uC6A9\uD588\uB358 \uBAA9\uAC78\uC774\uC774\uB2E4"
+  neck03: {fileID: 21300000, guid: afa412c2567cbb946adc933f139c1b01, type: 3}
+  neck03MP: 100
+  neck03Damage: 30
+  neck03MagicDamage: 30
+  neck03Idx: 0
+  neck03Count: 0
+  neck03Name: "\uB9C8\uC871\uC758 \uBAA9\uAC78\uC774"
+  neck03Explain: "\uB9C8\uC655\uB3C4 \uAD00\uC2EC\uC744 \uBCF4\uC600\uB358 \uBAA9\uAC78\uC774\uC774\uB2E4"
+  neck04: {fileID: 21300000, guid: 9183bb6333615e04e91b2d3d16c6362f, type: 3}
+  neck04MP: 150
+  neck04Damage: 45
+  neck04MagicDamage: 45
+  neck04Idx: 8
+  neck04Count: 1
+  neck04Name: "\uC601\uC6C5\uC758 \uBAA9\uAC78\uC774"
+  neck04Explain: "\uC6A9\uC0AC\uAC00 \uCC29\uC6A9\uD558\uB2E4 \uC601\uC6C5\uC5D0\uAC8C
+    \uBB3C\uB824\uC900 \uBAA9\uAC78\uC774\uC774\uB2E4"

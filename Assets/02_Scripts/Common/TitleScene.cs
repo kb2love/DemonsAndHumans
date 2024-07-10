@@ -20,43 +20,38 @@ public class TitleScene : MonoBehaviour
 
     public void SetBackgroundMusicVolume(float volume)
     {
-        SoundManager.soundInst.BackGroundMusic(volume);
-        Debug.Log(volume);
+        SoundManager.soundInst.BackGroundVolume(volume);
     }
 
     // 효과음 볼륨 설정 함수
     public void SetSoundEffectsVolume(float volume)
     {
-        SoundManager.soundInst.EffectSound(volume);
+        SoundManager.soundInst.EffectSoundVolum(volume);
     }
     public void StartGame()
     {
-        SoundManager.soundInst.EffectSound(effectSource, effectClip);
+        SoundManager.soundInst.EffectSoundPlay(effectClip);
         SceneMove.SceneInst.CatleScene();
     }
     public void LoadGame()
     {
-        SoundManager.soundInst.EffectSound(effectSource, effectClip);
+        SoundManager.soundInst.EffectSoundPlay(effectClip);
     }
     public void QuitGame()
     {
-        SoundManager.soundInst.EffectSound(effectSource, effectClip);
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false; // 유니티 에디터를 종료합니다.
-#else
-            Application.Quit(); // 어플리케이션을 종료합니다.
-#endif
+        SoundManager.soundInst.EffectSoundPlay(effectClip);
+        SceneMove.SceneInst.QuitGame();
     }
     public void OptionOpen()
     {
         if (optionWindpw.activeSelf)
         {
-            SoundManager.soundInst.EffectSound(effectSource, effectClip);
+            SoundManager.soundInst.EffectSoundPlay(effectClip);
             optionWindpw.SetActive(false);
         }
         else
         {
-            SoundManager.soundInst.EffectSound(effectSource, effectClip);
+            SoundManager.soundInst.EffectSoundPlay(effectClip);
             optionWindpw.SetActive(true);
         }
     }
