@@ -12,16 +12,8 @@ public class DialogueManager : MonoBehaviour
     // Awake에서 대화 데이터 로드
     private void Awake()
     {
-        if (dialogueInst == null)
-        {
-            dialogueInst = this;
-            LoadDialogueData();
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (dialogueInst != this)
-        {
-            Destroy(gameObject);
-        }
+        dialogueInst = this;
+        LoadDialogueData();
     }
 
     private void LoadDialogueData()

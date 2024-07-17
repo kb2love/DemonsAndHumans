@@ -29,6 +29,7 @@ public class PlayerData : ScriptableObject
     public int level15_1SkillIdx;
     public int level15_2SkillIdx;
     public int level25SkillIdx;
+    public int playerSceneIdx;
     public AudioClip AttackDownClip;
     public AudioClip AttackUpClip;
     public AudioClip AttackFinishClip;

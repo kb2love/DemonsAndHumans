@@ -14,37 +14,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPpotion01: {fileID: 21300000, guid: 5938952edc9df3e4396c65d0a0817633, type: 3}
   HPpotion01Value: 50
-  HPpotion01Count: 10
+  HPpotion01Count: 5
   HPpotion01Idx: 4
+  HPpotion01quick: 0
   HPpotion01Name: "\uC18C\uD615HP\uBB3C\uC57D"
   HPpotion01Explain: + HP 50
+  parent01Path: Canvas_Player/Image_Inventory/Panel_InventoryGrid/Image (7)
   HPpotion02: {fileID: 21300000, guid: 5808cc08edf647a4b957d0446ce5ac87, type: 3}
   HPpotion02Value: 100
-  HPpotion02Count: 7
-  HPpotion02Idx: 7
+  HPpotion02Count: 5
+  HPpotion02Idx: 2
+  HPpotion02quick: 0
   HPpotion02Name: "\uC911\uD615HP\uBB3C\uC57D"
   HPpotion02Explain: + HP 100
+  parent02Path: Canvas_Player/Image_Inventory/Panel_InventoryGrid/Image (2)
   HPpotion03: {fileID: 21300000, guid: ea126fc2939bf9348abfef4fe0f11ff2, type: 3}
   HPpotion03Value: 500
-  HPpotion03Count: 4
-  HPpotion03Idx: 8
+  HPpotion03Count: 5
+  HPpotion03Idx: 3
+  HPpotion03quick: 0
   HPpotion03Name: "\uB300\uD615HP\uBB3C\uC57D"
   HPpotion03Explain: + HP 500
+  parent03Path: Canvas_Player/Image_Inventory/Panel_InventoryGrid/Image (3)
   MPpotion01: {fileID: 21300000, guid: 18b28b957486808468b2d629dcc1efed, type: 3}
   MPpotion01Value: 50
-  MPpotion01Count: 14
-  MPpotion01Idx: 2
+  MPpotion01Count: 13
+  MPpotion01Idx: 5
+  MPpotion01quick: 0
   MPpotion01Name: "\uC18C\uD615MP\uBB3C\uC57D"
   MPpotion01Explain: + MP 50
+  parentMP01Path: Canvas_Player/Image_Inventory/Panel_InventoryGrid/Image (4)
   MPpotion02: {fileID: 21300000, guid: 83d1bcbe07da25a4fb82c2f8fba80166, type: 3}
   MPpotion02Value: 100
-  MPpotion02Count: 11
-  MPpotion02Idx: 3
+  MPpotion02Count: 0
+  MPpotion02Idx: 12
+  MPpotion02quick: 0
   MPpotion02Name: "\uC911\uD615MP\uBB3C\uC57D"
   MPpotion02Explain: + MP 100
+  parentMP02Path: Canvas_Player/Image_Inventory/Panel_InventoryGrid/Image (5)
   MPpotion03: {fileID: 21300000, guid: f57cbc11b46ac3a408ed4e22536366df, type: 3}
   MPpotion03Value: 500
-  MPpotion03Count: 12
-  MPpotion03Idx: 5
+  MPpotion03Count: 0
+  MPpotion03Idx: 13
+  MPpotion03quick: 0
   MPpotion03Name: "\uB300\uD615MP\uBB3C\uC57D"
   MPpotion03Explain: + MP 500
+  parentMP03Path: Canvas_Player/Image_Inventory/Panel_InventoryGrid/Image (6)

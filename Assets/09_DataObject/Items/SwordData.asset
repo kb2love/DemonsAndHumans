@@ -15,17 +15,23 @@ MonoBehaviour:
   sword01: {fileID: 21300000, guid: 172544e0b9f294c4caf131acbfda1de5, type: 3}
   sword01Damage: 10
   sword01Idx: 0
+  sword01Count: 1
   sword01Name: "\uB871\uC18C\uB4DC"
   sword01Explain: "\uAE30\uC0AC\uB2E8\uC6D0\uC774 \uB418\uBA74 \uAE30\uBCF8\uC801\uC73C\uB85C
     \uC9C0\uAE09\uB418\uB294 \uC800\uAE09 \uB871\uC18C\uB4DC\uC774\uB2E4"
+  parent01Path: Canvas_Player/Image_Equipment/EquipmentGroup/Image_Sword
   sword02: {fileID: 21300000, guid: c978836e79bcd1949ad9b17d62d73bb9, type: 3}
   sword02Damage: 100
   sword02Idx: 0
+  sword02Count: 0
   sword02Name: "\uB9C8\uAC80"
   sword02Explain: "\uB9C8\uC871\uB4E4\uC774 \uC4F4\uB2E4\uACE0 \uC54C\uB824\uC9C4
     \uB9C8\uAC80\uC774\uB2E4"
+  parent02Path: 
   sword03: {fileID: 21300000, guid: 0f3a6442a3e111542911f0cc11b3af81, type: 3}
   sword03Damage: 200
   sword03Idx: 0
+  sword03Count: 0
   sword03Name: "\uC601\uC6C5\uC758 \uAC80"
   sword03Explain: "\uC601\uC6C5\uC774 \uB420\uC218\uC788\uB358 \uAC80\uC774\uB77C\uACE0\uD55C\uB2E4"
+  parent03Path: 

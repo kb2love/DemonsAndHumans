@@ -26,7 +26,7 @@ public class SkillEffectMove : MonoBehaviour
         if(other.gameObject.tag == "Skeleton")
         {
             Debug.Log("123");
-            other.GetComponent<SkeletonDamage>().SkeletonHit(playerData.level05MagicDamage);
+            other.GetComponent<MutantDamage>().SkeletonHit(playerData.level05MagicDamage);
             gameObject.SetActive(false);
         }
         

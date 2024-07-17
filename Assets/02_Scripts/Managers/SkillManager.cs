@@ -23,15 +23,7 @@ public class SkillManager : MonoBehaviour
     bool isSelec = false;
     private void Awake()
     {
-        if (skillInst == null)
-        {
-            skillInst = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (skillInst != this)
-        {
-            Destroy(gameObject);
-        }
+        skillInst = this;
     }
     private void Start()
     {

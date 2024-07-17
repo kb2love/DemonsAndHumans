@@ -1,3 +1,4 @@
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -70,6 +71,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 StatUp();
                 isEquip = true;
                 GameManager.GM.AllStatUpdata();
+                ItemManger.itemInst.AllItemTrSave();
             }
             else if(transform.parent.GetComponent<ItemInfo>().type != itemInfo.type)
             {
@@ -80,6 +82,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                     StatDown();
                 isEquip = false;
                 GameManager.GM.AllStatUpdata();
+                ItemManger.itemInst.AllItemTrSave();
             }
         }
         else
@@ -90,6 +93,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 StatDown();
             isEquip = false;
             GameManager.GM.AllStatUpdata();
+            ItemManger.itemInst.AllItemTrSave();
         }
     }
 
@@ -115,7 +119,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     }
 
 
-    private void ItemTypeSelect(ItemData.ItemType type,bool _bool)
+    public void ItemTypeSelect(ItemData.ItemType type,bool _bool)
     {
         switch (type)
         {
@@ -191,5 +195,9 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 damage = Damage;
                 break;
         }
+    }
+    public void IsEuqip(bool _isEquip)
+    {
+        isEquip = _isEquip;
     }
 }

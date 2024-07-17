@@ -24,17 +24,15 @@ public class PlayerDamage : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         playerController = GetComponent<PlayerController>();
+        plHp.fillAmount = playerData.HP / playerData.MaxHP;
     }
     public void HitDamage(float damage)
     {
         hitEff = ObjectPoolingManager.objInst.GetHitEff();
         animator.SetTrigger("HitTrigger");
-        playerController.IsStop(true);
-        Invoke("MoveOff", 0.5f);
         if (!isShield)
         {
             hitEff.transform.position = transform.position + (Vector3.up * 0.8f);
-            Debug.Log("¾Æ¾ß");
             playerData.HP -= damage;
             plHp.fillAmount = playerData.HP / playerData.MaxHP;
             GameManager.GM.StatUpdate(PlayerData.PlayerStat.HP);
@@ -51,10 +49,6 @@ public class PlayerDamage : MonoBehaviour
             Invoke("IsHitFalse", 0.5f);
         }
         hitEff.SetActive(true);
-    }
-    void MoveOff()
-    {
-        playerController.IsStop(false);
     }
     public void IsShieldOnOff(bool _isShield)
     {

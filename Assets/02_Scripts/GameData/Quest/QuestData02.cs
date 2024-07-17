@@ -19,4 +19,6 @@ public class QuestData02 : ScriptableObject
     public int Idx;
     [Header("퀘스트 성공여부")]
     public bool Result;
+    [Header("퀘스트 수주여부")]
+    public bool Take;
 }

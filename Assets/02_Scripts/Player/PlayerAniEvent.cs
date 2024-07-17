@@ -16,7 +16,6 @@ public class PlayerAniEvent : MonoBehaviour
     int skillIdx;
     GameObject attackEff;
     AudioSource audioSource;
-    public float time;
     public float attackRadius = 3.0f; // 공격 범위
     IEnumerator skillCoroutine;
     float critical;
@@ -29,19 +28,19 @@ public class PlayerAniEvent : MonoBehaviour
     }
     public void AttackDown()
     {
-        AttackEff(new Vector3(180, 250,0), "AttackEffOff1");
+        AttackEff(new Vector3(180, 250,0));
         audioSource.PlayOneShot(playerData.AttackDownClip);
         Attack(1);
     }
     public void AttackUp()
     {
-        AttackEff(new Vector3(40, 250, 0), "AttackEffOff2");
+        AttackEff(new Vector3(40, 250, 0));
         audioSource.PlayOneShot(playerData.AttackUpClip);
         Attack(1.5f);
     }
     public void AttackFinish()
     {
-        AttackEff(new Vector3(-90, 250, 0), "AttackEffOff3");
+        AttackEff(new Vector3(-90, 250, 0));
         audioSource.PlayOneShot(playerData.AttackFinishClip);
         Attack(2.0f);
     }
@@ -77,11 +76,10 @@ public class PlayerAniEvent : MonoBehaviour
         yield return new WaitForSeconds(3.0f);
         level05EffectsList[2].SetActive(false);
     }
-    private void AttackEff(Vector3 rot, string attEffName)
+    private void AttackEff(Vector3 rot)
     {
         attackEff.transform.localEulerAngles = rot;
         attackEff.SetActive(true);
-        Invoke(attEffName, time);
     }
     private void Attack(float damage)
     {
@@ -104,7 +102,7 @@ public class PlayerAniEvent : MonoBehaviour
         foreach (var hitCollider in hitColliders)
         {
             // AttackValue 스크립트를 가진 객체인지 확인
-            SkeletonDamage skeletonDamage = hitCollider.GetComponent<SkeletonDamage>();
+            MutantDamage skeletonDamage = hitCollider.GetComponent<MutantDamage>();
             if (skeletonDamage != null)
             {
                 skeletonDamage.SkeletonHit(baseDamage);
@@ -128,21 +126,5 @@ public class PlayerAniEvent : MonoBehaviour
             skillCoroutine = FireBallSkill();
         else if (skiiIdx == 3)
             skillCoroutine = EelectroBallSkill();
-    }
-    void Level05EffectOff()
-    {
-        level05EffectsList[skillIdx].SetActive(false);  
-    }
-    void AttackEffOff1()
-    {
-        attackEff.SetActive(false);
-    }
-    void AttackEffOff2()
-    {
-        attackEff.SetActive(false);
-    }
-    void AttackEffOff3()
-    {
-        attackEff.SetActive(false);
     }
 }

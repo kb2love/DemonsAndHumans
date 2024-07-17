@@ -17,9 +17,10 @@ MonoBehaviour:
   Content: "\uAE30\uC0AC\uB2E8\uC6D0\uC774 \uB418\uAE30\uC704\uD55C \uD14C\uC2A4\uD2B8\uB97C
     \uD558\uB77C\uACE0 \uD55C\uB2E4 \uC131\uC744 \uB098\uAC00\uC11C \uB9C8\uC871\uC758
     \uC794\uC7AC 10\uB9C8\uB9AC\uB97C \uC7A1\uC544\uC624\uC790"
-  killCount: 0
+  killCount: 11
   clearCount: 10
   exp: 100
   gold: 500
   Idx: 0
   Result: 0
+  Take: 1

@@ -13,6 +13,7 @@ public class HatData : ScriptableObject
     public int Hat01Count;
     public string hat01Name;
     public string hat01Explain;
+    public string parent01Path;
     [Header("전사의 투구")]
     public Sprite hat02;
     public float hat02HP;
@@ -21,6 +22,7 @@ public class HatData : ScriptableObject
     public int Hat02Count;
     public string hat02Name;
     public string hat02Explain;
+    public string parent02Path;
     [Header("마족의 투구")]
     public Sprite hat03;
     public float hat03HP;
@@ -29,6 +31,7 @@ public class HatData : ScriptableObject
     public int Hat03Count;
     public string hat03Name;
     public string hat03Explain;
+    public string parent03Path;
     [Header("영웅의 투구")]
     public Sprite hat04;
     public float hat04HP;
@@ -37,4 +40,5 @@ public class HatData : ScriptableObject
     public int Hat04Count;
     public string hat04Name;
     public string hat04Explain;
+    public string parent04Path;
 }

@@ -12,19 +12,12 @@ public class GameManager : MonoBehaviour
     public static GameManager GM;
     private void Awake()
     {
-        if (GM == null)
-        {
-            GM = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (GM != this)
-        {
-            Destroy(gameObject);
-        }
+        GM = this;
     }
     private void Start()
     {
         AllStatUpdata();
+        expImage.fillAmount = playerData.expValue / playerData.maxExpValue;
     }
     public void StatUpdate(PlayerData.PlayerStat playerStat)
     {

@@ -14,6 +14,7 @@ public class KloakData : ScriptableObject
     public int kloak01Count;
     public string kloak01Name;
     public string kloak01Explain;
+    public string parent01Path;
     [Header("∏∂¡∑¿« ≥Ø∞≥")]
     public Sprite kloak02;
     public float kloak02HP;
@@ -23,6 +24,7 @@ public class KloakData : ScriptableObject
     public int kloak02Count;
     public string kloak02Name;
     public string kloak02Explain;
+    public string parent02Path;
     [Header("øµøı¿« ∏¡≈‰")]
     public Sprite kloak03;
     public float kloak03HP;
@@ -32,4 +34,5 @@ public class KloakData : ScriptableObject
     public int kloak03Count;
     public string kloak03Name;
     public string kloak03Explain;
+    public string parent03Path;
 }

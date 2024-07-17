@@ -12,6 +12,7 @@ public class SwordData : ScriptableObject
     public int sword01Count;
     public string sword01Name;
     public string sword01Explain;
+    public string parent01Path;
     [Header("마검")]
     public Sprite sword02;
     public float sword02Damage;
@@ -19,6 +20,7 @@ public class SwordData : ScriptableObject
     public int sword02Count;
     public string sword02Name;
     public string sword02Explain;
+    public string parent02Path;
     [Header("영웅의 검")]
     public Sprite sword03;
     public float sword03Damage;
@@ -26,4 +28,5 @@ public class SwordData : ScriptableObject
     public int sword03Count;
     public string sword03Name;
     public string sword03Explain;
+    public string parent03Path;
 }

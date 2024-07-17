@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public class SceneMove : MonoBehaviour
 {
     public static SceneMove SceneInst;
+    [SerializeField] Material castleSkyBox;
+    [SerializeField] Material mutantFieldSkyBox;
     private void Awake()
     {
         if(SceneInst == null)
@@ -18,13 +20,15 @@ public class SceneMove : MonoBehaviour
     }
     public void CatleScene()
     {
-        SceneManager.LoadScene(2);
-        SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("PlayerScene");
+        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        RenderSettings.skybox = castleSkyBox;
     }
-    public void MutantFieldScene()
+    public void PotalMove(int sncenIdx)
     {
-        SceneManager.LoadScene(3);
-        SceneManager.LoadScene("PlayerScene", LoadSceneMode.Additive);
+        SceneManager.LoadScene("PlayerScene");
+        SceneManager.LoadScene(sncenIdx, LoadSceneMode.Additive);
+        RenderSettings.skybox = mutantFieldSkyBox;
     }
     public void QuitGame()
     {

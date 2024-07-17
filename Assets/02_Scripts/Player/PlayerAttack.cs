@@ -1,10 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] PlayerData playerData;
+    [SerializeField] QuestData03 questData;
+    [SerializeField] GameObject sword;
+    [SerializeField] GameObject shield;
+    [SerializeField] Image mpImage;
+    NPCPaladinDialouge dialouge;
     Animator animator;
     PlayerController controller;
     PlayerDamage plDamage;
@@ -39,18 +44,23 @@ public class PlayerAttack : MonoBehaviour
         controller = GetComponent<PlayerController>();
         plDamage = GetComponent<PlayerDamage>();
         skillManager = SkillManager.skillInst;
+        if (GameObject.FindWithTag("Paladin") != null)
+            dialouge = GameObject.FindWithTag("Paladin").GetComponent<NPCPaladinDialouge>();
+        else
+            dialouge = null;
+        mpImage.fillAmount = playerData.MP / playerData.MaxMP;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!isInven && !isEquip)
+        if (!isInven && !isEquip)
         {
-            if(isSword)
+            if (isSword)
                 SwordAttack();
-            if(isShield)
+            if (isShield)
                 ShieldBlock();
-            if(isSword || isShield)
+            if (isSword || isShield)
                 Skill();
         }
     }
@@ -105,15 +115,15 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Skill()
     {
-        if(Input.GetKeyDown(KeyCode.Q) && Level05(0))
+        if (Input.GetKeyDown(KeyCode.Q) && Level05(0))
         {
             Level05SkillCasting();
         }
-        else if(Input.GetKeyDown(KeyCode.E) && Level05(1))
+        else if (Input.GetKeyDown(KeyCode.E) && Level05(1))
         {
             Level05SkillCasting();
         }
-        else if (Input.GetKeyDown(KeyCode.R) && Level05(1))
+        else if (Input.GetKeyDown(KeyCode.R) && Level05(2))
         {
             Level05SkillCasting();
         }
@@ -129,6 +139,8 @@ public class PlayerAttack : MonoBehaviour
                 controller.IsStop(true);
                 aniEvent.Level05SkillChange(i);
                 animator.SetTrigger("CastingTrigger");
+                playerData.MP -= 30;
+                mpImage.fillAmount = playerData.MP / playerData.MaxMP;
                 Invoke("IsMove", 1.0f);
                 level5LastSkilTime = Time.time;
                 break;
@@ -138,8 +150,6 @@ public class PlayerAttack : MonoBehaviour
 
     bool Level05(int skillListIdx)
     {
-        Debug.Log(skillManager.skillList[skillListIdx].sprite.name);
-        Debug.Log(skillManager.skillImageList[playerData.level05SkillIdx - 1].name);
         return skillManager.skillList[skillListIdx].sprite == skillManager.skillImageList[playerData.level05SkillIdx - 1];
     }
     void TriggerAttackAnimation()
@@ -172,12 +182,20 @@ public class PlayerAttack : MonoBehaviour
     }
     public void IsSword(bool _IsSword)
     {
-        animator.SetBool("GetSword", _IsSword);
         _isSword = _IsSword;
+        animator.SetBool("GetSword", isSword);
+        sword.SetActive(isSword);
+        if (isSword)
+        {
+            questData.Result = true;
+            if (dialouge != null)
+                dialouge.WeaponWear();
+        }
     }
     public void IsShield(bool _IsShield)
     {
-        animator.SetBool("GetShield", _IsShield);
         _isShield = _IsShield;
-    }   
+        animator.SetBool("GetShield", isShield);
+        shield.SetActive(isShield);
+    }
 }

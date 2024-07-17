@@ -18,6 +18,7 @@ public class RIngData : ScriptableObject
     public int ring01Count;
     public string ring01Name;
     public string ring01Explain;
+    public string parent01Path;
     [Header("용사의 반지")]
     public Sprite ring02;
     public float ring02HP;
@@ -31,4 +32,5 @@ public class RIngData : ScriptableObject
     public int ring02Count;
     public string ring02Name;
     public string ring02Explain;
+    public string parent02Path;
 }

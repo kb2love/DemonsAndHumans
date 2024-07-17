@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,8 @@ public class StoreOpen : MonoBehaviour
     [SerializeField] RectTransform weqponContant;
     [SerializeField] RectTransform potionContant;
     [SerializeField] RectTransform materialContant;
+    [SerializeField] GameObject playerStat;
+    [SerializeField] GameObject useItem;
     [SerializeField] ScrollRect scrollRect;
     [SerializeField] Text storeText;
     public void WeaponStore()
@@ -25,6 +28,12 @@ public class StoreOpen : MonoBehaviour
     public void QuitStore()
     {
         gameObject.SetActive(false);
+        playerStat.SetActive(true);
+        PlayerAttack playerAttack = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
+        playerAttack.enabled = true;
+        playerAttack.GetComponent<PlayerController>().enabled = true;   
+        useItem.SetActive(true);
+
     }
     public void StoreSelect(bool _isWeapon, bool _isPotion, bool _isMaterial, RectTransform rect, string storeName)
     {

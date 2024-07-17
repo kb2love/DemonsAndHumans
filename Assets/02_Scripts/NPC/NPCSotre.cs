@@ -2,14 +2,21 @@ using UnityEngine;
 
 public class NPCSotre : NPCDialogue
 {
+    private GameObject useItem;
     private GameObject store;
-
+    private GameObject playerStat;
     protected override void Start()
     {
         base.Start();
-        store = GameObject.Find("Canvas_Player").transform.GetChild(1).gameObject;
+        Transform canvas = GameObject.Find("Canvas_Player").transform;
+        useItem = canvas.transform.GetChild(7).gameObject;
+        store = canvas.GetChild(1).gameObject;
+        playerStat = canvas.GetChild(4).gameObject;
     }
-
+    protected override void StartDialogue()
+    {
+        base.StartDialogue();
+    }
     public override void TextBox()
     {
         float randomValue = Random.value;
@@ -28,5 +35,9 @@ public class NPCSotre : NPCDialogue
     {
         base.EndDialogue();
         store.SetActive(true);
+        playerStat.SetActive(false);
+        playerAttack.enabled = false;
+        playerController.enabled = false;
+        useItem.SetActive(false);
     }
 }

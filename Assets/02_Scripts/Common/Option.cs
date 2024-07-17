@@ -12,6 +12,7 @@ public class Option : MonoBehaviour
     {
         SoundManager.soundInst.EffectSoundPlay(effectClip);
         DataManager.dataInst.SaveData();
+        ItemManger.itemInst.AllItemTrSave();
     }
     public void QuitGame()
     {

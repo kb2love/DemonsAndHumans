@@ -14,24 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shield01: {fileID: 21300000, guid: 8fe0d52ff608d4241a1a5a42346c2291, type: 3}
   shield01Value: 10
-  shield01Idx: 0
+  shield01Idx: 1
+  shield01Count: 1
   shield01Name: "\uAE30\uC0AC\uB2E8\uC6D0\uC758 \uBC29\uD328"
   shield01Explain: "\uAE30\uC0AC\uB2E8\uC6D0\uC774 \uB418\uBA74 \uAE30\uBCF8\uC801\uC73C\uB85C
     \uC9C0\uAE09\uB418\uB294 \uC800\uAE09 \uBC29\uD328\uC774\uB2E4"
+  parent01Path: Canvas_Player/Image_Equipment/EquipmentGroup/Image_Shield
   shield02: {fileID: 21300000, guid: c0998869a06b72b4aa14e5999f3da890, type: 3}
   shield02Value: 20
   shield02Idx: 0
+  shield02Count: 0
   shield02Name: "\uADF8\uB9AC\uD540\uC758 \uBC29\uD328"
   shield02Explain: "\uADF8\uB9AC\uD540\uC758 \uAC11\uAC01\uC744 \uC7AC\uB8CC\uB85C
     \uC4F4 \uBC29\uD328\uC774\uB2E4"
+  parent02Path: 
   shield03: {fileID: 21300000, guid: bc43179b7db39ad419317aa5b20d0328, type: 3}
   shield03Value: 50
   shield03Idx: 0
+  shield03Count: 0
   shield03Name: "\uB9C8\uC871\uC758 \uBC29\uD328"
   shield03Explain: "\uB9C8\uC871\uC218\uC2ED\uC744 \uAC08\uC544\uB123\uC5B4 \uB9CC\uB4E0
     \uBC29\uD328\uC774\uB2E4"
+  parent03Path: 
   shield04: {fileID: 21300000, guid: fef446be0148714429cb2cead8e869c6, type: 3}
   shield04Value: 100
   shield04Idx: 0
+  shield04Count: 0
   shield04Name: "\uC601\uC6C5\uC758 \uBC29\uD328"
   shield04Explain: "\uC601\uC6C5\uC774 \uC990\uACA8\uC4F0\uB358 \uBC29\uD328\uC774\uB2E4"
+  parent04Path: 

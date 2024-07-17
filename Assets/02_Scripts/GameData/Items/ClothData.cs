@@ -13,6 +13,7 @@ public class ClothData : ScriptableObject
     public int cloth01Count;
     public string cloth01Name;
     public string cloth01Explain;
+    public string parent01Path;
     [Header("¾Ï»ìÀÚÀÇ ¿Ê")]
     public Sprite cloth02;
     public float cloth02HP;
@@ -21,6 +22,7 @@ public class ClothData : ScriptableObject
     public int cloth02Count;
     public string cloth02Name;
     public string cloth02Explain;
+    public string parent02Path;
     [Header("¿µ¿õÀÇ °©¿Ê")]
     public Sprite cloth03;
     public float cloth03HP;
@@ -29,4 +31,5 @@ public class ClothData : ScriptableObject
     public int cloth03Count;
     public string cloth03Name;
     public string cloth03Explain;
+    public string parent03Path;
 }

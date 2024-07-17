@@ -13,6 +13,7 @@ public class ShoesData : ScriptableObject
     public int shoes01Idx;
     public string shoes01Name;
     public string shoes01Explain;
+    public string parent01Path;
     [Header("암살자의 신발")]
     public Sprite shoes02;
     public float shoes02HP;
@@ -21,6 +22,7 @@ public class ShoesData : ScriptableObject
     public int shoes02Count;
     public string shoes02Name;
     public string shoes02Explain;
+    public string parent02Path;
     [Header("영웅의 신발")]
     public Sprite shoes03;
     public float shoes03HP;
@@ -29,4 +31,5 @@ public class ShoesData : ScriptableObject
     public int shoes03Count;
     public string shoes03Name;
     public string shoes03Explain;
+    public string parent03Path;
 }

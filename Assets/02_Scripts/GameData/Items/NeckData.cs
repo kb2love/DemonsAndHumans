@@ -14,6 +14,7 @@ public class NeckData : ScriptableObject
     public int neck01Count;
     public string neck01Name;
     public string neck01Explain;
+    public string parent01Path;
     [Header("암살자의 목걸이")]
     public Sprite neck02;
     public float neck02MP;
@@ -23,6 +24,7 @@ public class NeckData : ScriptableObject
     public int neck02Count;
     public string neck02Name;
     public string neck02Explain;
+    public string parent02Path;
     [Header("마족의 목걸이")]
     public Sprite neck03;
     public float neck03MP;
@@ -32,6 +34,7 @@ public class NeckData : ScriptableObject
     public int neck03Count;
     public string neck03Name;
     public string neck03Explain;
+    public string parent03Path;
     [Header("영웅의 목걸이")]
     public Sprite neck04;
     public float neck04MP;
@@ -41,4 +44,5 @@ public class NeckData : ScriptableObject
     public int neck04Count;
     public string neck04Name;
     public string neck04Explain;
+    public string parent04Path;
 }

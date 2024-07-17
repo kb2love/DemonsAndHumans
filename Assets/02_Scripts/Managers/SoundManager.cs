@@ -6,7 +6,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager soundInst;
     private AudioSource bgAudioSource;
-    private AudioSource effAudioSource;
+    [SerializeField] private AudioSource effAudioSource;
     private void Awake()
     {
         if (soundInst == null)
@@ -19,13 +19,6 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject);
         }
         bgAudioSource = GetComponent<AudioSource>();
-    }
-    private void Start()
-    {
-        if(GameObject.FindWithTag("Player").gameObject != null)
-        {
-            effAudioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
-        }
     }
     public void BackGroundVolume(float volum)
     {
@@ -45,5 +38,9 @@ public class SoundManager : MonoBehaviour
     public void EffectSoundPlay(AudioClip audioClip)
     {
         effAudioSource.PlayOneShot(audioClip);
+    }
+    public void PlayerFind()
+    {
+        effAudioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
     }
 }

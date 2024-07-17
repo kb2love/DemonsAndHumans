@@ -13,6 +13,7 @@ public class PantsData : ScriptableObject
     public int pants01Count;
     public string pants01Name;
     public string pants01Explain;
+    public string parent01Path;
     [Header("암살자의 바지")]
     public Sprite pants02;
     public float pants02HP;
@@ -21,6 +22,7 @@ public class PantsData : ScriptableObject
     public int pants02Count;
     public string pants02Name;
     public string pants02Explain;
+    public string parent02Path;
     [Header("영웅의 바지")]
     public Sprite pants03;
     public float pants03HP;
@@ -29,4 +31,5 @@ public class PantsData : ScriptableObject
     public int pants03Count;
     public string pants03Name;
     public string pants03Explain;
+    public string parent03Path;
 }
