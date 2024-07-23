@@ -38,7 +38,7 @@ namespace TMPro
 
 
         /// <summary>
-        /// Event delegate triggered when pointer is over a Image.
+        /// Event delegate triggered when pointer is over a Image_01.
         /// </summary>
         public SpriteSelectionEvent onSpriteSelection
         {
@@ -132,7 +132,7 @@ namespace TMPro
 
                     TMP_TextElementType elementType = m_TextComponent.textInfo.characterInfo[charIndex].elementType;
 
-                    // Send event to any event listeners depending on whether it is a character or Image.
+                    // Send event to any event listeners depending on whether it is a character or Image_01.
                     if (elementType == TMP_TextElementType.Character)
                         SendOnCharacterSelection(m_TextComponent.textInfo.characterInfo[charIndex].character, charIndex);
                     else if (elementType == TMP_TextElementType.Sprite)

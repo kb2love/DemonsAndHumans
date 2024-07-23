@@ -19,9 +19,9 @@ public class PlayerData : ScriptableObject
     public float FatalValue;        //치명타 공격력
     public float level05MagicDamage;
     public float level10MagicDamage;
-    public float level15_1MagicDamage;
-    public float level15_2MagicDamage;
-    public float level25MagicDamage;
+    public float level20_1MagicDamage;
+    public float level20_2MagicDamage;
+    public float level30MagicDamage;
     public int GoldValue;
     public int levelSkillPoint;
     public int level05SkillIdx;

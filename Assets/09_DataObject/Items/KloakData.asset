@@ -17,21 +17,27 @@ MonoBehaviour:
   kloak01MP: 25
   kloak01Defence: 10
   kloak01Idx: 0
+  kloak01Count: 0
   kloak01Name: "\uC554\uC0B4\uC790\uC758 \uB9DD\uD1A0"
   kloak01Explain: "\uC554\uC0B4\uC655\uC774 \uB420\uC218\uC788\uAC8C \uB9CC\uB4E4\uC5B4\uC92C\uB2E4\uB294
     \uB9DD\uD1A0\uC774\uB2E4"
+  parent01Path: 
   kloak02: {fileID: 21300000, guid: 322b8eeb974289a49b5beeeb53f4f4e5, type: 3}
   kloak02HP: 75
   kloak02MP: 35
   kloak02Defence: 20
   kloak02Idx: 0
+  kloak02Count: 0
   kloak02Name: "\uB9C8\uC871\uC758 \uB0A0\uAC1C"
   kloak02Explain: "\uB9C8\uC871\uC758 \uB0A0\uAC1C\uB97C \uBA87\uC2ED\uAC1C \uB5BC\uC5B4\uC11C
     \uB9CC\uB4E0 \uB9DD\uD1A0\uC774\uB2E4"
+  parent02Path: 
   kloak03: {fileID: 21300000, guid: 333c91b20b6cec54d9a460817d49cf5d, type: 3}
   kloak03HP: 100
   kloak03MP: 50
   kloak03Defence: 30
   kloak03Idx: 0
+  kloak03Count: 1
   kloak03Name: "\uC601\uC6C5\uC758 \uB9DD\uD1A0"
   kloak03Explain: "\uC601\uC6C5\uC774 \uC785\uC5C8\uB358 \uB9DD\uD1A0\uC774\uB2E4"
+  parent03Path: 

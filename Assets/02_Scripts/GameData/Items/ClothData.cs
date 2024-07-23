@@ -31,5 +31,5 @@ public class ClothData : ScriptableObject
     public int cloth03Count;
     public string cloth03Name;
     public string cloth03Explain;
-    public string parent03Path;
+    public string parent03Path; 
 }

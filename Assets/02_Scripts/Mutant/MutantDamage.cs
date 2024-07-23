@@ -5,15 +5,21 @@ using UnityEngine.UI;
 
 public class MutantDamage : MonoBehaviour
 {
-    [SerializeField] MutantData mutantData;
     [SerializeField] Image hpImage;
+    [Header("체력")]
     [SerializeField] float maxHp;
+    [SerializeField] Text hpText;
+    [Header("경험치")]
+    [SerializeField] int exp;
     [Header("퀘스트 클리어 횟수에 포함될 숫자")]
     [SerializeField] int questDataIdx;
+    [Header("보스인지 아닌지")]
+    [SerializeField] bool boss = false;
     float hp;
     MutantAI mutantAI;
     GameObject hitEff;
     bool isDie;
+    bool mutantShield;
     private void Start()
     {
         mutantAI = GetComponent<MutantAI>();
@@ -23,13 +29,19 @@ public class MutantDamage : MonoBehaviour
         isDie = false;
         hp = maxHp;
         hpImage.fillAmount = hp / maxHp;
+        if (hpText != null)
+        {
+            hpText.text = maxHp.ToString() + " : " + hp.ToString();
+        }
     }
-    public void SkeletonHit(float damage)
+    public void MutantHit(float damage)
     {
-        if (!isDie)
+        if (!isDie && !mutantShield)
         {
             hp -= damage;
             hpImage.fillAmount = hp / maxHp;
+            if (hpText != null)
+                hpText.text = maxHp.ToString() + " : " + hp.ToString();
             hitEff = ObjectPoolingManager.objInst.GetHitEff();
             hitEff.transform.position = transform.position + (Vector3.up * 0.8f);
             hitEff.SetActive(true);
@@ -37,12 +49,16 @@ public class MutantDamage : MonoBehaviour
             if (hp <= 0)
                 MutantDie();
         }
+        else if(mutantShield)
+        {
+            Debug.Log("막았죠?");
+        }
     }
     void MutantDie()
     {
         mutantAI.IsDie(true);
-        GameManager.GM.ExpUp(50);
-        QuestManager.questInst.QuestKillCount(questDataIdx);
+        GameManager.GM.ExpUp(exp);
+        QuestManager.questInst.UpdateKillCount(questDataIdx, boss);
         GenerateLoot();
         isDie = true;
     }
@@ -52,7 +68,7 @@ public class MutantDamage : MonoBehaviour
 
         if (randomValue < 90f)
         {
-            // 90% 확률로 gold 생성
+            // 90% 확률로 gold_01 생성
             ItemDrop(ObjectPoolingManager.objInst.GetGold(), ItemData.ItemType.Gold);
         }
         else if (randomValue < 98f)
@@ -136,4 +152,5 @@ public class MutantDamage : MonoBehaviour
         item.GetComponent<ItemInfo>().type = itemType;
         item.SetActive(true);
     }
+    public void IsMutantShield(bool isShield) { mutantShield = isShield; }
 }

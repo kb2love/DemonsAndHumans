@@ -140,7 +140,6 @@ GameObject:
   - component: {fileID: 5360186706644050444}
   - component: {fileID: 6070660386999018775}
   - component: {fileID: 2019611411219419694}
-  - component: {fileID: 6923517396565844843}
   m_Layer: 5
   m_Name: MutantHPBG
   m_TagString: Untagged
@@ -206,18 +205,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6923517396565844843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578609806540398115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab51157641ebe7d4eaf23fe617d338f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2094850081782156679
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,7 +876,6 @@ GameObject:
   - component: {fileID: 157273289872694519}
   - component: {fileID: 5657529197052348998}
   - component: {fileID: 6738227595400591732}
-  - component: {fileID: 5866998233399037198}
   - component: {fileID: 3721987160663391420}
   - component: {fileID: 3225752665853906728}
   m_Layer: 0
@@ -910,7 +896,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 63.13719, y: 37.099464, z: -187.18123}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3873002329979857469}
   - {fileID: 5120006324571861797}
@@ -984,20 +970,6 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &5866998233399037198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5198194689719139343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e64014b2c48de3c449261378495845ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mutantData: {fileID: 11400000, guid: b5d7e6c3f48951149b27f909484628c1, type: 2}
-  attackRadius: 2
 --- !u!114 &3721987160663391420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,6 +984,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpTr: {fileID: 1410498022946124964}
   respawnTr: {fileID: 0}
+  mutantKind: 0
+  damage: 15
+  attackRadius: 2.5
 --- !u!114 &3225752665853906728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,9 +999,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc681e04b10f04439e298d3ac7562f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mutantData: {fileID: 11400000, guid: b5d7e6c3f48951149b27f909484628c1, type: 2}
   hpImage: {fileID: 8760671464553844382}
-  maxHp: 0
+  maxHp: 100
+  exp: 0
+  questDataIdx: 1
 --- !u!1 &5356235434558969641
 GameObject:
   m_ObjectHideFlags: 0

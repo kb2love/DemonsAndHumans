@@ -5,7 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MutantData", menuName = "ScriptableObjects/MutantData", order = 1)]
 public class MutantData : ScriptableObject
 {
-    [Header("Skeleton")]
-    public float skMaxHp;
-    public float skDamage;
+
 }

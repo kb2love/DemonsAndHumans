@@ -40,5 +40,5 @@ public class HatData : ScriptableObject
     public int Hat04Count;
     public string hat04Name;
     public string hat04Explain;
-    public string parent04Path;
+    public string parent04Path; 
 }

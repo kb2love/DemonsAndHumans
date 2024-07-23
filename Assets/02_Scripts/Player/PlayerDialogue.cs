@@ -17,7 +17,7 @@ public class PlayerDialogue : MonoBehaviour
             {
                 if (npc == null)
                 {
-                    hit.transform.GetComponentInParent<NPCOutLineOnOff>().OutLineOn();
+                    hit.transform.GetComponentInParent<NPCOutLineOnOff>().OutLineOn();  
                     isDialogue = true;
                     StartCoroutine(DialogueOn());
                     npc = hit.transform.GetComponentInParent<NPCOutLineOnOff>().gameObject;
@@ -42,16 +42,11 @@ public class PlayerDialogue : MonoBehaviour
             yield return null;
             if (Input.GetKeyDown(KeyCode.G))
             {
-                 if(npc != null && npc.tag == "Leader")
-                    npc.transform.GetComponentInParent<NPCLeader>().TextBox();
-                 else if(npc != null && npc.tag == "Maria")
-                    npc.transform.GetComponentInParent<NPCMaria>().TextBox();
-                 else if(npc != null && npc.tag == "Paladin")
-                    npc.transform.GetComponentInParent<NPCPaladinDialouge>().TextBox();
-                 else if(npc != null && npc.tag == "Store")
-                {
-                    npc.transform.GetComponentInParent<NPCSotre>().TextBox();
-                }
+                if (npc != null && npc.tag == "Leader") npc.transform.GetComponentInParent<NPCLeader>().TextBox();
+                else if (npc != null && npc.tag == "Maria") npc.transform.GetComponentInParent<NPCMaria>().TextBox();
+                else if (npc != null && npc.tag == "Paladin") npc.transform.GetComponentInParent<NPCPaladinDialouge>().TextBox();
+                else if (npc != null && npc.tag == "Store") { npc.transform.GetComponentInParent<NPCSotre>().TextBox(); }
+                else if (npc != null && npc.tag == "Aki") { npc.transform.GetComponentInParent<NPCMutantKillerLeader>().TextBox();  }
             }
         }
     }

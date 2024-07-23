@@ -44,5 +44,5 @@ public class NeckData : ScriptableObject
     public int neck04Count;
     public string neck04Name;
     public string neck04Explain;
-    public string parent04Path;
+    public string parent04Path; 
 }

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class Option : MonoBehaviour
 {
     [SerializeField] AudioClip effectClip;
@@ -11,9 +9,13 @@ public class Option : MonoBehaviour
     public void SaveGame()
     {
         SoundManager.soundInst.EffectSoundPlay(effectClip);
-        DataManager.dataInst.SaveData();
-        ItemManger.itemInst.AllItemTrSave();
+        DataManager.dataInst.DataSave();
+        ItemManager.itemInst.AllItemTrSave();
+        CanvasGroup ga = GameObject.Find("Text (Legacy)_Save").GetComponent<CanvasGroup>();
+        ga.alpha = 1.0f;
+        ga.GetComponent<CanvasGroup>().DOFade(0, 2.0f);
     }
+   
     public void QuitGame()
     {
         SoundManager.soundInst.EffectSoundPlay(effectClip);

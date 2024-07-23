@@ -32,5 +32,5 @@ public class RIngData : ScriptableObject
     public int ring02Count;
     public string ring02Name;
     public string ring02Explain;
-    public string parent02Path;
+    public string parent02Path; 
 }

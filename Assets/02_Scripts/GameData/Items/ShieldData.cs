@@ -36,5 +36,5 @@ public class ShieldData : ScriptableObject
     public int shield04Count;
     public string shield04Name;
     public string shield04Explain;
-    public string parent04Path;
+    public string parent04Path; 
 }

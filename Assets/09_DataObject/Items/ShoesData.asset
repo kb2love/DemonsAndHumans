@@ -15,18 +15,24 @@ MonoBehaviour:
   shoes01: {fileID: 21300000, guid: a552096f2905a45418d0ae3452869f5f, type: 3}
   shoes01HP: 10
   shoes01Defence: 5
+  shoes01Count: 0
   shoes01Idx: 0
   shoes01Name: "\uBAA8\uD5D8\uAC00\uC758 \uC2E0\uBC1C"
   shoes01Explain: "\uBAA8\uD5D8\uAC00\uC758 \uD3C9\uBC94\uD55C \uC2E0\uBC1C\uC774\uB2E4"
+  parent01Path: 
   shoes02: {fileID: 21300000, guid: 39c17bbee02fc9f43bc92c47d89c2318, type: 3}
   shoes02HP: 50
   shoes02Defence: 25
   shoes02Idx: 0
+  shoes02Count: 0
   shoes02Name: "\uC554\uC0B4\uC790\uC758 \uC2E0\uBC1C"
   shoes02Explain: "\uC554\uC0B4\uC655\uC774 \uC2E0\uB358 \uC2E0\uBC1C\uC774\uB2E4"
+  parent02Path: 
   shoes03: {fileID: 21300000, guid: 788d297112ad4404b90c2450d65abd2c, type: 3}
   shoes03HP: 100
   shoes03Defence: 50
   shoes03Idx: 0
+  shoes03Count: 1
   shoes03Name: "\uC601\uC6C5\uC758 \uC2E0\uBC1C"
   shoes03Explain: "\uC601\uC6C5\uC774 \uC2E0\uB358 \uC2E0\uBC1C\uC774\uB2E4"
+  parent03Path: 

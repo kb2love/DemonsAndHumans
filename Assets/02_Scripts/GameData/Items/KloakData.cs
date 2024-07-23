@@ -34,5 +34,5 @@ public class KloakData : ScriptableObject
     public int kloak03Count;
     public string kloak03Name;
     public string kloak03Explain;
-    public string parent03Path;
+    public string parent03Path; 
 }

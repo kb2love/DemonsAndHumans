@@ -426,7 +426,6 @@ GameObject:
   - component: {fileID: 95457531584545886}
   - component: {fileID: 7968348235258540735}
   - component: {fileID: 4267402293223371172}
-  - component: {fileID: 7890842344420710283}
   - component: {fileID: 8671006119534284192}
   - component: {fileID: 7393997962076491690}
   m_Layer: 0
@@ -511,20 +510,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpTr: {fileID: 3971941100116248940}
   respawnTr: {fileID: 0}
---- !u!114 &7890842344420710283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931298151966786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e64014b2c48de3c449261378495845ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  mutantKind: 0
   damage: 10
-  attackRadius: 3
+  attackRadius: 2
 --- !u!114 &8671006119534284192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,9 +525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bc681e04b10f04439e298d3ac7562f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mutantData: {fileID: 11400000, guid: b5d7e6c3f48951149b27f909484628c1, type: 2}
   hpImage: {fileID: 1664944285132002465}
   maxHp: 20
+  exp: 0
+  questDataIdx: 0
 --- !u!135 &7393997962076491690
 SphereCollider:
   m_ObjectHideFlags: 0

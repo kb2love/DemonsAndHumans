@@ -10,5 +10,15 @@ public class ItemData : ScriptableObject
     public GameObject equipmentItem;
     public GameObject itemCountText;
     public int goldIdx;
-    
+    [Header("무기 장착 여부")]
+    public bool isSword;
+    public bool isShield;
+    public bool isHat;
+    public bool isCloth;
+    public bool isPants;
+    public bool isShoes;
+    public bool isKloak;
+    public bool isNeck;
+    public bool isRing;
+
 }

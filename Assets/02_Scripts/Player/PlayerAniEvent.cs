@@ -30,19 +30,19 @@ public class PlayerAniEvent : MonoBehaviour
     {
         AttackEff(new Vector3(180, 250,0));
         audioSource.PlayOneShot(playerData.AttackDownClip);
-        Attack(1);
+        Attack(1, 1.25f);
     }
     public void AttackUp()
     {
         AttackEff(new Vector3(40, 250, 0));
         audioSource.PlayOneShot(playerData.AttackUpClip);
-        Attack(1.5f);
+        Attack(1.25f, 1.5f);
     }
     public void AttackFinish()
     {
         AttackEff(new Vector3(-90, 250, 0));
         audioSource.PlayOneShot(playerData.AttackFinishClip);
-        Attack(2.0f);
+        Attack(1.5f, 2.0f);
     }
     public void IceSkillCasting()
     {
@@ -81,21 +81,20 @@ public class PlayerAniEvent : MonoBehaviour
         attackEff.transform.localEulerAngles = rot;
         attackEff.SetActive(true);
     }
-    private void Attack(float damage)
+    private void Attack(float damage, float radius)
     {
         // 스켈레톤의 위치에서 attackRadius 반경으로 오버랩 스피어 생성
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRadius);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRadius * radius);
 
         // 기본 공격력 설정
-        float baseDamage = playerData.AttackValue;
+        float baseDamage = playerData.AttackValue * damage;
 
         // 치명타 확률 체크
         System.Random random = new System.Random();
         float chance = (float)random.NextDouble();
         if (chance < playerData.FatalProbability)
         {
-            baseDamage *= playerData.FatalValue; // 치명타 발동 시 데미지 증폭
-            Debug.Log(baseDamage);
+            baseDamage *= playerData.FatalValue * 0.01f; // 치명타 발동 시 데미지 증폭
         }
 
         // 오버랩 스피어 내의 모든 콜라이더 확인
@@ -105,8 +104,7 @@ public class PlayerAniEvent : MonoBehaviour
             MutantDamage skeletonDamage = hitCollider.GetComponent<MutantDamage>();
             if (skeletonDamage != null)
             {
-                skeletonDamage.SkeletonHit(baseDamage);
-                Debug.Log(baseDamage);
+                skeletonDamage.MutantHit(baseDamage);
             }
         }
     }

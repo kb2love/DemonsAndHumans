@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] PlayerData playerData;
+    [SerializeField] ItemData itemData;
     [SerializeField] RectTransform inventoryTr;
     [SerializeField] RectTransform equipmentTr;
     private RectTransform itemTr;
@@ -71,7 +72,37 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 StatUp();
                 isEquip = true;
                 GameManager.GM.AllStatUpdata();
-                ItemManger.itemInst.AllItemTrSave();
+                ItemManager.itemInst.AllItemTrSave();
+                switch(itemInfo.type)
+                {
+                    case ItemData.ItemType.Sword:
+                        itemData.isSword = true;
+                        break;
+                    case ItemData.ItemType.Shield:
+                        itemData.isShield = true;
+                        break;
+                    case ItemData.ItemType.Hat:
+                        itemData.isHat = true;
+                        break;
+                    case ItemData.ItemType.Cloth:
+                        itemData.isCloth = true;
+                        break;
+                    case ItemData.ItemType.Pants:
+                        itemData.isPants = true;
+                        break;
+                    case ItemData.ItemType.Shoes:
+                        itemData.isShoes = true;
+                        break;
+                    case ItemData.ItemType.Kloak:
+                        itemData.isKloak = true;
+                        break;
+                    case ItemData.ItemType.Neck:
+                        itemData.isNeck = true;
+                        break;
+                    case ItemData.ItemType.Ring:
+                        itemData.isRing = true;
+                        break;
+                }
             }
             else if(transform.parent.GetComponent<ItemInfo>().type != itemInfo.type)
             {
@@ -81,8 +112,38 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 if(isEquip)
                     StatDown();
                 isEquip = false;
+                switch (itemInfo.type)
+                {
+                    case ItemData.ItemType.Sword:
+                        itemData.isSword = false;
+                        break;
+                    case ItemData.ItemType.Shield:
+                        itemData.isShield = false;
+                        break;
+                    case ItemData.ItemType.Hat:
+                        itemData.isHat = false;
+                        break;
+                    case ItemData.ItemType.Cloth:
+                        itemData.isCloth = false;
+                        break;
+                    case ItemData.ItemType.Pants:
+                        itemData.isPants = false;
+                        break;
+                    case ItemData.ItemType.Shoes:
+                        itemData.isShoes = false;
+                        break;
+                    case ItemData.ItemType.Kloak:
+                        itemData.isKloak = false;
+                        break;
+                    case ItemData.ItemType.Neck:
+                        itemData.isNeck = false;
+                        break;
+                    case ItemData.ItemType.Ring:
+                        itemData.isRing = false;
+                        break;
+                }
                 GameManager.GM.AllStatUpdata();
-                ItemManger.itemInst.AllItemTrSave();
+                ItemManager.itemInst.AllItemTrSave();
             }
         }
         else
@@ -93,7 +154,7 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 StatDown();
             isEquip = false;
             GameManager.GM.AllStatUpdata();
-            ItemManger.itemInst.AllItemTrSave();
+            ItemManager.itemInst.AllItemTrSave();
         }
     }
 
@@ -124,10 +185,10 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         switch (type)
         {
             case ItemData.ItemType.Sword:
-                ItemManger.itemInst.SwordOnOff(_bool);
+                ItemManager.itemInst.SwordOnOff(_bool);
                 break;
             case ItemData.ItemType.Shield:
-                ItemManger.itemInst.ShieldTakeOff(_bool);
+                ItemManager.itemInst.ShieldTakeOff(_bool);
                 break;
         }
     }

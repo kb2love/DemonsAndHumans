@@ -16,17 +16,23 @@ MonoBehaviour:
   pants01HP: 10
   pants01Defence: 5
   pants01Idx: 0
+  pants01Count: 0
   pants01Name: "\uBAA8\uD5D8\uAC00\uC758 \uBC14\uC9C0"
   pants01Explain: "\uD3C9\uBC94\uD55C \uBAA8\uD5D8\uAC00\uC758 \uBC14\uC9C0\uC774\uB2E4"
+  parent01Path: 
   pants02: {fileID: 21300000, guid: 863e0b6f04bae9d43a7a963d60b4abae, type: 3}
   pants02HP: 50
   pants02Defence: 25
   pants02Idx: 0
+  pants02Count: 0
   pants02Name: "\uC554\uC0B4\uC790\uC758 \uBC14\uC9C0"
   pants02Explain: "\uC554\uC0B4\uC655\uC774 \uC785\uC5C8\uB358 \uBC14\uC9C0\uC774\uB2E4"
+  parent02Path: 
   pants03: {fileID: 21300000, guid: caee86a9dac044b46ba2bff3d4342fbe, type: 3}
   pants03HP: 100
   pants03Defence: 50
-  pants03Idx: 0
+  pants03Idx: 3
+  pants03Count: 1
   pants03Name: "\uC601\uC6C5\uC758 \uBC14\uC9C0"
   pants03Explain: "\uC601\uC6C5\uC774 \uC785\uC5C8\uB358 \uBC14\uC9C0\uC774\uB2E4"
+  parent03Path: Canvas_Player/Image_Inventory/Panel_InventoryGrid/Image (2)

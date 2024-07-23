@@ -6,7 +6,7 @@ using UnityEngine;
 public class QuestData01 : ScriptableObject
 {
     [Header("퀘스트 이미지")]
-    public Sprite Image;
+    public Sprite Image_01;
     [Header("퀘스트 이름")]
     public string quest01Name;
     [Header("퀘스트 내용")]

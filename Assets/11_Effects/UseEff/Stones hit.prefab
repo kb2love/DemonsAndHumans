@@ -4908,7 +4908,7 @@ GameObject:
   - component: {fileID: 2452082064152055796}
   - component: {fileID: 484368387861551534}
   - component: {fileID: 8206432625395753029}
-  - component: {fileID: -2644964653746259987}
+  - component: {fileID: -6164478176737503370}
   m_Layer: 0
   m_Name: Stones hit
   m_TagString: Untagged
@@ -9798,7 +9798,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &-2644964653746259987
+--- !u!114 &-6164478176737503370
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

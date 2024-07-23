@@ -7,7 +7,8 @@ public class DataManager : MonoBehaviour
     public static DataManager dataInst;
     public GameData gameData = new GameData();
     private string path;
-    private string fileName = "GameData";
+    private string fileName = "GameData.json";
+
     private void Awake()
     {
         if (dataInst == null)
@@ -19,6 +20,7 @@ public class DataManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         path = Path.Combine(Application.persistentDataPath, fileName);
     }
 
@@ -27,6 +29,7 @@ public class DataManager : MonoBehaviour
         string data = JsonUtility.ToJson(gameData);
         File.WriteAllText(path, data);
     }
+
     public void LoadData()
     {
         if (File.Exists(path))
@@ -35,9 +38,22 @@ public class DataManager : MonoBehaviour
             gameData = JsonUtility.FromJson<GameData>(data);
         }
     }
+    public void DataSave()
+    {
+        Transform playerTr = GameObject.Find("Player").transform;
+        dataInst.gameData.IsSave = true;
+        gameData.sceneIdx = SceneMove.SceneInst.currentScene;
+        gameData.playerPosition = new float[] { playerTr.position.x, playerTr.position.y, playerTr.position.z };
+        gameData.playerRotation = new float[] { playerTr.rotation.eulerAngles.x, playerTr.rotation.eulerAngles.y, playerTr.rotation.eulerAngles.z };
+        SaveData();
+    }
 }
+
+[System.Serializable]
 public class GameData
 {
-    public Transform playeTr;
-    public int scenIdx;
+    public float[] playerPosition;
+    public float[] playerRotation;
+    public int sceneIdx;
+    public bool IsSave;
 }

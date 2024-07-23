@@ -9,10 +9,13 @@ public class DialogueManager : MonoBehaviour
     // 대화 데이터를 저장할 딕셔너리
     private Dictionary<string, List<DialogueEntry>> dialogueDictionary = new Dictionary<string, List<DialogueEntry>>();
 
-    // Awake에서 대화 데이터 로드
     private void Awake()
     {
         dialogueInst = this;
+    }
+    // Awake에서 대화 데이터 로드
+    public void Initialize()
+    {
         LoadDialogueData();
     }
 
@@ -48,6 +51,7 @@ public class DialogueManager : MonoBehaviour
         {
             return dialogueDictionary[eventName];
         }
+        Debug.LogWarning(eventName);
         return null;
     }
 }

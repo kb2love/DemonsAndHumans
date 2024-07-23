@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     {
         GM = this;
     }
-    private void Start()
+    public void Initialize()
     {
         AllStatUpdata();
         expImage.fillAmount = playerData.expValue / playerData.maxExpValue;
@@ -64,21 +64,25 @@ public class GameManager : MonoBehaviour
         StatUpdate(PlayerData.PlayerStat.DefenceValue);
         StatUpdate(PlayerData.PlayerStat.FatalValue);
         StatUpdate(PlayerData.PlayerStat.FatalProbability);
-    }
-    //******************플레이어 경험치 업 및 레벨업하는 메서드****************//
+    }//******************플레이어 경험치 업 및 레벨업하는 메서드****************//
     public void ExpUp(int exp)
     {
+        // 플레이어의 경험치를 증가시킴
         playerData.expValue += exp;
-        if (playerData.expValue >= playerData.maxExpValue )
+
+        // 현재 경험치가 최대 경험치보다 큰 경우 레벨업을 반복적으로 수행
+        while (playerData.expValue >= playerData.maxExpValue)
         {
             LevelUp();
         }
+
+        // 경험치 이미지 업데이트
         expImage.fillAmount = playerData.expValue / playerData.maxExpValue;
     }
     private void LevelUp()
     {
         playerData.expValue -= playerData.maxExpValue;
-        playerData.maxExpValue *= 1.1f;
+        playerData.maxExpValue *= 50.0f;
         playerData.MaxHP *= 1.1f;
         playerData.MaxMP *= 1.1f;
         playerData.HP = playerData.MaxHP;

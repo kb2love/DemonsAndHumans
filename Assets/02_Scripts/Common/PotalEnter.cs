@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PotalEnter : MonoBehaviour
 {
-    [Header("포탈 입장할 씬의 Idx")]
+    [Header("포탈 입장할 씬의 Idx_01")]
     [SerializeField] int sceneIdx;
-    [Header("포탈 입장 할 스타트 포인트의 Idx")]
+    [Header("포탈 입장 할 스타트 포인트의 Idx_01")]
     [SerializeField] int startPointIdx;
     [Header("플레이어 레벨")]
     [SerializeField] int playerLevel;
@@ -15,6 +15,7 @@ public class PotalEnter : MonoBehaviour
     {
         if(other.gameObject.tag == "Player" && playerData.Level >= playerLevel)
         {
+            ItemManager.itemInst.AllItemTrSave();
             playerData.playerSceneIdx = startPointIdx;
             SceneMove.SceneInst.PotalMove(sceneIdx);
         }

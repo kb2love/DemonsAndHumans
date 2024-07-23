@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] PlayerData playerData;
-    [SerializeField] QuestData03 questData;
     [SerializeField] GameObject sword;
     [SerializeField] GameObject shield;
     [SerializeField] Image mpImage;
@@ -27,16 +26,8 @@ public class PlayerAttack : MonoBehaviour
     private bool isStop;
     private bool isEquip;
     private bool isInven;
-    public bool isSword
-    {
-        get { return _isSword; }
-    }
-    private bool _isSword;
-    public bool isShield
-    {
-        get { return _isShield; }
-    }
-    private bool _isShield;
+    public bool isSword;
+    public bool isShield;
     void Start()
     {
         animator = transform.GetChild(0).GetComponent<Animator>();
@@ -182,19 +173,18 @@ public class PlayerAttack : MonoBehaviour
     }
     public void IsSword(bool _IsSword)
     {
-        _isSword = _IsSword;
+        isSword = _IsSword;
         animator.SetBool("GetSword", isSword);
         sword.SetActive(isSword);
         if (isSword)
         {
-            questData.Result = true;
             if (dialouge != null)
                 dialouge.WeaponWear();
         }
     }
     public void IsShield(bool _IsShield)
     {
-        _isShield = _IsShield;
+        isShield = _IsShield;
         animator.SetBool("GetShield", isShield);
         shield.SetActive(isShield);
     }

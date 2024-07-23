@@ -5,53 +5,63 @@ public class NPCPaladinDialouge : NPCDialogue
     [SerializeField] private Transform gate01;
     [SerializeField] private Transform gate02;
     [SerializeField] GameObject nextDoor;
-    [SerializeField] QuestData03 questData;
-    private bool isGive = false;
+    [SerializeField] QuestData03 questData03;
 
-    protected override void Start()
+    public override void Initialize()
     {
-        if (questData.Result)
+        switch(questData03.questState)
         {
-            OpenDoor();
+            case QuestState_01.QuestHave:
+                QuestAdd();
+                break;
+            case QuestState_01.QuestTake:
+                QuestEnd();
+                QuestManager.questInst.AddQuest(ref questData03.Idx, questData03.Image, questData03.Name, questData03.Content, questData03.exp.ToString() + " exp_01", null, null,null, 0, 0, ref questData03.questState, QuestState_01.QuestTake);
+                break;
+            case QuestState_01.QuestClear:
+                QuestClear();
+                break;
+            case QuestState_01.None:
+                OpenDoor();
+                QuestEnd();
+                break;
         }
-        base.Start();
+        base.Initialize();
     }
 
     protected override void StartDialogue()
     {
-        if (questData.Result)
+        switch (questData03.questState)
         {
-            dialogueIdx = 3;
+            case QuestState_01.QuestHave: dialogueIdx = 0; break;
+            case QuestState_01.QuestTake: dialogueIdx = 1; break;
+            case QuestState_01.QuestClear: dialogueIdx = 2; break;
+            case QuestState_01.None: dialogueIdx = 3; break;
         }
         base.StartDialogue();
     }
 
     protected override void EndDialogue()
     {
-        if (!questData.Result)
+        switch (questData03.questState)
         {
-            dialogueIdx = 1;
-            if (!isGive)
-            {
-                ItemManger.itemInst.GetSword01();
-                ItemManger.itemInst.GetShield01();
-                ItemManger.itemInst.AllItemTrSave();
-                isGive = true;
-                QuestManager.questInst.QuestPlus(ref questData.Idx, questData.Image, questData.Name, questData.Content, questData.exp.ToString() + " exp", ref questData.Take);
+            case QuestState_01.QuestHave:
+                ItemManager.itemInst.GetSword01();
+                ItemManager.itemInst.GetShield01();
+                ItemManager.itemInst.AllItemTrSave();
+                QuestManager.questInst.AddQuest(ref questData03.Idx, questData03.Image, questData03.Name, questData03.Content, questData03.exp.ToString() + " exp_01", null, null,null, 0, 0, ref questData03.questState, QuestState_01.QuestTake);
                 QuestAdd();
-            }
-        }
-        else
-        {
-            dialogueIdx = 3;
-            if(questData.Take)
-            {
+                break;
+            case QuestState_01.QuestTake:
+
+                break;
+            case QuestState_01.QuestClear:
                 OpenDoor();
                 QuestEnd();
-                QuestManager.questInst.QuestClear(questData.Idx, ref questData.Result, ref questData.Take);
-                GameManager.GM.ExpUp(questData.exp);
-                isGive = false;
-            }
+                QuestManager.questInst.CompleteQuest(questData03.Idx, ref questData03.questState);
+                GameManager.GM.ExpUp(questData03.exp);
+                break;
+            case QuestState_01.None: break;
         }
         base.EndDialogue();
     }
@@ -66,7 +76,10 @@ public class NPCPaladinDialouge : NPCDialogue
 
     public void WeaponWear()
     {
-        if(questData.Take)
+        if (questData03.questState == QuestState_01.QuestTake)
+        {
+            questData03.questState = QuestState_01.QuestClear;
             QuestClear();
+        };
     }
 }

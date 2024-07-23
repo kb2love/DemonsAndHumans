@@ -89,8 +89,8 @@ public class Outline : MonoBehaviour {
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
     outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
 
-    outlineMaskMaterial.name = "OutlineMask (Instance)";
-    outlineFillMaterial.name = "OutlineFill (Instance)";
+    outlineMaskMaterial.name = "OutlineMask (questInst)";
+    outlineFillMaterial.name = "OutlineFill (questInst)";
 
     // Retrieve or generate smooth normals
     LoadSmoothNormals();

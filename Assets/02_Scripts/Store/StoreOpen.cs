@@ -10,7 +10,6 @@ public class StoreOpen : MonoBehaviour
     [SerializeField] RectTransform potionContant;
     [SerializeField] RectTransform materialContant;
     [SerializeField] GameObject playerStat;
-    [SerializeField] GameObject useItem;
     [SerializeField] ScrollRect scrollRect;
     [SerializeField] Text storeText;
     public void WeaponStore()
@@ -32,7 +31,8 @@ public class StoreOpen : MonoBehaviour
         PlayerAttack playerAttack = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         playerAttack.enabled = true;
         playerAttack.GetComponent<PlayerController>().enabled = true;   
-        useItem.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
     }
     public void StoreSelect(bool _isWeapon, bool _isPotion, bool _isMaterial, RectTransform rect, string storeName)

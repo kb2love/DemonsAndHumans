@@ -6,11 +6,11 @@ public class StoreBuyAndSell : MonoBehaviour
 {
     [SerializeField] PlayerData playerData;
     [SerializeField] MaterialData materialData;
-    ItemManger itemManger;
+    ItemManager itemManger;
 
     private void Start()
     {
-        itemManger = ItemManger.itemInst;
+        itemManger = ItemManager.itemInst;
     }
 
     // 아이템 구매를 위한 공통 메서드

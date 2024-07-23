@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class NPCSotre : NPCDialogue
 {
-    private GameObject useItem;
     private GameObject store;
     private GameObject playerStat;
-    protected override void Start()
+    public override void Initialize()
     {
-        base.Start();
-        Transform canvas = GameObject.Find("Canvas_Player").transform;
-        useItem = canvas.transform.GetChild(7).gameObject;
-        store = canvas.GetChild(1).gameObject;
-        playerStat = canvas.GetChild(4).gameObject;
+        base.Initialize();
+        store = GameObject.Find("Canvas_NPC").transform.GetChild(1).gameObject;
+        playerStat = GameObject.Find("PlayerState");
     }
     protected override void StartDialogue()
     {
@@ -38,6 +35,7 @@ public class NPCSotre : NPCDialogue
         playerStat.SetActive(false);
         playerAttack.enabled = false;
         playerController.enabled = false;
-        useItem.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
