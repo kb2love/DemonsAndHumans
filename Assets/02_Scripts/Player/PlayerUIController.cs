@@ -4,8 +4,8 @@ using UnityEngine.Events;
 
 public class PlayerUIController : MonoBehaviour
 {
-    [SerializeField] GameObject inventory;
-    [SerializeField] GameObject equipment;
+    [SerializeField] CanvasGroup inventory;
+    [SerializeField] CanvasGroup equipment;
     [SerializeField] GameObject state;
     [SerializeField] GameObject skillWindow;
     [SerializeField] GameObject option;
@@ -22,8 +22,8 @@ public class PlayerUIController : MonoBehaviour
 
     void Update()
     {
-        HandleToggleWindow(new KeyCode[] { KeyCode.Tab, KeyCode.I }, inventory, playerAttack.IsInventory);
-        HandleToggleWindow(new KeyCode[] { KeyCode.U }, equipment, playerAttack.IsEquipment);
+        HandleToggleItemWindow(new KeyCode[] { KeyCode.Tab, KeyCode.I }, inventory, playerAttack.IsInventory);
+        HandleToggleItemWindow(new KeyCode[] { KeyCode.U }, equipment, playerAttack.IsEquipment);
         HandleToggleWindow(new KeyCode[] { KeyCode.P }, state);
         HandleToggleWindow(new KeyCode[] { KeyCode.K }, skillWindow);
         HandleToggleWindow(new KeyCode[] { KeyCode.J }, quest);
@@ -34,6 +34,33 @@ public class PlayerUIController : MonoBehaviour
         HandlePotionUse(3);
     }
 
+    void HandleToggleItemWindow(KeyCode[] keys, CanvasGroup canvasGroup, System.Action<bool> onToggleAction = null)
+    {
+        foreach (KeyCode key in keys)
+        {
+            if (Input.GetKeyDown(key))
+            {
+                bool isActive = canvasGroup.alpha == 0;
+                canvasGroup.alpha = isActive ? 1 : 0;
+                canvasGroup.blocksRaycasts = isActive; // Interactable only if visible
+                canvasGroup.interactable = isActive;
+                onToggleAction?.Invoke(isActive);
+
+                if (isActive)
+                {
+                    CursorOn();
+                    playerAttack.enabled = false;
+                }
+                else
+                {
+                    CursorOff();
+                    playerAttack.enabled = true;
+                }
+
+                break;
+            }
+        }
+    }
     void HandleToggleWindow(KeyCode[] keys, GameObject window, System.Action<bool> onToggleAction = null)
     {
         foreach (KeyCode key in keys)

@@ -6,39 +6,31 @@ using UnityEngine;
 public class HatData : ScriptableObject
 {
     [Header("암살자의 투구")]
-    public Sprite hat01;
-    public float hat01HP;
-    public float hat01Defence;
-    public int hat01Idx;
-    public int Hat01Count;
-    public string hat01Name;
-    public string hat01Explain;
-    public string parent01Path;
+    public Sprite Image_01;
+    public float HP_01;
+    public float Defence_01;
+    public int Idx_01;
+    public int Count_01;
+    public string Name_01; 
     [Header("전사의 투구")]
-    public Sprite hat02;
-    public float hat02HP;
-    public float hat02Defence;
-    public int hat02Idx;
-    public int Hat02Count;
-    public string hat02Name;
-    public string hat02Explain;
-    public string parent02Path;
+    public Sprite Image_02;
+    public float HP_02;
+    public float Defence_02;
+    public int Idx_02;
+    public int Count_02;
+    public string Name_02; 
     [Header("마족의 투구")]
-    public Sprite hat03;
-    public float hat03HP;
-    public float hat03Defence;
-    public int hat03Idx;
-    public int Hat03Count;
-    public string hat03Name;
-    public string hat03Explain;
-    public string parent03Path;
+    public Sprite Image_03;
+    public float HP_03;
+    public float Defence_03;
+    public int Idx_03;
+    public int Count_03;
+    public string Name_03; 
     [Header("영웅의 투구")]
-    public Sprite hat04;
-    public float hat04HP;
-    public float hat04Defence;
-    public int hat04Idx;
-    public int Hat04Count;
-    public string hat04Name;
-    public string hat04Explain;
-    public string parent04Path; 
+    public Sprite Image_04;
+    public float HP_04;
+    public float Defence_04;
+    public int Idx_04;
+    public int Count_04;
+    public string Name_04; 
 }

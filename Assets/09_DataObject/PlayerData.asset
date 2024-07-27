@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904822520bffef54a97977d50238ab49, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  HP: 997.7249
+  HP: 2507.725
   MaxHP: 417.7249
-  MP: 597.7249
+  MP: 1347.725
   MaxMP: 417.7249
-  AttackValue: 143.545
-  MagicAttackValue: 80
+  AttackValue: 453.545
+  MagicAttackValue: 290
   expValue: 341.2414
-  maxExpValue: 18987.5
+  maxExpValue: 350
   Level: 16
-  DefenceValue: 412.6587
-  FatalProbability: 20.20886
-  FatalValue: 511.839
+  DefenceValue: 1332.659
+  FatalProbability: 260.2089
+  FatalValue: 1011.839
   level05MagicDamage: 100
   level10MagicDamage: 0
   level20_1MagicDamage: 0

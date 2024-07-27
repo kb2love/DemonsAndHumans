@@ -3,7 +3,7 @@ using static NPCDialogue;
 
 public class NPCLeader : NPCDialogue
 {
-    [SerializeField] private QuestData01 questData01;
+    [SerializeField] private DialougeQuest leaderQuest;
 
     public override void Initialize()
     {
@@ -13,15 +13,15 @@ public class NPCLeader : NPCDialogue
 
     private void UpdateQuestMarkers()
     {
-        switch (questData01.questState)
+        switch (leaderQuest.questState)
         {
-            case QuestState_01.QuestHave:
+            case QuestState.QuestHave:
                 QuestAdd();
                 break;
-            case QuestState_01.QuestTake:
+            case QuestState.QuestTake:
                 QuestEnd();
                 break;
-            case QuestState_01.None:
+            case QuestState.None:
                 QuestEnd();
                 break;
         }
@@ -29,15 +29,15 @@ public class NPCLeader : NPCDialogue
 
     protected override void StartDialogue()
     {
-        switch (questData01.questState)
+        switch (leaderQuest.questState)
         {
-            case QuestState_01.QuestHave:
+            case QuestState.QuestHave:
                 dialogueIdx = 0;
                 break;
-            case QuestState_01.QuestTake:
+            case QuestState.QuestTake:
                 dialogueIdx = 1;
                 break;
-            case QuestState_01.None:
+            case QuestState.None:
                 dialogueIdx = 2;
                 break;
         }
@@ -49,9 +49,9 @@ public class NPCLeader : NPCDialogue
     {
         base.EndDialogue();
 
-        if (questData01.questState == QuestState_01.QuestHave)
+        if (leaderQuest.questState == QuestState.QuestHave)
         {
-            QuestManager.questInst.AddQuest(ref questData01.Idx, questData01.Image, questData01.Name, questData01.content, questData01.exp.ToString() + " Exp", null, null, null, 0, 0, ref questData01.questState, QuestState_01.QuestTake);
+            QuestManager.questInst.AddQuest_01(ref leaderQuest.Idx, leaderQuest.Image, leaderQuest.Name, leaderQuest.Content, leaderQuest.Exp.ToString() + " Exp", ref leaderQuest.questState, QuestState.QuestTake);
             QuestEnd();
             FindObjectOfType<NPCMaria>().QuestAdd();
         }

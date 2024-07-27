@@ -1,35 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ShoesData", menuName = "ScriptableObjects/Items/ShoesData", order = 7)]
 public class ShoesData : ScriptableObject
 {
     [Header("모험가의 신발")]
-    public Sprite shoes01;
-    public float shoes01HP;
-    public float shoes01Defence;
-    public int shoes01Count;
-    public int shoes01Idx;
-    public string shoes01Name;
-    public string shoes01Explain;
-    public string parent01Path;
+    public Sprite Image_01;
+    public float HP_01;
+    public float Defence_01;
+    public int Count_01;
+    public int Idx_01;
+    public string Name_01;
     [Header("암살자의 신발")]
-    public Sprite shoes02;
-    public float shoes02HP;
-    public float shoes02Defence;
-    public int shoes02Idx;
-    public int shoes02Count;
-    public string shoes02Name;
-    public string shoes02Explain;
-    public string parent02Path;
+    public Sprite Image_02;
+    public float HP_02;
+    public float Defence_02;
+    public int Count_02;
+    public int Idx_02;
+    public string Name_02;
     [Header("영웅의 신발")]
-    public Sprite shoes03;
-    public float shoes03HP;
-    public float shoes03Defence;
-    public int shoes03Idx;
-    public int shoes03Count;
-    public string shoes03Name;
-    public string shoes03Explain;
-    public string parent03Path;
+    public Sprite Image_03;
+    public float HP_03;
+    public float Defence_03;
+    public int Count_03;
+    public int Idx_03;
+    public string Name_03; 
 }

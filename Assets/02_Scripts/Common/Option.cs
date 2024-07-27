@@ -10,7 +10,7 @@ public class Option : MonoBehaviour
     {
         SoundManager.soundInst.EffectSoundPlay(effectClip);
         DataManager.dataInst.DataSave();
-        ItemManager.itemInst.AllItemTrSave();
+        ItemManager.itemInst.AllItemSave();
         CanvasGroup ga = GameObject.Find("Text (Legacy)_Save").GetComponent<CanvasGroup>();
         ga.alpha = 1.0f;
         ga.GetComponent<CanvasGroup>().DOFade(0, 2.0f);

@@ -6,33 +6,27 @@ using UnityEngine;
 public class KloakData : ScriptableObject
 {
     [Header("암살자의 망토")]
-    public Sprite kloak01;
-    public float kloak01HP;
-    public float kloak01MP;
-    public float kloak01Defence;
-    public int kloak01Idx;
-    public int kloak01Count;
-    public string kloak01Name;
-    public string kloak01Explain;
-    public string parent01Path;
+    public Sprite Image_01;
+    public float HP_01;
+    public float MP_01;
+    public float Defence_01;
+    public int Idx_01;
+    public int Count_01;
+    public string Name_01; 
     [Header("마족의 날개")]
-    public Sprite kloak02;
-    public float kloak02HP;
-    public float kloak02MP;
-    public float kloak02Defence;
-    public int kloak02Idx;
-    public int kloak02Count;
-    public string kloak02Name;
-    public string kloak02Explain;
-    public string parent02Path;
+    public Sprite Image_02;
+    public float HP_02;
+    public float MP_02;
+    public float Defence_02;
+    public int Idx_02;
+    public int Count_02;
+    public string Name_02; 
     [Header("영웅의 망토")]
-    public Sprite kloak03;
-    public float kloak03HP;
-    public float kloak03MP;
-    public float kloak03Defence;
-    public int kloak03Idx;
-    public int kloak03Count;
-    public string kloak03Name;
-    public string kloak03Explain;
-    public string parent03Path; 
+    public Sprite Image_03;
+    public float HP_03;
+    public float MP_03;
+    public float Defence_03;
+    public int Idx_03;
+    public int Count_03;
+    public string Name_03; 
 }

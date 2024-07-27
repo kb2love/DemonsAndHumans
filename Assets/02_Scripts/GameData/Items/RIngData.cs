@@ -6,31 +6,27 @@ using UnityEngine;
 public class RIngData : ScriptableObject
 {
     [Header("마왕의 반지")]
-    public Sprite ring01;
-    public float ring01HP;
-    public float ring01MP;
-    public float ring01Defence;
-    public float ring01FatalValue;
-    public float ring01FatalProbability;
-    public float ring01MagicDamage;
-    public float ring01Damage;
-    public int ring01Idx;
-    public int ring01Count;
-    public string ring01Name;
-    public string ring01Explain;
-    public string parent01Path;
+    public Sprite Image_01;
+    public float HP_01;
+    public float MP_01;
+    public float Defence_01;
+    public float FatalValue_01;
+    public float FatalProbability_01;
+    public float MagicDamage_01;
+    public float Damage_01;
+    public int Idx_01;
+    public int Count_01;
+    public string Name_01;
     [Header("용사의 반지")]
-    public Sprite ring02;
-    public float ring02HP;
-    public float ring02MP;
-    public float ring02Defence;
-    public float ring02FatalValue;
-    public float ring02FatalProbability;
-    public float ring02MagicDamage;
-    public float ring02Damage;
-    public int ring02Idx;
-    public int ring02Count;
-    public string ring02Name;
-    public string ring02Explain;
-    public string parent02Path; 
+    public Sprite Image_02;
+    public float HP_02;
+    public float MP_02;
+    public float Defence_02;
+    public float FatalValue_02;
+    public float FatalProbability_02;
+    public float MagicDamage_02;
+    public float Damage_02;
+    public int Idx_02;
+    public int Count_02;
+    public string Name_02;
 }

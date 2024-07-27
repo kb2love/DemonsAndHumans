@@ -6,30 +6,24 @@ using UnityEngine;
 public class PantsData : ScriptableObject
 {
     [Header("모험가의 바지")]
-    public Sprite pants01;
-    public float pants01HP;
-    public float pants01Defence;
-    public int pants01Idx;
-    public int pants01Count;
-    public string pants01Name;
-    public string pants01Explain;
-    public string parent01Path;
+    public Sprite Image_01;
+    public float HP_01;
+    public float Defence_01;
+    public int Idx_01;
+    public int Count_01;
+    public string Name_01;
     [Header("암살자의 바지")]
-    public Sprite pants02;
-    public float pants02HP;
-    public float pants02Defence;
-    public int pants02Idx;
-    public int pants02Count;
-    public string pants02Name;
-    public string pants02Explain;
-    public string parent02Path;
+    public Sprite Image_02;
+    public float HP_02;
+    public float Defence_02;
+    public int Idx_02;
+    public int Count_02;
+    public string Name_02;
     [Header("영웅의 바지")]
-    public Sprite pants03;
-    public float pants03HP;
-    public float pants03Defence;
-    public int pants03Idx;
-    public int pants03Count;
-    public string pants03Name;
-    public string pants03Explain;
-    public string parent03Path; 
+    public Sprite Image_03;
+    public float HP_03;
+    public float Defence_03;
+    public int Idx_03;
+    public int Count_03;
+    public string Name_03;
 }

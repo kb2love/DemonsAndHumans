@@ -9,9 +9,13 @@ public class StoreOpen : MonoBehaviour
     [SerializeField] RectTransform weqponContant;
     [SerializeField] RectTransform potionContant;
     [SerializeField] RectTransform materialContant;
-    [SerializeField] GameObject playerStat;
+    GameObject playerStat;
     [SerializeField] ScrollRect scrollRect;
     [SerializeField] Text storeText;
+    public void Initialize()
+    {
+        playerStat = GameObject.Find("PlayerState").gameObject;
+    }
     public void WeaponStore()
     {
         StoreSelect(true, false, false, weqponContant, "무기 상점");

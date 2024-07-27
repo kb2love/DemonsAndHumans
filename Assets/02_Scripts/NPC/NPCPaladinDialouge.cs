@@ -5,23 +5,23 @@ public class NPCPaladinDialouge : NPCDialogue
     [SerializeField] private Transform gate01;
     [SerializeField] private Transform gate02;
     [SerializeField] GameObject nextDoor;
-    [SerializeField] QuestData03 questData03;
+    [SerializeField] DialougeQuest paladinQuest;
 
     public override void Initialize()
     {
-        switch(questData03.questState)
+        switch(paladinQuest.questState)
         {
-            case QuestState_01.QuestHave:
+            case QuestState.QuestHave:
                 QuestAdd();
                 break;
-            case QuestState_01.QuestTake:
+            case QuestState.QuestTake:
                 QuestEnd();
-                QuestManager.questInst.AddQuest(ref questData03.Idx, questData03.Image, questData03.Name, questData03.Content, questData03.exp.ToString() + " exp_01", null, null,null, 0, 0, ref questData03.questState, QuestState_01.QuestTake);
+                QuestManager.questInst.AddQuest_01(ref paladinQuest.Idx, paladinQuest.Image, paladinQuest.Name, paladinQuest.Content, paladinQuest.Exp.ToString() + " Exp", ref paladinQuest.questState, QuestState.QuestTake); 
                 break;
-            case QuestState_01.QuestClear:
+            case QuestState.QuestClear:
                 QuestClear();
                 break;
-            case QuestState_01.None:
+            case QuestState.None:
                 OpenDoor();
                 QuestEnd();
                 break;
@@ -31,37 +31,37 @@ public class NPCPaladinDialouge : NPCDialogue
 
     protected override void StartDialogue()
     {
-        switch (questData03.questState)
+        switch (paladinQuest.questState)
         {
-            case QuestState_01.QuestHave: dialogueIdx = 0; break;
-            case QuestState_01.QuestTake: dialogueIdx = 1; break;
-            case QuestState_01.QuestClear: dialogueIdx = 2; break;
-            case QuestState_01.None: dialogueIdx = 3; break;
+            case QuestState.QuestHave: dialogueIdx = 0; break;
+            case QuestState.QuestTake: dialogueIdx = 1; break;
+            case QuestState.QuestClear: dialogueIdx = 2; break;
+            case QuestState.None: dialogueIdx = 3; break;
         }
         base.StartDialogue();
     }
 
     protected override void EndDialogue()
     {
-        switch (questData03.questState)
+        switch (paladinQuest.questState)
         {
-            case QuestState_01.QuestHave:
+            case QuestState.QuestHave:
                 ItemManager.itemInst.GetSword01();
                 ItemManager.itemInst.GetShield01();
-                ItemManager.itemInst.AllItemTrSave();
-                QuestManager.questInst.AddQuest(ref questData03.Idx, questData03.Image, questData03.Name, questData03.Content, questData03.exp.ToString() + " exp_01", null, null,null, 0, 0, ref questData03.questState, QuestState_01.QuestTake);
+                ItemManager.itemInst.AllItemSave();
+                QuestManager.questInst.AddQuest_01(ref paladinQuest.Idx, paladinQuest.Image, paladinQuest.Name, paladinQuest.Content, paladinQuest.Exp.ToString() + " Exp", ref paladinQuest.questState, QuestState.QuestTake);
                 QuestAdd();
                 break;
-            case QuestState_01.QuestTake:
+            case QuestState.QuestTake:
 
                 break;
-            case QuestState_01.QuestClear:
+            case QuestState.QuestClear:
                 OpenDoor();
                 QuestEnd();
-                QuestManager.questInst.CompleteQuest(questData03.Idx, ref questData03.questState);
-                GameManager.GM.ExpUp(questData03.exp);
+                QuestManager.questInst.CompleteQuest(paladinQuest.Idx, ref paladinQuest.questState);
+                GameManager.GM.ExpUp(paladinQuest.Exp);
                 break;
-            case QuestState_01.None: break;
+            case QuestState.None: break;
         }
         base.EndDialogue();
     }
@@ -76,9 +76,9 @@ public class NPCPaladinDialouge : NPCDialogue
 
     public void WeaponWear()
     {
-        if (questData03.questState == QuestState_01.QuestTake)
+        if (paladinQuest.questState == QuestState.QuestTake)
         {
-            questData03.questState = QuestState_01.QuestClear;
+            paladinQuest.questState = QuestState.QuestClear;
             QuestClear();
         };
     }

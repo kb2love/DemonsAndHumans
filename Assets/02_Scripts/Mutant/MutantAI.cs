@@ -7,6 +7,9 @@ public class MutantAI : MonoBehaviour
 {
     [SerializeField] Transform hpTr;
     [SerializeField] Transform respawnTr;
+    [Header("공격 효과음")]
+    [SerializeField] AudioClip attackClip;
+    [SerializeField] AudioClip dieClip;
     [SerializeField] bool mutantKindIdx;
     [SerializeField] int mutantAttackKindIdx;
     [SerializeField] float damage;
@@ -107,6 +110,7 @@ public class MutantAI : MonoBehaviour
                     agent.isStopped = true;
                     if (mutantKindIdx)
                         animator.SetInteger("AttackIdx", Random.Range(0, mutantAttackKindIdx));
+                    SoundManager.soundInst.EffectSoundPlay(attackClip);
                     animator.SetTrigger("AttackTrigger");
                     Invoke("IsTraceFalse", 3.0f);
                     break;
@@ -123,6 +127,7 @@ public class MutantAI : MonoBehaviour
                 case MutantState.Die:
                     agent.isStopped = true;
                     animator.SetTrigger("DieTrigger");
+                    SoundManager.soundInst.EffectSoundPlay(dieClip);
                     Invoke("DieOn", 5.0f);
                     if (bossImage != null)
                     {

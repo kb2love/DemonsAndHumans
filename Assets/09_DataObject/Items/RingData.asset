@@ -12,32 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf31e9e567678284d9d0a82caede7e7e, type: 3}
   m_Name: RingData
   m_EditorClassIdentifier: 
-  ring01: {fileID: 21300000, guid: 40132e59175222f41888d1dc6b0eee14, type: 3}
-  ring01HP: 50
-  ring01MP: 50
-  ring01Defence: 25
-  ring01FatalValue: 100
-  ring01FatalProbability: 10
-  ring01MagicDamage: 25
-  ring01Damage: 10
-  ring01Idx: 0
-  ring01Count: 0
-  ring01Name: "\uB9C8\uC655\uC758 \uBC18\uC9C0"
-  ring01Explain: "\uB9C8\uC655\uC774 \uC8FD\uAE30 \uC9C1\uC804\uAE4C\uC9C0 \uAF07\uB2E4\uACE0
-    \uD558\uB294\uBC18\uC9C0"
-  parent01Path: 
-  ring02: {fileID: 21300000, guid: 8a263870835e0f64d9f486cb39ea2b30, type: 3}
-  ring02HP: 100
-  ring02MP: 100
-  ring02Defence: 50
-  ring02FatalValue: 200
-  ring02FatalProbability: 20
-  ring02MagicDamage: 50
-  ring02Damage: 20
-  ring02Idx: 0
-  ring02Count: 1
-  ring02Name: "\uC6A9\uC0AC\uC758 \uBC18\uC9C0"
-  ring02Explain: "\uC6A9\uC0AC\uAC00 \uB9C8\uC655\uC744 \uC8FD\uC77C\uC218\uC788\uB294\uB370
-    \uAC00\uC7A5 \uD070 \uC5ED\uD560\uC744 \uD588\uB2E4\uACE0 \uC54C\uB824\uC838
-    \uC788\uB294 \uBC18\uC9C0"
-  parent02Path: 
+  Image_01: {fileID: 21300000, guid: 40132e59175222f41888d1dc6b0eee14, type: 3}
+  HP_01: 100
+  MP_01: 150
+  Defence_01: 50
+  FatalValue_01: 100
+  FatalProbability_01: 5
+  MagicDamage_01: 100
+  Damage_01: 50
+  Idx_01: 9
+  Count_01: 1
+  Name_01: "\uB9C8\uC655\uC758 \uBC18\uC9C0"
+  Path_01: 
+  Image_02: {fileID: 21300000, guid: 8a263870835e0f64d9f486cb39ea2b30, type: 3}
+  HP_02: 150
+  MP_02: 300
+  Defence_02: 75
+  FatalValue_02: 150
+  FatalProbability_02: 0
+  MagicDamage_02: 0
+  Damage_02: 0
+  Idx_02: 0
+  Count_02: 0
+  Name_02: 
+  Path_02: 

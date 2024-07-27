@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32808a993a27704469d157fe75396724, type: 3}
+  m_Name: MariaQuest_02
+  m_EditorClassIdentifier: 
+  questState: 0
+  Image: {fileID: 21300000, guid: e308c0e2c079a594597aa9ebd732d094, type: 3}
+  Name: "\uB9C8\uC871\uC0AC\uB0E5\uB300\uB85C"
+  Content: "\uAE30\uC0AC\uB2E8\uC7A5 \uB9C8\uB9AC\uC544\uAC00 \uB098\uB97C \uB9C8\uC871\uC0AC\uB0E5\uB300\uB85C
+    \uD3B8\uC131\uD560\uB824\uB294 \uBAA8\uC591\uC774\uB2E4. \uB9C8\uC871\uC0AC\uB0E5\uB300\uB300\uC7A5\uC740
+    \uB9C8\uC871\uC758 \uC794\uC7AC\uB97C \uC7A1\uC740\uACF3 \uC55E\uC5D0\uC788\uB2E4\uACE0\uD55C\uB2E4."
+  Exp: 10
+  Idx: 0

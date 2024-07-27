@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float walkSpeed = 2.5f;
     [SerializeField] float runSpeed = 5.0f;
+    [SerializeField] AudioClip walkSound;
+    [SerializeField] AudioClip runSound;
     private float moveSpeed = 0;
     private Camera _camera;
     private Animator animator;
@@ -15,6 +17,9 @@ public class PlayerController : MonoBehaviour
     public bool toggleCameraRotation;
     private float smoothness = 10.0f;
     private bool isStop = false;
+    private bool isRunning = false;
+    private float stepTimer = 0.0f;
+    private float stepInterval = 0.5f; // 걸을 때 소리 간격
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
@@ -25,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(!isStop)
+        if (!isStop)
             MoveAndRun();
     }
 
@@ -41,17 +46,39 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("IsRun", true);
             moveSpeed = runSpeed;
+            isRunning = true;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift) || mvZ < 0.1f || Mathf.Abs(mvX) > 0.1f)
         {
             animator.SetBool("IsRun", false);
             moveSpeed = walkSpeed;
+            isRunning = false;
+        }
+        if (mvZ > 0.1f || Mathf.Abs(mvX) > 0.1f)
+        {
+            stepTimer += Time.deltaTime;
+            if (stepTimer > stepInterval)
+            {
+                PlayFootstepSound();
+                stepTimer = 0.0f;
+            }
         }
         Vector3 dir = new Vector3(mvX, mvY, mvZ);
         dir = transform.TransformDirection(dir);
         ch.Move(dir * Time.deltaTime * moveSpeed);
     }
 
+    private void PlayFootstepSound()
+    {
+        if (isRunning)
+        {
+            SoundManager.soundInst.EffectSoundPlay(runSound);
+        }
+        else
+        {
+            SoundManager.soundInst.EffectSoundPlay(walkSound);
+        }
+    }
     private void LateUpdate()
     {
         Vector3 playerRotate = Vector3.Scale(_camera.transform.forward, new Vector3(1, 0, 1));

@@ -8,6 +8,7 @@ public class MutantDamage : MonoBehaviour
     [SerializeField] Image hpImage;
     [Header("체력")]
     [SerializeField] float maxHp;
+    [SerializeField] AudioClip hitClip;
     [SerializeField] Text hpText;
     [Header("경험치")]
     [SerializeField] int exp;
@@ -39,6 +40,7 @@ public class MutantDamage : MonoBehaviour
         if (!isDie && !mutantShield)
         {
             hp -= damage;
+            SoundManager.soundInst.EffectSoundPlay(hitClip);
             hpImage.fillAmount = hp / maxHp;
             if (hpText != null)
                 hpText.text = maxHp.ToString() + " : " + hp.ToString();
@@ -68,83 +70,83 @@ public class MutantDamage : MonoBehaviour
 
         if (randomValue < 90f)
         {
-            // 90% 확률로 gold_01 생성
-            ItemDrop(ObjectPoolingManager.objInst.GetGold(), ItemData.ItemType.Gold);
+            // 90% 확률로 Gold 생성
+            ItemDrop(ObjectPoolingManager.objInst.GetGold(), ItemType.Gold);
         }
         else if (randomValue < 98f)
         {
             // 8% 확률로 normalItem 생성
-            ItemData.ItemType type = GetNormalItemType();
+            ItemType type = GetNormalItemType();
             ItemDrop(ObjectPoolingManager.objInst.GetNormalItem(), type);
         }
         else if (randomValue < 100f)
         {
             // 2% 확률로 equipmentItem 생성
-            ItemData.ItemType type = GetEquipmentItemType();
+            ItemType type = GetEquipmentItemType();
             ItemDrop(ObjectPoolingManager.objInst.GetEquipmentItem(), type);
         }
     }
 
-    ItemData.ItemType GetNormalItemType()
+    ItemType GetNormalItemType()
     {
         float randomValue = Random.Range(0f, 100f);
 
         if (randomValue < 33.33f)
         {
-            return ItemData.ItemType.HPPotion;
+            return ItemType.HPPotion;
         }
         else if (randomValue < 66.66f)
         {
-            return ItemData.ItemType.MPPotion;
+            return ItemType.MPPotion;
         }
         else
         {
-            return ItemData.ItemType.Material;
+            return ItemType.Material;
         }
     }
 
-    ItemData.ItemType GetEquipmentItemType()
+    ItemType GetEquipmentItemType()
     {
         float randomValue = Random.Range(0f, 100f);
 
         if (randomValue < 11.5f)
         {
-            return ItemData.ItemType.Hat;
+            return ItemType.Hat;
         }
         else if (randomValue < 24f)
         {
-            return ItemData.ItemType.Kloak;
+            return ItemType.Kloak;
         }
         else if (randomValue < 36.5f)
         {
-            return ItemData.ItemType.Sword;
+            return ItemType.Sword;
         }
         else if (randomValue < 49f)
         {
-            return ItemData.ItemType.Shield;
+            return ItemType.Shield;
         }
         else if (randomValue < 61.5f)
         {
-            return ItemData.ItemType.Cloth;
+            return ItemType.Cloth;
         }
         else if (randomValue < 74f)
         {
-            return ItemData.ItemType.Shoes;
+            return ItemType.Shoes;
         }
         else if (randomValue < 86.5f)
         {
-            return ItemData.ItemType.Pants;
+            return ItemType.Pants;
         }
         else if (randomValue < 99f)
         {
-            return ItemData.ItemType.Neck;
+            return ItemType.Neck;
         }
         else
         {
-            return ItemData.ItemType.Ring;
+            return ItemType.Ring;
         }
     }
-    private void ItemDrop(GameObject obj, ItemData.ItemType itemType)
+    private void ItemDrop(GameObject obj, ItemType itemType)
     {
         GameObject item = obj;
         item.transform.position = transform.position;

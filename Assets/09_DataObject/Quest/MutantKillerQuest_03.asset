@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e04b3f00738a24785a3026a4f1d927, type: 3}
+  m_Name: MutantKillerQuest_03
+  m_EditorClassIdentifier: 
+  questState: 0
+  Image: {fileID: 21300000, guid: 26b7d2da814dbc54ab1bb627e464b4f2, type: 3}
+  Name: "\uD30C\uBA78\uC758 \uC790\uB974\uAC04 \uC0AC\uB0E5"
+  Content: "\uB9C8\uC871\uC0AC\uB0E5\uB300 \uB300\uC7A5\uC774 \uC8FC\uB294 \uB9C8\uC9C0\uB9C9\uD14C\uC2A4\uD2B8\uB2E4.
+    \uC911\uAE09\uADC0\uB9C8\uC871 10\uB9C8\uB9AC\uC640 \uAD70\uB2E8\uC7A5 \uD30C\uBA78\uC758
+    \uC790\uB974\uAC04\uC744 \uC0AC\uB0E5\uD574\uC57C\uD55C\uB2E4 Lv20 \uC0AC\uB0E5\uD130\uC5D0
+    \uC788\uB2E4\uACE0\uD55C\uB2E4."
+  MutantName: "\uC911\uAE09\uB9C8\uADC0\uC871"
+  BossName: "\uD30C\uBA78\uC758 \uC790\uB974\uAC04"
+  killCount: 0
+  bossKillCount: 0
+  clearCount: 10
+  bossClearCount: 1
+  rewardImage_01: {fileID: 21300000, guid: 287154434b47d4644a5b6912a8996a69, type: 3}
+  rewardImage_02: {fileID: 21300000, guid: caee86a9dac044b46ba2bff3d4342fbe, type: 3}
+  exp: 1000
+  gold: 5000
+  idx: 0

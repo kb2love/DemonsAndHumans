@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75efda868ea126e468da579cb63917d2, type: 3}
+  m_Name: MutantKillerQuest_01
+  m_EditorClassIdentifier: 
+  questState: 0
+  Image: {fileID: 21300000, guid: 9b79778310736e6499019bb0f5298217, type: 3}
+  Name: "\uB9C8\uC871\uC0AC\uB0E5\uB300 \uD14C\uC2A4\uD2B8"
+  Content: "\uB9C8\uC871\uC0AC\uB0E5\uB300\uAC00 \uB420\uB824\uBA74 \uB9C8\uC871\uBCD1\uC0AC\uB97C
+    10\uB9C8\uB9AC \uC7A1\uC544\uC57C\uD55C\uB2E4 5Lv \uD3EC\uD0C8\uC744 \uD0C0\uACE0
+    \uB4E4\uC5B4\uAC00\uBA74 \uB9C8\uC871\uBCD1\uC0AC\uB4E4\uC774 \uC788\uB2E4\uACE0\uD55C\uB2E4."
+  MutantName: "\uB9C8\uC871\uBCD1\uC0AC"
+  killCount: 0
+  clearCount: 10
+  exp: 100
+  gold: 1000
+  Idx: 0

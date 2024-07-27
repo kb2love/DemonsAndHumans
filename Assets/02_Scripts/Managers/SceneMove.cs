@@ -107,7 +107,12 @@ public class SceneMove : MonoBehaviour
         if (resetQuest && QuestManager.questInst != null)
         {
             QuestManager.questInst.QuestReset();
+            DataManager.dataInst.DeleteSaveData();
             ItemManager.itemInst.ReSetGame();
+        }
+        else
+        {
+            DataManager.dataInst.DataLoad();
         }
         DialogueManager.dialogueInst.Initialize();
         GameManager.GM.Initialize();
@@ -125,7 +130,6 @@ public class SceneMove : MonoBehaviour
         }
         playerStartPoint.Initialize();
         _currentScene = sceneIdx;
-        ItemManager.itemInst.Initialize();
         switch (sceneIdx)
         {
             case 2: sceneName = "호크반제국"; break;
@@ -151,6 +155,7 @@ public class SceneMove : MonoBehaviour
                 sceneMoveStart.GetComponent<CanvasGroup>().alpha = 1; // alpha 값 초기화
             });
         });
+        ItemManager.itemInst.Initialize();
         // 게임 데이터를 업데이트하여 저장
         DataManager.dataInst.DataSave();
     }

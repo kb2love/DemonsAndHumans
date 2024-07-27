@@ -19,7 +19,8 @@ public class TitleScene : MonoBehaviour
         effect_Slider.value = 0.5f;
         SoundManager.soundInst.BackGroundMusic(audioSource, bgClip);
         DataManager.dataInst.LoadData();
-        if (DataManager.dataInst.gameData.IsSave)
+        bool fileEx = DataManager.dataInst.FileExistst();
+        if (fileEx)
             loadImage.alpha = 1.0f;
         else
             loadImage.alpha = 0.5f;

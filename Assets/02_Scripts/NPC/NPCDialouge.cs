@@ -15,13 +15,7 @@ public class NPCDialogue : MonoBehaviour
     [SerializeField] protected GameObject my2DExcMark;
     [SerializeField] protected GameObject my2DQuesNpcMark;
     [SerializeField] protected GameObject my2DNPCMark;
-
-    public enum QuestState_01 { QuestHave, QuestTake, QuestClear, None }
-    public enum QuestState_02 { QuestHave, QuestTake, QuestClear, None }
-    public enum QuestState_03 { QuestHave, QuestTake, QuestClear, None }
-    public QuestState_01 questState01 = QuestState_01.QuestHave;
-    public QuestState_02 questState_02 = QuestState_02.QuestHave;
-    public QuestState_03 questState_03 = QuestState_03.QuestHave;
+    public QuestState questState01 = QuestState.QuestHave;
     protected GameObject textBGImage;
     protected Text dialogueText;
     protected Text characterName;

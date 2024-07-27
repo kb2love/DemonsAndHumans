@@ -1,48 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NeckData", menuName = "ScriptableObjects/Items/NeckData", order = 9)]
 public class NeckData : ScriptableObject
 {
     [Header("마법사의 목걸이")]
-    public Sprite neck01;
-    public float neck01MP;
-    public float neck01Damage;
-    public float neck01MagicDamage;
-    public int neck01Idx;
-    public int neck01Count;
-    public string neck01Name;
-    public string neck01Explain;
-    public string parent01Path;
+    public Sprite Image_01;
+    public float MP_01;
+    public float Damage_01;
+    public float Magicdamage_01;
+    public int Idx_01;
+    public int Count_01;
+    public string Name_01; 
     [Header("암살자의 목걸이")]
-    public Sprite neck02;
-    public float neck02MP;
-    public float neck02Damage;
-    public float neck02MagicDamage;
-    public int neck02Idx;
-    public int neck02Count;
-    public string neck02Name;
-    public string neck02Explain;
-    public string parent02Path;
+    public Sprite Image_02;
+    public float MP_02;
+    public float Damage_02;
+    public float Magicdamage_02;
+    public int Idx_02;
+    public int Count_02;
+    public string Name_02; 
     [Header("마족의 목걸이")]
-    public Sprite neck03;
-    public float neck03MP;
-    public float neck03Damage;
-    public float neck03MagicDamage;
-    public int neck03Idx;
-    public int neck03Count;
-    public string neck03Name;
-    public string neck03Explain;
-    public string parent03Path;
+    public Sprite Image_03;
+    public float MP_03;
+    public float Damage_03;
+    public float Magicdamage_03;
+    public int Idx_03;
+    public int Count_03;
+    public string Name_03; 
     [Header("영웅의 목걸이")]
-    public Sprite neck04;
-    public float neck04MP;
-    public float neck04Damage;
-    public float neck04MagicDamage;
-    public int neck04Idx;
-    public int neck04Count;
-    public string neck04Name;
-    public string neck04Explain;
-    public string parent04Path; 
+    public Sprite Image_04;
+    public float MP_04;
+    public float Damage_04;
+    public float Magicdamage_04;
+    public int Idx_04;
+    public int Count_04;
+    public string Name_04; 
 }

@@ -63,98 +63,38 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {//내 부모가 인벤토리에 들어간게아닌 인벤토리창, 장비창에머물러있다면 원래있던 위치로 돌린다
             transform.SetParent(parent);
         }
-        if(transform.parent.GetComponent<ItemInfo>() != null)
+        if (transform.parent.GetComponent<ItemInfo>() != null)
         {
             if (transform.parent.gameObject.GetComponent<ItemInfo>().type == itemInfo.type)
             {// 아이템이 장비창과 같다면 
-                if (itemInfo.type == ItemData.ItemType.Sword || itemInfo.type == ItemData.ItemType.Shield)
+                if (itemInfo.type == ItemType.Sword || itemInfo.type == ItemType.Shield)
                     ItemTypeSelect(itemInfo.type, true);
                 StatUp();
                 isEquip = true;
                 GameManager.GM.AllStatUpdata();
-                ItemManager.itemInst.AllItemTrSave();
-                switch(itemInfo.type)
-                {
-                    case ItemData.ItemType.Sword:
-                        itemData.isSword = true;
-                        break;
-                    case ItemData.ItemType.Shield:
-                        itemData.isShield = true;
-                        break;
-                    case ItemData.ItemType.Hat:
-                        itemData.isHat = true;
-                        break;
-                    case ItemData.ItemType.Cloth:
-                        itemData.isCloth = true;
-                        break;
-                    case ItemData.ItemType.Pants:
-                        itemData.isPants = true;
-                        break;
-                    case ItemData.ItemType.Shoes:
-                        itemData.isShoes = true;
-                        break;
-                    case ItemData.ItemType.Kloak:
-                        itemData.isKloak = true;
-                        break;
-                    case ItemData.ItemType.Neck:
-                        itemData.isNeck = true;
-                        break;
-                    case ItemData.ItemType.Ring:
-                        itemData.isRing = true;
-                        break;
-                }
+                ItemManager.itemInst.AllItemSave();
             }
-            else if(transform.parent.GetComponent<ItemInfo>().type != itemInfo.type)
+            else if (transform.parent.GetComponent<ItemInfo>().type != itemInfo.type)
             {
-                if (itemInfo.type == ItemData.ItemType.Sword || itemInfo.type == ItemData.ItemType.Shield)
-                    ItemTypeSelect(itemInfo.type ,false);
+                if (itemInfo.type == ItemType.Sword || itemInfo.type == ItemType.Shield)
+                    ItemTypeSelect(itemInfo.type, false);
                 transform.SetParent(parent);
-                if(isEquip)
+                if (isEquip)
                     StatDown();
                 isEquip = false;
-                switch (itemInfo.type)
-                {
-                    case ItemData.ItemType.Sword:
-                        itemData.isSword = false;
-                        break;
-                    case ItemData.ItemType.Shield:
-                        itemData.isShield = false;
-                        break;
-                    case ItemData.ItemType.Hat:
-                        itemData.isHat = false;
-                        break;
-                    case ItemData.ItemType.Cloth:
-                        itemData.isCloth = false;
-                        break;
-                    case ItemData.ItemType.Pants:
-                        itemData.isPants = false;
-                        break;
-                    case ItemData.ItemType.Shoes:
-                        itemData.isShoes = false;
-                        break;
-                    case ItemData.ItemType.Kloak:
-                        itemData.isKloak = false;
-                        break;
-                    case ItemData.ItemType.Neck:
-                        itemData.isNeck = false;
-                        break;
-                    case ItemData.ItemType.Ring:
-                        itemData.isRing = false;
-                        break;
-                }
                 GameManager.GM.AllStatUpdata();
-                ItemManager.itemInst.AllItemTrSave();
+                ItemManager.itemInst.AllItemSave();
             }
         }
         else
         {
-            if (itemInfo.type == ItemData.ItemType.Sword || itemInfo.type == ItemData.ItemType.Shield)
+            if (itemInfo.type == ItemType.Sword || itemInfo.type == ItemType.Shield)
                 ItemTypeSelect(itemInfo.type, false);
             if (isEquip)
                 StatDown();
             isEquip = false;
             GameManager.GM.AllStatUpdata();
-            ItemManager.itemInst.AllItemTrSave();
+            ItemManager.itemInst.AllItemSave();
         }
     }
 
@@ -180,73 +120,73 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     }
 
 
-    public void ItemTypeSelect(ItemData.ItemType type,bool _bool)
+    public void ItemTypeSelect(ItemType type, bool _bool)
     {
         switch (type)
         {
-            case ItemData.ItemType.Sword:
+            case ItemType.Sword:
                 ItemManager.itemInst.SwordOnOff(_bool);
                 break;
-            case ItemData.ItemType.Shield:
+            case ItemType.Shield:
                 ItemManager.itemInst.ShieldTakeOff(_bool);
                 break;
         }
     }
-    public void ItemChange(ItemData.ItemType type, float value01)
+    public void ItemChange(ItemType type, float value01)
     {
         switch (type)
         {
-            case ItemData.ItemType.Sword:
+            case ItemType.Sword:
                 damage = value01;
                 break;
-            case ItemData.ItemType.Shield:
+            case ItemType.Shield:
                 defence = value01;
                 break;
         }
     }
-    public void ItemChange(ItemData.ItemType type, float HP, float Defence)
+    public void ItemChange(ItemType type, float HP, float Defence)
     {
         switch (type)
         {
-            case ItemData.ItemType.Hat:
+            case ItemType.Hat:
                 hp = HP;
                 defence = Defence;
                 break;
-            case ItemData.ItemType.Cloth:
+            case ItemType.Cloth:
                 hp = HP;
                 defence = Defence;
                 break;
-            case ItemData.ItemType.Pants:
+            case ItemType.Pants:
                 hp = HP;
                 defence = Defence;
                 break;
-            case ItemData.ItemType.Shoes:
+            case ItemType.Shoes:
                 hp = HP;
                 defence = Defence;
                 break;
         }
     }
-    public void ItemChange(ItemData.ItemType type, float HPAndMP, float MPAndDamage, float DefenceAndMagiceDamage)
+    public void ItemChange(ItemType type, float HPAndMP, float MPAndDamage, float DefenceAndMagiceDamage)
     {
         switch (type)
         {
-            case ItemData.ItemType.Kloak:
+            case ItemType.Kloak:
                 hp = HPAndMP;
                 mp = MPAndDamage;
                 defence = DefenceAndMagiceDamage;
                 break;
-            case ItemData.ItemType.Neck:
+            case ItemType.Neck:
                 mp = MPAndDamage;
                 damage = MPAndDamage;
                 magicDamage = DefenceAndMagiceDamage;
                 break;
         }
     }
-    public void ItemChange(ItemData.ItemType type,float HP, float MP, float Damage, float Defence, float MagicDamage, float FatalProbabillity, float FatalValue)
+    public void ItemChange(ItemType type, float HP, float MP, float Damage, float Defence, float MagicDamage, float FatalProbabillity, float FatalValue)
     {
         switch (type)
         {
-            case ItemData.ItemType.Ring:
+            case ItemType.Ring:
                 hp = HP;
                 mp = MP;
                 defence = Defence;

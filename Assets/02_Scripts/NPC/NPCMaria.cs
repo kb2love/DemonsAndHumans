@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class NPCMaria : NPCDialogue
 {
-    [SerializeField] private QuestData01 questData01;
-    [SerializeField] private QuestData02 questData02;
+    [SerializeField] private DialougeQuest questData01;
+    [SerializeField] private MutantKillQuest mariaQuest_01;
+    [SerializeField] private DialougeQuest mariaQuest_02;
 
     public override void Initialize()
     {
@@ -13,24 +14,24 @@ public class NPCMaria : NPCDialogue
 
     private void UpdateQuestMarkers()
     {
-        if (questData01.questState == QuestState_01.QuestTake)
+        if (questData01.questState == QuestState.QuestTake)
         {
             QuestClear();
         }
         else
         {
-            switch (questData02.questState)
+            switch (mariaQuest_01.questState)
             {
-                case QuestState_01.QuestHave:
+                case QuestState.QuestHave:
                     QuestAdd();
                     break;
-                case QuestState_01.QuestTake:
+                case QuestState.QuestTake:
                     QuestEnd();
                     break;
-                case QuestState_01.QuestClear:
+                case QuestState.QuestClear:
                     QuestClear();
                     break;
-                case QuestState_01.None:
+                case QuestState.None:
                     QuestEnd();
                     break;
             }
@@ -39,7 +40,7 @@ public class NPCMaria : NPCDialogue
 
     protected override void StartDialogue()
     {
-        if (questData01.questState == QuestState_01.QuestTake)
+        if (questData01.questState == QuestState.QuestTake)
         {
             dialogueIdx = 0;
             FindObjectOfType<NPCLeader>().QuestEnd();
@@ -47,17 +48,17 @@ public class NPCMaria : NPCDialogue
         }
         else
         {
-            switch (questData02.questState)
+            switch (mariaQuest_01.questState)
             {
-                case QuestState_01.QuestHave:
+                case QuestState.QuestHave:
                     break;
-                case QuestState_01.QuestTake:
+                case QuestState.QuestTake:
                     dialogueIdx = 1;
                     break;
-                case QuestState_01.QuestClear:
+                case QuestState.QuestClear:
                     dialogueIdx = 2;
                     break;
-                case QuestState_01.None:
+                case QuestState.None:
                     dialogueIdx = 3;
                     break;
             }
@@ -68,19 +69,18 @@ public class NPCMaria : NPCDialogue
     protected override void EndDialogue()
     {
         base.EndDialogue();
-        switch (questData02.questState)
+        switch (mariaQuest_01.questState)
         {
-            case QuestState_01.QuestHave:
-                QuestManager.questInst.AddQuest(ref questData02.Idx_01, questData02.Image_01, questData02.Name_01, questData02.Content_01, questData02.gold.ToString() + " Gold, " + questData02.exp_01.ToString() + " Exp",
-                    null, null, questData02.MutantName, questData02.killCount, questData02.clearCount, ref questData02.questState, QuestState_01.QuestTake);
+            case QuestState.QuestHave:
+                QuestManager.questInst.AddQuest_02(ref mariaQuest_01.Idx, mariaQuest_01.Image, mariaQuest_01.Name, mariaQuest_01.Content, mariaQuest_01.Gold.ToString() + " Gold, " + mariaQuest_01.Exp.ToString() + " Exp", mariaQuest_01.MutantName,
+                mariaQuest_01.KillCount, mariaQuest_01.ClearCount, ref mariaQuest_01.questState, QuestState.QuestTake);
                 QuestEnd();
                 break;
-            case QuestState_01.QuestClear:
-                QuestManager.questInst.CompleteQuest(questData02.Idx_01, ref questData02.questState);
-                QuestManager.questInst.AddQuest_02(ref questData02.Idx_02, questData02.Image_02, questData02.Name_02, questData02.Content_02, questData02.exp_02.ToString() + " Exp",
-                    null, null, null,null, 0, 0, ref questData02.questState_02, QuestState_02.QuestTake);
-                ItemManager.itemInst.GoldPlus(questData02.gold);
-                GameManager.GM.ExpUp(questData02.exp_01);
+            case QuestState.QuestClear:
+                QuestManager.questInst.CompleteQuest(mariaQuest_01.Idx, ref mariaQuest_01.questState);
+                QuestManager.questInst.AddQuest_01(ref mariaQuest_02.Idx, mariaQuest_02.Image, mariaQuest_02.Name, mariaQuest_02.Content, mariaQuest_02.Exp.ToString() + " Exp", ref mariaQuest_02.questState, QuestState.QuestTake);
+                ItemManager.itemInst.GoldPlus(mariaQuest_01.Gold);
+                GameManager.GM.ExpUp(mariaQuest_01.Exp);
                 QuestEnd();
                 break;
         }

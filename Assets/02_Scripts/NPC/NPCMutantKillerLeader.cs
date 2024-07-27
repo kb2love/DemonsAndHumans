@@ -3,33 +3,35 @@ using UnityEngine;
 public class NPCMutantKillerLeader : NPCDialogue
 {
     // 퀘스트 데이터 변수들
-    [SerializeField] private QuestData02 questData02;
-    [SerializeField] private QuestData04 questData04;
+    [SerializeField] private DialougeQuest maraiQuest_02;
+    [SerializeField] private MutantKillQuest mutantKillerQuest_01;
+    [SerializeField] private MutantKillerQuest mutantKillerQuest_02;
+    [SerializeField] private MutantKillerQuest mutantKillerQuest_03;
 
     // NPC 초기화 메소드
     public override void Initialize()
     {
-        if(questData04.questState_03 == QuestState_03.QuestHave)
+        if (mutantKillerQuest_03.questState == QuestState.QuestHave)
         {
-            if (questData04.questState_02 == QuestState_02.QuestHave)
+            if (mutantKillerQuest_02.questState == QuestState.QuestHave)
             {
-                if (questData02.questState_02 == QuestState_02.QuestTake)
+                if (maraiQuest_02.questState == QuestState.QuestTake)
                 {
                     QuestClear();
                 }
                 else
                 {
-                    switch (questData04.questState_01)
+                    switch (mutantKillerQuest_01.questState)
                     {
-                        case QuestState_01.QuestHave:
+                        case QuestState.QuestHave:
                             break;
-                        case QuestState_01.QuestTake:
+                        case QuestState.QuestTake:
                             QuestEnd();
                             break;
-                        case QuestState_01.QuestClear:
+                        case QuestState.QuestClear:
                             QuestClear();
                             break;
-                        case QuestState_01.None:
+                        case QuestState.None:
                             QuestEnd();
                             break;
                     }
@@ -37,17 +39,17 @@ public class NPCMutantKillerLeader : NPCDialogue
             }
             else
             {
-                switch (questData04.questState_02)
+                switch (mutantKillerQuest_02.questState)
                 {
-                    case QuestState_02.QuestHave:
+                    case QuestState.QuestHave:
                         break;
-                    case QuestState_02.QuestTake:
+                    case QuestState.QuestTake:
                         QuestEnd();
                         break;
-                    case QuestState_02.QuestClear:
+                    case QuestState.QuestClear:
                         QuestClear();
                         break;
-                    case QuestState_02.None:
+                    case QuestState.None:
                         QuestEnd();
                         break;
                 }
@@ -56,22 +58,22 @@ public class NPCMutantKillerLeader : NPCDialogue
         else
         {
 
-            switch (questData04.questState_03)
+            switch (mutantKillerQuest_03.questState)
             {
-                case QuestState_03.QuestHave:
+                case QuestState.QuestHave:
                     break;
-                case QuestState_03.QuestTake:
+                case QuestState.QuestTake:
                     QuestEnd();
                     break;
-                case QuestState_03.QuestClear:
+                case QuestState.QuestClear:
                     QuestClear();
                     break;
-                case QuestState_03.None:
+                case QuestState.None:
                     QuestEnd();
                     break;
             }
         }
-       
+
 
         base.Initialize();
     }
@@ -79,28 +81,28 @@ public class NPCMutantKillerLeader : NPCDialogue
     // 대화 시작 메소드
     protected override void StartDialogue()
     {
-        if (questData04.questState_03 == QuestState_03.QuestHave)
+        if (mutantKillerQuest_03.questState == QuestState.QuestHave)
         {
-            if (questData04.questState_02 == QuestState_02.QuestHave)
+            if (mutantKillerQuest_02.questState == QuestState.QuestHave)
             {
-                if (questData02.questState_02 == QuestState_02.QuestTake)
+                if (maraiQuest_02.questState == QuestState.QuestTake)
                 {
                     dialogueIdx = 0;
                 }
                 else
                 {
-                    switch (questData04.questState_01)
+                    switch (mutantKillerQuest_01.questState)
                     {
-                        case QuestState_01.QuestHave:
+                        case QuestState.QuestHave:
                             dialogueIdx = 0;
                             break;
-                        case QuestState_01.QuestTake:
+                        case QuestState.QuestTake:
                             dialogueIdx = 1;
                             break;
-                        case QuestState_01.QuestClear:
+                        case QuestState.QuestClear:
                             dialogueIdx = 2;
-                            break; 
-                        case QuestState_01.None:
+                            break;
+                        case QuestState.None:
                             break;
                     }
                 }
@@ -108,17 +110,17 @@ public class NPCMutantKillerLeader : NPCDialogue
             #region 두번째 퀘스트
             else
             {
-                switch (questData04.questState_02)
+                switch (mutantKillerQuest_02.questState)
                 {
-                    case QuestState_02.QuestHave:
+                    case QuestState.QuestHave:
                         break;
-                    case QuestState_02.QuestTake:
+                    case QuestState.QuestTake:
                         dialogueIdx = 3;
                         break;
-                    case QuestState_02.QuestClear:
+                    case QuestState.QuestClear:
                         dialogueIdx = 4;
                         break;
-                    case QuestState_02.None:
+                    case QuestState.None:
                         break;
                 }
             }
@@ -127,17 +129,17 @@ public class NPCMutantKillerLeader : NPCDialogue
         #region 세번째 퀘스트
         else
         {
-            switch (questData04.questState_03)
+            switch (mutantKillerQuest_03.questState)
             {
-                case QuestState_03.QuestHave:
+                case QuestState.QuestHave:
                     break;
-                case QuestState_03.QuestTake:
+                case QuestState.QuestTake:
                     dialogueIdx = 5;
                     break;
-                case QuestState_03.QuestClear:
+                case QuestState.QuestClear:
                     dialogueIdx = 6;
                     break;
-                case QuestState_03.None:
+                case QuestState.None:
                     break;
             }
         }
@@ -152,30 +154,33 @@ public class NPCMutantKillerLeader : NPCDialogue
         base.EndDialogue();
 
         // 특정 퀘스트 상태에 따라 퀘스트 완료 및 새로운 퀘스트 추가
-        if (questData04.questState_03 == QuestState_03.QuestHave)
+        if (mutantKillerQuest_03.questState == QuestState.QuestHave)
         {
             #region 첫번째 퀘스트
-            if (questData04.questState_02 == QuestState_02.QuestHave)
+            if (mutantKillerQuest_02.questState == QuestState.QuestHave)
             {
-                switch (questData04.questState_01)
+                switch (mutantKillerQuest_01.questState)
                 {
-                    case QuestState_01.QuestHave:
-                        questData02.questState_02 = QuestState_02.None;
-                        QuestManager.questInst.CompleteQuest(questData02.Idx_02, ref questData02.questState_02);
-                        QuestManager.questInst.AddQuest(ref questData04.Idx_01, questData04.Image_01, questData04.Name_01, questData04.Content_01, questData04.gold_01.ToString() + " Gold, " + questData04.exp_01.ToString() + " Exp",
-                            questData04.rewardImage_01_01, questData04.rewardImage_01_02, questData04.MutantName_01, questData04.killCount_01, questData04.clearCount_01, ref questData04.questState_01, QuestState_01.QuestTake);
+                    case QuestState.QuestHave:
+                        maraiQuest_02.questState = QuestState.None;
+                        QuestManager.questInst.CompleteQuest(maraiQuest_02.Idx, ref maraiQuest_02.questState);
+                        QuestManager.questInst.AddQuest_02(ref mutantKillerQuest_01.Idx, mutantKillerQuest_01.Image, mutantKillerQuest_01.Name, mutantKillerQuest_01.Content, mutantKillerQuest_01.Gold.ToString() + " Gold, " +
+                        mutantKillerQuest_01.Exp.ToString() + " Exp", mutantKillerQuest_01.MutantName,
+                        mutantKillerQuest_01.KillCount, mutantKillerQuest_01.ClearCount, ref mutantKillerQuest_01.questState, QuestState.QuestTake);
                         QuestEnd();
                         break;
-                    case QuestState_01.QuestTake:
+                    case QuestState.QuestTake:
                         break;
-                    case QuestState_01.QuestClear:
-                        QuestManager.questInst.CompleteQuest(questData04.Idx_01, ref questData04.questState_01);
+                    case QuestState.QuestClear:
+                        QuestManager.questInst.CompleteQuest(mutantKillerQuest_01.Idx, ref mutantKillerQuest_01.questState);
                         ItemManager.itemInst.GetCloth01();
                         ItemManager.itemInst.GetPants01();
-                        QuestManager.questInst.AddQuest_02(ref questData04.Idx_02, questData04.Image_02, questData04.Name_02, questData04.Content_02, questData04.gold_02.ToString() + " Gold, " + questData04.exp_02.ToString() + " Exp", questData04.rewardImage_02_02,
-                            questData04.rewardImage_02_02, questData04.MutantName_02, questData04.bossName_02, questData04.killCount_02_01, questData04.clearCount_02_01, ref questData04.questState_02, QuestState_02.QuestTake);
+                        QuestManager.questInst.AddQuest_03(ref mutantKillerQuest_02.Idx, mutantKillerQuest_02.Image, mutantKillerQuest_02.Name, mutantKillerQuest_02.Content, mutantKillerQuest_02.Gold.ToString() +
+                        " Gold, " + mutantKillerQuest_02.Exp.ToString() + " Exp", mutantKillerQuest_02.RewardImage_01, mutantKillerQuest_02.RewardImage_02, mutantKillerQuest_02.MutantName,
+                        mutantKillerQuest_02.BossName, mutantKillerQuest_02.KillCount, mutantKillerQuest_02.ClearCount, mutantKillerQuest_02.BossKillCount, mutantKillerQuest_02.BossClearCount,
+                        ref mutantKillerQuest_02.questState, QuestState.QuestTake);
                         break;
-                    case QuestState_01.None:
+                    case QuestState.None:
                         break;
                 }
             }
@@ -183,19 +188,22 @@ public class NPCMutantKillerLeader : NPCDialogue
             #region 두번째 퀘스트
             else
             {
-                switch (questData04.questState_02)
+                switch (mutantKillerQuest_02.questState)
                 {
-                    case QuestState_02.QuestHave:
+                    case QuestState.QuestHave:
                         break;
-                    case QuestState_02.QuestTake:
+                    case QuestState.QuestTake:
                         break;
-                    case QuestState_02.QuestClear:
-                        QuestManager.questInst.CompleteQuest(questData04.Idx_02, ref questData04.questState_02);
+                    case QuestState.QuestClear:
+                        QuestManager.questInst.CompleteQuest(mutantKillerQuest_02.Idx, ref mutantKillerQuest_02.questState);
                         ItemManager.itemInst.GetCloth02();
                         ItemManager.itemInst.GetPants02();
-                        QuestManager.questInst.AddQuest_03(QuestState_03.QuestClear);
+                        QuestManager.questInst.AddQuest_03(ref mutantKillerQuest_03.Idx, mutantKillerQuest_03.Image, mutantKillerQuest_03.Name, mutantKillerQuest_03.Content, mutantKillerQuest_03.Gold.ToString() +
+                            " Gold, " + mutantKillerQuest_03.Exp.ToString() + " Exp", mutantKillerQuest_03.RewardImage_01, mutantKillerQuest_03.RewardImage_02, mutantKillerQuest_03.MutantName,
+                            mutantKillerQuest_03.BossName, mutantKillerQuest_03.KillCount, mutantKillerQuest_03.ClearCount, mutantKillerQuest_03.BossKillCount, mutantKillerQuest_03.BossClearCount,
+                            ref mutantKillerQuest_03.questState, QuestState.QuestClear);
                         break;
-                    case QuestState_02.None:
+                    case QuestState.None:
                         break;
                 }
             }
@@ -204,18 +212,18 @@ public class NPCMutantKillerLeader : NPCDialogue
         #region 세번째 퀘스트
         else
         {
-            switch (questData04.questState_03)
+            switch (mutantKillerQuest_03.questState)
             {
-                case QuestState_03.QuestHave:
+                case QuestState.QuestHave:
                     break;
-                case QuestState_03.QuestTake:
+                case QuestState.QuestTake:
                     break;
-                case QuestState_03.QuestClear:
-                    QuestManager.questInst.CompleteQuest(questData04.Idx_03, ref questData04.questState_03);
+                case QuestState.QuestClear:
+                    QuestManager.questInst.CompleteQuest(mutantKillerQuest_03.Idx, ref mutantKillerQuest_01.questState);
                     ItemManager.itemInst.GetCloth03();
                     ItemManager.itemInst.GetPants03();
                     break;
-                case QuestState_03.None:
+                case QuestState.None:
                     break;
             }
         }

@@ -6,30 +6,24 @@ using UnityEngine;
 public class ClothData : ScriptableObject
 {
     [Header("¸ðÇè°¡ÀÇ ¿Ê")]
-    public Sprite cloth01;
-    public float cloth01HP;
-    public float cloth01Defence;
-    public int cloth01Idx;
-    public int cloth01Count;
-    public string cloth01Name;
-    public string cloth01Explain;
-    public string parent01Path;
+    public Sprite Image_01;
+    public float HP_01;
+    public float Defence_01;
+    public int Idx_01;
+    public int Count_01;
+    public string Name_01; 
     [Header("¾Ï»ìÀÚÀÇ ¿Ê")]
-    public Sprite cloth02;
-    public float cloth02HP;
-    public float cloth02Defence;
-    public int cloth02Idx;
-    public int cloth02Count;
-    public string cloth02Name;
-    public string cloth02Explain;
-    public string parent02Path;
+    public Sprite Image_02;
+    public float HP_02;
+    public float Defence_02;
+    public int Idx_02;
+    public int Count_02;
+    public string Name_02; 
     [Header("¿µ¿õÀÇ °©¿Ê")]
-    public Sprite cloth03;
-    public float cloth03HP;
-    public float cloth03Defence;
-    public int cloth03Idx;
-    public int cloth03Count;
-    public string cloth03Name;
-    public string cloth03Explain;
-    public string parent03Path; 
+    public Sprite Image_03;
+    public float HP_03;
+    public float Defence_03;
+    public int Idx_03;
+    public int Count_03;
+    public string Name_03; 
 }

@@ -6,13 +6,14 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager soundInst;
     private AudioSource bgAudioSource;
-    [SerializeField] private AudioSource effAudioSource;
+    [SerializeField] AudioSource effAudioSource;
     private void Awake()
     {
         if (soundInst == null)
         {
             soundInst = this;
             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(effAudioSource);
         }
         else if (soundInst != this)
         {
@@ -31,16 +32,12 @@ public class SoundManager : MonoBehaviour
         bgAudioSource = bgAudio;
         bgAudioSource.Play();
     }
-    public void EffectSoundVolum(float volum)
+    public void EffectSoundVolum(float _volum)
     {
-        effAudioSource.volume = volum;
+        effAudioSource.volume = _volum;
     }
     public void EffectSoundPlay(AudioClip audioClip)
     {
         effAudioSource.PlayOneShot(audioClip);
-    }
-    public void PlayerFind()
-    {
-        effAudioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
     }
 }

@@ -12,27 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be50bfb467e98143ac9a01f615a2a87, type: 3}
   m_Name: ShoesData
   m_EditorClassIdentifier: 
-  shoes01: {fileID: 21300000, guid: a552096f2905a45418d0ae3452869f5f, type: 3}
-  shoes01HP: 10
-  shoes01Defence: 5
-  shoes01Count: 0
-  shoes01Idx: 0
-  shoes01Name: "\uBAA8\uD5D8\uAC00\uC758 \uC2E0\uBC1C"
-  shoes01Explain: "\uBAA8\uD5D8\uAC00\uC758 \uD3C9\uBC94\uD55C \uC2E0\uBC1C\uC774\uB2E4"
-  parent01Path: 
-  shoes02: {fileID: 21300000, guid: 39c17bbee02fc9f43bc92c47d89c2318, type: 3}
-  shoes02HP: 50
-  shoes02Defence: 25
-  shoes02Idx: 0
-  shoes02Count: 0
-  shoes02Name: "\uC554\uC0B4\uC790\uC758 \uC2E0\uBC1C"
-  shoes02Explain: "\uC554\uC0B4\uC655\uC774 \uC2E0\uB358 \uC2E0\uBC1C\uC774\uB2E4"
-  parent02Path: 
-  shoes03: {fileID: 21300000, guid: 788d297112ad4404b90c2450d65abd2c, type: 3}
-  shoes03HP: 100
-  shoes03Defence: 50
-  shoes03Idx: 0
-  shoes03Count: 1
-  shoes03Name: "\uC601\uC6C5\uC758 \uC2E0\uBC1C"
-  shoes03Explain: "\uC601\uC6C5\uC774 \uC2E0\uB358 \uC2E0\uBC1C\uC774\uB2E4"
-  parent03Path: 
+  Image_01: {fileID: 21300000, guid: a552096f2905a45418d0ae3452869f5f, type: 3}
+  HP_01: 10
+  Defence_01: 5
+  Count_01: 1
+  Idx_01: 6
+  Name_01: "\uBAA8\uD5D8\uAC00\uC758 \uC2E0\uBC1C"
+  Path_01: ' '
+  Image_02: {fileID: 21300000, guid: 39c17bbee02fc9f43bc92c47d89c2318, type: 3}
+  HP_02: 50
+  Defence_02: 25
+  Count_02: 0
+  Idx_02: 0
+  Name_02: "\uC554\uC0B4\uC790\uC758 \uC2E0\uBC1C"
+  Path_02: 
+  Image_03: {fileID: 21300000, guid: 788d297112ad4404b90c2450d65abd2c, type: 3}
+  HP_03: 100
+  Defence_03: 50
+  Count_03: 0
+  Idx_03: 0
+  Name_03: "\uC601\uC6C5\uC758 \uC2E0\uBC1C"
+  Path_03: 

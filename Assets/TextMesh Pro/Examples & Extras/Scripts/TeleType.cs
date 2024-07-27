@@ -12,8 +12,8 @@ namespace TMPro.Examples
         //[Range(0, 100)]
         //public int RevealSpeed = 50;
 
-        private string label01 = "Example <Image_01=2> of using <Image_01=7> <#ffa000>Graphics Inline</color> <Image_01=5> with Text in <font=\"Bangers SDF\" material=\"Bangers SDF - Drop Shadow\">TextMesh<#40a0ff>Pro</color></font><Image_01=0> and Unity<Image_01=1>";
-        private string label02 = "Example <Image_01=2> of using <Image_01=7> <#ffa000>Graphics Inline</color> <Image_01=5> with Text in <font=\"Bangers SDF\" material=\"Bangers SDF - Drop Shadow\">TextMesh<#40a0ff>Pro</color></font><Image_01=0> and Unity<Image_01=2>";
+        private string label01 = "Example <Image=2> of using <Image=7> <#ffa000>Graphics Inline</color> <Image=5> with Text in <font=\"Bangers SDF\" material=\"Bangers SDF - Drop Shadow\">TextMesh<#40a0ff>Pro</color></font><Image=0> and Unity<Image=1>";
+        private string label02 = "Example <Image=2> of using <Image=7> <#ffa000>Graphics Inline</color> <Image=5> with Text in <font=\"Bangers SDF\" material=\"Bangers SDF - Drop Shadow\">TextMesh<#40a0ff>Pro</color></font><Image=0> and Unity<Image=2>";
 
 
         private TMP_Text m_textMeshPro;

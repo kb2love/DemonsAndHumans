@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
     private void LevelUp()
     {
         playerData.expValue -= playerData.maxExpValue;
-        playerData.maxExpValue *= 50.0f;
+        playerData.maxExpValue += 50.0f;
         playerData.MaxHP *= 1.1f;
         playerData.MaxMP *= 1.1f;
         playerData.HP = playerData.MaxHP;

@@ -12,36 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6fda18b30d78647a144dc7ecc6fdae, type: 3}
   m_Name: HatData
   m_EditorClassIdentifier: 
-  hat01: {fileID: 21300000, guid: c48ddd7fe9603754788016a0d79e22d9, type: 3}
-  hat01HP: 15
-  hat01Defence: 8
-  hat01Idx: 1
-  Hat01Count: 0
-  hat01Name: "\uC554\uC0B4\uC790\uC758 \uD22C\uAD6C"
-  hat01Explain: "\uC554\uC0B4\uC655\uC774 \uC990\uACA8 \uC37B\uB2E4\uB294 \uD22C\uAD6C\uB2E4"
-  parent01Path: 
-  hat02: {fileID: 21300000, guid: 74510f79fdd61c74a91316793ca3e553, type: 3}
-  hat02HP: 20
-  hat02Defence: 15
-  hat02Idx: 2
-  Hat02Count: 0
-  hat02Name: "\uC804\uC0AC\uC758 \uD22C\uAD6C"
-  hat02Explain: "\uAD11\uC804\uC0AC \uD558\uBA5C\uC774 \uC4F0\uB358 \uD22C\uAD6C\uB2E4"
-  parent02Path: 
-  hat03: {fileID: 21300000, guid: 2331aee16c4ec1645b2cc76acd7cdb27, type: 3}
-  hat03HP: 50
-  hat03Defence: 30
-  hat03Idx: 0
-  Hat03Count: 1
-  hat03Name: "\uB9C8\uC871\uC758 \uD22C\uAD6C"
-  hat03Explain: "\uB9C8\uC871\uC758 \uBA38\uB9AC\uB97C \uBF51\uC544 \uADF8\uB300\uB85C
-    \uB9CC\uB4E0 \uD22C\uAD6C\uC774\uB2E4"
-  parent03Path: 
-  hat04: {fileID: 21300000, guid: b35c48c4295736b408985f974bdee92a, type: 3}
-  hat04HP: 100
-  hat04Defence: 60
-  hat04Idx: 3
-  Hat04Count: 0
-  hat04Name: "\uC601\uC6C5\uC758 \uD22C\uAD6C"
-  hat04Explain: "\uC601\uC6C5\uC774 \uC37B\uB2E4\uB294 \uD22C\uAD6C\uC774\uB2E4"
-  parent04Path: 
+  Image_01: {fileID: 21300000, guid: c48ddd7fe9603754788016a0d79e22d9, type: 3}
+  HP_01: 30
+  Defence_01: 15
+  Idx_01: 0
+  Count_01: 0
+  Name_01: "\uC554\uC0B4\uC790\uC758 \uD22C\uAD6C"
+  Path_01: 
+  Image_02: {fileID: 21300000, guid: 74510f79fdd61c74a91316793ca3e553, type: 3}
+  HP_02: 50
+  Defence_02: 25
+  Idx_02: 3
+  Count_02: 1
+  Name_02: "\uC804\uC0AC\uC758 \uD22C\uAD6C"
+  Path_02: 
+  Image_03: {fileID: 21300000, guid: 2331aee16c4ec1645b2cc76acd7cdb27, type: 3}
+  HP_03: 75
+  Defence_03: 35
+  Idx_03: 0
+  Count_03: 0
+  Name_03: "\uB9C8\uC871\uC758 \uD22C\uAD6C"
+  Path_03: 
+  Image_04: {fileID: 21300000, guid: b35c48c4295736b408985f974bdee92a, type: 3}
+  HP_04: 100
+  Defence_04: 50
+  Idx_04: 0
+  Count_04: 0
+  Name_04: "\uC601\uC6C5\uC758 \uD22C\uAD6C"
+  Path_04: 
