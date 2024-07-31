@@ -1,21 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
+using DG.Tweening;
 public class MutantBoss : MonoBehaviour
 {
+    [Header("군단장 파멸의 자르간")]
     [SerializeField] GameObject magicShield;
     [SerializeField] GameObject jumpAttackEff;
     [SerializeField] GameObject areaAttackEff;
+    [Header("군단장 아스모데우스")]
+    [SerializeField] GameObject iceField;
+    [SerializeField] GameObject mateor;
+    [SerializeField] Transform mateorTr;
+    [SerializeField] GameObject electroBall;
+    [SerializeField] GameObject strikeFire;
     [SerializeField] float attackRadius = 5.0f;
     [SerializeField] float damage = 50.0f;
-    MutantAI mutantAI;
+    Transform playerTr;
     MutantDamage mutantDamage;
     private void Start()
     {
         mutantDamage = GetComponent<MutantDamage>();
-        mutantAI = GetComponent<MutantAI>();
+    }
+    public void Initialize()
+    {
+        playerTr = GameObject.Find("Player").transform;
     }
     public void MagicShield()
     { 
@@ -27,13 +34,37 @@ public class MutantBoss : MonoBehaviour
     {
         jumpAttackEff.SetActive(true);
         Attack(1.5f, 2.0f);
-        Invoke("JumpAtkEffOff", 2.0f);
     }
     public void AreaAttack()
     {
         areaAttackEff.SetActive(true);
         Attack(2.0f, 1.5f);
-        Invoke("AreaAtkEffOff", 2.0f);
+    }
+    // 투사체 날리기
+    public void ElectroBall()
+    {
+        electroBall.transform.position = playerTr.position + Vector3.up * 5.0f;
+        electroBall.transform.rotation = Quaternion.LookRotation(playerTr.position - transform.position);
+        electroBall.SetActive(true);
+    }
+    // 투사체 날리기
+    public void FireStrike()
+    {
+        strikeFire.transform.position = transform.forward;
+        strikeFire.transform.rotation = Quaternion.LookRotation(playerTr.position - transform.position);
+        strikeFire.SetActive(true);
+    }
+    // 메테오 날리기(궁극기)
+    public void Meteor()
+    {
+        mateor.transform.position = playerTr.position + Vector3.up * 5.0f;
+        mateor.SetActive(true);
+    }
+    // 전방향 공격날리기
+    public void IceField()
+    {
+        iceField.SetActive(true);
+        Attack(3.0f, 2.0f);
     }
     void Attack(float radiusValue, float damageValue)
     {
@@ -51,7 +82,5 @@ public class MutantBoss : MonoBehaviour
             }
         }
     }
-    void ShieldOff() { magicShield.SetActive(false); mutantDamage.IsMutantShield(false); }
-    void JumpAtkEffOff() { jumpAttackEff.SetActive(false);}
-    void AreaAtkEffOff() {  areaAttackEff.SetActive(false);}
+    void ShieldOff() {  mutantDamage.IsMutantShield(false); }
 }

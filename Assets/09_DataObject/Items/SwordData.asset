@@ -9,24 +9,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3eedcaeacb66e4d99c7b7a1461a8a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 03b24e047daab65409932e07442b5243, type: 3}
   m_Name: SwordData
   m_EditorClassIdentifier: 
+  Name_01: "\uBAA8\uD5D8\uAC00\uC758 \uAC80"
   Image_01: {fileID: 21300000, guid: 172544e0b9f294c4caf131acbfda1de5, type: 3}
-  Damage_01: 10
+  Value_01:
+  - 10
   Idx_01: 0
   Count_01: 1
-  Name_01: "\uBAA8\uD5D8\uAC00\uC758 \uAC80"
-  Path_01: 
+  Name_02: "\uC601\uC6C5\uC758 \uAC80"
   Image_02: {fileID: 21300000, guid: c978836e79bcd1949ad9b17d62d73bb9, type: 3}
-  damage_02: 50
+  Value_02:
+  - 100
   Idx_02: 0
   Count_02: 0
-  Name_02: "\uB9C8\uAC80"
-  Path_02: 
+  Name_03: "\uB9C8\uAC80"
   Image_03: {fileID: 21300000, guid: 0f3a6442a3e111542911f0cc11b3af81, type: 3}
-  damage_03: 100
+  Value_03:
+  - 200
   Idx_03: 0
   Count_03: 0
-  Name_03: "\uC601\uC6C5\uC758 "
-  Path_03: 
+  Name_04: 
+  Image_04: {fileID: 0}
+  Value_04:
+  - 0
+  - 0
+  Idx_04: 0
+  Count_04: 0

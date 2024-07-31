@@ -26,8 +26,8 @@ public class StoreBuyAndSell : MonoBehaviour
 
     // 검 구매 메서드
     public void BuySword01() => BuyItem(100, itemManger.GetSword01);
-    public void BuySword02() => BuyItem(5000, itemManger.GetSword02);
-    public void BuySword03() => BuyItem(10000, itemManger.GetSword03);
+    public void BuySword02() => BuyItem(10000, itemManger.GetSword02);
+    public void BuySword03() => BuyItem(20000, itemManger.GetSword03);
 
     // 방패 구매 메서드
     public void BuyShield01() => BuyItem(100, itemManger.GetShield01);

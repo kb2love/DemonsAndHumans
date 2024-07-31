@@ -15,36 +15,36 @@ MonoBehaviour:
   HPpotion01: {fileID: 21300000, guid: 5938952edc9df3e4396c65d0a0817633, type: 3}
   HPpotion01Value: 50
   HPpotion01Count: 0
-  HPpotion01Idx: 10
+  HPpotion01Idx: 0
   HPpotion01quick: 0
   HPpotion01Name: "\uC18C\uD615HP\uBB3C\uC57D"
   HPpotion02: {fileID: 21300000, guid: 5808cc08edf647a4b957d0446ce5ac87, type: 3}
   HPpotion02Value: 100
   HPpotion02Count: 0
-  HPpotion02Idx: 11
+  HPpotion02Idx: 0
   HPpotion02quick: 0
   HPpotion02Name: "\uC911\uD615HP\uBB3C\uC57D"
   HPpotion03: {fileID: 21300000, guid: ea126fc2939bf9348abfef4fe0f11ff2, type: 3}
   HPpotion03Value: 500
   HPpotion03Count: 0
-  HPpotion03Idx: 12
+  HPpotion03Idx: 0
   HPpotion03quick: 0
   HPpotion03Name: "\uB300\uD615HP\uBB3C\uC57D"
   MPpotion01: {fileID: 21300000, guid: 18b28b957486808468b2d629dcc1efed, type: 3}
   MPpotion01Value: 50
   MPpotion01Count: 0
-  MPpotion01Idx: 13
+  MPpotion01Idx: 0
   MPpotion01quick: 0
   MPpotion01Name: "\uC18C\uD615MP\uBB3C\uC57D"
   MPpotion02: {fileID: 21300000, guid: 83d1bcbe07da25a4fb82c2f8fba80166, type: 3}
   MPpotion02Value: 100
   MPpotion02Count: 0
-  MPpotion02Idx: 15
+  MPpotion02Idx: 0
   MPpotion02quick: 0
   MPpotion02Name: "\uC911\uD615MP\uBB3C\uC57D"
   MPpotion03: {fileID: 21300000, guid: f57cbc11b46ac3a408ed4e22536366df, type: 3}
   MPpotion03Value: 500
   MPpotion03Count: 0
-  MPpotion03Idx: 13
+  MPpotion03Idx: 0
   MPpotion03quick: 0
   MPpotion03Name: "\uB300\uD615MP\uBB3C\uC57D"

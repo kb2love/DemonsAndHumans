@@ -9,30 +9,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf31e9e567678284d9d0a82caede7e7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 03b24e047daab65409932e07442b5243, type: 3}
   m_Name: RingData
   m_EditorClassIdentifier: 
-  Image_01: {fileID: 21300000, guid: 40132e59175222f41888d1dc6b0eee14, type: 3}
-  HP_01: 100
-  MP_01: 150
-  Defence_01: 50
-  FatalValue_01: 100
-  FatalProbability_01: 5
-  MagicDamage_01: 100
-  Damage_01: 50
-  Idx_01: 9
-  Count_01: 1
   Name_01: "\uB9C8\uC655\uC758 \uBC18\uC9C0"
-  Path_01: 
+  Image_01: {fileID: 21300000, guid: 40132e59175222f41888d1dc6b0eee14, type: 3}
+  Value_01:
+  - 100
+  - 150
+  - 50
+  - 100
+  - 5
+  - 100
+  - 50
+  Idx_01: 0
+  Count_01: 0
+  Name_02: "\uC6A9\uC0AC\uC758 \uBC18\uC9C0"
   Image_02: {fileID: 21300000, guid: 8a263870835e0f64d9f486cb39ea2b30, type: 3}
-  HP_02: 150
-  MP_02: 300
-  Defence_02: 75
-  FatalValue_02: 150
-  FatalProbability_02: 0
-  MagicDamage_02: 0
-  Damage_02: 0
+  Value_02:
+  - 150
+  - 300
+  - 75
+  - 150
+  - 8
+  - 150
+  - 75
   Idx_02: 0
   Count_02: 0
-  Name_02: 
-  Path_02: 
+  Name_03: 
+  Image_03: {fileID: 0}
+  Value_03:
+  - 0
+  - 0
+  Idx_03: 0
+  Count_03: 0
+  Name_04: 
+  Image_04: {fileID: 0}
+  Value_04:
+  - 0
+  - 0
+  Idx_04: 0
+  Count_04: 0

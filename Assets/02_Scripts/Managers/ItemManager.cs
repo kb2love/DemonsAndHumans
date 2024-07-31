@@ -5,21 +5,20 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static ItemData;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager itemInst;
     [Header("아이템 데이터")]
-    [SerializeField] ItemData itemData;
-    [SerializeField] SwordData swordData;
-    [SerializeField] ShieldData shieldData;
-    [SerializeField] HatData hatData;
-    [SerializeField] ClothData clothData;
-    [SerializeField] PantsData pantsData;
-    [SerializeField] ShoesData shoesData;
-    [SerializeField] KloakData kloakData;
-    [SerializeField] NeckData neckData;
-    [SerializeField] RIngData ringData;
+    [SerializeField] SunDryItemData itemData;
+    [SerializeField] ItemData swordData;
+    [SerializeField] ItemData shieldData;
+    [SerializeField] ItemData hatData;
+    [SerializeField] ItemData clothData;
+    [SerializeField] ItemData pantsData;
+    [SerializeField] ItemData shoesData;
+    [SerializeField] ItemData kloakData;
+    [SerializeField] ItemData neckData;
+    [SerializeField] ItemData ringData;
     [SerializeField] PotionData potionData;
     [SerializeField] MaterialData materialData;
     [SerializeField] Transform inventory;
@@ -74,244 +73,73 @@ public class ItemManager : MonoBehaviour
     }
     #region 아이템 얻기
     //************** 검얻기****************//
-    public void GetSword01() { CreateWeaponItem(ItemType.Sword, swordData.Image_01, ref swordData.Count_01, ref swordData.Idx_01, new float[] { swordData.Damage_01 }, swordData.Name_01); }
-    public void GetSword02() { CreateWeaponItem(ItemType.Sword, swordData.Image_02, ref swordData.Count_02, ref swordData.Idx_01, new float[] { swordData.Damage_02 }, swordData.Name_02); }
-    public void GetSword03() { CreateWeaponItem(ItemType.Sword, swordData.Image_03, ref swordData.Count_03, ref swordData.Idx_01, new float[] { swordData.Damage_03 }, swordData.Name_03); }
+    public void GetSword01() { CreateWeaponItem(ItemType.Sword, swordData.Image_01, ref swordData.Count_01, ref swordData.Idx_01, new float[] { swordData.Value_01[0] }, swordData.Name_01); }
+    public void GetSword02() { CreateWeaponItem(ItemType.Sword, swordData.Image_02, ref swordData.Count_02, ref swordData.Idx_01, new float[] { swordData.Value_02[0] }, swordData.Name_02); }
+    public void GetSword03() { CreateWeaponItem(ItemType.Sword, swordData.Image_03, ref swordData.Count_03, ref swordData.Idx_01, new float[] { swordData.Value_03[0] }, swordData.Name_03); }
     // 방패 얻기
-    public void GetShield01() { CreateWeaponItem(ItemType.Shield, shieldData.Image_01, ref shieldData.Count_01, ref shieldData.Idx_01, new float[] { shieldData.Defence_01 }, shieldData.Name_01); }
-    public void GetShield02() { CreateWeaponItem(ItemType.Shield, shieldData.Image_02, ref shieldData.Count_02, ref shieldData.Idx_02, new float[] { shieldData.Defence_02 }, shieldData.Name_02); }
-    public void GetShield03() { CreateWeaponItem(ItemType.Shield, shieldData.Image_03, ref shieldData.Count_03, ref shieldData.Idx_03, new float[] { shieldData.Defence_03 }, shieldData.Name_03); }
-    public void GetShield04() { CreateWeaponItem(ItemType.Shield, shieldData.Image_04, ref shieldData.Count_04, ref shieldData.Idx_04, new float[] { shieldData.Defence_04 }, shieldData.Name_04); }
+    public void GetShield01() { CreateWeaponItem(ItemType.Shield, shieldData.Image_01, ref shieldData.Count_01, ref shieldData.Idx_01, new float[] { shieldData.Value_01[0] }, shieldData.Name_01); }
+    public void GetShield02() { CreateWeaponItem(ItemType.Shield, shieldData.Image_02, ref shieldData.Count_02, ref shieldData.Idx_02, new float[] { shieldData.Value_02[0] }, shieldData.Name_02); }
+    public void GetShield03() { CreateWeaponItem(ItemType.Shield, shieldData.Image_03, ref shieldData.Count_03, ref shieldData.Idx_03, new float[] { shieldData.Value_03[0] }, shieldData.Name_03); }
+    public void GetShield04() { CreateWeaponItem(ItemType.Shield, shieldData.Image_04, ref shieldData.Count_04, ref shieldData.Idx_04, new float[] { shieldData.Value_04[0] }, shieldData.Name_04); }
     // 헬멧 얻기
-    public void GetHat01() { CreateWeaponItem(ItemType.Hat, hatData.Image_01, ref hatData.Count_01, ref hatData.Idx_01, new float[] { hatData.HP_01, hatData.Defence_01 }, hatData.Name_01); }
-    public void GetHat02() { CreateWeaponItem(ItemType.Hat, hatData.Image_02, ref hatData.Count_02, ref hatData.Idx_02, new float[] { hatData.HP_02, hatData.Defence_02 }, hatData.Name_02); }
-    public void GetHat03() { CreateWeaponItem(ItemType.Hat, hatData.Image_03, ref hatData.Count_03, ref hatData.Idx_03, new float[] { hatData.HP_03, hatData.Defence_03 }, hatData.Name_03); }
-    public void GetHat04() { CreateWeaponItem(ItemType.Hat, hatData.Image_04, ref hatData.Count_04, ref hatData.Idx_04, new float[] { hatData.HP_04, hatData.Defence_04 }, hatData.Name_04); }
+    public void GetHat01() { CreateWeaponItem(ItemType.Hat, hatData.Image_01, ref hatData.Count_01, ref hatData.Idx_01, new float[] { hatData.Value_01[0], hatData.Value_01[1] }, hatData.Name_01); }
+    public void GetHat02() { CreateWeaponItem(ItemType.Hat, hatData.Image_02, ref hatData.Count_02, ref hatData.Idx_02, new float[] { hatData.Value_02[0], hatData.Value_02[1] }, hatData.Name_02); }
+    public void GetHat03() { CreateWeaponItem(ItemType.Hat, hatData.Image_03, ref hatData.Count_03, ref hatData.Idx_03, new float[] { hatData.Value_03[0], hatData.Value_03[1] }, hatData.Name_03); }
+    public void GetHat04() { CreateWeaponItem(ItemType.Hat, hatData.Image_04, ref hatData.Count_04, ref hatData.Idx_04, new float[] { hatData.Value_04[0], hatData.Value_04[1] }, hatData.Name_04); }
     // 옷 얻기
-    public void GetCloth01() { CreateWeaponItem(ItemType.Cloth, clothData.Image_01, ref clothData.Count_01, ref clothData.Idx_01, new float[] { clothData.HP_01, clothData.Defence_01 }, clothData.Name_01); }
-    public void GetCloth02() { CreateWeaponItem(ItemType.Cloth, clothData.Image_02, ref clothData.Count_02, ref clothData.Idx_02, new float[] { clothData.HP_02, clothData.Defence_02 }, clothData.Name_02); }
-    public void GetCloth03() { CreateWeaponItem(ItemType.Cloth, clothData.Image_03, ref clothData.Count_03, ref clothData.Idx_03, new float[] { clothData.HP_03, clothData.Defence_03 }, clothData.Name_03); }
+    public void GetCloth01() { CreateWeaponItem(ItemType.Cloth, clothData.Image_01, ref clothData.Count_01, ref clothData.Idx_01, new float[] { clothData.Value_01[0], clothData.Value_01[1] }, clothData.Name_01); }
+    public void GetCloth02() { CreateWeaponItem(ItemType.Cloth, clothData.Image_02, ref clothData.Count_02, ref clothData.Idx_02, new float[] { clothData.Value_02[0], clothData.Value_02[1] }, clothData.Name_02); }
+    public void GetCloth03() { CreateWeaponItem(ItemType.Cloth, clothData.Image_03, ref clothData.Count_03, ref clothData.Idx_03, new float[] { clothData.Value_03[0], clothData.Value_03[1] }, clothData.Name_03); }
     // 바지 얻기
-    public void GetPants01() { CreateWeaponItem(ItemType.Pants, pantsData.Image_01, ref pantsData.Count_01, ref pantsData.Idx_01, new float[] { pantsData.HP_01, pantsData.Defence_01 }, pantsData.Name_01); }
-    public void GetPants02() { CreateWeaponItem(ItemType.Pants, pantsData.Image_02, ref pantsData.Count_02, ref pantsData.Idx_02, new float[] { pantsData.HP_02, pantsData.Defence_02 }, pantsData.Name_02); }
-    public void GetPants03() { CreateWeaponItem(ItemType.Pants, pantsData.Image_03, ref pantsData.Count_03, ref pantsData.Idx_03, new float[] { pantsData.HP_03, pantsData.Defence_03 }, pantsData.Name_03); }
+    public void GetPants01() { CreateWeaponItem(ItemType.Pants, pantsData.Image_01, ref pantsData.Count_01, ref pantsData.Idx_01, new float[] { pantsData.Value_01[0], pantsData.Value_01[1] }, pantsData.Name_01); }
+    public void GetPants02() { CreateWeaponItem(ItemType.Pants, pantsData.Image_02, ref pantsData.Count_02, ref pantsData.Idx_02, new float[] { pantsData.Value_02[0], pantsData.Value_02[1] }, pantsData.Name_02); }
+    public void GetPants03() { CreateWeaponItem(ItemType.Pants, pantsData.Image_03, ref pantsData.Count_03, ref pantsData.Idx_03, new float[] { pantsData.Value_03[0], pantsData.Value_03[1] }, pantsData.Name_03); }
     // 신발 얻기
-    public void GetShoes01() { CreateWeaponItem(ItemType.Shoes, shoesData.Image_01, ref shoesData.Count_01, ref shoesData.Idx_01, new float[] { shoesData.HP_01, shoesData.Defence_01 }, shoesData.Name_01); }
-    public void GetShoes02() { CreateWeaponItem(ItemType.Shoes, shoesData.Image_02, ref shoesData.Count_02, ref shoesData.Idx_02, new float[] { shoesData.HP_02, shoesData.Defence_02 }, shoesData.Name_02); }
-    public void GetShoes03() { CreateWeaponItem(ItemType.Shoes, shoesData.Image_03, ref shoesData.Count_03, ref shoesData.Idx_03, new float[] { shoesData.HP_03, shoesData.Defence_03 }, shoesData.Name_03); }
+    public void GetShoes01() { CreateWeaponItem(ItemType.Shoes, shoesData.Image_01, ref shoesData.Count_01, ref shoesData.Idx_01, new float[] { shoesData.Value_01[0], shoesData.Value_01[1] }, shoesData.Name_01); }
+    public void GetShoes02() { CreateWeaponItem(ItemType.Shoes, shoesData.Image_02, ref shoesData.Count_02, ref shoesData.Idx_02, new float[] { shoesData.Value_02[0], shoesData.Value_02[1] }, shoesData.Name_02); }
+    public void GetShoes03() { CreateWeaponItem(ItemType.Shoes, shoesData.Image_03, ref shoesData.Count_03, ref shoesData.Idx_03, new float[] { shoesData.Value_03[0], shoesData.Value_03[1] }, shoesData.Name_03); }
     // 망토 얻기
-    public void GetKloak01() { CreateWeaponItem(ItemType.Kloak, kloakData.Image_01, ref kloakData.Count_01, ref kloakData.Idx_01, new float[] { kloakData.HP_01, kloakData.MP_01, kloakData.Defence_01 }, kloakData.Name_01); }
-    public void GetKloak02() { CreateWeaponItem(ItemType.Kloak, kloakData.Image_02, ref kloakData.Count_02, ref kloakData.Idx_02, new float[] { kloakData.HP_02, kloakData.MP_02, kloakData.Defence_02 }, kloakData.Name_02); }
-    public void GetKloak03() { CreateWeaponItem(ItemType.Kloak, kloakData.Image_03, ref kloakData.Count_03, ref kloakData.Idx_03, new float[] { kloakData.HP_03, kloakData.MP_03, kloakData.Defence_03 }, kloakData.Name_03); }
+    public void GetKloak01() { CreateWeaponItem(ItemType.Kloak, kloakData.Image_01, ref kloakData.Count_01, ref kloakData.Idx_01, new float[] { kloakData.Value_01[0], kloakData.Value_01[1], kloakData.Value_01[2] }, kloakData.Name_01); }
+    public void GetKloak02() { CreateWeaponItem(ItemType.Kloak, kloakData.Image_02, ref kloakData.Count_02, ref kloakData.Idx_02, new float[] { kloakData.Value_02[0], kloakData.Value_02[1], kloakData.Value_02[2] }, kloakData.Name_02); }
+    public void GetKloak03() { CreateWeaponItem(ItemType.Kloak, kloakData.Image_03, ref kloakData.Count_03, ref kloakData.Idx_03, new float[] { kloakData.Value_03[0], kloakData.Value_03[1], kloakData.Value_03[2] }, kloakData.Name_03); }
     // 목걸이 얻기
-    public void GetNeck01() { CreateWeaponItem(ItemType.Neck, neckData.Image_01, ref neckData.Count_01, ref neckData.Idx_01, new float[] { neckData.MP_01, neckData.Damage_01, neckData.Magicdamage_01 }, neckData.Name_01); }
-    public void GetNeck02() { CreateWeaponItem(ItemType.Neck, neckData.Image_02, ref neckData.Count_02, ref neckData.Idx_02, new float[] { neckData.MP_02, neckData.Damage_02, neckData.Magicdamage_02 }, neckData.Name_02); }
-    public void GetNeck03() { CreateWeaponItem(ItemType.Neck, neckData.Image_03, ref neckData.Count_03, ref neckData.Idx_03, new float[] { neckData.MP_03, neckData.Damage_03, neckData.Magicdamage_03 }, neckData.Name_03); }
-    public void GetNeck04() { CreateWeaponItem(ItemType.Neck, neckData.Image_04, ref neckData.Count_04, ref neckData.Idx_04, new float[] { neckData.MP_04, neckData.Damage_04, neckData.Magicdamage_04 }, neckData.Name_04); }
+    public void GetNeck01() { CreateWeaponItem(ItemType.Neck, neckData.Image_01, ref neckData.Count_01, ref neckData.Idx_01, new float[] { neckData.Value_01[0], neckData.Value_01[1], neckData.Value_01[2] }, neckData.Name_01); }
+    public void GetNeck02() { CreateWeaponItem(ItemType.Neck, neckData.Image_02, ref neckData.Count_02, ref neckData.Idx_02, new float[] { neckData.Value_02[0], neckData.Value_02[1], neckData.Value_02[2] }, neckData.Name_02); }
+    public void GetNeck03() { CreateWeaponItem(ItemType.Neck, neckData.Image_03, ref neckData.Count_03, ref neckData.Idx_03, new float[] { neckData.Value_03[0], neckData.Value_03[1], neckData.Value_03[2] }, neckData.Name_03); }
+    public void GetNeck04() { CreateWeaponItem(ItemType.Neck, neckData.Image_04, ref neckData.Count_04, ref neckData.Idx_04, new float[] { neckData.Value_04[0], neckData.Value_04[1], neckData.Value_04[2] }, neckData.Name_04); }
     // 반지 얻기
-    public void GetRing01() { CreateWeaponItem(ItemType.Ring, ringData.Image_01, ref ringData.Count_01, ref ringData.Idx_01, new float[] { ringData.HP_01, ringData.MP_01, ringData.Damage_01, ringData.Defence_01, ringData.MagicDamage_01, ringData.FatalProbability_01, ringData.FatalValue_01 }, ringData.Name_01); }
-    public void GetRing02() { CreateWeaponItem(ItemType.Ring, ringData.Image_02, ref ringData.Count_02, ref ringData.Idx_02, new float[] { ringData.HP_02, ringData.MP_02, ringData.Damage_02, ringData.Defence_02, ringData.MagicDamage_02, ringData.FatalProbability_02, ringData.FatalValue_02 }, ringData.Name_02); }
-
-
+    public void GetRing01() { CreateWeaponItem(ItemType.Ring, ringData.Image_01, ref ringData.Count_01, ref ringData.Idx_01, new float[] { ringData.Value_01[0], ringData.Value_01[1], ringData.Value_01[2], ringData.Value_01[3], ringData.Value_01[4], ringData.Value_01[5], ringData.Value_01[6] }, ringData.Name_01); }
+    public void GetRing02() { CreateWeaponItem(ItemType.Ring, ringData.Image_02, ref ringData.Count_02, ref ringData.Idx_02, new float[] { ringData.Value_02[0], ringData.Value_02[1], ringData.Value_02[2], ringData.Value_02[3], ringData.Value_02[4], ringData.Value_02[5], ringData.Value_02[6] }, ringData.Name_02); }
     //************** HP 포션 얻기 ****************//
-    public void GetHPpotion01()
-    {
-        potionData.HPpotion01Count++;
-        if (potionData.HPpotion01Count > 1)
-        {
-            itemList[potionData.HPpotion01Idx].GetComponentInChildren<Text>().text = potionData.HPpotion01Count.ToString();
-        }
-        else
-        {
-            potionData.HPpotion01Idx = itemList.Count;
-            CreatItemPotionMatItem(ItemType.HPPotion, potionData.HPpotion01, potionData.HPpotion01Count, ref potionData.HPpotion01Idx, potionData.HPpotion01Name, potionData.HPpotion01quick, HPHeal01);
-        }
-    }
-
-    public void GetHPpotion02()
-    {
-        potionData.HPpotion02Count++;
-        if (potionData.HPpotion02Count > 1)
-        {
-            itemList[potionData.HPpotion02Idx].GetComponentInChildren<Text>().text = potionData.HPpotion02Count.ToString();
-        }
-        else
-        {
-            potionData.HPpotion02Idx = itemList.Count;
-            CreatItemPotionMatItem(ItemType.HPPotion, potionData.HPpotion02, potionData.HPpotion02Count, ref potionData.HPpotion02Idx, potionData.HPpotion02Name, potionData.HPpotion02quick, HPHeal02);
-        }
-    }
-
-    public void GetHPpotion03()
-    {
-        potionData.HPpotion03Count++;
-        if (potionData.HPpotion03Count > 1)
-        {
-            itemList[potionData.HPpotion03Idx].GetComponentInChildren<Text>().text = potionData.HPpotion03Count.ToString();
-        }
-        else
-        {
-            potionData.HPpotion03Idx = itemList.Count;
-            CreatItemPotionMatItem(ItemType.HPPotion, potionData.HPpotion03, potionData.HPpotion03Count, ref potionData.HPpotion03Idx, potionData.HPpotion03Name, potionData.HPpotion03quick, HPHeal03);
-        }
-    }
-
+    public void GetHPpotion01() { GetPotionMat(ref potionData.HPpotion01Count, ref potionData.HPpotion01Idx, potionData.HPpotion01, ItemType.HPPotion, potionData.HPpotion01Name, potionData.HPpotion01quick, HPHeal01, potionData.HPpotion01Value); }
+    public void GetHPpotion02() { GetPotionMat(ref potionData.HPpotion02Count, ref potionData.HPpotion02Idx, potionData.HPpotion02, ItemType.HPPotion, potionData.HPpotion02Name, potionData.HPpotion02quick, HPHeal02, potionData.HPpotion02Value); }
+    public void GetHPpotion03() { GetPotionMat(ref potionData.HPpotion03Count, ref potionData.HPpotion03Idx, potionData.HPpotion03, ItemType.HPPotion, potionData.HPpotion03Name, potionData.HPpotion03quick, HPHeal03, potionData.HPpotion03Value); }
     //************** MP 포션 얻기 ****************//
-    public void GetMPpotion01()
-    {
-        potionData.MPpotion01Count++;
-        if (potionData.MPpotion01Count > 1)
-        {
-            itemList[potionData.MPpotion01Idx].GetComponentInChildren<Text>().text = potionData.MPpotion01Count.ToString();
-        }
-        else
-        {
-            potionData.MPpotion01Idx = itemList.Count;
-            CreatItemPotionMatItem(ItemType.MPPotion, potionData.MPpotion01, potionData.MPpotion01Count, ref potionData.MPpotion01Idx, potionData.MPpotion01Name, potionData.MPpotion01quick, MPHeal01);
-        }
-    }
-
-    public void GetMPpotion02()
-    {
-        potionData.MPpotion02Count++;
-        if (potionData.MPpotion02Count > 1)
-        {
-            itemList[potionData.MPpotion02Idx].GetComponentInChildren<Text>().text = potionData.MPpotion02Count.ToString();
-        }
-        else
-        {
-            potionData.MPpotion02Idx = itemList.Count;
-            CreatItemPotionMatItem(ItemType.MPPotion, potionData.MPpotion02, potionData.MPpotion02Count, ref potionData.MPpotion02Idx, potionData.MPpotion02Name, potionData.MPpotion02quick, MPHeal02);
-        }
-    }
-
-    public void GetMPpotion03()
-    {
-        potionData.MPpotion03Count++;
-        if (potionData.MPpotion03Count > 1)
-        {
-            itemList[potionData.MPpotion03Idx].GetComponentInChildren<Text>().text = potionData.MPpotion03Count.ToString();
-        }
-        else
-        {
-            potionData.MPpotion03Idx = itemList.Count;
-            CreatItemPotionMatItem(ItemType.MPPotion, potionData.MPpotion03, potionData.MPpotion03Count, ref potionData.MPpotion03Idx, potionData.MPpotion03Name, potionData.MPpotion03quick, MPHeal03);
-        }
-    }
+    public void GetMPpotion01() { GetPotionMat(ref potionData.MPpotion01Count, ref potionData.MPpotion01Idx, potionData.MPpotion01, ItemType.MPPotion, potionData.MPpotion01Name, potionData.MPpotion01quick, MPHeal01, potionData.MPpotion01Value); }
+    public void GetMPpotion02() { GetPotionMat(ref potionData.MPpotion02Count, ref potionData.MPpotion02Idx, potionData.MPpotion02, ItemType.MPPotion, potionData.MPpotion02Name, potionData.MPpotion02quick, MPHeal02, potionData.MPpotion02Value); }
+    public void GetMPpotion03() { GetPotionMat(ref potionData.MPpotion03Count, ref potionData.MPpotion03Idx, potionData.MPpotion03, ItemType.MPPotion, potionData.MPpotion03Name, potionData.MPpotion03quick, MPHeal03, potionData.MPpotion03Value); }
 
     //************** 재료 얻기 ****************//
-    public void GetMaterial01()
+    public void GetMaterial01() { GetPotionMat(ref materialData.material01Count, ref materialData.material01Idx, materialData.material01, ItemType.Material, materialData.material01Name, materialData.material01Price); }
+    public void GetMaterial02() { GetPotionMat(ref materialData.material02Count, ref materialData.material02Idx, materialData.material02, ItemType.Material, materialData.material02Name, materialData.material02Price); }
+    public void GetMaterial03() { GetPotionMat(ref materialData.material03Count, ref materialData.material03Idx, materialData.material03, ItemType.Material, materialData.material03Name, materialData.material03Price); }
+    public void GetMaterial04() { GetPotionMat(ref materialData.material04Count, ref materialData.material04Idx, materialData.material04, ItemType.Material, materialData.material04Name, materialData.material04Price); }
+    public void GetMaterial05() { GetPotionMat(ref materialData.material05Count, ref materialData.material05Idx, materialData.material05, ItemType.Material, materialData.material05Name, materialData.material05Price); }
+    public void GetMaterial06() { GetPotionMat(ref materialData.material06Count, ref materialData.material06Idx, materialData.material06, ItemType.Material, materialData.material06Name, materialData.material06Price); }
+    public void GetMaterial07() { GetPotionMat(ref materialData.material07Count, ref materialData.material07Idx, materialData.material07, ItemType.Material, materialData.material07Name, materialData.material07Price); }
+    public void GetMaterial08() { GetPotionMat(ref materialData.material08Count, ref materialData.material08Idx, materialData.material08, ItemType.Material, materialData.material08Name, materialData.material08Price); }
+    private void GetPotionMat(ref int itemCount, ref int itemIdx, Sprite itemImage, ItemType type, string itemName, int priceAndQuickIdx, UnityAction action = null, float potionValue = 0)
     {
-        materialData.material01Count++;
-        if (materialData.material01Count > 1)
-        {
-            itemList[materialData.material01Idx].GetComponentInChildren<Text>().text = materialData.material01Count.ToString();
-        }
+        itemCount++;
+        if (itemCount > 1) { itemList[itemIdx].GetComponentInChildren<Text>().text = itemCount.ToString(); }
         else
-        {
-            CreatItemPotionMatItem(ItemType.Material, materialData.material01, materialData.material01Count, ref materialData.material01Idx, materialData.material01Name, materialData.material01Price);
-        }
-    }
-
-    public void GetMaterial02()
-    {
-        materialData.material02Count++;
-        if (materialData.material02Count > 1)
-        {
-            itemList[materialData.material02Idx].GetComponentInChildren<Text>().text = materialData.material02Count.ToString();
-        }
-        else
-        {
-            CreatItemPotionMatItem(ItemType.Material, materialData.material02, materialData.material02Count, ref materialData.material02Idx, materialData.material02Name, materialData.material02Price);
-        }
-    }
-
-    public void GetMaterial03()
-    {
-        materialData.material03Count++;
-        if (materialData.material03Count > 1)
-        {
-            itemList[materialData.material03Idx].GetComponentInChildren<Text>().text = materialData.material03Count.ToString();
-        }
-        else
-        {
-            CreatItemPotionMatItem(ItemType.Material, materialData.material03, materialData.material03Count, ref materialData.material03Idx, materialData.material03Name, materialData.material03Price);
-        }
-    }
-    public void GetMaterial04()
-    {
-        materialData.material04Count++;
-        if (materialData.material04Count > 1)
-        {
-            itemList[materialData.material04Idx].GetComponentInChildren<Text>().text = materialData.material04Count.ToString();
-        }
-        else
-        {
-            CreatItemPotionMatItem(ItemType.Material, materialData.material04, materialData.material04Count, ref materialData.material04Idx, materialData.material04Name, materialData.material04Price);
-        }
-    }
-
-    public void GetMaterial05()
-    {
-        materialData.material05Count++;
-        if (materialData.material05Count > 1)
-        {
-            itemList[materialData.material05Idx].GetComponentInChildren<Text>().text = materialData.material05Count.ToString();
-        }
-        else
-        {
-            CreatItemPotionMatItem(ItemType.Material, materialData.material05, materialData.material05Count, ref materialData.material05Idx, materialData.material05Name, materialData.material05Price);
-        }
-    }
-
-    public void GetMaterial06()
-    {
-        materialData.material06Count++;
-        if (materialData.material06Count > 1)
-        {
-            itemList[materialData.material06Idx].GetComponentInChildren<Text>().text = materialData.material06Count.ToString();
-        }
-        else
-        {
-            CreatItemPotionMatItem(ItemType.Material, materialData.material06, materialData.material06Count, ref materialData.material06Idx, materialData.material06Name, materialData.material06Price);
-        }
-    }
-
-    public void GetMaterial07()
-    {
-        materialData.material07Count++;
-        if (materialData.material07Count > 1)
-        {
-            itemList[materialData.material07Idx].GetComponentInChildren<Text>().text = materialData.material07Count.ToString();
-        }
-        else
-        {
-            CreatItemPotionMatItem(ItemType.Material, materialData.material07, materialData.material07Count, ref materialData.material07Idx, materialData.material07Name, materialData.material07Price);
-        }
-    }
-
-    public void GetMaterial08()
-    {
-        materialData.material08Count++;
-        if (materialData.material08Count > 1)
-        {
-            itemList[materialData.material08Idx].GetComponentInChildren<Text>().text = materialData.material08Count.ToString();
-        }
-        else
-        {
-            CreatItemPotionMatItem(ItemType.Material, materialData.material08, materialData.material08Count, ref materialData.material08Idx, materialData.material08Name, materialData.material08Price);
-        }
+        { itemIdx = PotionMatCreate(type, itemImage, itemCount, itemIdx, itemName, priceAndQuickIdx, action, potionValue); ; }
     }
     #endregion
     #region 아이템 얻는 메소드
     public void GetItem(ItemType itemType)
     {
-        if (itemType == ItemType.Gold)
-        {
-            GoldPlus(Random.Range(1, 10));
-            return;
-        }
-
+        if (itemType == ItemType.Gold) { GoldPlus(Random.Range(1, 10)); return; }
         if (itemDropTable.TryGetValue(itemType, out var itemDrops))
         {
             float randomValue = Random.Range(0f, 100f);
@@ -440,20 +268,27 @@ public class ItemManager : MonoBehaviour
     float[] values, string itemName)
     {
         itemCount++;
-        for (int i = 0; i < itemList.Count; i++)
-        {
-            if (!itemList[i].gameObject.activeSelf)
-            {
-                itemIdx = i;
-                break;
-            }
-        }
+        RectTransform item = ItemVase(itemType, itemSprite, ref itemIdx, itemName);
+        string explain = "";
+        explain = WeaponCase(itemType, values, item, explain);
+        item.GetComponent<ItemToolTip>().itemExplain = explain;
+        RectTransform window = GetWindow();
+        item.SetParent(window);
+        item.gameObject.SetActive(true);
+    }
 
+    private RectTransform ItemVase(ItemType itemType, Sprite itemSprite, ref int itemIdx, string itemName)
+    {
+        for (int i = 0; i < itemList.Count; i++) { if (!itemList[i].gameObject.activeSelf) { itemIdx = i; break; } }
         var item = itemList[itemIdx];
         item.GetComponent<Image>().sprite = itemSprite;
         item.GetComponent<ItemInfo>().type = itemType;
-        string explain = "";
+        item.GetComponent<ItemToolTip>().itemName = itemName;
+        return item;
+    }
 
+    private static string WeaponCase(ItemType itemType, float[] values, RectTransform item, string explain)
+    {
         switch (itemType)
         {
             case ItemType.Sword:
@@ -495,25 +330,15 @@ public class ItemManager : MonoBehaviour
                 break;
         }
 
-        item.GetComponent<ItemToolTip>().itemName = itemName;
-        item.GetComponent<ItemToolTip>().itemExplain = explain;
-        WindowSetParents(item);
-        item.gameObject.SetActive(true);
+        return explain;
     }
-    void CreatItemPotionMatItem(ItemType itemType, Sprite itemSprite, int itemCount, ref int itemIdx, string itemName, int priceAndQuickIdx, UnityAction onClickAction = null, float potionValue = 0)
+
+    private int PotionMatCreate(ItemType itemType, Sprite itemSprite, int itemCount, int itemIdx, string itemName, int priceAndQuickIdx, UnityAction onClickAction, float potionValue = 0)
     {
-        for (int i = 0; i < itemList.Count; i++)
-        {
-            if (!itemList[i].gameObject.activeSelf)
-            {
-                itemIdx = i;
-                break;
-            }
-        }
+        for (int i = 0; i < itemList.Count; i++) { if (!itemList[i].gameObject.activeSelf) { itemIdx = i; break; } }
         var item = itemList[itemIdx];
         item.GetComponent<Image>().sprite = itemSprite;
         item.GetComponent<ItemInfo>().type = itemType;
-        int j = itemIdx;
         string explain = "";
         switch (itemType)
         {
@@ -525,7 +350,7 @@ public class ItemManager : MonoBehaviour
                 EventTrigger eventTrigger = item.AddComponent<EventTrigger>();
                 EventTrigger.Entry entry = new EventTrigger.Entry();
                 entry.eventID = EventTriggerType.PointerDown;
-                entry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data, onClickAction, j); });
+                entry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data, onClickAction, itemIdx); });
                 eventTrigger.triggers.Add(entry);
                 explain = "HP + " + potionValue.ToString();
                 break;
@@ -537,7 +362,7 @@ public class ItemManager : MonoBehaviour
                 EventTrigger MPeventTrigger = item.AddComponent<EventTrigger>();
                 EventTrigger.Entry MPentry = new EventTrigger.Entry();
                 MPentry.eventID = EventTriggerType.PointerDown;
-                MPentry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data, onClickAction, j); });
+                MPentry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data, onClickAction, itemIdx); });
                 MPeventTrigger.triggers.Add(MPentry);
                 explain = "MP + " + potionValue.ToString();
                 break;
@@ -550,9 +375,11 @@ public class ItemManager : MonoBehaviour
         }
         item.GetComponent<ItemToolTip>().itemName = itemName;
         item.GetComponent<ItemToolTip>().itemExplain = explain;
-        ItemSave(itemType,itemIdx, itemName, itemCount);
-        WindowSetParents(item);
+        ItemSave(itemType, itemIdx, itemName, itemCount);
+        RectTransform window = GetWindow();
+        item.SetParent(window);
         item.gameObject.SetActive(true);
+        return itemIdx;
     }
     #endregion
     #region 아이템 체크 및 위치 저장
@@ -560,49 +387,43 @@ public class ItemManager : MonoBehaviour
     {
         DataManager.dataInst.LoadItemData();
         // 아이템 체크
-        ItemCheck(ItemType.Sword, swordData.Image_01, ref swordData.Idx_01, new float[] { swordData.Damage_01 }, swordData.Name_01);
-        ItemCheck(ItemType.Sword, swordData.Image_02, ref swordData.Idx_02, new float[] { swordData.Damage_02 }, swordData.Name_02);
-        ItemCheck(ItemType.Sword, swordData.Image_03, ref swordData.Idx_03, new float[] { swordData.Damage_03 }, swordData.Name_03);
-        ItemCheck(ItemType.Shield, shieldData.Image_01, ref shieldData.Idx_01, new float[] { shieldData.Defence_01 }, shieldData.Name_01);
-        ItemCheck(ItemType.Shield, shieldData.Image_02, ref shieldData.Idx_02, new float[] { shieldData.Defence_02 }, shieldData.Name_02);
-        ItemCheck(ItemType.Shield, shieldData.Image_03, ref shieldData.Idx_03, new float[] { shieldData.Defence_03 }, shieldData.Name_03);
-        ItemCheck(ItemType.Shield, shieldData.Image_04, ref shieldData.Idx_04, new float[] { shieldData.Defence_04 }, shieldData.Name_04);
-        ItemCheck(ItemType.Hat, hatData.Image_01, ref hatData.Idx_01, new float[] { hatData.HP_01, hatData.Defence_01 }, hatData.Name_01);
-        ItemCheck(ItemType.Hat, hatData.Image_02, ref hatData.Idx_02, new float[] { hatData.HP_02, hatData.Defence_02 }, hatData.Name_02);
-        ItemCheck(ItemType.Hat, hatData.Image_03, ref hatData.Idx_03, new float[] { hatData.HP_03, hatData.Defence_03 }, hatData.Name_03);
-        ItemCheck(ItemType.Hat, hatData.Image_04, ref hatData.Idx_04, new float[] { hatData.HP_04, hatData.Defence_04 }, hatData.Name_04);
-        ItemCheck(ItemType.Cloth, clothData.Image_01, ref clothData.Idx_01, new float[] { clothData.HP_01, clothData.Defence_01 }, clothData.Name_01);
-        ItemCheck(ItemType.Cloth, clothData.Image_02, ref clothData.Idx_02, new float[] { clothData.HP_01, clothData.Defence_02 }, clothData.Name_02);
-        ItemCheck(ItemType.Cloth, clothData.Image_03, ref clothData.Idx_03, new float[] { clothData.HP_01, clothData.Defence_03 }, clothData.Name_03);
-        ItemCheck(ItemType.Pants, pantsData.Image_01, ref pantsData.Idx_01, new float[] { pantsData.HP_01, pantsData.Defence_01 }, pantsData.Name_01);
-        ItemCheck(ItemType.Pants, pantsData.Image_02, ref pantsData.Idx_02, new float[] { pantsData.HP_01, pantsData.Defence_02 }, pantsData.Name_02);
-        ItemCheck(ItemType.Pants, pantsData.Image_03, ref pantsData.Idx_03, new float[] { pantsData.HP_01, pantsData.Defence_03 }, pantsData.Name_03);
-        ItemCheck(ItemType.Shoes, shoesData.Image_01, ref shoesData.Idx_01, new float[] { shoesData.HP_01, shoesData.Defence_01 }, shoesData.Name_01);
-        ItemCheck(ItemType.Shoes, shoesData.Image_02, ref shoesData.Idx_02, new float[] { shoesData.HP_01, shoesData.Defence_02 }, shoesData.Name_02);
-        ItemCheck(ItemType.Shoes, shoesData.Image_03, ref shoesData.Idx_03, new float[] { shoesData.HP_01, shoesData.Defence_03 }, shoesData.Name_03);
-        ItemCheck(ItemType.Kloak, kloakData.Image_01, ref kloakData.Idx_01, new float[] { kloakData.HP_01, kloakData.MP_01, kloakData.Defence_01 }, kloakData.Name_01);
-        ItemCheck(ItemType.Kloak, kloakData.Image_02, ref kloakData.Idx_02, new float[] { kloakData.HP_02, kloakData.MP_02, kloakData.Defence_02 }, kloakData.Name_02);
-        ItemCheck(ItemType.Kloak, kloakData.Image_03, ref kloakData.Idx_03, new float[] { kloakData.HP_03, kloakData.MP_03, kloakData.Defence_03 }, kloakData.Name_03);
-        ItemCheck(ItemType.Neck, neckData.Image_01, ref neckData.Idx_01, new float[] { neckData.MP_01, neckData.Damage_01, neckData.Magicdamage_01 }, neckData.Name_01);
-        ItemCheck(ItemType.Neck, neckData.Image_02, ref neckData.Idx_02, new float[] { neckData.MP_02, neckData.Damage_02, neckData.Magicdamage_02 }, neckData.Name_02);
-        ItemCheck(ItemType.Neck, neckData.Image_03, ref neckData.Idx_03, new float[] { neckData.MP_03, neckData.Damage_03, neckData.Magicdamage_03 }, neckData.Name_03);
-        ItemCheck(ItemType.Neck, neckData.Image_04, ref neckData.Idx_04, new float[] { neckData.MP_04, neckData.Damage_04, neckData.Magicdamage_04 }, neckData.Name_04);
-        ItemCheck(ItemType.Ring, ringData.Image_01, ref ringData.Idx_01,
-            new float[] { ringData.HP_01, ringData.MP_01, ringData.Defence_01, ringData.FatalValue_01, ringData.FatalProbability_01, ringData.MagicDamage_01, ringData.Damage_01 }, ringData.Name_01);
-        ItemCheck(ItemType.Ring, ringData.Image_02, ref ringData.Idx_02,
-            new float[] { ringData.HP_02, ringData.MP_02, ringData.Defence_02, ringData.FatalValue_02, ringData.FatalProbability_02, ringData.MagicDamage_02, ringData.Damage_02 }, ringData.Name_02);
-        CheckPotionMat(ItemType.HPPotion, potionData.HPpotion01, ref potionData.HPpotion01Idx, potionData.HPpotion01quick,
-             potionData.HPpotion01Name, HPHeal01, potionData.HPpotion01Value);
-        CheckPotionMat(ItemType.HPPotion, potionData.HPpotion02, ref potionData.HPpotion02Idx, potionData.HPpotion02quick,
-             potionData.HPpotion02Name, HPHeal02, potionData.HPpotion02Value);
-        CheckPotionMat(ItemType.HPPotion, potionData.HPpotion03, ref potionData.HPpotion03Idx, potionData.HPpotion03quick,
-            potionData.HPpotion03Name, HPHeal03, potionData.HPpotion03Value);
-        CheckPotionMat(ItemType.HPPotion, potionData.MPpotion01, ref potionData.MPpotion01Idx, potionData.MPpotion01quick,
-             potionData.MPpotion01Name, MPHeal01, potionData.MPpotion01Value);
-        CheckPotionMat(ItemType.HPPotion, potionData.MPpotion02, ref potionData.MPpotion02Idx, potionData.MPpotion02quick,
-             potionData.MPpotion02Name, MPHeal02, potionData.MPpotion02Value);
-        CheckPotionMat(ItemType.HPPotion, potionData.MPpotion03, ref potionData.MPpotion03Idx, potionData.MPpotion03quick,
-             potionData.MPpotion03Name, MPHeal03, potionData.MPpotion03Value);
+        ItemCheck(ItemType.Sword, swordData.Image_01, ref swordData.Idx_01, new float[] { swordData.Value_01[0] }, swordData.Name_01);
+        ItemCheck(ItemType.Sword, swordData.Image_02, ref swordData.Idx_02, new float[] { swordData.Value_02[0] }, swordData.Name_02);
+        ItemCheck(ItemType.Sword, swordData.Image_03, ref swordData.Idx_03, new float[] { swordData.Value_03[0] }, swordData.Name_03);
+        ItemCheck(ItemType.Shield, shieldData.Image_01, ref shieldData.Idx_01, new float[] { shieldData.Value_01[0] }, shieldData.Name_01);
+        ItemCheck(ItemType.Shield, shieldData.Image_02, ref shieldData.Idx_02, new float[] { shieldData.Value_02[0] }, shieldData.Name_02);
+        ItemCheck(ItemType.Shield, shieldData.Image_03, ref shieldData.Idx_03, new float[] { shieldData.Value_03[0] }, shieldData.Name_03);
+        ItemCheck(ItemType.Shield, shieldData.Image_04, ref shieldData.Idx_04, new float[] { shieldData.Value_04[0] }, shieldData.Name_04);
+        ItemCheck(ItemType.Hat, hatData.Image_01, ref hatData.Idx_01, new float[] { hatData.Value_01[0], hatData.Value_01[1] }, hatData.Name_01);
+        ItemCheck(ItemType.Hat, hatData.Image_02, ref hatData.Idx_02, new float[] { hatData.Value_02[0], hatData.Value_02[1] }, hatData.Name_02);
+        ItemCheck(ItemType.Hat, hatData.Image_03, ref hatData.Idx_03, new float[] { hatData.Value_03[0], hatData.Value_03[1] }, hatData.Name_03);
+        ItemCheck(ItemType.Hat, hatData.Image_04, ref hatData.Idx_04, new float[] { hatData.Value_04[0], hatData.Value_04[1] }, hatData.Name_04);
+        ItemCheck(ItemType.Cloth, clothData.Image_01, ref clothData.Idx_01, new float[] { clothData.Value_01[0], clothData.Value_01[1] }, clothData.Name_01);
+        ItemCheck(ItemType.Cloth, clothData.Image_02, ref clothData.Idx_02, new float[] { clothData.Value_02[0], clothData.Value_02[1] }, clothData.Name_02);
+        ItemCheck(ItemType.Cloth, clothData.Image_03, ref clothData.Idx_03, new float[] { clothData.Value_03[0], clothData.Value_03[1] }, clothData.Name_03);
+        ItemCheck(ItemType.Pants, pantsData.Image_01, ref pantsData.Idx_01, new float[] { pantsData.Value_01[0], pantsData.Value_01[1] }, pantsData.Name_01);
+        ItemCheck(ItemType.Pants, pantsData.Image_02, ref pantsData.Idx_02, new float[] { pantsData.Value_02[0], pantsData.Value_02[1] }, pantsData.Name_02);
+        ItemCheck(ItemType.Pants, pantsData.Image_03, ref pantsData.Idx_03, new float[] { pantsData.Value_03[0], pantsData.Value_03[1] }, pantsData.Name_03);
+        ItemCheck(ItemType.Shoes, shoesData.Image_01, ref shoesData.Idx_01, new float[] { shoesData.Value_01[0], shoesData.Value_01[1] }, shoesData.Name_01);
+        ItemCheck(ItemType.Shoes, shoesData.Image_02, ref shoesData.Idx_02, new float[] { shoesData.Value_02[0], shoesData.Value_02[1] }, shoesData.Name_02);
+        ItemCheck(ItemType.Shoes, shoesData.Image_03, ref shoesData.Idx_03, new float[] { shoesData.Value_03[0], shoesData.Value_03[1] }, shoesData.Name_03);
+        ItemCheck(ItemType.Kloak, kloakData.Image_01, ref kloakData.Idx_01, new float[] { kloakData.Value_01[0], kloakData.Value_01[1], kloakData.Value_01[2] }, kloakData.Name_01);
+        ItemCheck(ItemType.Kloak, kloakData.Image_02, ref kloakData.Idx_02, new float[] { kloakData.Value_02[0], kloakData.Value_02[1], kloakData.Value_02[2] }, kloakData.Name_02);
+        ItemCheck(ItemType.Kloak, kloakData.Image_03, ref kloakData.Idx_03, new float[] { kloakData.Value_03[0], kloakData.Value_03[1], kloakData.Value_03[2] }, kloakData.Name_03);
+        ItemCheck(ItemType.Neck, neckData.Image_01, ref neckData.Idx_01, new float[] { neckData.Value_01[0], neckData.Value_01[1], neckData.Value_01[2] }, neckData.Name_01);
+        ItemCheck(ItemType.Neck, neckData.Image_02, ref neckData.Idx_02, new float[] { neckData.Value_02[0], neckData.Value_02[1], neckData.Value_02[2] }, neckData.Name_02);
+        ItemCheck(ItemType.Neck, neckData.Image_03, ref neckData.Idx_03, new float[] { neckData.Value_03[0], neckData.Value_03[1], neckData.Value_03[2] }, neckData.Name_03);
+        ItemCheck(ItemType.Neck, neckData.Image_04, ref neckData.Idx_04, new float[] { neckData.Value_04[0], neckData.Value_04[1], neckData.Value_04[2] }, neckData.Name_04);
+        ItemCheck(ItemType.Ring, ringData.Image_01, ref ringData.Idx_01, new float[] { ringData.Value_01[0], ringData.Value_01[1], ringData.Value_01[2], ringData.Value_01[3],
+            ringData.Value_01[4], ringData.Value_01[5], ringData.Value_01[6] }, ringData.Name_01);
+        ItemCheck(ItemType.Ring, ringData.Image_02, ref ringData.Idx_02, new float[] { ringData.Value_02[0], ringData.Value_02[1], ringData.Value_02[2], ringData.Value_02[3],
+            ringData.Value_02[4], ringData.Value_02[5], ringData.Value_02[6] }, ringData.Name_02);
+        CheckPotionMat(ItemType.HPPotion, potionData.HPpotion01, ref potionData.HPpotion01Idx, potionData.HPpotion01quick, potionData.HPpotion01Name, HPHeal01, potionData.HPpotion01Value);
+        CheckPotionMat(ItemType.HPPotion, potionData.HPpotion02, ref potionData.HPpotion02Idx, potionData.HPpotion02quick, potionData.HPpotion02Name, HPHeal02, potionData.HPpotion02Value);
+        CheckPotionMat(ItemType.HPPotion, potionData.HPpotion03, ref potionData.HPpotion03Idx, potionData.HPpotion03quick, potionData.HPpotion03Name, HPHeal03, potionData.HPpotion03Value);
+        CheckPotionMat(ItemType.HPPotion, potionData.MPpotion01, ref potionData.MPpotion01Idx, potionData.MPpotion01quick, potionData.MPpotion01Name, MPHeal01, potionData.MPpotion01Value);
+        CheckPotionMat(ItemType.HPPotion, potionData.MPpotion02, ref potionData.MPpotion02Idx, potionData.MPpotion02quick, potionData.MPpotion02Name, MPHeal02, potionData.MPpotion02Value);
+        CheckPotionMat(ItemType.HPPotion, potionData.MPpotion03, ref potionData.MPpotion03Idx, potionData.MPpotion03quick, potionData.MPpotion03Name, MPHeal03, potionData.MPpotion03Value);
 
         CheckPotionMat(ItemType.Material, materialData.material01, ref materialData.material01Idx, materialData.material01Price, materialData.material01Name);
         CheckPotionMat(ItemType.Material, materialData.material02, ref materialData.material02Idx, materialData.material02Price, materialData.material02Name);
@@ -616,7 +437,7 @@ public class ItemManager : MonoBehaviour
     }
     public void AllItemSave()
     {
-        ItemSave(ItemType.Sword, swordData.Idx_01, swordData.Name_01,  swordData.Count_01);
+        ItemSave(ItemType.Sword, swordData.Idx_01, swordData.Name_01, swordData.Count_01);
         ItemSave(ItemType.Sword, swordData.Idx_02, swordData.Name_02, swordData.Count_02);
         ItemSave(ItemType.Sword, swordData.Idx_03, swordData.Name_03, swordData.Count_03);
 
@@ -654,7 +475,7 @@ public class ItemManager : MonoBehaviour
         ItemSave(ItemType.Ring, ringData.Idx_01, ringData.Name_01, ringData.Count_01);
         ItemSave(ItemType.Ring, ringData.Idx_02, ringData.Name_02, ringData.Count_02);
 
-        ItemSave(ItemType.HPPotion, potionData.HPpotion01Idx, potionData.HPpotion01Name,  potionData.HPpotion01Count);
+        ItemSave(ItemType.HPPotion, potionData.HPpotion01Idx, potionData.HPpotion01Name, potionData.HPpotion01Count);
         ItemSave(ItemType.HPPotion, potionData.HPpotion02Idx, potionData.HPpotion02Name, potionData.HPpotion02Count);
         ItemSave(ItemType.HPPotion, potionData.HPpotion03Idx, potionData.HPpotion03Name, potionData.HPpotion03Count);
 
@@ -663,7 +484,7 @@ public class ItemManager : MonoBehaviour
         ItemSave(ItemType.MPPotion, potionData.MPpotion03Idx, potionData.MPpotion03Name, potionData.MPpotion03Count);
 
         ItemSave(ItemType.Material, materialData.material01Idx, materialData.material01Name, materialData.material01Count);
-        ItemSave(ItemType.Material, materialData.material02Idx, materialData.material02Name,  materialData.material02Count);
+        ItemSave(ItemType.Material, materialData.material02Idx, materialData.material02Name, materialData.material02Count);
         ItemSave(ItemType.Material, materialData.material03Idx, materialData.material03Name, materialData.material03Count);
         ItemSave(ItemType.Material, materialData.material04Idx, materialData.material04Name, materialData.material04Count);
         ItemSave(ItemType.Material, materialData.material05Idx, materialData.material05Name, materialData.material05Count);
@@ -675,200 +496,45 @@ public class ItemManager : MonoBehaviour
     private void ItemCheck(ItemType itemType, Sprite itemSprite, ref int itemIdx, float[] values, string itemName)
     {
         ItemDataJson itemDataJson = DataManager.dataInst.FindItem(itemType, itemName);
-        if (itemDataJson != null )
+        if (itemDataJson != null && itemDataJson.Count > 0)
         {
-            if (itemDataJson.Count > 0)
+            RectTransform item = ItemVase(itemType, itemSprite, ref itemIdx, itemName);
+            string explain = "";
+            Transform trParent = GetParentTransformByPath(itemDataJson.Path);
+            if (trParent != null)
             {
-                for (int i = 0; i < itemList.Count; i++)
+                ItemInfo itemInfo = item.GetComponent<ItemInfo>();
+                if (trParent.GetComponent<ItemInfo>() != null && itemInfo.type == trParent.GetComponent<ItemInfo>().type)
                 {
-                    if (!itemList[i].gameObject.activeSelf)
+                    Drag itemDrag = item.GetComponent<Drag>();
+                    itemDrag.IsEuqip(true);
+                    if (itemType == ItemType.Sword || itemType == ItemType.Shield)
                     {
-                        itemIdx = i;
-                        break;
+                        itemDrag.ItemTypeSelect(itemType, true);
                     }
+                    explain = WeaponCase(itemType, values, item, explain);
                 }
-                var item = itemList[itemIdx];
-                item.GetComponent<Image>().sprite = itemSprite;
-                item.GetComponent<ItemInfo>().type = itemType;
-                item.GetComponent<ItemToolTip>().itemName = itemName;
-                Transform trparent = GetParentTransformByPath(itemDataJson.Path);
-                string explain = "";
-                if (trparent != null)
-                {
-                    ItemInfo itemInfo = item.GetComponent<ItemInfo>();
-                    if (trparent.GetComponent<ItemInfo>() != null && itemInfo.type == trparent.GetComponent<ItemInfo>().type)
-                    {
-                        Drag itemDrag = item.GetComponent<Drag>();
-                        itemDrag.IsEuqip(true);
-                        if (itemInfo.type == ItemType.Sword || itemInfo.type == ItemType.Shield)
-                        {
-                            itemDrag.ItemTypeSelect(itemInfo.type, true);
-                        }
-                        switch (itemInfo.type)
-                        {
-                            case ItemType.Sword:
-                                itemDrag.ItemTypeSelect(itemInfo.type, true);
-                                itemDrag.ItemChange(itemType, values[0]);
-                                explain = "공격력 + " + values[0].ToString();
-                                break;
-                            case ItemType.Shield:
-                                itemDrag.ItemTypeSelect(itemInfo.type, true);
-                                itemDrag.ItemChange(itemType, values[0]);
-                                explain = "방어력 + " + values[0].ToString();
-                                break;
-                            case ItemType.Hat:
-                                itemDrag.ItemChange(itemType, values[0], values[1]);
-                                explain = "HP + " + values[0].ToString() + "방어력 + " + values[1].ToString();
-                                break;
-                            case ItemType.Cloth:
-                                itemDrag.ItemChange(itemType, values[0], values[1]);
-                                explain = "HP + " + values[0].ToString() + "방어력 + " + values[1].ToString();
-                                break;
-                            case ItemType.Pants:
-                                itemDrag.ItemChange(itemType, values[0], values[1]);
-                                explain = "HP + " + values[0].ToString() + "방어력 + " + values[1].ToString();
-                                break;
-                            case ItemType.Shoes:
-                                itemDrag.ItemChange(itemType, values[0], values[1]);
-                                explain = "HP + " + values[0].ToString() + "방어력 + " + values[1].ToString();
-                                break;
-                            case ItemType.Kloak:
-                                explain = "HP + " + values[0].ToString() + "MP + " + values[1].ToString() + "공격력 + " + values[2].ToString();
-                                itemDrag.ItemChange(itemType, values[0], values[1], values[2]);
-                                break;
-                            case ItemType.Neck:
-                                item.GetComponent<Drag>().ItemChange(itemType, values[0], values[1], values[2]);
-                                explain = "MP + " + values[0].ToString() + "공격력 + " + values[1].ToString() + "마법데미지 + " + values[2].ToString();
-                                break;
-                            case ItemType.Ring:
-                                itemDrag.ItemChange(itemType, values[0], values[1], values[2], values[3], values[4], values[5], values[6]);
-                                explain = "HP + " + values[0].ToString() + "MP + " + values[1].ToString() + "방어력 + " + values[2].ToString() + "치명타공격력 + " +
-                                    values[3].ToString() + "치명타확률 + " + values[4].ToString() + "마법데미지" + values[5].ToString() + "공격력" + values[5].ToString();
-                                break;
-                        }
-                    }
-                    item.SetParent(trparent);
-                }
-                else
-                {
-                    switch (itemType)
-                    {
-                        case ItemType.Sword:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0]);
-                            explain = "공격력 + " + values[0].ToString();
-                            break;
-                        case ItemType.Shield:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0]);
-                            explain = "방어력 + " + values[0].ToString();
-                            break;
-                        case ItemType.Hat:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0], values[1]);
-                            explain = "HP + " + values[0].ToString() + "방어력 + " + values[1].ToString();
-                            break;
-                        case ItemType.Cloth:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0], values[1]);
-                            explain = "HP + " + values[0].ToString() + "방어력 + " + values[1].ToString();
-                            break;
-                        case ItemType.Pants:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0], values[1]);
-                            explain = "HP + " + values[0].ToString() + "방어력 + " + values[1].ToString();
-                            break;
-                        case ItemType.Shoes:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0], values[1]);
-                            explain = "HP + " + values[0].ToString() + "방어력 + " + values[1].ToString();
-                            break;
-                        case ItemType.Kloak:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0], values[1], values[2]);
-                            explain = "HP + " + values[0].ToString() + "MP + " + values[1].ToString() + "공격력 + " + values[2].ToString();
-                            break;
-                        case ItemType.Neck:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0], values[1], values[2]);
-                            explain = "MP + " + values[0].ToString() + "공격력 + " + values[1].ToString() + "마법데미지 + " + values[2].ToString();
-                            break;
-                        case ItemType.Ring:
-                            item.GetComponent<Drag>().ItemChange(itemType, values[0], values[1], values[2], values[3], values[4], values[5], values[6]);
-                            explain = "HP + " + values[0].ToString() + "MP + " + values[1].ToString() + "방어력 + " + values[2].ToString() + "치명타공격력 + " +
-                                values[3].ToString() + "치명타확률 + " + values[4].ToString() + "마법데미지" + values[5].ToString() + "공격력" + values[5].ToString();
-                            break;
-                    }
-                    WindowSetParents(item);
-                }
-                item.GetComponent<ItemToolTip>().itemExplain = explain;
-                item.gameObject.SetActive(true);
+                item.SetParent(trParent);
             }
+            else
+            {
+                explain = WeaponCase(itemType, values, item, explain);
+                RectTransform window = GetWindow();
+                item.SetParent(window);
+            }
+            item.GetComponent<ItemToolTip>().itemExplain = explain;
+            item.gameObject.SetActive(true);
         }
     }
     private void CheckPotionMat(ItemType itemType, Sprite itemSprite, ref int itemIdx, int priceAndQuickIdx, string itemName, UnityAction onClickAction = null, float potionValue = 0)
     {
         ItemDataJson itemDataJson = DataManager.dataInst.FindItem(itemType, itemName);
-        if(itemDataJson != null)
-        {
-
-            if (itemDataJson.Count > 0)
-            {
-                for (int i = 0; i < itemList.Count; i++)
-                {
-                    if (!itemList[i].gameObject.activeSelf)
-                    {
-                        itemIdx = i;
-                        break;
-                    }
-                }
-                var item = itemList[itemIdx];
-                item.GetComponent<Image>().sprite = itemSprite;
-                item.GetComponent<ItemInfo>().type = itemType;
-                int j = itemIdx;
-                 Transform tr = GetParentTransformByPath(itemDataJson.Path);
-                string explain = "";
-                if (tr != null)
-                {
-                    item.SetParent(tr);
-                    switch (itemType)
-                    {
-                        case ItemType.HPPotion:
-                            var text = Instantiate(itemData.itemCountText, item);
-                            text.GetComponent<Text>().text = itemDataJson.Count.ToString();
-                            item.AddComponent<Button>();
-                            item.GetComponent<Button>().onClick.AddListener(onClickAction);
-                            EventTrigger eventTrigger = item.AddComponent<EventTrigger>();
-                            EventTrigger.Entry entry = new EventTrigger.Entry();
-                            entry.eventID = EventTriggerType.PointerDown;
-                            entry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data, onClickAction, j); });
-                            eventTrigger.triggers.Add(entry);
-                            explain = "HP + " + potionValue.ToString();
-                            break;
-                        case ItemType.MPPotion:
-                            var text02 = Instantiate(itemData.itemCountText, item);
-                            text02.GetComponent<Text>().text = itemDataJson.Count.ToString();
-                            item.AddComponent<Button>();
-                            item.GetComponent<Button>().onClick.AddListener(onClickAction);
-                            EventTrigger MPeventTrigger = item.AddComponent<EventTrigger>();
-                            EventTrigger.Entry MPentry = new EventTrigger.Entry();
-                            MPentry.eventID = EventTriggerType.PointerDown;
-                            MPentry.callback.AddListener((data) => { OnPointerDownDelegate((PointerEventData)data, onClickAction, j); });
-                            MPeventTrigger.triggers.Add(MPentry);
-                            explain = "MP + " + potionValue.ToString();
-                            break;
-                        case ItemType.Material:
-                            var matText = Instantiate(itemData.itemCountText, item);
-                            matText.GetComponent<Text>().text = itemDataJson.Count.ToString();
-                            item.GetComponent<Drag>().price = priceAndQuickIdx;
-                            explain = priceAndQuickIdx.ToString() + " 원";
-                            break;
-                    }
-                }
-
-                item.GetComponent<ItemToolTip>().itemName = itemName;
-                item.GetComponent<ItemToolTip>().itemExplain = explain;
-                item.gameObject.SetActive(true);
-            }
-        }
+        if (itemDataJson != null && itemDataJson.Count > 0) itemIdx = PotionMatCreate(itemType, itemSprite, itemDataJson.Count, itemIdx, itemName, priceAndQuickIdx, onClickAction, potionValue);
     }
     // 경로에 따라 Transform을 반환하는 메서드
     private Transform GetTransformByPath(string path)
     {
-        if (string.IsNullOrEmpty(path))
-            return null;
+        if (string.IsNullOrEmpty(path)) return null;
 
         string[] pathElements = path.Split('/');
         Transform currentTransform = null;
@@ -879,62 +545,33 @@ public class ItemManager : MonoBehaviour
             {
                 // 루트 Transform을 찾기
                 GameObject obj = GameObject.Find(element);
-                if (obj != null)
-                {
-                    currentTransform = obj.transform;
-                }
-                else
-                {
-                    Debug.LogError($"Root GameObject '{element}' not found.");
-                    return null;
-                }
+                if (obj != null) { currentTransform = obj.transform; }
+                else { return null; }
             }
             else
             {
                 // 현재 Transform의 자식 Transform을 찾기
                 Transform childTransform = currentTransform.Find(element);
-                if (childTransform != null)
-                {
-                    currentTransform = childTransform;
-                }
-                else
-                {
-                    Debug.LogError($"Transform '{element}' not found under '{currentTransform.name}'.");
-                    return null;
-                }
+                if (childTransform != null) { currentTransform = childTransform; }  // Tr이 존재한다면 Tr을 반환한다
+                else { return null; }
             }
         }
 
         return currentTransform;
     }
-    // 경로에 따라 Transform을 반환하는 메서드
+    // 부모를 찾는 메서드
     private Transform GetParentTransformByPath(string path)
     {
-        if (string.IsNullOrEmpty(path))
-            return null;
-
+        if (string.IsNullOrEmpty(path)) return null;
         string[] pathElements = path.Split('/');
-        if (pathElements.Length <= 1)
-        {
-            Debug.LogError("Path does not contain enough elements to determine a parent.");
-            return null;
-        }
-
+        if (pathElements.Length <= 1) { return null; }
         // 부모 경로 분리
         string parentPath = string.Join("/", pathElements, 0, pathElements.Length - 1);
-
         // 부모 Transform 찾기
         Transform parentTransform = GetTransformByPath(parentPath);
-        if (parentTransform == null)
-        {
-            Debug.LogError($"Parent Transform not found for path: '{parentPath}'.");
-            return null;
-        }
-
+        if (parentTransform == null) { return null; }
         return parentTransform;
     }
-
-
     // 아이템의 위치를 경로로 저장할 메서드
     private void ItemSave(ItemType itemType, int idx, string itemName, int itemCount)
     {
@@ -952,29 +589,13 @@ public class ItemManager : MonoBehaviour
             return transform.name;
         return GetTransformPath(transform.parent) + "/" + transform.name;
     }
-
-
-
     public void GoldPlus(int gold)
     {
         playerData.GoldValue += gold;
         goldText.text = playerData.GoldValue.ToString();
     }
-    public void GoldUpdate()
-    { // 골드 상태 업데이트
-        goldText.text = playerData.GoldValue.ToString();
-    }
-    void WindowSetParents(Transform tr)
-    {
-        for (int i = 0; i < windowList.Count; i++)
-        {
-            if (windowList[i].childCount == 0)
-            {
-                tr.SetParent(windowList[i]);
-                break;
-            }
-        }
-    }
+    public void GoldUpdate() { goldText.text = playerData.GoldValue.ToString(); }  // 골드 상태 업데이트
+    RectTransform GetWindow() { for (int i = 0; i < windowList.Count; i++) { if (windowList[i].childCount == 0) { return windowList[i]; } } return null; }//아이템창의 자식으로 아이템을 넣는 메서드
     #region 포션 메서드
     //*****************************포션 사용*********************************//
 
@@ -1081,15 +702,8 @@ public class ItemManager : MonoBehaviour
         itemList[itemIdx].SetParent(itemGroup);
     }
     //****************************아이템 착용 확인**************************//
-    public void SwordOnOff(bool _active)
-    {
-        playerAttack.IsSword(_active);
-
-    }
-    public void ShieldTakeOff(bool _active)
-    {
-        playerAttack.IsShield(_active);
-    }
+    public void SwordOnOff(bool _active) { playerAttack.IsSword(_active); }
+    public void ShieldTakeOff(bool _active) { playerAttack.IsShield(_active); }
     // 새로 게임을 시작할때
     public void ReSetGame()
     {
@@ -1105,11 +719,6 @@ public class ItemManager : MonoBehaviour
         playerData.DefenceValue = 5;
         playerData.FatalProbability = 0.05f;
         playerData.FatalValue = 150f;
-        playerData.level05MagicDamage = 100;
-        playerData.level10MagicDamage = 200;
-        playerData.level20_1MagicDamage = 300;
-        playerData.level20_2MagicDamage = 300;
-        playerData.level30MagicDamage = 400;
         playerData.GoldValue = 10;
         playerData.levelSkillPoint = 0;
         playerData.playerSceneIdx = 0;

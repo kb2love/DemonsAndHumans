@@ -58,8 +58,7 @@ public class NPCPaladinDialouge : NPCDialogue
             case QuestState.QuestClear:
                 OpenDoor();
                 QuestEnd();
-                QuestManager.questInst.CompleteQuest(paladinQuest.Idx, ref paladinQuest.questState);
-                GameManager.GM.ExpUp(paladinQuest.Exp);
+                QuestManager.questInst.CompleteQuest(paladinQuest.Idx, ref paladinQuest.questState, paladinQuest.Exp, paladinQuest.Name);
                 break;
             case QuestState.None: break;
         }

@@ -9,6 +9,7 @@ public class MutantDamage : MonoBehaviour
     [Header("체력")]
     [SerializeField] float maxHp;
     [SerializeField] AudioClip hitClip;
+    AudioSource hitSource;
     [SerializeField] Text hpText;
     [Header("경험치")]
     [SerializeField] int exp;
@@ -24,6 +25,8 @@ public class MutantDamage : MonoBehaviour
     private void Start()
     {
         mutantAI = GetComponent<MutantAI>();
+        hitSource = GetComponent<AudioSource>();
+        hitEff = ObjectPoolingManager.objInst.GetHitEff();
     }
     private void OnEnable()
     {
@@ -40,11 +43,10 @@ public class MutantDamage : MonoBehaviour
         if (!isDie && !mutantShield)
         {
             hp -= damage;
-            SoundManager.soundInst.EffectSoundPlay(hitClip);
+            SoundManager.soundInst.EffectSoundPlay(hitSource,hitClip);
             hpImage.fillAmount = hp / maxHp;
             if (hpText != null)
                 hpText.text = maxHp.ToString() + " : " + hp.ToString();
-            hitEff = ObjectPoolingManager.objInst.GetHitEff();
             hitEff.transform.position = transform.position + (Vector3.up * 0.8f);
             hitEff.SetActive(true);
             Debug.Log(hp);
@@ -54,6 +56,16 @@ public class MutantDamage : MonoBehaviour
         else if(mutantShield)
         {
             Debug.Log("막았죠?");
+        }
+    }
+    public void HitEffChange(SkillState skillState)
+    {
+        switch(skillState)
+        {
+            case SkillState.None: hitEff = ObjectPoolingManager.objInst.GetHitEff(); break;
+            case SkillState.Ice: hitEff = ObjectPoolingManager.objInst.GetIceHitEff(); break;
+            case SkillState.Fire: hitEff = ObjectPoolingManager.objInst.GetFireHitEff(); break;
+            case SkillState.Electro: hitEff = ObjectPoolingManager.objInst.GetElectroHitEff(); break;
         }
     }
     void MutantDie()

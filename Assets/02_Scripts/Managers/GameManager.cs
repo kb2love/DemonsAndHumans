@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] PlayerData playerData;
     [SerializeField] List<Text> stateText = new List<Text>();
     [SerializeField] Image expImage;
+    [SerializeField] Image hpImage;
+    [SerializeField] Image mpImage;
     public static GameManager GM;
     private void Awake()
     {
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
         {
             case PlayerData.PlayerStat.Level:
                 stateText[8].text = "Level : " + playerData.Level.ToString();
-                stateText[9].text = "Lev : " + playerData.Level.ToString(); 
+                stateText[9].text = "Lev : " + playerData.Level.ToString();
                 break;
             case PlayerData.PlayerStat.HP:
                 stateText[0].text = "HP : " + playerData.HP.ToString("0");
@@ -83,20 +85,23 @@ public class GameManager : MonoBehaviour
     {
         playerData.expValue -= playerData.maxExpValue;
         playerData.maxExpValue += 50.0f;
-        playerData.MaxHP *= 1.1f;
-        playerData.MaxMP *= 1.1f;
+        playerData.MaxHP *= 1.05f;
+        playerData.MaxMP *= 1.05f;
         playerData.HP = playerData.MaxHP;
         playerData.MP = playerData.MaxMP;
+        hpImage.fillAmount = playerData.HP / playerData.MaxHP;
+        mpImage.fillAmount = playerData.MP / playerData.MaxMP;
         playerData.AttackValue *= 1.1f;
         playerData.DefenceValue *= 1.1f;
         playerData.FatalValue *= 1.05f;
         playerData.FatalProbability *= 1.1f;
         playerData.Level++;
-        if(playerData.Level == 5)
-        {
-            SkillManager.skillInst.Level5();
-        }
-        for(int i = 0; i < 10; i++)
+        if (playerData.Level == 5) { SkillManager.skillInst.Level5(); }
+        else if (playerData.Level == 10) { SkillManager.skillInst.Level10(); }
+        else if (playerData.Level == 20) { SkillManager.skillInst.Level20(); }
+        else if (playerData.Level == 21) { SkillManager.skillInst.Level20(); }
+        else if (playerData.Level == 30) { QuestManager.questInst.PlayerLevel30(); SkillManager.skillInst.Level30(); }
+        for (int i = 0; i < 10; i++)
         {
             AllStatUpdata();
         }

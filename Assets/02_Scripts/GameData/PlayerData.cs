@@ -17,18 +17,8 @@ public class PlayerData : ScriptableObject
     public float DefenceValue;      //방어력
     public float FatalProbability;  //치명타확률
     public float FatalValue;        //치명타 공격력
-    public float level05MagicDamage;
-    public float level10MagicDamage;
-    public float level20_1MagicDamage;
-    public float level20_2MagicDamage;
-    public float level30MagicDamage;
     public int GoldValue;
     public int levelSkillPoint;
-    public int level05SkillIdx;
-    public int level10SkillIdx;
-    public int level15_1SkillIdx;
-    public int level15_2SkillIdx;
-    public int level25SkillIdx;
     public int playerSceneIdx;
     public AudioClip AttackDownClip;
     public AudioClip AttackUpClip;
@@ -37,5 +27,8 @@ public class PlayerData : ScriptableObject
     public AudioClip SkillElectro;
     public AudioClip SkillFire;
     public GameObject hitEff;
+    public GameObject iceHitEff;
+    public GameObject fireHitEff;
+    public GameObject electroHitEff;
     public GameObject iceSpear;
 }

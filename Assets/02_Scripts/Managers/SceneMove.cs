@@ -26,10 +26,7 @@ public class SceneMove : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             InitializeLoadingUI();
         }
-        else if (SceneInst != this)
-        {
-            Destroy(gameObject);
-        }
+        else if (SceneInst != this) { Destroy(gameObject); }
     }
 
     private void InitializeLoadingUI()
@@ -57,26 +54,24 @@ public class SceneMove : MonoBehaviour
 
     public void CatleScene()
     {
-        StartCoroutine(LoadSceneAsync(2, castleSkyBox, resetQuest: true));
+        StartCoroutine(LoadSceneAsync(2, castleSkyBox, resetGame: true));
     }
 
     public void PotalMove(int sceneIdx)
     {
         Material material = mutantFieldSkyBox;
-        if (sceneIdx == 2)
-            material = castleSkyBox;
+        if (sceneIdx == 2) material = castleSkyBox;
         StartCoroutine(LoadSceneAsync(sceneIdx, material));
     }
 
     public void LoadScene(int sceneIdx, GameData gameData)
     {
         Material material = mutantFieldSkyBox;
-        if (sceneIdx == 2)
-            material = castleSkyBox;
+        if (sceneIdx == 2) material = castleSkyBox;
         StartCoroutine(LoadSceneAsync(sceneIdx, material, gameData));
     }
 
-    private IEnumerator LoadSceneAsync(int sceneIdx, Material skybox, GameData gameData = null, bool resetQuest = false)
+    private IEnumerator LoadSceneAsync(int sceneIdx, Material skybox, GameData gameData = null, bool resetGame = false)
     {
         loadingWindow.SetActive(true);
         loadingBar.fillAmount = 0f;
@@ -103,23 +98,21 @@ public class SceneMove : MonoBehaviour
         // PlayerScene을 활성화
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("PlayerScene"));
 
-        // QuestReset을 PlayerScene이 활성화된 후에 호출
-        if (resetQuest && QuestManager.questInst != null)
+        if (resetGame)
         {
             QuestManager.questInst.QuestReset();
             DataManager.dataInst.DeleteSaveData();
             ItemManager.itemInst.ReSetGame();
         }
-        else
-        {
-            DataManager.dataInst.DataLoad();
-        }
+        else { DataManager.dataInst.DataLoad(); }
         DialogueManager.dialogueInst.Initialize();
+        ObjectPoolingManager.objInst.Initialize();
         GameManager.GM.Initialize();
         // 초기화 메서드 호출
         InitializeNPCDialogue();
         InitializeMutantAI();
         QuestManager.questInst.QuestSearch();
+        SkillManager.skillInst.Initialize();
         // PlayerStartPoint 초기화
         PlayerStartPoint playerStartPoint = FindObjectOfType<PlayerStartPoint>();
         if (gameData != null && gameData.playerPosition != null && gameData.playerRotation != null)
@@ -160,21 +153,17 @@ public class SceneMove : MonoBehaviour
         DataManager.dataInst.DataSave();
     }
     private void InitializeNPCDialogue()
-    {
+    { // 씬에있는 NPCDialouge들을 초기화 해준다
         NPCDialogue[] dialogues = FindObjectsOfType<NPCDialogue>();
-        foreach (var dialogue in dialogues)
-        {
-            dialogue.Initialize();
-        }
+        foreach (var dialogue in dialogues) { dialogue.Initialize(); }
     }
 
     private void InitializeMutantAI()
-    {
+    { // 신에 있는 MutatnAi들을 초기화 해준다
         MutantAI[] mutantAI = FindObjectsOfType<MutantAI>();
-        foreach (var ai in mutantAI)
-        {
-            ai.Initialize();
-        }
+        foreach (var ai in mutantAI) { ai.Initialize(); }
+        MutantBoss mutantBoss = FindAnyObjectByType<MutantBoss>();
+        if (mutantBoss != null) { mutantBoss.Initialize(); }
     }
 
     public void QuitGame()

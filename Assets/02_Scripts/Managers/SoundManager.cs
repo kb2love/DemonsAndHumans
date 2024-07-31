@@ -40,4 +40,9 @@ public class SoundManager : MonoBehaviour
     {
         effAudioSource.PlayOneShot(audioClip);
     }
+    public void EffectSoundPlay(AudioSource audioSource,AudioClip audioClip)
+    {
+        audioSource.volume = effAudioSource.volume;
+        audioSource.PlayOneShot(audioClip);
+    }
 }

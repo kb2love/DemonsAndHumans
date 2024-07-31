@@ -14,7 +14,7 @@ public class StoreOpen : MonoBehaviour
     [SerializeField] Text storeText;
     public void Initialize()
     {
-        playerStat = GameObject.Find("PlayerState").gameObject;
+        playerStat = GameObject.Find("Canvas_Player").transform.GetChild(2).gameObject;
     }
     public void WeaponStore()
     {

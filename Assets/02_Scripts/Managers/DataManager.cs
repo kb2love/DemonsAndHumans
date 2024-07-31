@@ -1,18 +1,21 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
-using static UnityEditor.Progress;
+using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager dataInst;
     public GameData gameData = new GameData();
     public ItemSaveData itemSaveData = new ItemSaveData();
+    public QuestSaveData questSaveData = new QuestSaveData();
+    public SkillDataJson skillDataJson = new SkillDataJson();
     private string path;
     private string fileName = "GameData.json";
-    private string itemDataFileName = "ItemData.json"; // 아이템 데이터 JSON 파일 이름
+    private string itemDataFileName = "SunDryItemData.json"; // 아이템 데이터 JSON 파일 이름
+    private string questDataFileName = "QuestSaveData.json";
+    private string skillDataFileName = "SkillData.json"; // 스킬 데이터 JSON 파일 이름
     public List<ItemDataJson> Items = new List<ItemDataJson>();
-
+    public List<QuestDataJson> Quests = new List<QuestDataJson>();
     public List<RectTransform> uiElements; // 저장할 UI 요소 목록
     public Canvas canvas; // 최상위 Canvas
 
@@ -33,7 +36,7 @@ public class DataManager : MonoBehaviour
         LoadData();
     }
 
-    public void SaveData()
+    public void GameDataSave()
     {
         string data = JsonUtility.ToJson(gameData);
         Debug.Log($"Saving data to path: {path}");
@@ -48,26 +51,26 @@ public class DataManager : MonoBehaviour
             gameData = JsonUtility.FromJson<GameData>(data);
         }
     }
+
     public bool FileExistst()
     {
         if (File.Exists(path)) return true;
         else return false;
     }
+
     public void DeleteSaveData()
     {
         string gameDataPath = Path.Combine(Application.persistentDataPath, fileName);
         string itemDataPath = Path.Combine(Application.persistentDataPath, itemDataFileName);
+        string questDataPath = Path.Combine(Application.persistentDataPath, questDataFileName);
+        string skillDataPath = Path.Combine(Application.persistentDataPath, skillDataFileName);
 
-        if (File.Exists(gameDataPath))
-        {
-            File.Delete(gameDataPath);
-        }
-
-        if (File.Exists(itemDataPath))
-        {
-            File.Delete(itemDataPath);
-        }
+        if (File.Exists(gameDataPath)) { File.Delete(gameDataPath); }
+        if (File.Exists(itemDataPath)) { File.Delete(itemDataPath); }
+        if (File.Exists(questDataPath)) { File.Delete(questDataPath); }
+        if (File.Exists(skillDataPath)) { File.Delete(skillDataPath); }
     }
+
     public void DataSave()
     {
         Transform playerTr = GameObject.Find("Player").transform;
@@ -76,7 +79,7 @@ public class DataManager : MonoBehaviour
         gameData.playerPosition = new float[] { playerTr.position.x, playerTr.position.y, playerTr.position.z };
         gameData.playerRotation = new float[] { playerTr.rotation.eulerAngles.x, playerTr.rotation.eulerAngles.y, playerTr.rotation.eulerAngles.z };
 
-        SaveData();
+        GameDataSave();
     }
 
     public void DataLoad()
@@ -89,6 +92,11 @@ public class DataManager : MonoBehaviour
             playerTr.rotation = Quaternion.Euler(gameData.playerRotation[0], gameData.playerRotation[1], gameData.playerRotation[2]);
 
             LoadItemData(); // 아이템 데이터 불러오기
+            LoadQuest();
+            LoadSkillData();
+            Debug.Log($"Game data path: {path}");
+            Debug.Log($"Item data path: {Path.Combine(Application.persistentDataPath, itemDataFileName)}");
+            Debug.Log($"Quest data path: {Path.Combine(Application.persistentDataPath, questDataFileName)}");
         }
     }
 
@@ -123,6 +131,48 @@ public class DataManager : MonoBehaviour
         File.WriteAllText(Path.Combine(Application.persistentDataPath, itemDataFileName), json);
     }
 
+    public void SaveQuestData(QuestState type, string name_, int killCount = 0, int bossKillCount = 0)
+    {
+        // 새로운 퀘스트 데이터 생성
+        QuestDataJson newQuest = new QuestDataJson
+        {
+            Name = name_,
+            KillCount = killCount,
+            bossKillCount = bossKillCount,
+            questState = type
+        };
+
+        // 기존 퀘스트가 있는지 확인
+        QuestDataJson existingQuest = questSaveData.Quests.Find(quest => quest.Name == name_);
+
+        if (existingQuest != null)
+        {
+            // 기존 퀘스트가 있다면 상태와 카운트를 업데이트
+            existingQuest.KillCount = killCount;
+            existingQuest.bossKillCount = bossKillCount;
+            existingQuest.questState = type;
+        }
+        else
+        {
+            // 기존 퀘스트가 없다면 새로운 퀘스트 추가
+            questSaveData.Quests.Add(newQuest);
+        }
+
+        // JSON으로 변환하여 파일에 저장
+        string json = JsonUtility.ToJson(questSaveData, true);
+        File.WriteAllText(Path.Combine(Application.persistentDataPath, questDataFileName), json);
+    }
+    public QuestSaveData LoadQuest()
+    {
+        string jsonPath = Path.Combine(Application.persistentDataPath, questDataFileName);
+        if (File.Exists(jsonPath))
+        {
+            string json = File.ReadAllText(jsonPath);
+            questSaveData = JsonUtility.FromJson<QuestSaveData>(json);
+            Quests = questSaveData.Quests; // Load the items into the Items list
+        }
+        return questSaveData;
+    }
     public ItemSaveData LoadItemData()
     {
         string jsonPath = Path.Combine(Application.persistentDataPath, itemDataFileName);
@@ -134,14 +184,35 @@ public class DataManager : MonoBehaviour
         }
         return itemSaveData;
     }
-    public ItemDataJson FindItem(ItemType itemType, string itemName)
+    public void SaveSkillData(List<SkillData> skillDataList)
     {
-        var foundItem = Items.Find(item => item.itemType == itemType && item.Name == itemName);
-        return foundItem;
-    }
-}
+        // 새로운 스킬 데이터 리스트 생성
+        skillDataJson.skillDataList = skillDataList;
 
-    [System.Serializable]
+        // JSON으로 변환하여 파일에 저장
+        string json = JsonUtility.ToJson(skillDataJson, true);
+        File.WriteAllText(Path.Combine(Application.persistentDataPath, skillDataFileName), json);
+    }
+    public SkillDataJson LoadSkillData()
+    {
+        string jsonPath = Path.Combine(Application.persistentDataPath, skillDataFileName);
+        if (File.Exists(jsonPath))
+        {
+            string json = File.ReadAllText(jsonPath);
+            skillDataJson = JsonUtility.FromJson<SkillDataJson>(json);
+        }
+        return null;
+    }
+    public SkillData GetSkillDataByName(string dataName, SkillData defaultSkillData)
+    {
+        var foundSkillData = skillDataJson.skillDataList.Find(skillData => skillData.DataName == dataName);
+        return foundSkillData ?? defaultSkillData;
+    }
+
+    public ItemDataJson FindItem(ItemType itemType, string itemName) { var foundItem = Items.Find(item => item.itemType == itemType && item.Name == itemName); return foundItem; }
+    public QuestDataJson FindQuest(QuestState state, string questName) { var foundQuest = Quests.Find(quest => quest.questState == state && quest.Name == questName); return foundQuest; }
+}
+[System.Serializable]
 public class GameData
 {
     public float[] playerPosition;
@@ -149,7 +220,6 @@ public class GameData
     public int sceneIdx;
     public bool IsSave = false;
 }
-
 [System.Serializable]
 public class ItemDataJson
 {
@@ -158,21 +228,19 @@ public class ItemDataJson
     public string Path;       // 아이템의 위치 경로
     public ItemType itemType;
 }
-public enum ItemType
-{
-    Sword, Shield, Hat, Cloth, Pants, Shoes, Neck, Kloak, Ring, Material, Gold, HPPotion, MPPotion, Nothing
-}
+public enum ItemType { Sword, Shield, Hat, Cloth, Pants, Shoes, Neck, Kloak, Ring, Material, Gold, HPPotion, MPPotion, Nothing }
 [System.Serializable]
 public class QuestDataJson
 {
-    public string Name;
-    public int KillCount;
-    public int CluearCOunt;
-    public QuestState questState;
+    public string Name;     //퀘스트 이름
+    public int KillCount;   //퀘스트 목표 킬카운트
+    public int bossKillCount;
+    public QuestState questState;   // 퀘스트 상태
 }
-public enum QuestState { QuestHave, QuestTake, QuestClear, None }
-[System.Serializable]
-public class ItemSaveData
-{
-    public List<ItemDataJson> Items = new List<ItemDataJson>();
-}
+public enum QuestState { QuestHave, QuestTake, QuestClear, None, QuestNormal }
+public enum SkillState { None, Ice, Fire, Electro }
+public enum SkillLevelState { None, Lv05, Lv10, Lv20_01, Lv20_02, Lv30 }
+public enum SkillSelecState { None, Q, E, R, F, C }
+[System.Serializable] public class ItemSaveData { public List<ItemDataJson> Items = new List<ItemDataJson>(); }
+[System.Serializable] public class QuestSaveData { public List<QuestDataJson> Quests = new List<QuestDataJson>(); }
+[System.Serializable] public class SkillDataJson { public List<SkillData> skillDataList = new List<SkillData>(); }

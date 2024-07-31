@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NPCMaria : NPCDialogue
 {
-    [SerializeField] private DialougeQuest questData01;
+    [SerializeField] private DialougeQuest leaderQuest;
     [SerializeField] private MutantKillQuest mariaQuest_01;
     [SerializeField] private DialougeQuest mariaQuest_02;
 
@@ -14,7 +14,7 @@ public class NPCMaria : NPCDialogue
 
     private void UpdateQuestMarkers()
     {
-        if (questData01.questState == QuestState.QuestTake)
+        if (leaderQuest.questState == QuestState.QuestTake)
         {
             QuestClear();
         }
@@ -40,11 +40,11 @@ public class NPCMaria : NPCDialogue
 
     protected override void StartDialogue()
     {
-        if (questData01.questState == QuestState.QuestTake)
+        if (leaderQuest.questState == QuestState.QuestTake)
         {
             dialogueIdx = 0;
             FindObjectOfType<NPCLeader>().QuestEnd();
-            QuestManager.questInst.CompleteQuest(questData01.Idx, ref questData01.questState);
+            QuestManager.questInst.CompleteQuest(leaderQuest.Idx, ref leaderQuest.questState, leaderQuest.Exp, leaderQuest.Name);
         }
         else
         {
@@ -77,10 +77,9 @@ public class NPCMaria : NPCDialogue
                 QuestEnd();
                 break;
             case QuestState.QuestClear:
-                QuestManager.questInst.CompleteQuest(mariaQuest_01.Idx, ref mariaQuest_01.questState);
-                QuestManager.questInst.AddQuest_01(ref mariaQuest_02.Idx, mariaQuest_02.Image, mariaQuest_02.Name, mariaQuest_02.Content, mariaQuest_02.Exp.ToString() + " Exp", ref mariaQuest_02.questState, QuestState.QuestTake);
-                ItemManager.itemInst.GoldPlus(mariaQuest_01.Gold);
-                GameManager.GM.ExpUp(mariaQuest_01.Exp);
+                QuestManager.questInst.CompleteQuest(mariaQuest_01.Idx, ref mariaQuest_01.questState, mariaQuest_01.Exp, mariaQuest_01.Gold, mariaQuest_01.Name);
+                QuestManager.questInst.AddQuest_01(ref mariaQuest_02.Idx, mariaQuest_02.Image, mariaQuest_02.Name, mariaQuest_02.Content, mariaQuest_02.Exp.ToString() + " Exp", 
+                    ref mariaQuest_02.questState, QuestState.QuestTake);
                 QuestEnd();
                 break;
         }

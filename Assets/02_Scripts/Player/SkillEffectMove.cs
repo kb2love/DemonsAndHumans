@@ -4,8 +4,9 @@ using UnityEngine;
 using DG.Tweening;
 public class SkillEffectMove : MonoBehaviour
 {
-    [SerializeField] PlayerData playerData;
+    [SerializeField] int damage;
     [SerializeField] float aniTime = 1;
+    [SerializeField] SkillState skillState;
     Transform pltr;
     Sequence seq;
     private void Start()
@@ -25,8 +26,8 @@ public class SkillEffectMove : MonoBehaviour
     {
         if(other.gameObject.tag == "Skeleton")
         {
-            Debug.Log("123");
-            other.GetComponent<MutantDamage>().MutantHit(playerData.level05MagicDamage);
+            other.GetComponent<MutantDamage>().HitEffChange(skillState);
+            other.GetComponent<MutantDamage>().MutantHit(damage);
             gameObject.SetActive(false);
         }
         

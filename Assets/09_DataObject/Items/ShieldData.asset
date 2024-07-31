@@ -9,30 +9,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e87fa0461b759c346be569768323d3ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 03b24e047daab65409932e07442b5243, type: 3}
   m_Name: ShieldData
   m_EditorClassIdentifier: 
-  Image_01: {fileID: 21300000, guid: 8fe0d52ff608d4241a1a5a42346c2291, type: 3}
-  Defence_01: 10
-  Idx_01: 1
-  Count_01: 1
   Name_01: "\uBAA8\uD5D8\uAC00\uC758 \uBC29\uD328"
-  Path_01: 
-  Image_02: {fileID: 21300000, guid: c0998869a06b72b4aa14e5999f3da890, type: 3}
-  Defence_02: 25
-  Idx_02: 2
-  Count_02: 1
+  Image_01: {fileID: 21300000, guid: 8fe0d52ff608d4241a1a5a42346c2291, type: 3}
+  Value_01:
+  - 10
+  Idx_01: 0
+  Count_01: 1
   Name_02: "\uADF8\uB9AC\uD540\uC758 \uBC29\uD328"
-  Path_02: 
+  Image_02: {fileID: 21300000, guid: c0998869a06b72b4aa14e5999f3da890, type: 3}
+  Value_02:
+  - 25
+  Idx_02: 0
+  Count_02: 0
+  Name_03: "\uB9C8\uC871\uC758 \uBC29\uD328"
   Image_03: {fileID: 21300000, guid: bc43179b7db39ad419317aa5b20d0328, type: 3}
-  Defence_03: 50
+  Value_03:
+  - 50
   Idx_03: 0
   Count_03: 0
-  Name_03: "\uB9C8\uC871\uC758 \uBC29\uD328"
-  Path_03: 
+  Name_04: "\uC601\uC6C5\uC758 \uBC29\uD328"
   Image_04: {fileID: 21300000, guid: fef446be0148714429cb2cead8e869c6, type: 3}
-  Defence_04: 100
+  Value_04:
+  - 100
   Idx_04: 0
   Count_04: 0
-  Name_04: "\uC601\uC6C5\uC758 \uBC29\uD328"
-  Path_04: 

@@ -16,6 +16,7 @@ public class PotalEnter : MonoBehaviour
         if(other.gameObject.tag == "Player" && playerData.Level >= playerLevel)
         {
             ItemManager.itemInst.AllItemSave();
+            DataManager.dataInst.DataSave();
             playerData.playerSceneIdx = startPointIdx;
             SceneMove.SceneInst.PotalMove(sceneIdx);
         }

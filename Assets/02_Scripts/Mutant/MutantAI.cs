@@ -10,6 +10,7 @@ public class MutantAI : MonoBehaviour
     [Header("공격 효과음")]
     [SerializeField] AudioClip attackClip;
     [SerializeField] AudioClip dieClip;
+    AudioSource audioSource;
     [SerializeField] bool mutantKindIdx;
     [SerializeField] int mutantAttackKindIdx;
     [SerializeField] float damage;
@@ -33,6 +34,7 @@ public class MutantAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         playerTr = GameObject.FindWithTag("Player").transform;
         originPos = transform.position;
     }
@@ -110,7 +112,8 @@ public class MutantAI : MonoBehaviour
                     agent.isStopped = true;
                     if (mutantKindIdx)
                         animator.SetInteger("AttackIdx", Random.Range(0, mutantAttackKindIdx));
-                    SoundManager.soundInst.EffectSoundPlay(attackClip);
+                    if(!audioSource.isPlaying)
+                        SoundManager.soundInst.EffectSoundPlay(audioSource, attackClip);
                     animator.SetTrigger("AttackTrigger");
                     Invoke("IsTraceFalse", 3.0f);
                     break;

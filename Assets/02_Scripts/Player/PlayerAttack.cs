@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
@@ -13,13 +14,12 @@ public class PlayerAttack : MonoBehaviour
     PlayerController controller;
     PlayerDamage plDamage;
     PlayerAniEvent aniEvent;
+    public UnityAction[] skillAction = new UnityAction[5];
     private int attackCount = 0;
     private float comboResetTime = 1.0f; // 연속 공격을 초기화하는 시간
     private float stopAttackTime = 1.25f; // 시간이 지나면 공격카운트를 초기화할 시간
-    //어택 시간
     private float lastAttackTime;       // 현재시간을 저장할 공격한 시간
     private float stopLastAttackTime;   // 현재시간을 저장할 공격을 멈출 시간
-    //스킬 시간
     [SerializeField] private float level5SkillTime = 10.0f; // 스킬 쿨타임
     private float level5LastSkilTime;      // 얼음 스킬을 날린 마지막시간을 저장할 시간
     SkillManager skillManager;
@@ -42,7 +42,6 @@ public class PlayerAttack : MonoBehaviour
         mpImage.fillAmount = playerData.MP / playerData.MaxMP;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!isInven && !isEquip)
@@ -106,42 +105,109 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Skill()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && Level05(0))
+        // 스킬 인덱스를 설정하는 헬퍼 메서드
+        /*int GetSkillIndex(SkillState state, int baseIndex)
         {
-            Level05SkillCasting();
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && Level05(1))
-        {
-            Level05SkillCasting();
-        }
-        else if (Input.GetKeyDown(KeyCode.R) && Level05(2))
-        {
-            Level05SkillCasting();
-        }
+            switch (state)
+            {
+                case SkillState.Ice:
+                    return baseIndex;
+                case SkillState.Fire:
+                    return baseIndex + 1;
+                case SkillState.Electro:
+                    return baseIndex + 2;
+                default:
+                    return -1;
+            }
+        }*/
 
+        // 각 레벨에 대한 스킬 인덱스 설정
+        /*int[] skillIndices = new int[5];
+        skillIndices[0] = GetSkillIndex(playerData.level05State, 0);
+        skillIndices[1] = GetSkillIndex(playerData.level10State, 3);
+        skillIndices[2] = GetSkillIndex(playerData.level20_01State, 6);
+        skillIndices[3] = GetSkillIndex(playerData.level20_02State, 9);
+        skillIndices[4] = GetSkillIndex(playerData.level30State, 12);*/
+
+        // 키 입력에 따른 스킬 실행
+        if (Input.GetKeyDown(KeyCode.Q) && skillAction[0] != null) { skillAction[0](); }
+        else if (Input.GetKeyDown(KeyCode.E) && skillAction[1] != null) { skillAction[1](); }
+        else if (Input.GetKeyDown(KeyCode.R) && skillAction[2] != null) { skillAction[2](); }
+        else if (Input.GetKeyDown(KeyCode.F) && skillAction[3] != null) { skillAction[3](); }
+        else if (Input.GetKeyDown(KeyCode.C) && skillAction[4] != null) { skillAction[4](); }
+    }
+    public void SkillAdd(int qucikIdx, int levelIdx)
+    {
+        switch(levelIdx)
+        {
+            case 0: skillAction[qucikIdx] = Level05SkillCasting; break;
+            case 1: skillAction[qucikIdx] = Level10SkillCasting; break;
+            case 2: skillAction[qucikIdx] = Level20_01SkillCasting; break;
+            case 3: skillAction[qucikIdx] = Level20_02SkillCasting; break;
+            case 4: skillAction[qucikIdx] = Level30SkillCasting; break;
+        }
     }
 
     private void Level05SkillCasting()
     {
-        for (int i = 1; i < 4; i++)
-        {
-            if (playerData.level05SkillIdx == i && Time.time - level5LastSkilTime > level5SkillTime)
-            {
-                controller.IsStop(true);
-                aniEvent.Level05SkillChange(i);
-                animator.SetTrigger("CastingTrigger");
-                playerData.MP -= 30;
-                mpImage.fillAmount = playerData.MP / playerData.MaxMP;
-                Invoke("IsMove", 1.0f);
-                level5LastSkilTime = Time.time;
-                break;
-            }
+        if (Time.time - level5LastSkilTime > level5SkillTime)
+        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
+            controller.IsStop(true);
+            animator.SetTrigger("Lv05SkillTrigger");
+            playerData.MP -= 30;
+            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
+            Invoke("IsMove", 1.0f);
+            level5LastSkilTime = Time.time;
         }
     }
-
-    bool Level05(int skillListIdx)
+    private void Level10SkillCasting()
     {
-        return skillManager.skillList[skillListIdx].sprite == skillManager.skillImageList[playerData.level05SkillIdx - 1];
+        if (Time.time - level5LastSkilTime > level5SkillTime)
+        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
+            controller.IsStop(true);
+            animator.SetTrigger("Lv10SkillTrigger");
+            playerData.MP -= 60;
+            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
+            Invoke("IsMove", 1.0f);
+            level5LastSkilTime = Time.time;
+        }
+    
+    }
+    private void Level20_01SkillCasting()
+    {
+        if (Time.time - level5LastSkilTime > level5SkillTime)
+        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
+            controller.IsStop(true);
+            animator.SetTrigger("Lv20_01SkillTrigger");
+            playerData.MP -= 120;
+            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
+            Invoke("IsMove", 1.0f);
+            level5LastSkilTime = Time.time;
+        }
+    }
+    private void Level20_02SkillCasting()
+    {
+        if (Time.time - level5LastSkilTime > level5SkillTime)
+        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
+            controller.IsStop(true);
+            animator.SetTrigger("Lv20_02SkillTrigger");
+            playerData.MP -= 120;
+            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
+            Invoke("IsMove", 1.0f);
+            level5LastSkilTime = Time.time;
+        }
+    }
+    private void Level30SkillCasting()
+    {
+        if (Time.time - level5LastSkilTime > level5SkillTime)
+        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
+            controller.IsStop(true);
+            animator.SetTrigger("Lv30SkillTrigger");
+            playerData.MP -= 300;
+            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
+            Invoke("IsMove", 1.0f);
+            level5LastSkilTime = Time.time;
+        }
     }
     void TriggerAttackAnimation()
     {

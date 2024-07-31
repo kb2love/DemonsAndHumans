@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] PlayerData playerData;
-    [SerializeField] ItemData itemData;
+    [SerializeField] SunDryItemData itemData;
     [SerializeField] RectTransform inventoryTr;
     [SerializeField] RectTransform equipmentTr;
     private RectTransform itemTr;

@@ -6,10 +6,14 @@ public class ObjectPoolingManager : MonoBehaviour
 {
     public static ObjectPoolingManager objInst;
     [SerializeField] PlayerData playerData;
-    [SerializeField] MutantData mutantData;
-    [SerializeField] ItemData itemData;
-    [SerializeField] Transform items;
-    List<GameObject> hitEffList = new List<GameObject>();
+    [SerializeField] SunDryItemData itemData;
+    [SerializeField] Transform objects;
+    Transform items;
+    Transform hits;
+    List<GameObject> stoneHitEffList = new List<GameObject>();
+    List<GameObject> iceHitEffList = new List<GameObject>();
+    List<GameObject> fireHitEffList = new List<GameObject>();
+    List<GameObject> electroHitEffList = new List<GameObject>();
     List<GameObject> goldList = new List<GameObject>();
     List<GameObject> normalItemList = new List<GameObject>();
     List<GameObject> equipmentItemList = new List<GameObject>();
@@ -17,17 +21,22 @@ public class ObjectPoolingManager : MonoBehaviour
     {
         objInst = this;
     }
-    private void Start()
+    public void Initialize()
     {
-        CreateObejct("HitEffGroup", playerData.hitEff, 10, "HitEff", hitEffList);
-        CreateObejct("GoldGroup", itemData.gold, 10, "Gold", goldList);
-        CreateObejct("NormalItemGroup", itemData.normalItem, 10, "NormalItem", normalItemList);
-        CreateObejct("EquipmentItemGroup", itemData.equipmentItem, 10, "EquipmentItem", equipmentItemList);
+        items = objects.GetChild(0);
+        hits = objects.GetChild(1);
+        CreateObejct("HitEffGroup", playerData.hitEff, 10, "HitEff", stoneHitEffList, hits);
+        CreateObejct("IceEffGroup", playerData.iceHitEff, 10, "IceHitEff", iceHitEffList, hits);
+        CreateObejct("FireEffGroup", playerData.fireHitEff, 10, "FireHitEff", fireHitEffList, hits);
+        CreateObejct("ElectroEffGroup", playerData.electroHitEff, 10, "ElectroHitEff", electroHitEffList, hits);
+        CreateObejct("GoldGroup", itemData.gold, 10, "Gold", goldList, items);
+        CreateObejct("NormalItemGroup", itemData.normalItem, 10, "NormalItem", normalItemList, items);
+        CreateObejct("EquipmentItemGroup", itemData.equipmentItem, 10, "EquipmentItem", equipmentItemList, items);
     }
-    private void CreateObejct(string parentName, GameObject creatObj, int itemCount, string objName, List<GameObject> addList)
+    private void CreateObejct(string parentName, GameObject creatObj, int itemCount, string objName, List<GameObject> addList, Transform tr)
     {
         GameObject objParentGroup = new GameObject(parentName);
-        objParentGroup.transform.SetParent(items.transform);
+        objParentGroup.transform.SetParent(tr.transform);
         for (int i = 0; i < itemCount; i++)
         {
             GameObject _obj = Instantiate(creatObj, objParentGroup.transform);
@@ -36,47 +45,20 @@ public class ObjectPoolingManager : MonoBehaviour
             addList.Add(_obj);
         }
     }
-
-    public GameObject GetHitEff()
+    public GameObject GetHitEff() {  return RetrunGameObject(stoneHitEffList); }
+    public GameObject GetIceHitEff() { return RetrunGameObject(iceHitEffList); }
+    public GameObject GetFireHitEff() { return RetrunGameObject(fireHitEffList); }
+    public GameObject GetElectroHitEff() { return RetrunGameObject(electroHitEffList); }
+    public GameObject GetGold() { return RetrunGameObject(goldList); }
+    public GameObject GetNormalItem() { return RetrunGameObject(normalItemList); }
+    public GameObject GetEquipmentItem() { return RetrunGameObject(equipmentItemList); }
+    private GameObject RetrunGameObject(List<GameObject> objects)
     {
-        foreach (GameObject hitEff in hitEffList)
+        foreach (GameObject hitEff in objects)
         {
             if (!hitEff.activeSelf)
             {
                 return hitEff;
-            }
-        }
-        return null;
-    }
-    public GameObject GetGold()
-    {
-        foreach (GameObject gold in goldList)
-        {
-            if (!gold.activeSelf)
-            {
-                return gold;
-            }
-        }
-        return null;
-    }
-    public GameObject GetNormalItem()
-    {
-        foreach (GameObject normalItem in normalItemList)
-        {
-            if (!normalItem.activeSelf)
-            {
-                return normalItem;
-            }
-        }
-        return null;
-    }
-    public GameObject GetEquipmentItem()
-    {
-        foreach (GameObject equipmentItem in equipmentItemList)
-        {
-            if (!equipmentItem.activeSelf)
-            {
-                return equipmentItem;
             }
         }
         return null;

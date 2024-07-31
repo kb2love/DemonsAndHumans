@@ -12,31 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904822520bffef54a97977d50238ab49, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  HP: 2507.725
-  MaxHP: 417.7249
-  MP: 1347.725
-  MaxMP: 417.7249
-  AttackValue: 453.545
-  MagicAttackValue: 290
-  expValue: 341.2414
-  maxExpValue: 350
-  Level: 16
-  DefenceValue: 1332.659
-  FatalProbability: 260.2089
-  FatalValue: 1011.839
-  level05MagicDamage: 100
-  level10MagicDamage: 0
-  level20_1MagicDamage: 0
-  level20_2MagicDamage: 0
-  level30MagicDamage: 0
-  GoldValue: 10000161
-  levelSkillPoint: 22
-  level05SkillIdx: 3
-  level10SkillIdx: 0
-  level15_1SkillIdx: 0
-  level15_2SkillIdx: 0
-  level25SkillIdx: 0
-  playerSceneIdx: 2
+  HP: 105
+  MaxHP: 105
+  MP: 44.99999
+  MaxMP: 105
+  AttackValue: 22
+  MagicAttackValue: 0
+  expValue: 0
+  maxExpValue: 150
+  Level: 5
+  DefenceValue: 16.5
+  FatalProbability: 0.055
+  FatalValue: 157.5
+  GoldValue: 10
+  levelSkillPoint: -1
+  playerSceneIdx: 0
   AttackDownClip: {fileID: 8300000, guid: 6cdf2b6afcdf03c4fb959f056819ba48, type: 3}
   AttackUpClip: {fileID: 8300000, guid: 594c4d362d2ee664e91397fd725b3b3f, type: 3}
   AttackFinishClip: {fileID: 8300000, guid: b0c1abd0649fdfd428d028574a0805fe, type: 3}
@@ -44,4 +34,7 @@ MonoBehaviour:
   SkillElectro: {fileID: 8300000, guid: 40bc0b255d9acd540b7c3f65be9a6741, type: 3}
   SkillFire: {fileID: 8300000, guid: 07cc499b4e48b544aadf3af4b86365bd, type: 3}
   hitEff: {fileID: 1758473627833946668, guid: 9b21333b068a5084ba09535839bee3c8, type: 3}
+  iceHitEff: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
+  fireHitEff: {fileID: 0}
+  electroHitEff: {fileID: 2965222256817593503, guid: a164e676dbbd6e54587237e619372c98, type: 3}
   iceSpear: {fileID: 7959778793882517401, guid: c6fe011d32d5b4e47a54b09e69b8f46e, type: 3}

@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float runSpeed = 5.0f;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip runSound;
+    [SerializeField] AudioSource audioSource;
     private float moveSpeed = 0;
     private Camera _camera;
     private Animator animator;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         ch = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
         _camera = Camera.main;
         moveSpeed = walkSpeed;
     }
@@ -72,11 +74,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isRunning)
         {
-            SoundManager.soundInst.EffectSoundPlay(runSound);
+            SoundManager.soundInst.EffectSoundPlay(audioSource,runSound);
         }
         else
         {
-            SoundManager.soundInst.EffectSoundPlay(walkSound);
+            SoundManager.soundInst.EffectSoundPlay(audioSource,walkSound);
         }
     }
     private void LateUpdate()

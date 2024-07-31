@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questState: 0
   Image: {fileID: 21300000, guid: 756bd64b4ab48c5458e97cd112d150b9, type: 3}
-  Name: "\uD53C\uC758 \uD22C\uB974\uC545 \uC0AC\uB0E5"
+  Name: "\uD558\uAE09 \uAD70\uC8FC \uD53C\uC758 \uD22C\uB974\uC545"
   Content: "\uB9C8\uC871\uC0AC\uB0E5\uB300 \uB300\uC7A5\uC774 \uB450\uBC88\uC9F8
     \uD018\uC2A4\uD2B8\uB97C \uC8FC\uC5C8\uB2E4. \uADF8\uB140\uC5D0\uAC8C \uC778\uC815\uBC1B\uC744\uB824\uBA74
     \uD558\uAE09\uB9C8\uADC0\uC871 10\uB9C8\uB9AC\uC640 \uD53C\uC758 \uAD70\uC8FC
@@ -22,12 +22,12 @@ MonoBehaviour:
     \uC788\uB2E4\uACE0\uD55C\uB2E4."
   MutantName: "\uD558\uAE09\uB9C8\uADC0\uC871"
   BossName: "\uD53C\uC758 \uAD70\uC8FC \uD22C\uB974\uC545"
-  killCount: 0
-  bossKillCount: 0
-  clearCount: 10
-  bossClearCount: 1
-  rewardImage_01: {fileID: 21300000, guid: 14e48de6a07039848871cb8926160bf6, type: 3}
-  rewardImage_02: {fileID: 21300000, guid: 863e0b6f04bae9d43a7a963d60b4abae, type: 3}
-  exp: 500
-  gold: 2000
-  idx: 0
+  KillCount: 0
+  BossKillCount: 0
+  ClearCount: 10
+  BossClearCount: 1
+  RewardImage_01: {fileID: 21300000, guid: 83851ce23cb97864ea5a4468878bbed3, type: 3}
+  RewardImage_02: {fileID: 21300000, guid: e0ad1f688c119c648a0ba38e67e1b3bd, type: 3}
+  Exp: 500
+  Gold: 2000
+  Idx: 0

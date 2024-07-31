@@ -9,38 +9,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf7bdb0e2dac534f8d35bcc32ac464b, type: 3}
+  m_Script: {fileID: 11500000, guid: 03b24e047daab65409932e07442b5243, type: 3}
   m_Name: NeckData
   m_EditorClassIdentifier: 
+  Name_01: "\uB9C8\uBC95\uC0AC\uC758 \uBAA9\uAC78\uC774"
   Image_01: {fileID: 21300000, guid: 83851ce23cb97864ea5a4468878bbed3, type: 3}
-  MP_01: 20
-  Damage_01: 10
-  Magicdamage_01: 10
+  Value_01:
+  - 20
+  - 10
+  - 10
   Idx_01: 0
   Count_01: 0
-  Name_01: "\uB9C8\uBC95\uC0AC\uC758 \uBAA9\uAC78\uC774"
-  Path_01: 
-  Image_02: {fileID: 21300000, guid: 41a6fa5a46c35bd40945f6a423a2edd4, type: 3}
-  MP_02: 40
-  Damage_02: 20
-  Magicdamage_02: 20
-  Idx_02: 8
-  Count_02: 1
   Name_02: "\uC554\uC0B4\uC790\uC758 \uBAA9\uAC78\uC774"
-  Path_02: 
+  Image_02: {fileID: 21300000, guid: 41a6fa5a46c35bd40945f6a423a2edd4, type: 3}
+  Value_02:
+  - 40
+  - 20
+  - 20
+  Idx_02: 0
+  Count_02: 0
+  Name_03: "\uB9C8\uC871\uC758 \uBAA9\uAC78\uC774"
   Image_03: {fileID: 21300000, guid: afa412c2567cbb946adc933f139c1b01, type: 3}
-  MP_03: 60
-  Damage_03: 30
-  Magicdamage_03: 30
+  Value_03:
+  - 60
+  - 30
+  - 30
   Idx_03: 0
   Count_03: 0
-  Name_03: "\uB9C8\uC871\uC758 \uBAA9\uAC78\uC774"
-  Path_03: 
+  Name_04: "\uC601\uC6C5\uC758 \uBAA9\uAC78\uC774"
   Image_04: {fileID: 21300000, guid: 9183bb6333615e04e91b2d3d16c6362f, type: 3}
-  MP_04: 100
-  Damage_04: 50
-  Magicdamage_04: 50
+  Value_04:
+  - 100
+  - 50
+  - 50
   Idx_04: 0
   Count_04: 0
-  Name_04: "\uC601\uC6C5\uC758 \uBAA9\uAC78\uC774"
-  Path_04: 
