@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager soundInst;
     private AudioSource bgAudioSource;
     [SerializeField] AudioSource effAudioSource;
+    [SerializeField] AudioClip[] clips;
     private void Awake()
     {
         if (soundInst == null)
@@ -25,11 +26,10 @@ public class SoundManager : MonoBehaviour
     {
         bgAudioSource.volume = volum;
     }
-    public void BackGroundMusic(AudioSource bgAudio,AudioClip audioClip)
+    public void BackGroundMusic(int clipsIdx)
     {
-        bgAudio.clip = audioClip;
-        bgAudio.loop = true;
-        bgAudioSource = bgAudio;
+        bgAudioSource.clip = clips[clipsIdx];
+        bgAudioSource.loop = true;
         bgAudioSource.Play();
     }
     public void EffectSoundVolum(float _volum)

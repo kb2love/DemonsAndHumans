@@ -23,9 +23,8 @@ public class PlayerData : ScriptableObject
     public AudioClip AttackDownClip;
     public AudioClip AttackUpClip;
     public AudioClip AttackFinishClip;
-    public AudioClip SkillIce;
-    public AudioClip SkillElectro;
-    public AudioClip SkillFire;
+    public AudioClip levelUpClip;
+    public AudioClip ItemGetClip;
     public GameObject hitEff;
     public GameObject iceHitEff;
     public GameObject fireHitEff;

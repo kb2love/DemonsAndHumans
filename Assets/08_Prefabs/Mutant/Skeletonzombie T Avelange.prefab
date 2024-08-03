@@ -366,6 +366,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeletonzombie T Avelange
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 335ac2601ad836841ac92fb389b1ac91, type: 3}
+      propertyPath: m_TagString
+      value: Mutant
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 335ac2601ad836841ac92fb389b1ac91, type: 3}
       propertyPath: m_Controller
       value: 
@@ -480,9 +484,9 @@ MonoBehaviour:
   hpImage: {fileID: 8919518985287520065}
   maxHp: 150
   hitClip: {fileID: 8300000, guid: e27f50f725600624f88427a841fd9596, type: 3}
-  hitSource: {fileID: 0}
+  itemDropClip: {fileID: 8300000, guid: cabdd2029e85b0b41b8474aff74205ea, type: 3}
   hpText: {fileID: 0}
-  exp: 75
+  exp: 250
   questDataIdx: 2
   boss: 0
 --- !u!82 &629506296839285576

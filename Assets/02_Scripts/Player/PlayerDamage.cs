@@ -10,6 +10,7 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] Image plHp;
     PlayerController playerController;
     Animator animator;
+
     GameObject hitEff;
     bool isShield;
     private bool isHit = false;
@@ -50,6 +51,17 @@ public class PlayerDamage : MonoBehaviour
         }
         hitEff.SetActive(true);
     }
+    // 아이템 얻는 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Item"))
+        {
+            ItemManager.itemInst.GetItem(other.gameObject.GetComponent<ItemInfo>().type);
+            SoundManager.soundInst.EffectSoundPlay(playerData.ItemGetClip);
+            other.gameObject.SetActive(false);
+        }
+    }
+
     public void IsShieldOnOff(bool _isShield)
     {
         isShield = _isShield;

@@ -881,7 +881,7 @@ GameObject:
   - component: {fileID: -8943686091627715410}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Skeleton
+  m_TagString: Mutant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1008,8 +1008,9 @@ MonoBehaviour:
   hpImage: {fileID: 8760671464553844382}
   maxHp: 100
   hitClip: {fileID: 8300000, guid: 119a78ae6bd6e3043b1b1cec83b5f90d, type: 3}
+  itemDropClip: {fileID: 8300000, guid: cabdd2029e85b0b41b8474aff74205ea, type: 3}
   hpText: {fileID: 0}
-  exp: 60
+  exp: 100
   questDataIdx: 1
   boss: 0
 --- !u!82 &-8943686091627715410

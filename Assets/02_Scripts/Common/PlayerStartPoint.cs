@@ -11,6 +11,7 @@ public class PlayerStartPoint : MonoBehaviour
     {
         playerTr = GameObject.FindWithTag("Player").transform;
         playerTr.position = startPoint[playerData.playerSceneIdx].position;
+        playerTr.rotation = startPoint[playerData.playerSceneIdx].rotation;
         Camera.main.transform.parent.position = playerTr.transform.position;
     }
 }

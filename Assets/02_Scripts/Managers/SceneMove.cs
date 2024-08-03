@@ -55,6 +55,7 @@ public class SceneMove : MonoBehaviour
     public void CatleScene()
     {
         StartCoroutine(LoadSceneAsync(2, castleSkyBox, resetGame: true));
+        
     }
 
     public void PotalMove(int sceneIdx)
@@ -125,12 +126,19 @@ public class SceneMove : MonoBehaviour
         _currentScene = sceneIdx;
         switch (sceneIdx)
         {
-            case 2: sceneName = "호크반제국"; break;
-            case 3: sceneName = "마의접경지"; break;
-            case 4: sceneName = "뼈의무덤"; break;
-            case 5: sceneName = "하급마족의 마을"; break;
-            case 6: sceneName = "중급마족 성"; break;
-            case 7: sceneName = "마왕의 성"; break;
+            case 2: sceneName = "호크반제국";
+                SoundManager.soundInst.BackGroundMusic(0);
+                break;
+            case 3: sceneName = "마의접경지";
+                SoundManager.soundInst.BackGroundMusic(1); break;
+            case 4: sceneName = "뼈의무덤";
+                SoundManager.soundInst.BackGroundMusic(2); break;
+            case 5: sceneName = "하급마족의 마을";
+                SoundManager.soundInst.BackGroundMusic(3); break;
+            case 6: sceneName = "중급마족 성";
+                SoundManager.soundInst.BackGroundMusic(4); break;
+            case 7: sceneName = "마왕의 성";
+                SoundManager.soundInst.BackGroundMusic(5); break;
         }
         // Scene Move Start 애니메이션
         sceneMoveStart.gameObject.SetActive(true);

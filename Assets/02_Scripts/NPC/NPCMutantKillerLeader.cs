@@ -223,6 +223,7 @@ public class NPCMutantKillerLeader : NPCDialogue
                             " Gold, " + mutantKillerQuest_02.Exp.ToString() + " Exp", mutantKillerQuest_02.RewardImage_01, mutantKillerQuest_02.RewardImage_02, mutantKillerQuest_02.MutantName,
                             mutantKillerQuest_02.BossName, mutantKillerQuest_02.KillCount, mutantKillerQuest_02.ClearCount, mutantKillerQuest_02.BossKillCount, mutantKillerQuest_02.BossClearCount,
                             ref mutantKillerQuest_02.questState, QuestState.QuestTake);
+                            QuestEnd();
                             break;
                         case QuestState.None:
                             break;
@@ -246,6 +247,7 @@ public class NPCMutantKillerLeader : NPCDialogue
                                 " Gold, " + mutantKillerQuest_03.Exp.ToString() + " Exp", mutantKillerQuest_03.RewardImage_01, mutantKillerQuest_03.RewardImage_02, mutantKillerQuest_03.MutantName,
                                 mutantKillerQuest_03.BossName, mutantKillerQuest_03.KillCount, mutantKillerQuest_03.ClearCount, mutantKillerQuest_03.BossKillCount, mutantKillerQuest_03.BossClearCount,
                                 ref mutantKillerQuest_03.questState, QuestState.QuestClear);
+                            QuestEnd();
                             break;
                         case QuestState.None:
                             break;
@@ -266,6 +268,7 @@ public class NPCMutantKillerLeader : NPCDialogue
                         QuestManager.questInst.CompleteQuest(mutantKillerQuest_03.Idx, ref mutantKillerQuest_03.questState, mutantKillerQuest_03.Exp, mutantKillerQuest_03.Gold, mutantKillerQuest_03.Name);
                         ItemManager.itemInst.GetNeck02();
                         ItemManager.itemInst.GetKloak02();
+                        QuestEnd();
                         break;
                     case QuestState.None:
                         break;
@@ -290,6 +293,7 @@ public class NPCMutantKillerLeader : NPCDialogue
                     QuestManager.questInst.CompleteQuest(mutantKillerQuest_04.Idx, ref mutantKillerQuest_04.questState, mutantKillerQuest_04.Exp, mutantKillerQuest_04.Gold, mutantKillerQuest_04.Name);
                     ItemManager.itemInst.GetRing01();
                     ItemManager.itemInst.GetKloak03();
+                    QuestEnd();
                     break;
                 case QuestState.None:
                     break;

@@ -3,7 +3,11 @@ guid: 9bc681e04b10f04439e298d3ac7562f3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hpImage: {instanceID: 0}
+  - hitClip: {instanceID: 0}
+  - itemDropClip: {fileID: 8300000, guid: cabdd2029e85b0b41b8474aff74205ea, type: 3}
+  - hpText: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

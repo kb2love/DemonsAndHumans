@@ -7,6 +7,7 @@ public class SkillEffectMove : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] float aniTime = 1;
     [SerializeField] SkillState skillState;
+    [SerializeField] PlayerData playerData;
     Transform pltr;
     Sequence seq;
     private void Start()
@@ -24,10 +25,9 @@ public class SkillEffectMove : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Skeleton")
+        if(other.gameObject.tag == "Mutant")
         {
-            other.GetComponent<MutantDamage>().HitEffChange(skillState);
-            other.GetComponent<MutantDamage>().MutantHit(damage);
+            other.GetComponent<MutantDamage>().MutantHit(damage + playerData.MagicAttackValue, skillState);
             gameObject.SetActive(false);
         }
         

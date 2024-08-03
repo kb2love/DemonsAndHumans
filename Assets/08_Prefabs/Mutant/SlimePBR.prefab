@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 2924305024141126590}
   m_Layer: 0
   m_Name: SlimePBR
-  m_TagString: Untagged
+  m_TagString: Mutant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -534,8 +534,9 @@ MonoBehaviour:
   hpImage: {fileID: 1664944285132002465}
   maxHp: 30
   hitClip: {fileID: 8300000, guid: 804060a6134c444478707906af48750f, type: 3}
+  itemDropClip: {fileID: 8300000, guid: cabdd2029e85b0b41b8474aff74205ea, type: 3}
   hpText: {fileID: 0}
-  exp: 30
+  exp: 60
   questDataIdx: 0
   boss: 0
 --- !u!135 &7393997962076491690

@@ -95,16 +95,6 @@ public class PlayerUIController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Item"))
-        {
-            ItemManager.itemInst.GetItem(other.gameObject.GetComponent<ItemInfo>().type);
-            other.gameObject.SetActive(false);
-        }
-    }
-
-
     public void SetAction(int index, UnityAction action)
     {
         actions[index] = action;

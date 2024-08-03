@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
         playerData.FatalValue *= 1.05f;
         playerData.FatalProbability *= 1.1f;
         playerData.Level++;
+        SoundManager.soundInst.EffectSoundPlay(playerData.levelUpClip);
         if (playerData.Level == 5) { SkillManager.skillInst.Level5(); }
         else if (playerData.Level == 10) { SkillManager.skillInst.Level10(); }
         else if (playerData.Level == 20) { SkillManager.skillInst.Level20(); }

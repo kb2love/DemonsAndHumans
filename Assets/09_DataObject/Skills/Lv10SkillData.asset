@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: Lv10SkillData
   m_EditorClassIdentifier: 
   DataName: Lv10SkillData
-  SkillState: 0
-  SkillSelecState: 0
+  SkillState: 1
+  SkillSelecState: 2
   IceImage: {fileID: 21300000, guid: 624e4d5b5af596e488ad14ea52d2e4a3, type: 3}
   IceSkillName: "\uC544\uC774\uC2A4 \uBCFC"
+  IceClip: {fileID: 8300000, guid: d0d6ef44047aeb94d9b872571cff601a, type: 3}
   FireImage: {fileID: 21300000, guid: 057a9dc3b5ee72140a8faf5b3fdaa5b1, type: 3}
   FireSkillName: "\uD654\uC5FC\uC758 \uD68C\uC624\uB9AC"
+  FireClip: {fileID: 8300000, guid: 689141da9fa659145ad5d607aba8b6fc, type: 3}
   ElectroImage: {fileID: 21300000, guid: 3d93db45be23e574d90eaa2d61644f5c, type: 3}
   ElectroSkillName: "\uCC9C\uB465\uC758 \uB208"
+  ElectroClip: {fileID: 8300000, guid: cf17627608dd8cf41af562a1692da228, type: 3}

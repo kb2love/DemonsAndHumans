@@ -7,17 +7,14 @@ public class TitleScene : MonoBehaviour
     [SerializeField] GameObject optionWindpw;
     [SerializeField] Slider BG_Slider;
     [SerializeField] Slider effect_Slider;
-    [SerializeField] AudioClip bgClip;
     [SerializeField] AudioClip effectClip;
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioSource effectSource;
     [SerializeField] CanvasGroup loadImage;
     [SerializeField] PlayerData playerData;
     private void Start()
     {
         BG_Slider.value = 0.5f;
         effect_Slider.value = 0.5f;
-        SoundManager.soundInst.BackGroundMusic(audioSource, bgClip);
+        SoundManager.soundInst.BackGroundMusic(0);
         DataManager.dataInst.LoadData();
         bool fileEx = DataManager.dataInst.FileExistst();
         if (fileEx)

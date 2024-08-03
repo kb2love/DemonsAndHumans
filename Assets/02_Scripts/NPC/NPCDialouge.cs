@@ -15,6 +15,9 @@ public class NPCDialogue : MonoBehaviour
     [SerializeField] protected GameObject my2DExcMark;
     [SerializeField] protected GameObject my2DQuesNpcMark;
     [SerializeField] protected GameObject my2DNPCMark;
+    [Header("NPC ∫∏¿ÃΩ∫")]
+    [SerializeField] AudioClip audioClip;
+    
     public QuestState questState01 = QuestState.QuestHave;
     protected GameObject textBGImage;
     protected Text dialogueText;
@@ -27,6 +30,7 @@ public class NPCDialogue : MonoBehaviour
     protected int currentDialogueIndex;
     protected int dialogueIdx = 0;
     private Quaternion originRot;
+    private AudioSource audioSource;
 
     public virtual void Initialize()
     {
@@ -36,6 +40,7 @@ public class NPCDialogue : MonoBehaviour
         playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         playerAttack = playerController.GetComponent<PlayerAttack>();
         cameraController = Camera.main.transform.parent.GetComponent<CameraController>();
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         originRot = transform.rotation;
     }
@@ -55,6 +60,7 @@ public class NPCDialogue : MonoBehaviour
         dialogueEntries = DialogueManager.dialogueInst.GetDialogueByEvent(_eventName);
         
         animator.SetBool("IsTalk", true);
+        SoundManager.soundInst.EffectSoundPlay(audioSource, audioClip);
         Vector3 dir = playerController.transform.position - transform.position;
         Quaternion rot = Quaternion.LookRotation(dir);
         rot.z = rot.x = 0;

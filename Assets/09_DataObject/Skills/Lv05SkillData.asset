@@ -17,7 +17,10 @@ MonoBehaviour:
   SkillSelecState: 1
   IceImage: {fileID: 21300000, guid: bc2d50530cdaef641bd109e6213237da, type: 3}
   IceSkillName: "\uC544\uC774\uC2A4 \uC2A4\uD53C\uC5B4"
+  IceClip: {fileID: 8300000, guid: 0a1c8512ec0ce824fa0485eaaccf700f, type: 3}
   FireImage: {fileID: 21300000, guid: 756cc1fcf811eff43a5bf0f4854a1a9e, type: 3}
   FireSkillName: "\uD30C\uC774\uC5B4 \uBCFC"
+  FireClip: {fileID: 8300000, guid: 07cc499b4e48b544aadf3af4b86365bd, type: 3}
   ElectroImage: {fileID: 21300000, guid: 0640f43aa5bfaba4aab330f572ecae88, type: 3}
   ElectroSkillName: "\uC804\uACA9\uC758 \uAD6C"
+  ElectroClip: {fileID: 8300000, guid: b0d55f4f3e69a5341a4672fd0c6beb83, type: 3}

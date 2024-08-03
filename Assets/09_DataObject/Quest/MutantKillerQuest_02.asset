@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e04b3f00738a24785a3026a4f1d927, type: 3}
   m_Name: MutantKillerQuest_02
   m_EditorClassIdentifier: 
-  questState: 0
+  questState: 3
   Image: {fileID: 21300000, guid: 756bd64b4ab48c5458e97cd112d150b9, type: 3}
   Name: "\uD558\uAE09 \uAD70\uC8FC \uD53C\uC758 \uD22C\uB974\uC545"
   Content: "\uB9C8\uC871\uC0AC\uB0E5\uB300 \uB300\uC7A5\uC774 \uB450\uBC88\uC9F8
@@ -22,12 +22,12 @@ MonoBehaviour:
     \uC788\uB2E4\uACE0\uD55C\uB2E4."
   MutantName: "\uD558\uAE09\uB9C8\uADC0\uC871"
   BossName: "\uD53C\uC758 \uAD70\uC8FC \uD22C\uB974\uC545"
-  KillCount: 0
-  BossKillCount: 0
+  KillCount: 18
+  BossKillCount: 1
   ClearCount: 10
   BossClearCount: 1
   RewardImage_01: {fileID: 21300000, guid: 83851ce23cb97864ea5a4468878bbed3, type: 3}
   RewardImage_02: {fileID: 21300000, guid: e0ad1f688c119c648a0ba38e67e1b3bd, type: 3}
-  Exp: 500
+  Exp: 2000
   Gold: 2000
   Idx: 0

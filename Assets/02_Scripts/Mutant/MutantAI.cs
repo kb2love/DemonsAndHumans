@@ -130,7 +130,7 @@ public class MutantAI : MonoBehaviour
                 case MutantState.Die:
                     agent.isStopped = true;
                     animator.SetTrigger("DieTrigger");
-                    SoundManager.soundInst.EffectSoundPlay(dieClip);
+                    SoundManager.soundInst.EffectSoundPlay( audioSource,dieClip);
                     Invoke("DieOn", 5.0f);
                     if (bossImage != null)
                     {

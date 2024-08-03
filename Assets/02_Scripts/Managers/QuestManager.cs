@@ -272,13 +272,6 @@ public class QuestManager : MonoBehaviour
         return -1; // 사용 가능한 인덱스가 없을 경우 -1 반환
     }
 
-    // 퀘스트 진행 상태 업데이트
-    public void UpdateQuestProgress(int questIdx, int questGoalCount, int questClearCount, int questGoalCount_02 = 0, int questClearCount_02 = 0)
-    {
-        questList[questIdx].GetChild(0).GetChild(1).GetComponent<Text>().text = $"{questGoalCount} / {questClearCount}";
-        if (questGoalCount_02 > 0 || questClearCount_02 > 0)
-            questList[questIdx].GetChild(0).GetChild(2).GetComponent<Text>().text = $"{questGoalCount_02} / {questClearCount_02}";
-    }
 
     // 퀘스트 완료 처리 (QuestState)
     public void CompleteQuest(int questIdx, ref QuestState questState, int exp, string questName)
@@ -315,13 +308,13 @@ public class QuestManager : MonoBehaviour
                 IncrementKillCount(ref mutantKillerQuest_01.KillCount, mutantKillerQuest_01.ClearCount, mutantKillerQuest_01.Idx, ref mutantKillerQuest_01.questState, mutantKillerQuest_01.Name);
                 break;
             case 2:
-                IncrementBossKillCount(ref mutantKillerQuest_02.KillCount, mutantKillerQuest_02.ClearCount, ref mutantKillerQuest_02.KillCount, mutantKillerQuest_02.ClearCount, mutantKillerQuest_02.Idx, ref mutantKillerQuest_02.questState, mutantKillerQuest_02.Name, boss);
+                IncrementBossKillCount(ref mutantKillerQuest_02.KillCount, mutantKillerQuest_02.ClearCount, ref mutantKillerQuest_02.BossKillCount, mutantKillerQuest_02.BossClearCount, mutantKillerQuest_02.Idx, ref mutantKillerQuest_02.questState, mutantKillerQuest_02.Name, boss);
                 break;
             case 3:
-                IncrementBossKillCount(ref mutantKillerQuest_03.KillCount, mutantKillerQuest_03.ClearCount, ref mutantKillerQuest_03.KillCount, mutantKillerQuest_03.ClearCount, mutantKillerQuest_03.Idx, ref mutantKillerQuest_03.questState, mutantKillerQuest_03.Name, boss);
+                IncrementBossKillCount(ref mutantKillerQuest_03.KillCount, mutantKillerQuest_03.ClearCount, ref mutantKillerQuest_03.BossKillCount, mutantKillerQuest_03.BossClearCount, mutantKillerQuest_03.Idx, ref mutantKillerQuest_03.questState, mutantKillerQuest_03.Name, boss);
                 break;
             case 4:
-                IncrementBossKillCount(ref mutantKillerQuest_04.KillCount, mutantKillerQuest_04.ClearCount, ref mutantKillerQuest_04.KillCount, mutantKillerQuest_04.ClearCount, mutantKillerQuest_04.Idx, ref mutantKillerQuest_04.questState, mutantKillerQuest_04.Name, boss);
+                IncrementBossKillCount(ref mutantKillerQuest_04.KillCount, mutantKillerQuest_04.ClearCount, ref mutantKillerQuest_04.BossKillCount, mutantKillerQuest_04.BossClearCount, mutantKillerQuest_04.Idx, ref mutantKillerQuest_04.questState, mutantKillerQuest_04.Name, boss);
                 break;
 
         }
@@ -358,6 +351,16 @@ public class QuestManager : MonoBehaviour
                 state = QuestState.QuestClear;
             }
         }
+    }
+    // 퀘스트 진행 상태 업데이트
+    public void UpdateQuestProgress(int questIdx, int questGoalCount, int questClearCount)
+    {
+        questList[questIdx].GetChild(0).GetChild(1).GetComponent<Text>().text = $"{questGoalCount} / {questClearCount}";
+    }
+    public void UpdateQuestProgress(int questIdx, int mutantKillCount, int mutantClearCount, int bossKillCount, int bossClearCount)
+    {
+        questList[questIdx].GetChild(0).GetChild(1).GetComponent<Text>().text = $"{mutantKillCount} / {mutantClearCount}";
+        questList[questIdx].GetChild(0).GetChild(2).GetComponent<Text>().text = $"{bossKillCount} / {bossClearCount}";
     }
     public void PlayerLevel30() { mutantKillerQuest_04.questState = QuestState.QuestHave; }
 }

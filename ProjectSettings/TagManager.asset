@@ -8,12 +8,12 @@ TagManager:
   - NPC
   - Paladin
   - NextStep
-  - Skeleton
   - Item
   - Store
   - Maria
   - Leader
   - Aki
+  - Mutant
   layers:
   - Default
   - TransparentFX

@@ -28,6 +28,6 @@ MonoBehaviour:
   BossClearCount: 1
   RewardImage_01: {fileID: 21300000, guid: 40132e59175222f41888d1dc6b0eee14, type: 3}
   RewardImage_02: {fileID: 21300000, guid: 333c91b20b6cec54d9a460817d49cf5d, type: 3}
-  Exp: 2000
+  Exp: 10000
   Gold: 10000
   Idx: 0

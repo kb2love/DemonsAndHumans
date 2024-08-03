@@ -9,7 +9,8 @@ public class MutantDamage : MonoBehaviour
     [Header("체력")]
     [SerializeField] float maxHp;
     [SerializeField] AudioClip hitClip;
-    AudioSource hitSource;
+    [SerializeField] AudioClip itemDropClip;
+    AudioSource audioSource;
     [SerializeField] Text hpText;
     [Header("경험치")]
     [SerializeField] int exp;
@@ -25,25 +26,32 @@ public class MutantDamage : MonoBehaviour
     private void Start()
     {
         mutantAI = GetComponent<MutantAI>();
-        hitSource = GetComponent<AudioSource>();
-        hitEff = ObjectPoolingManager.objInst.GetHitEff();
+        audioSource = GetComponent<AudioSource>();
     }
     private void OnEnable()
     {
         isDie = false;
         hp = maxHp;
         hpImage.fillAmount = hp / maxHp;
+        GetComponent<Collider>().enabled = true;
         if (hpText != null)
         {
             hpText.text = maxHp.ToString() + " : " + hp.ToString();
         }
     }
-    public void MutantHit(float damage)
+    public void MutantHit(float damage, SkillState skillState)
     {
         if (!isDie && !mutantShield)
         {
             hp -= damage;
-            SoundManager.soundInst.EffectSoundPlay(hitSource,hitClip);
+            switch (skillState)
+            {
+                case SkillState.None: hitEff = ObjectPoolingManager.objInst.GetHitEff(); break;
+                case SkillState.Ice: hitEff = ObjectPoolingManager.objInst.GetIceHitEff(); break;
+                case SkillState.Fire: hitEff = ObjectPoolingManager.objInst.GetFireHitEff(); break;
+                case SkillState.Electro: hitEff = ObjectPoolingManager.objInst.GetElectroHitEff(); break;
+            }
+            SoundManager.soundInst.EffectSoundPlay(audioSource, hitClip);
             hpImage.fillAmount = hp / maxHp;
             if (hpText != null)
                 hpText.text = maxHp.ToString() + " : " + hp.ToString();
@@ -53,26 +61,19 @@ public class MutantDamage : MonoBehaviour
             if (hp <= 0)
                 MutantDie();
         }
-        else if(mutantShield)
+        else if (mutantShield)
         {
             Debug.Log("막았죠?");
-        }
-    }
-    public void HitEffChange(SkillState skillState)
-    {
-        switch(skillState)
-        {
-            case SkillState.None: hitEff = ObjectPoolingManager.objInst.GetHitEff(); break;
-            case SkillState.Ice: hitEff = ObjectPoolingManager.objInst.GetIceHitEff(); break;
-            case SkillState.Fire: hitEff = ObjectPoolingManager.objInst.GetFireHitEff(); break;
-            case SkillState.Electro: hitEff = ObjectPoolingManager.objInst.GetElectroHitEff(); break;
         }
     }
     void MutantDie()
     {
         mutantAI.IsDie(true);
+        GetComponent<Collider>().enabled = false;
         GameManager.GM.ExpUp(exp);
         QuestManager.questInst.UpdateKillCount(questDataIdx, boss);
+        if (!audioSource.isPlaying)
+            SoundManager.soundInst.EffectSoundPlay(audioSource, itemDropClip);
         GenerateLoot();
         isDie = true;
     }
