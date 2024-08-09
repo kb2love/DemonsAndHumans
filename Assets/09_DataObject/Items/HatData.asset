@@ -17,26 +17,26 @@ MonoBehaviour:
   Value_01:
   - 30
   - 15
-  Idx_01: 0
+  Idx_01: 3
   Count_01: 0
   Name_02: "\uC804\uC0AC\uC758 \uD22C\uAD6C"
   Image_02: {fileID: 21300000, guid: 74510f79fdd61c74a91316793ca3e553, type: 3}
   Value_02:
   - 50
   - 25
-  Idx_02: 0
+  Idx_02: 4
   Count_02: 0
   Name_03: "\uB9C8\uC871\uC758 \uD22C\uAD6C"
   Image_03: {fileID: 21300000, guid: 2331aee16c4ec1645b2cc76acd7cdb27, type: 3}
   Value_03:
   - 75
   - 35
-  Idx_03: 0
+  Idx_03: 5
   Count_03: 0
   Name_04: "\uC601\uC6C5\uC758 \uD22C\uAD6C"
   Image_04: {fileID: 21300000, guid: b35c48c4295736b408985f974bdee92a, type: 3}
   Value_04:
   - 100
   - 50
-  Idx_04: 0
+  Idx_04: 6
   Count_04: 0

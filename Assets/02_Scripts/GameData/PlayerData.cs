@@ -4,25 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 0)]
 public class PlayerData : ScriptableObject
 {
-    public enum PlayerStat { Level, HP, MP, MaxHP, MaxMP, AttackValue, DefenceValue, FatalProbability, FatalValue}
-    public float HP;                //체력
-    public float MaxHP;             //최대체력
-    public float MP;                //마나
-    public float MaxMP;             //최대마나
-    public float AttackValue;            //데미지
-    public float MagicAttackValue;
-    public float expValue;        //경험치
-    public float maxExpValue;     //최대경험치
-    public int Level;             //레벨
-    public float DefenceValue;      //방어력
-    public float FatalProbability;  //치명타확률
-    public float FatalValue;        //치명타 공격력
-    public int GoldValue;
-    public int levelSkillPoint;
-    public int playerSceneIdx;
-    public AudioClip AttackDownClip;
-    public AudioClip AttackUpClip;
-    public AudioClip AttackFinishClip;
     public AudioClip levelUpClip;
     public AudioClip ItemGetClip;
     public GameObject hitEff;

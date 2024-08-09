@@ -8,15 +8,21 @@ public class PlayerAniEvent : MonoBehaviour
     [SerializeField] PlayerData playerData;
     [SerializeField] List<GameObject> level05EffectsList = new List<GameObject>();
     [SerializeField] List<GameObject> level10EffectsList = new List<GameObject>();
-    [SerializeField] List<GameObject> level20_1EffectsList = new List<GameObject>();
-    [SerializeField] List<GameObject> level20_2EffectsList = new List<GameObject>();
+    [SerializeField] List<GameObject> level20EffectsList = new List<GameObject>();
+    [SerializeField] List<GameObject> level25EffectsList = new List<GameObject>();
     [SerializeField] List<GameObject> level30EffectsList = new List<GameObject>();
     [SerializeField] List<GameObject> slashEffectsList = new List<GameObject>();
     [SerializeField] SkillData lv05SkillData;
     [SerializeField] SkillData lv10SkillData;
-    [SerializeField] SkillData lv20_01SkillData;
-    [SerializeField] SkillData lv20_02SkillData;
+    [SerializeField] SkillData lv20SkillData;
+    [SerializeField] SkillData lv25SkillData;
     [SerializeField] SkillData lv30SkillData;
+    [SerializeField] AudioClip attackDownClip;
+    [SerializeField] AudioClip attackUpClip;
+    [SerializeField] AudioClip attackFinishClip;
+    AudioClip saveAttackDownClip;
+    AudioClip saveAttackUpClip;
+    AudioClip saveAttackFinishClip;
     Transform plTr;
     int skillIdx;
     GameObject attackEff;
@@ -25,38 +31,43 @@ public class PlayerAniEvent : MonoBehaviour
     SkillState skillState = SkillState.None;
     UnityAction lv05SkillCoroutine;
     UnityAction lv10SkillCoroutine;
-    UnityAction lv20_01SkillCoroutine;
-    UnityAction lv20_02SkillCoroutine;
+    UnityAction lv20SkillCoroutine;
+    UnityAction lv25SkillCoroutine;
     UnityAction lv30SkillCoroutine;
     float critical;
+    GameManager GM;
     private void Start()
     {
         audioSource = GetComponentInParent<AudioSource>();
         attackEff = slashEffectsList[0];
+        saveAttackDownClip = attackDownClip;
+        saveAttackUpClip = attackUpClip;
+        saveAttackFinishClip = attackFinishClip;
         plTr = transform.parent;
+        GM = GameManager.GM;
     }
     public void AttackDown()
     {
         AttackEff(new Vector3(180, 250, 0));
-        audioSource.PlayOneShot(playerData.AttackDownClip);
-        Attack(playerData.AttackValue, 1.25f, skillState);
+        SoundManager.soundInst.EffectSoundPlay(audioSource, saveAttackDownClip);
+        Attack(GM.playerDataJson.AttackValue, 1.25f, skillState);
     }
     public void AttackUp()
     {
         AttackEff(new Vector3(40, 250, 0));
-        audioSource.PlayOneShot(playerData.AttackUpClip);
-        Attack(playerData.AttackValue * 1.25f, 1.5f, skillState);
+        SoundManager.soundInst.EffectSoundPlay(audioSource, saveAttackUpClip);
+        Attack(GM.playerDataJson.AttackValue * 1.25f, 1.5f, skillState);
     }
     public void AttackFinish()
     {
         AttackEff(new Vector3(-90, 250, 0));
-        audioSource.PlayOneShot(playerData.AttackFinishClip);
-        Attack(playerData.AttackValue * 1.5f, 2.0f, skillState);
+        SoundManager.soundInst.EffectSoundPlay(audioSource, saveAttackFinishClip);
+        Attack(GM.playerDataJson.AttackValue * 1.5f, 2.0f, skillState);
     }
-    public void Lv05MagicSkillCasting() { Debug.Log(lv05SkillCoroutine); lv05SkillCoroutine(); }
+    public void Lv05MagicSkillCasting() { lv05SkillCoroutine(); }
     public void Lv10MagicSkillCasting() { lv10SkillCoroutine(); }
-    public void Lv20_01MagicSkillCasting() { lv20_01SkillCoroutine(); }
-    public void Lv20_02MagicSkillCasting() { lv20_02SkillCoroutine(); }
+    public void Lv20MagicSkillCasting() { lv20SkillCoroutine(); }
+    public void Lv25MagicSkillCasting() { lv25SkillCoroutine(); }
     public void Lv30MagicSkillCasting() { lv30SkillCoroutine(); }
     #region Lv05스킬
     void IceSpearSkill()
@@ -75,118 +86,133 @@ public class PlayerAniEvent : MonoBehaviour
     void EelectroBallSkill() { LvelSkill(level05EffectsList, 2, lv05SkillData.ElectroClip); }
     #endregion
     #region Lv10스킬
-    void IceBallSkill()
+    void IceTornadoSkill()
     {
-        LvelSkill(level10EffectsList, 0, lv10SkillData.IceClip);
+        LvelSkill(level20EffectsList, 0, lv10SkillData.IceClip);
+        Attack(GM.playerDataJson.MagicAttackValue + 200, 2.0f, SkillState.Ice);
+        Invoke("IceTornadoOff", 1.5f);
     }
+    void IceTornadoOff() { level20EffectsList[0].gameObject.SetActive(false); }
     void FireTornado()
     {
         LvelSkill(level10EffectsList, 1, lv10SkillData.FireClip);
-        Attack(playerData.MagicAttackValue + 200, 2.0f, SkillState.Fire);
+        Attack(GM.playerDataJson.MagicAttackValue + 200, 2.0f, SkillState.Fire);
     }
     void ElectroTornado()
     {
         LvelSkill(level10EffectsList, 2, lv10SkillData.ElectroClip);
-        Attack(playerData.MagicAttackValue + 200, 2.0f, SkillState.Electro);
+        Attack(GM.playerDataJson.MagicAttackValue + 200, 2.0f, SkillState.Electro);
     }
     #endregion
-    #region Lv20_01스킬
+    #region Lv20스킬
     void IceAuraSkill()
     {
-        Auras(0, 1, SkillState.Ice, lv20_01SkillData.IceClip);
+        Auras(0, 1, SkillState.Ice, lv20SkillData.IceClip, lv05SkillData.IceClip);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.0f);
-        seq.AppendCallback(() => level20_1EffectsList[0].SetActive(false));
+        seq.AppendCallback(() => level20EffectsList[0].SetActive(false));
         seq.AppendInterval(1.0f);
         seq.AppendCallback(() => IceAuraOn());
         seq.AppendInterval(1.0f);
-        seq.AppendCallback(() => level20_1EffectsList[0].SetActive(false));
+        seq.AppendCallback(() => level20EffectsList[0].SetActive(false));
         seq.AppendInterval(1.0f);
         seq.AppendCallback(() => IceAuraOn());
         seq.AppendInterval(1.0f);
-        seq.AppendCallback(() => level20_1EffectsList[0].SetActive(false));
+        seq.AppendCallback(() => level20EffectsList[0].SetActive(false));
         seq.AppendInterval(1.0f);
         seq.AppendCallback(() => IceAuraOn());
         seq.AppendInterval(1.0f);
-        seq.AppendCallback(() => level20_1EffectsList[0].SetActive(false));
+        seq.AppendCallback(() => level20EffectsList[0].SetActive(false));
         seq.AppendInterval(1.0f);
         seq.AppendCallback(() => IceAuraOn());
         seq.AppendInterval(2.0f);
         seq.AppendCallback(() =>
         {
-            playerData.AttackValue -= 100;
+            GM.playerDataJson.AttackValue -= 100;
             attackEff = slashEffectsList[0];
-            level20_1EffectsList[0].SetActive(false);
+            level20EffectsList[0].SetActive(false);
             skillState = SkillState.None;
+            saveAttackDownClip = attackDownClip;
+            saveAttackUpClip = attackUpClip;
+            saveAttackFinishClip = attackFinishClip;
         });
     }
 
     private void IceAuraOn()
     {
-        level20_1EffectsList[0].SetActive(true);
-        SoundManager.soundInst.EffectSoundPlay(audioSource, lv20_01SkillData.IceClip);
+        level20EffectsList[0].SetActive(true);
+        SoundManager.soundInst.EffectSoundPlay(audioSource, lv20SkillData.IceClip);
     }
 
     void FireAuraSkill()
     {
-        Auras(1, 2, SkillState.Fire, lv20_01SkillData.FireClip);
+        Auras(1, 2, SkillState.Fire, lv20SkillData.FireClip, lv05SkillData.FireClip);
         Invoke("FireAuraOff", 10.0f);
     }
 
     private void FireAuraOff()
     {
-        playerData.AttackValue -= 100;
-        attackEff = slashEffectsList[2];
-        level20_1EffectsList[1].SetActive(false);
+        GM.playerDataJson.AttackValue -= 100;
+        attackEff = slashEffectsList[0];
+        level20EffectsList[1].SetActive(false);
         skillState = SkillState.None;
+        saveAttackDownClip = attackDownClip;
+        saveAttackUpClip = attackUpClip;
+        saveAttackFinishClip = attackFinishClip;
     }
 
     void ElectroAuraSkill()
     {
-        Auras(2, 3, SkillState.Electro, lv20_01SkillData.ElectroClip);
+        Auras(2, 3, SkillState.Electro, lv20SkillData.ElectroClip, lv25SkillData.ElectroClip);
         Invoke("ElectroAuraOff", 10.0f);
     }
 
-    private void Auras(int effIdx, int slashIdx, SkillState _skillState, AudioClip audioClip)
+    private void Auras(int effIdx, int slashIdx, SkillState _skillState, AudioClip audioClip, AudioClip clip)
     {
-        level20_1EffectsList[effIdx].SetActive(true);
+        level20EffectsList[effIdx].SetActive(true);
         attackEff = slashEffectsList[slashIdx];
-        playerData.AttackValue += 100;
+        GM.playerDataJson.AttackValue += 100;
         skillState = _skillState;
         SoundManager.soundInst.EffectSoundPlay(audioSource, audioClip);
+        saveAttackDownClip = clip;
+        saveAttackUpClip = clip;
+        saveAttackFinishClip = clip;
     }
 
     private void ElectroAuraOff()
     {
-        playerData.AttackValue -= 100;
-        attackEff = slashEffectsList[3];
-        level20_1EffectsList[2].SetActive(false);
+        GM.playerDataJson.AttackValue -= 100;
+        attackEff = slashEffectsList[0];
+        level20EffectsList[2].SetActive(false);
         skillState = SkillState.None;
+        saveAttackDownClip = attackDownClip;
+        saveAttackUpClip = attackUpClip;
+        saveAttackFinishClip = attackFinishClip;
     }
     #endregion
-    #region Lv20_02스킬
+    #region Lv25스킬
     void IceStrikeSkill()
     {
-        level20_2EffectsList[0].transform.position = plTr.position + Vector3.up;
-        level20_2EffectsList[0].transform.rotation = plTr.rotation;
-        level20_2EffectsList[0].SetActive(true);
-        level20_2EffectsList[0].transform.DOMove(plTr.position + plTr.forward * 20.0f + Vector3.up, 5.0f);
-        SoundManager.soundInst.EffectSoundPlay(audioSource, lv20_02SkillData.IceClip);
-        Attack(300 + playerData.MagicAttackValue, 5.0f, SkillState.Ice);
+        level25EffectsList[0].transform.position = plTr.position + Vector3.up;
+        level25EffectsList[0].transform.rotation = plTr.rotation;
+        level25EffectsList[0].SetActive(true);
+        level25EffectsList[0].transform.DOMove(plTr.position + plTr.forward * 20.0f + Vector3.up, 5.0f);
+        SoundManager.soundInst.EffectSoundPlay(audioSource, lv25SkillData.IceClip);
+        Attack(300 + GM.playerDataJson.MagicAttackValue, 5.0f, SkillState.Ice);
     }
     void FireStrikeSkill()
     {
-        LvelSkill(level20_2EffectsList, 1, lv20_02SkillData.FireClip);
-        Attack(300 + playerData.MagicAttackValue, 5.0f, SkillState.Fire);
+        LvelSkill(level25EffectsList, 1, lv25SkillData.FireClip);
+        Attack(300 + GM.playerDataJson.MagicAttackValue, 5.0f, SkillState.Fire);
     }
     void ElectroStrikeSkill()
     {
-        level20_2EffectsList[2].transform.position = plTr.position + Vector3.up;
-        level20_2EffectsList[2].transform.rotation = plTr.rotation;
-        level20_2EffectsList[2].SetActive(true);
-        level20_2EffectsList[2].transform.DOMove(plTr.position + plTr.forward * 20.0f + Vector3.up, 5.0f);
-        SoundManager.soundInst.EffectSoundPlay(audioSource, lv20_02SkillData.ElectroClip);
-        Attack(300 + playerData.MagicAttackValue, 5.0f, SkillState.Electro);
+        level25EffectsList[2].transform.position = plTr.position + Vector3.up;
+        level25EffectsList[2].transform.rotation = plTr.rotation;
+        level25EffectsList[2].SetActive(true);
+        level25EffectsList[2].transform.DOMove(plTr.position + plTr.forward * 20.0f + Vector3.up, 5.0f);
+        SoundManager.soundInst.EffectSoundPlay(audioSource, lv25SkillData.ElectroClip);
+        Attack(300 + GM.playerDataJson.MagicAttackValue, 5.0f, SkillState.Electro);
     }
     #endregion
     #region Lv30스킬
@@ -197,7 +223,7 @@ public class PlayerAniEvent : MonoBehaviour
         level30EffectsList[0].transform.rotation = plTr.rotation;
         level30EffectsList[0].SetActive(true);
         SoundManager.soundInst.EffectSoundPlay(audioSource, lv30SkillData.IceClip);
-        Attack(500 + playerData.MagicAttackValue, 7.0f, SkillState.Ice);
+        Attack(500 + GM.playerDataJson.MagicAttackValue, 7.0f, SkillState.Ice);
     }
     void FireMeteorSkill()
     {
@@ -207,7 +233,7 @@ public class PlayerAniEvent : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
-            SoundManager.soundInst.EffectSoundPlay(audioSource, lv20_02SkillData.FireClip);
+            SoundManager.soundInst.EffectSoundPlay(audioSource, lv25SkillData.FireClip);
             level30EffectsList[1].transform.DOMove(plTr.position + (plTr.forward * 2.0f), 2.0f);
         });
         seq.AppendInterval(2.0f);
@@ -215,7 +241,7 @@ public class PlayerAniEvent : MonoBehaviour
         {
             level30EffectsList[1].transform.GetChild(0).gameObject.SetActive(false);
             SoundManager.soundInst.EffectSoundPlay(audioSource, lv30SkillData.FireClip);
-            Attack(500 + playerData.MagicAttackValue, 7.0f, SkillState.Fire);
+            Attack(500 + GM.playerDataJson.MagicAttackValue, 7.0f, SkillState.Fire);
             level30EffectsList[3].gameObject.SetActive(true);
         });
         seq.AppendInterval(2.0f);
@@ -228,13 +254,13 @@ public class PlayerAniEvent : MonoBehaviour
     }
     void ElectroArrowSkill()
     {
-        level30EffectsList[2].transform.position = plTr.position + plTr.forward;
+        level30EffectsList[2].transform.position = plTr.position;
         level30EffectsList[2].transform.rotation = plTr.rotation;
         level30EffectsList[2].SetActive(true);
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
-            level30EffectsList[2].transform.DOMove(plTr.position + plTr.position, 2.0f);
+            level30EffectsList[2].transform.DOMove(plTr.position + plTr.forward, 2.0f);
             SoundManager.soundInst.EffectSoundPlay(audioSource, lv10SkillData.ElectroClip);
         });
         seq.AppendInterval(2.0f);
@@ -242,7 +268,7 @@ public class PlayerAniEvent : MonoBehaviour
         {
             level30EffectsList[2].transform.DOMove(plTr.position + plTr.forward * 10, 2.0f);
             SoundManager.soundInst.EffectSoundPlay(audioSource, lv30SkillData.ElectroClip);
-            Attack(500 + playerData.MagicAttackValue, 7.0f, SkillState.Electro);
+            Attack(500 + GM.playerDataJson.MagicAttackValue, 7.0f, SkillState.Electro);
         });
         seq.AppendInterval(2.0f);
         seq.AppendCallback(() => level30EffectsList[2].SetActive(false));
@@ -272,9 +298,9 @@ public class PlayerAniEvent : MonoBehaviour
         // 치명타 확률 체크
         System.Random random = new System.Random();
         float chance = (float)random.NextDouble();
-        if (chance < playerData.FatalProbability)
+        if (chance < GM.playerDataJson.FatalProbability)
         {
-            baseDamage *= playerData.FatalValue * 0.01f; // 치명타 발동 시 데미지 증폭
+            baseDamage *= GM.playerDataJson.FatalAttackValue * 0.01f; // 치명타 발동 시 데미지 증폭
         }
 
         // 오버랩 스피어 내의 모든 콜라이더 확인
@@ -293,7 +319,7 @@ public class PlayerAniEvent : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             if (level15_1Idx == i)
-                attackEff = level20_1EffectsList[i];
+                attackEff = level20EffectsList[i];
         }
     }
     public void LevelSkillChange(SkillState state, SkillLevelState level)
@@ -311,25 +337,25 @@ public class PlayerAniEvent : MonoBehaviour
             case SkillLevelState.Lv10:
                 switch (state)
                 {
-                    case SkillState.Ice: lv10SkillCoroutine = IceBallSkill; break;
+                    case SkillState.Ice: lv10SkillCoroutine = IceTornadoSkill; break;
                     case SkillState.Fire: lv10SkillCoroutine = FireTornado; break;
                     case SkillState.Electro: lv10SkillCoroutine = ElectroTornado; break;
                 }
                 break;
-            case SkillLevelState.Lv20_01:
+            case SkillLevelState.Lv20:
                 switch (state)
                 {
-                    case SkillState.Ice: lv20_01SkillCoroutine = IceAuraSkill; break;
-                    case SkillState.Fire: lv20_01SkillCoroutine = FireAuraSkill; break;
-                    case SkillState.Electro: lv20_01SkillCoroutine = ElectroAuraSkill; break;
+                    case SkillState.Ice: lv20SkillCoroutine = IceAuraSkill; break;
+                    case SkillState.Fire: lv20SkillCoroutine = FireAuraSkill; break;
+                    case SkillState.Electro: lv20SkillCoroutine = ElectroAuraSkill; break;
                 }
                 break;
-            case SkillLevelState.Lv20_02:
+            case SkillLevelState.Lv25:
                 switch (state)
                 {
-                    case SkillState.Ice: lv20_02SkillCoroutine = IceStrikeSkill; break;
-                    case SkillState.Fire: lv20_02SkillCoroutine = FireStrikeSkill; break;
-                    case SkillState.Electro: lv20_02SkillCoroutine = ElectroStrikeSkill; break;
+                    case SkillState.Ice: lv25SkillCoroutine = IceStrikeSkill; break;
+                    case SkillState.Fire: lv25SkillCoroutine = FireStrikeSkill; break;
+                    case SkillState.Electro: lv25SkillCoroutine = ElectroStrikeSkill; break;
                 }
                 break;
             case SkillLevelState.Lv30:

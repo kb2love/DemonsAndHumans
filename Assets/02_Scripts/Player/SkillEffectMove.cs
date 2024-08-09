@@ -27,7 +27,7 @@ public class SkillEffectMove : MonoBehaviour
     {
         if(other.gameObject.tag == "Mutant")
         {
-            other.GetComponent<MutantDamage>().MutantHit(damage + playerData.MagicAttackValue, skillState);
+            other.GetComponent<MutantDamage>().MutantHit(damage + GameManager.GM.playerDataJson.MagicAttackValue, skillState);
             gameObject.SetActive(false);
         }
         

@@ -5,22 +5,23 @@ public class NPCMaria : NPCDialogue
     [SerializeField] private DialougeQuest leaderQuest;
     [SerializeField] private MutantKillQuest mariaQuest_01;
     [SerializeField] private DialougeQuest mariaQuest_02;
-
+    DataManager dataManager;
     public override void Initialize()
     {
+        dataManager = DataManager.dataInst;
         base.Initialize();
         UpdateQuestMarkers();
     }
 
     private void UpdateQuestMarkers()
     {
-        if (leaderQuest.questState == QuestState.QuestTake)
+        if (dataManager.leaderQuestDataJson.questState == QuestState.QuestTake)
         {
             QuestClear();
         }
         else
         {
-            switch (mariaQuest_01.questState)
+            switch (dataManager.mariaQuest_01DataJson.questState)
             {
                 case QuestState.QuestHave:
                     QuestAdd();
@@ -40,15 +41,15 @@ public class NPCMaria : NPCDialogue
 
     protected override void StartDialogue()
     {
-        if (leaderQuest.questState == QuestState.QuestTake)
+        if (dataManager.leaderQuestDataJson.questState == QuestState.QuestTake)
         {
             dialogueIdx = 0;
             FindObjectOfType<NPCLeader>().QuestEnd();
-            QuestManager.questInst.CompleteQuest(leaderQuest.Idx, ref leaderQuest.questState, leaderQuest.Exp, leaderQuest.Name);
+            QuestManager.questInst.CompleteQuest(leaderQuest.Exp, leaderQuest.Exp, leaderQuest.Name,ref dataManager.leaderQuestDataJson);
         }
         else
         {
-            switch (mariaQuest_01.questState)
+            switch (dataManager.mariaQuest_01DataJson.questState)
             {
                 case QuestState.QuestHave:
                     break;
@@ -69,17 +70,15 @@ public class NPCMaria : NPCDialogue
     protected override void EndDialogue()
     {
         base.EndDialogue();
-        switch (mariaQuest_01.questState)
+        switch (dataManager.mariaQuest_01DataJson.questState)
         {
             case QuestState.QuestHave:
-                QuestManager.questInst.AddQuest_02(ref mariaQuest_01.Idx, mariaQuest_01.Image, mariaQuest_01.Name, mariaQuest_01.Content, mariaQuest_01.Gold.ToString() + " Gold, " + mariaQuest_01.Exp.ToString() + " Exp", mariaQuest_01.MutantName,
-                mariaQuest_01.KillCount, mariaQuest_01.ClearCount, ref mariaQuest_01.questState, QuestState.QuestTake);
+                QuestManager.questInst.AddQuest_02(ref mariaQuest_01, ref dataManager.mariaQuest_01DataJson);
                 QuestEnd();
                 break;
             case QuestState.QuestClear:
-                QuestManager.questInst.CompleteQuest(mariaQuest_01.Idx, ref mariaQuest_01.questState, mariaQuest_01.Exp, mariaQuest_01.Gold, mariaQuest_01.Name);
-                QuestManager.questInst.AddQuest_01(ref mariaQuest_02.Idx, mariaQuest_02.Image, mariaQuest_02.Name, mariaQuest_02.Content, mariaQuest_02.Exp.ToString() + " Exp", 
-                    ref mariaQuest_02.questState, QuestState.QuestTake);
+                QuestManager.questInst.CompleteQuest( mariaQuest_01.Exp, mariaQuest_01.Gold, mariaQuest_01.Name,ref dataManager.mariaQuest_01DataJson);
+                QuestManager.questInst.AddQuest_01(ref mariaQuest_02, ref dataManager.mariaQuest_02DataJson);
                 QuestEnd();
                 break;
         }

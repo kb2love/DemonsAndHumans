@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +7,10 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField] PlayerData playerData;
     [SerializeField] Transform shieldTr;
     [SerializeField] Image plHp;
+    [SerializeField] CanvasGroup fadeOutImage;
+    [SerializeField] AudioClip audioClip;
     PlayerController playerController;
+    AudioSource audioSource;
     Animator animator;
 
     GameObject hitEff;
@@ -23,9 +25,9 @@ public class PlayerDamage : MonoBehaviour
     }
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponentInChildren<Animator>();
         playerController = GetComponent<PlayerController>();
-        plHp.fillAmount = playerData.HP / playerData.MaxHP;
     }
     public void HitDamage(float damage)
     {
@@ -34,17 +36,27 @@ public class PlayerDamage : MonoBehaviour
         if (!isShield)
         {
             hitEff.transform.position = transform.position + (Vector3.up * 0.8f);
-            playerData.HP -= damage;
-            plHp.fillAmount = playerData.HP / playerData.MaxHP;
-            GameManager.GM.StatUpdate(PlayerData.PlayerStat.HP);
-            if (playerData.HP <= 0)
+            damage = damage - (GameManager.GM.playerDataJson.DefenceValue / 2);
+            if (damage <= 0) damage = 1;
+            GameManager.GM.playerDataJson.HP -= damage;
+            plHp.fillAmount = GameManager.GM.playerDataJson.HP / GameManager.GM.playerDataJson.MaxHP;
+            GameManager.GM.StatUpdate(PlayerStat.HP);
+            DataManager.dataInst.PlayerDataSave(GameManager.GM.playerDataJson);
+            if (GameManager.GM.playerDataJson.HP <= 0)
             {
-                Debug.Log("≥ ¡◊¿Ω §ª§ª§ª");
+                playerController.enabled = false;
+                animator.SetTrigger("DieTrigger");
+                GetComponent<PlayerAttack>().enabled = false;
+                GetComponent<Collider>().enabled = false;
+                GetComponent<PlayerUIController>().enabled = false;
+                GameManager.GM.playerDataJson.currentSceneIdx = 0;
+                fadeOutImage.DOFade(1, 3.0f).OnComplete(() => SceneMove.SceneInst.DeathScene());
             }
         }
         else
         {
             Debug.Log("∏∑æ—¡“?");
+            SoundManager.soundInst.EffectSoundPlay(audioSource, audioClip);
             hitEff.transform.position = shieldTr.position;
             isHit = true;
             Invoke("IsHitFalse", 0.5f);
@@ -56,7 +68,7 @@ public class PlayerDamage : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Item"))
         {
-            ItemManager.itemInst.GetItem(other.gameObject.GetComponent<ItemInfo>().type);
+            ItemManager.itemInst.GetItem(other.gameObject.GetComponent<ItemInfo>().type, other.GetComponent<ItemInfo>().goldValue);
             SoundManager.soundInst.EffectSoundPlay(playerData.ItemGetClip);
             other.gameObject.SetActive(false);
         }

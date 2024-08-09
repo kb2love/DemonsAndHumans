@@ -896,7 +896,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 63.13719, y: 37.099464, z: -187.18123}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3873002329979857469}
@@ -989,7 +989,7 @@ MonoBehaviour:
   dieClip: {fileID: 8300000, guid: a40772278a39d8f4386133e04c4cefd4, type: 3}
   mutantKindIdx: 0
   mutantAttackKindIdx: 0
-  damage: 15
+  damage: 20
   attackRadius: 2.5
   bossImage: {fileID: 0}
   state: 0
@@ -1006,13 +1006,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpImage: {fileID: 8760671464553844382}
-  maxHp: 100
+  maxHp: 200
   hitClip: {fileID: 8300000, guid: 119a78ae6bd6e3043b1b1cec83b5f90d, type: 3}
   itemDropClip: {fileID: 8300000, guid: cabdd2029e85b0b41b8474aff74205ea, type: 3}
   hpText: {fileID: 0}
   exp: 100
   questDataIdx: 1
   boss: 0
+  sceneBackPotal: {fileID: 0}
+  shieldClip: {fileID: 0}
+  goldValue: 50
 --- !u!82 &-8943686091627715410
 AudioSource:
   m_ObjectHideFlags: 0

@@ -7,8 +7,8 @@ public class NPCSotre : NPCDialogue
     public override void Initialize()
     {
         base.Initialize();
-        store = GameObject.Find("Canvas_NPC").transform.GetChild(1).gameObject;
-        GameObject.Find("Canvas_NPC").transform.GetChild(1).GetComponent<StoreOpen>().Initialize();
+        store = GameObject.Find("Canvas_Player").transform.GetChild(12).gameObject;
+        store.GetComponent<StoreOpen>().Initialize();
         playerStat = GameObject.Find("PlayerState");
     }
     protected override void StartDialogue()

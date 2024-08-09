@@ -4,16 +4,17 @@ using static NPCDialogue;
 public class NPCLeader : NPCDialogue
 {
     [SerializeField] private DialougeQuest leaderQuest;
-
+    DataManager dataManager;
     public override void Initialize()
     {
+        dataManager = DataManager.dataInst;
         base.Initialize();
         UpdateQuestMarkers();
     }
 
     private void UpdateQuestMarkers()
     {
-        switch (leaderQuest.questState)
+        switch (dataManager.leaderQuestDataJson.questState)
         {
             case QuestState.QuestHave:
                 QuestAdd();
@@ -29,7 +30,7 @@ public class NPCLeader : NPCDialogue
 
     protected override void StartDialogue()
     {
-        switch (leaderQuest.questState)
+        switch (dataManager.leaderQuestDataJson.questState)
         {
             case QuestState.QuestHave:
                 dialogueIdx = 0;
@@ -49,9 +50,9 @@ public class NPCLeader : NPCDialogue
     {
         base.EndDialogue();
 
-        if (leaderQuest.questState == QuestState.QuestHave)
+        if (dataManager.leaderQuestDataJson.questState == QuestState.QuestHave)
         {
-            QuestManager.questInst.AddQuest_01(ref leaderQuest.Idx, leaderQuest.Image, leaderQuest.Name, leaderQuest.Content, leaderQuest.Exp.ToString() + " Exp", ref leaderQuest.questState, QuestState.QuestTake);
+            QuestManager.questInst.AddQuest_01(ref leaderQuest,ref dataManager.leaderQuestDataJson);
             QuestEnd();
             FindObjectOfType<NPCMaria>().QuestAdd();
         }

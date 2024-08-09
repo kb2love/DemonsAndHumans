@@ -10,8 +10,8 @@ public class PlayerStartPoint : MonoBehaviour
     public void Initialize()
     {
         playerTr = GameObject.FindWithTag("Player").transform;
-        playerTr.position = startPoint[playerData.playerSceneIdx].position;
-        playerTr.rotation = startPoint[playerData.playerSceneIdx].rotation;
+        playerTr.position = startPoint[GameManager.GM.playerDataJson.currentSceneIdx].position;
+        playerTr.rotation = startPoint[GameManager.GM.playerDataJson.currentSceneIdx].rotation;
         Camera.main.transform.parent.position = playerTr.transform.position;
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e04b3f00738a24785a3026a4f1d927, type: 3}
   m_Name: MutantKillerQuest_03
   m_EditorClassIdentifier: 
-  questState: 2
+  questState: 1
   Image: {fileID: 21300000, guid: 26b7d2da814dbc54ab1bb627e464b4f2, type: 3}
   Name: "\uAD70\uB2E8\uC7A5 \uD30C\uBA78\uC758 \uC790\uB974\uAC04"
   Content: "\uB9C8\uC871\uC0AC\uB0E5\uB300 \uB300\uC7A5\uC774 \uC8FC\uB294 \uB9C8\uC9C0\uB9C9\uD14C\uC2A4\uD2B8\uB2E4.

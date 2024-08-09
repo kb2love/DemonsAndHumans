@@ -12,6 +12,7 @@ public class MutantAI : MonoBehaviour
     [SerializeField] AudioClip dieClip;
     AudioSource audioSource;
     [SerializeField] bool mutantKindIdx;
+   
     [SerializeField] int mutantAttackKindIdx;
     [SerializeField] float damage;
     [SerializeField] float attackRadius = 3.0f; // 공격 범위
@@ -112,8 +113,6 @@ public class MutantAI : MonoBehaviour
                     agent.isStopped = true;
                     if (mutantKindIdx)
                         animator.SetInteger("AttackIdx", Random.Range(0, mutantAttackKindIdx));
-                    if(!audioSource.isPlaying)
-                        SoundManager.soundInst.EffectSoundPlay(audioSource, attackClip);
                     animator.SetTrigger("AttackTrigger");
                     Invoke("IsTraceFalse", 3.0f);
                     break;
@@ -213,6 +212,8 @@ public class MutantAI : MonoBehaviour
     {
         // 스켈레톤의 위치에서 attackRadius 반경으로 오버랩 스피어 생성
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRadius);
+        if (!audioSource.isPlaying)
+            SoundManager.soundInst.EffectSoundPlay(audioSource, attackClip);
 
         // 오버랩 스피어 내의 모든 콜라이더 확인
         foreach (var hitCollider in hitColliders)

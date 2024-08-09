@@ -18,6 +18,10 @@ public class MutantDamage : MonoBehaviour
     [SerializeField] int questDataIdx;
     [Header("보스인지 아닌지")]
     [SerializeField] bool boss = false;
+    [SerializeField] GameObject sceneBackPotal;
+    [SerializeField] AudioClip shieldClip;
+    [Header("골드")]
+    [SerializeField] int goldValue;
     float hp;
     MutantAI mutantAI;
     GameObject hitEff;
@@ -54,16 +58,15 @@ public class MutantDamage : MonoBehaviour
             SoundManager.soundInst.EffectSoundPlay(audioSource, hitClip);
             hpImage.fillAmount = hp / maxHp;
             if (hpText != null)
-                hpText.text = maxHp.ToString() + " : " + hp.ToString();
+                hpText.text = maxHp.ToString() + " : " + hp.ToString("0");
             hitEff.transform.position = transform.position + (Vector3.up * 0.8f);
             hitEff.SetActive(true);
-            Debug.Log(hp);
             if (hp <= 0)
                 MutantDie();
         }
         else if (mutantShield)
         {
-            Debug.Log("막았죠?");
+            SoundManager.soundInst.EffectSoundPlay(audioSource, shieldClip);
         }
     }
     void MutantDie()
@@ -72,6 +75,16 @@ public class MutantDamage : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         GameManager.GM.ExpUp(exp);
         QuestManager.questInst.UpdateKillCount(questDataIdx, boss);
+        if (boss)
+        {
+            sceneBackPotal.SetActive(true);
+            ItemDrop(ObjectPoolingManager.objInst.GetGold(), ItemType.Gold, goldValue);
+            ItemDrop(ObjectPoolingManager.objInst.GetGold(), ItemType.Gold, goldValue);
+            ItemType type = GetNormalItemType();
+            ItemDrop(ObjectPoolingManager.objInst.GetNormalItem(), type);
+            ItemType type_ = GetEquipmentItemType();
+            ItemDrop(ObjectPoolingManager.objInst.GetEquipmentItem(), type_);
+        }
         if (!audioSource.isPlaying)
             SoundManager.soundInst.EffectSoundPlay(audioSource, itemDropClip);
         GenerateLoot();
@@ -81,10 +94,10 @@ public class MutantDamage : MonoBehaviour
     {
         float randomValue = Random.Range(0f, 100f);
 
-        if (randomValue < 90f)
+        if (randomValue < 50f)
         {
             // 90% 확률로 Gold 생성
-            ItemDrop(ObjectPoolingManager.objInst.GetGold(), ItemType.Gold);
+            ItemDrop(ObjectPoolingManager.objInst.GetGold(), ItemType.Gold, goldValue);
         }
         else if (randomValue < 98f)
         {
@@ -104,11 +117,11 @@ public class MutantDamage : MonoBehaviour
     {
         float randomValue = Random.Range(0f, 100f);
 
-        if (randomValue < 33.33f)
+        if (randomValue < 45f)
         {
             return ItemType.HPPotion;
         }
-        else if (randomValue < 66.66f)
+        else if (randomValue < 90f)
         {
             return ItemType.MPPotion;
         }
@@ -159,12 +172,16 @@ public class MutantDamage : MonoBehaviour
             return ItemType.Ring;
         }
     }
-    private void ItemDrop(GameObject obj, ItemType itemType)
+    private void ItemDrop(GameObject obj, ItemType itemType, int goldValue = 0, bool isBoss = false)
     {
         GameObject item = obj;
-        item.transform.position = transform.position;
+        if(isBoss)
+         item.transform.position = transform.position + new Vector3(Random.Range(-2.0f, 2.0f),Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f));
+        else
+            item.transform.position = transform.position;
         item.transform.rotation = Quaternion.identity;
         item.GetComponent<ItemInfo>().type = itemType;
+        item.GetComponent<ItemInfo>().goldValue = goldValue;    
         item.SetActive(true);
     }
     public void IsMutantShield(bool isShield) { mutantShield = isShield; }

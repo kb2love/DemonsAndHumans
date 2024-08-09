@@ -16,12 +16,11 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private MutantKillerQuest mutantKillerQuest_02;
     [SerializeField] private MutantKillerQuest mutantKillerQuest_03;
     [SerializeField] private MutantKillerQuest mutantKillerQuest_04;
-
     // UI 요소들
     [SerializeField] private RectTransform content;
     private Vector2 plusContent;
     private List<Transform> questList = new List<Transform>();
-
+    DataManager dataManager;
     private void Awake()
     {
         questInst = this; // Singleton 인스턴스 설정
@@ -29,6 +28,7 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
+        dataManager = DataManager.dataInst;
         plusContent = content.sizeDelta; // content의 초기 사이즈 저장
         // content의 자식들을 questList에 추가
         for (int i = 1; i < content.childCount; i++)
@@ -40,223 +40,175 @@ public class QuestManager : MonoBehaviour
     // 퀘스트를 검색하여 퀘스트 목록에 추가
     public void QuestSearch()
     {
-        QuestCheck_01(ref leaderQuest.Idx, leaderQuest.Image, leaderQuest.Name, leaderQuest.Content, leaderQuest.Exp.ToString() + " Exp", ref leaderQuest.questState);  // 리더 퀘스트
-        QuestCheck_02(ref mariaQuest_01.Idx, mariaQuest_01.Image, mariaQuest_01.Name, mariaQuest_01.Content, mariaQuest_01.Gold.ToString() + " Gold, " + mariaQuest_01.Exp.ToString() + " Exp", mariaQuest_01.MutantName,
-          ref mariaQuest_01.KillCount, mariaQuest_01.ClearCount, ref mariaQuest_01.questState); //마리아 첫번째 퀘스트
-        QuestCheck_01(ref mariaQuest_02.Idx, mariaQuest_02.Image, mariaQuest_02.Name, mariaQuest_02.Content, mariaQuest_02.Exp.ToString() + " Exp", ref mariaQuest_02.questState);  // 마리아 두번째 퀘스트
-        QuestCheck_01(ref paladinQuest.Idx, paladinQuest.Image, paladinQuest.Name, paladinQuest.Content, paladinQuest.Exp.ToString() + " Exp", ref paladinQuest.questState);    //팔라딘 퀘스트
-        QuestCheck_02(ref mutantKillerQuest_01.Idx, mutantKillerQuest_01.Image, mutantKillerQuest_01.Name, mutantKillerQuest_01.Content, mutantKillerQuest_01.Gold.ToString() + " Gold, " +
-            mutantKillerQuest_01.Exp.ToString() + " Exp", mutantKillerQuest_01.MutantName, ref mutantKillerQuest_01.KillCount, mutantKillerQuest_01.ClearCount, ref mutantKillerQuest_01.questState);//마족사냥대대장 첫번째 퀘스트
-        QuestCheck_03(ref mutantKillerQuest_02.Idx, mutantKillerQuest_02.Image, mutantKillerQuest_02.Name, mutantKillerQuest_02.Content, mutantKillerQuest_02.Gold.ToString() +
-            " Gold, " + mutantKillerQuest_02.Exp.ToString() + " Exp", mutantKillerQuest_02.RewardImage_01, mutantKillerQuest_02.RewardImage_02, mutantKillerQuest_02.MutantName,
-            mutantKillerQuest_02.BossName, ref mutantKillerQuest_02.KillCount, mutantKillerQuest_02.ClearCount, ref mutantKillerQuest_02.BossKillCount, mutantKillerQuest_02.BossClearCount,
-            ref mutantKillerQuest_02.questState);   //마족사냥대대장 두번째 퀘스트
-        QuestCheck_03(ref mutantKillerQuest_03.Idx, mutantKillerQuest_03.Image, mutantKillerQuest_03.Name, mutantKillerQuest_03.Content, mutantKillerQuest_03.Gold.ToString() +
-            " Gold, " + mutantKillerQuest_03.Exp.ToString() + " Exp", mutantKillerQuest_03.RewardImage_01, mutantKillerQuest_03.RewardImage_02, mutantKillerQuest_03.MutantName,
-            mutantKillerQuest_03.BossName, ref mutantKillerQuest_03.KillCount, mutantKillerQuest_03.ClearCount, ref mutantKillerQuest_03.BossKillCount, mutantKillerQuest_03.BossClearCount,
-            ref mutantKillerQuest_03.questState);   //마족사냥대대장 세번째 퀘스트
-        QuestCheck_03(ref mutantKillerQuest_04.Idx, mutantKillerQuest_04.Image, mutantKillerQuest_04.Name, mutantKillerQuest_04.Content, mutantKillerQuest_04.Gold.ToString() +
-           " Gold, " + mutantKillerQuest_04.Exp.ToString() + " Exp", mutantKillerQuest_04.RewardImage_01, mutantKillerQuest_04.RewardImage_02, mutantKillerQuest_04.MutantName,
-           mutantKillerQuest_04.BossName, ref mutantKillerQuest_04.KillCount, mutantKillerQuest_04.ClearCount, ref mutantKillerQuest_04.BossKillCount, mutantKillerQuest_04.BossClearCount,
-           ref mutantKillerQuest_03.questState);    //마족사냥대대장 네번째 퀘스트
+        QuestCheck_01(ref leaderQuest, dataManager.leaderQuestDataJson);  // 리더 퀘스트
+        QuestCheck_02(ref mariaQuest_01, dataManager.mariaQuest_01DataJson); //마리아 첫번째 퀘스트
+        QuestCheck_01(ref mariaQuest_02, dataManager.mariaQuest_02DataJson);  // 마리아 두번째 퀘스트
+        QuestCheck_01(ref paladinQuest, dataManager.paladinQuestDataJson);    //팔라딘 퀘스트
+        QuestCheck_02(ref mutantKillerQuest_01, dataManager.mutantKillerQuest_01DataJson);//마족사냥대대장 첫번째 퀘스트
+        QuestCheck_03(ref mutantKillerQuest_02, dataManager.mutantKillerQuest_02DataJson);   //마족사냥대대장 두번째 퀘스트
+        QuestCheck_03(ref mutantKillerQuest_03, dataManager.mutantKillerQuest_03DataJson);   //마족사냥대대장 세번째 퀘스트
+        QuestCheck_03(ref mutantKillerQuest_04, dataManager.mutantKillerQuest_04DataJson);    //마족사냥대대장 네번째 퀘스트
     }
-    void QuestCheck_01(ref int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, ref QuestState questState)
+    #region 퀘스트가 있는지 확인
+    void QuestCheck_01(ref DialougeQuest quest, QuestDataJson questDataJson)
     {
-        QuestDataJson questDataJson = DataManager.dataInst.FindQuest(questState, questName);
-        if (questDataJson != null)
+        if (questDataJson.questState == QuestState.QuestTake || questDataJson.questState == QuestState.QuestClear)
         {
-            if (questDataJson.questState == QuestState.QuestTake)
-            {
-                QuestCheckMethod_01(out questIdx, questSprite, questName, questContent, questRewards, questState);
-                questState = QuestState.QuestTake;
-            }
-            else if (questDataJson.questState == QuestState.QuestClear)
-            {
-                QuestCheckMethod_01(out questIdx, questSprite, questName, questContent, questRewards, questState);
-                questState = QuestState.QuestClear;
-            }
+            QuestCheckMethod_01(ref quest, questDataJson);
         }
     }
-    void QuestCheck_02(ref int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, string mutantName, ref int mutantKillCount, int mutantClearCount, ref QuestState questState)
+    void QuestCheck_02(ref MutantKillQuest killQuest, QuestDataJson questDataJson)
     {
-        QuestDataJson questDataJson = DataManager.dataInst.FindQuest(questState, questName);
-        if (questDataJson != null)
+        if (questDataJson.questState == QuestState.QuestTake || questDataJson.questState == QuestState.QuestClear)
         {
-            if (questDataJson.questState == QuestState.QuestTake)
-            {
-                QuestCheckMethod_02(out questIdx, questSprite, questName, questContent, questRewards, mutantName, out mutantKillCount, mutantClearCount, questState, questDataJson);
-                questState = QuestState.QuestTake;
-            }
-            else if (questDataJson.questState == QuestState.QuestClear)
-            {
-                QuestCheckMethod_02(out questIdx, questSprite, questName, questContent, questRewards, mutantName, out mutantKillCount, mutantClearCount, questState, questDataJson);
-                questState = QuestState.QuestClear;
-            }
+            QuestCheckMethod_02(ref killQuest, questDataJson);
         }
+
     }
 
-    private void QuestCheckMethod_01(out int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, QuestState questState)
+    void QuestCheck_03(ref MutantKillerQuest mutantKillerQuest, QuestDataJson questDataJson)
     {
-        questIdx = GetAvailableQuestIdx();
-        Transform questTransform = questList[questIdx];
-        questTransform.GetChild(2).GetComponent<Image>().sprite = questSprite;
-        questTransform.GetChild(1).GetComponent<Text>().text = questName;
+        if (questDataJson.questState == QuestState.QuestTake || questDataJson.questState == QuestState.QuestClear)
+        {
+            QuestCheckMethod_03(ref mutantKillerQuest, questDataJson);
+        }
+
+    }
+    private void QuestCheckMethod_01(ref DialougeQuest quest, QuestDataJson questDataJson)
+    {
+        questDataJson.Idx = GetAvailableQuestIdx();
+        Transform questTransform = questList[questDataJson.Idx];
+        questTransform.GetChild(2).GetComponent<Image>().sprite = quest.Image;
+        questTransform.GetChild(1).GetComponent<Text>().text = quest.Name;
 
         Transform questBox = questTransform.GetChild(0);
-        questBox.GetChild(0).GetComponent<Text>().text = questContent;
-        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = questRewards;
+        questBox.GetChild(0).GetComponent<Text>().text = quest.Content;
+        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = quest.Exp.ToString() + " Exp";
         plusContent.y += 305.0f;
         content.sizeDelta = plusContent;
-        DataManager.dataInst.SaveQuestData(questState, questName);
         questTransform.gameObject.SetActive(true);
     }
 
-    private void QuestCheckMethod_02(out int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, string mutantName, out int mutantKillCount, int mutantClearCount,
-        QuestState questState, QuestDataJson questDataJson)
+    private void QuestCheckMethod_02(ref MutantKillQuest killQuest, QuestDataJson questDataJson)
     {
-        questIdx = GetAvailableQuestIdx();
-        Transform questTransform = questList[questIdx];
-        questTransform.GetChild(2).GetComponent<Image>().sprite = questSprite;
-        questTransform.GetChild(1).GetComponent<Text>().text = questName;
+        questDataJson.Idx = GetAvailableQuestIdx();
+        Transform questTransform = questList[questDataJson.Idx];
+        questTransform.GetChild(2).GetComponent<Image>().sprite = killQuest.Image;
+        questTransform.GetChild(1).GetComponent<Text>().text = killQuest.Name;
 
         Transform questBox = questTransform.GetChild(0);
-        questBox.GetChild(0).GetComponent<Text>().text = questContent;
-        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = questRewards;
-        mutantKillCount = questDataJson.KillCount;
-        questBox.GetChild(1).GetComponent<Text>().text = $"{mutantKillCount} / {mutantClearCount}";
-        questBox.GetChild(1).GetChild(0).GetComponent<Text>().text = mutantName;
+        questBox.GetChild(0).GetComponent<Text>().text = killQuest.Content;
+        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = $"{killQuest.Gold} Gold {killQuest.Exp} Exp";
+        questBox.GetChild(1).GetComponent<Text>().text = $"{questDataJson.KillCount} / {killQuest.ClearCount}";
+        questBox.GetChild(1).GetChild(0).GetComponent<Text>().text = killQuest.MutantName;
         questBox.GetChild(1).gameObject.SetActive(true);
         plusContent.y += 305.0f;
         content.sizeDelta = plusContent;
-        DataManager.dataInst.SaveQuestData(questState, questName);
         questTransform.gameObject.SetActive(true);
     }
 
-    void QuestCheck_03(ref int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, Sprite questReward01, Sprite questReward02, string mutantName, string bossName,
-        ref int mutantKillCount, int mutantClearCount, ref int bossKillCount, int bossClearCount, ref QuestState questState)
+
+    private void QuestCheckMethod_03(ref MutantKillerQuest mutantKillerQuest, QuestDataJson questDataJson)
     {
-        QuestDataJson questDataJson = DataManager.dataInst.FindQuest(questState, questName);
-        if (questDataJson != null)
-        {
-            if (questDataJson.questState == QuestState.QuestTake)
-            {
-                QuestCheckMethod_03(out questIdx, questSprite, questName, questContent, questRewards, questReward01, questReward02, mutantName, bossName, out mutantKillCount, mutantClearCount, out bossKillCount, bossClearCount, questState, questDataJson);
-                questState = QuestState.QuestTake;
-            }
-            else if (questDataJson.questState == QuestState.QuestClear)
-            {
-                QuestCheckMethod_03(out questIdx, questSprite, questName, questContent, questRewards, questReward01, questReward02, mutantName, bossName, out mutantKillCount, mutantClearCount, out bossKillCount, bossClearCount, questState, questDataJson);
-                questState = QuestState.QuestClear;
-            }
+        questDataJson.Idx = GetAvailableQuestIdx();
+        Transform questTransform = questList[questDataJson.Idx];
 
-        }
-    }
-
-    private void QuestCheckMethod_03(out int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, Sprite questReward01, Sprite questReward02, string mutantName,
-        string bossName, out int mutantKillCount, int mutantClearCount, out int bossKillCount, int bossClearCount, QuestState questState, QuestDataJson questDataJson)
-    {
-        questIdx = GetAvailableQuestIdx();
-        Transform questTransform = questList[questIdx];
-
-        questTransform.GetChild(2).GetComponent<Image>().sprite = questSprite;
-        questTransform.GetChild(1).GetComponent<Text>().text = questName;
+        questTransform.GetChild(2).GetComponent<Image>().sprite = mutantKillerQuest.Image;
+        questTransform.GetChild(1).GetComponent<Text>().text = mutantKillerQuest.Name;
 
         Transform questBox = questTransform.GetChild(0);
-        questBox.GetChild(0).GetComponent<Text>().text = questContent;
-        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = questRewards;
-        questBox.GetChild(3).GetChild(0).GetComponent<Image>().sprite = questReward01;
-        questBox.GetChild(3).GetChild(1).GetComponent<Image>().sprite = questReward02;
-        mutantKillCount = questDataJson.KillCount;
-        bossKillCount = questDataJson.bossKillCount;
-        questBox.GetChild(1).GetComponent<Text>().text = $"{mutantKillCount} / {mutantClearCount}";
-        questBox.GetChild(1).GetChild(0).GetComponent<Text>().text = mutantName;
+        questBox.GetChild(0).GetComponent<Text>().text = mutantKillerQuest.Content;
+        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = $"{mutantKillerQuest.Gold} Gold {mutantKillerQuest.Exp} Exp";
+        questBox.GetChild(3).GetChild(0).GetComponent<Image>().sprite = mutantKillerQuest.RewardImage_01;
+        questBox.GetChild(3).GetChild(1).GetComponent<Image>().sprite = mutantKillerQuest.RewardImage_02;
+        questBox.GetChild(3).GetChild(0).gameObject.SetActive(true);
+        questBox.GetChild(3).GetChild(1).gameObject.SetActive(true);
+        questBox.GetChild(1).GetComponent<Text>().text = $"{questDataJson.KillCount} / {mutantKillerQuest.ClearCount}";
+        questBox.GetChild(1).GetChild(0).GetComponent<Text>().text = mutantKillerQuest.MutantName;
         questBox.GetChild(1).gameObject.SetActive(true);
-        questBox.GetChild(2).GetComponent<Text>().text = $"{bossKillCount} / {bossClearCount}";
-        questBox.GetChild(2).GetChild(0).GetComponent<Text>().text = bossName;
+        questBox.GetChild(2).GetComponent<Text>().text = $"{questDataJson.bossKillCount}  /  {mutantKillerQuest.BossClearCount}";
+        questBox.GetChild(2).GetChild(0).GetComponent<Text>().text = mutantKillerQuest.BossName;
         questBox.GetChild(2).gameObject.SetActive(true);
         plusContent.y += 305.0f;
         content.sizeDelta = plusContent;
-        DataManager.dataInst.SaveQuestData(questState, questName);
         questTransform.gameObject.SetActive(true);
     }
-
+    #endregion
     // 모든 퀘스트 상태를 초기화
     public void QuestReset()
     {
-        leaderQuest.questState = QuestState.QuestHave;
-        mariaQuest_01.questState = QuestState.QuestHave;
-        mariaQuest_02.questState = QuestState.QuestHave;
-        paladinQuest.questState = QuestState.QuestHave;
-        mutantKillerQuest_01.questState = QuestState.QuestHave;
-        mutantKillerQuest_02.questState = QuestState.QuestHave;
-        mutantKillerQuest_03.questState = QuestState.QuestHave;
-        mutantKillerQuest_04.questState = QuestState.QuestNormal;
+        dataManager.leaderQuestDataJson.questState = QuestState.QuestHave;
+        dataManager.mariaQuest_01DataJson.questState = QuestState.QuestHave;
+        dataManager.mariaQuest_02DataJson.questState = QuestState.QuestHave;
+        dataManager.paladinQuestDataJson.questState = QuestState.QuestHave;
+        dataManager.mutantKillerQuest_01DataJson.questState = QuestState.QuestHave;
+        dataManager.mutantKillerQuest_02DataJson.questState = QuestState.QuestHave;
+        dataManager.mutantKillerQuest_03DataJson.questState = QuestState.QuestHave;
+        dataManager.mutantKillerQuest_04DataJson.questState = QuestState.QuestNormal;
     }
 
     // 퀘스트를 추가하는 메소드 (QuestState)
-    public void AddQuest_01(ref int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, ref QuestState questState, QuestState newState)
+    public void AddQuest_01(ref DialougeQuest dialougeQuest, ref QuestDataJson questDataJson)
     {
-        questIdx = GetAvailableQuestIdx();
-        Transform questTransform = questList[questIdx];
-        questTransform.GetChild(2).GetComponent<Image>().sprite = questSprite;
-        questTransform.GetChild(1).GetComponent<Text>().text = questName;
+        questDataJson.Idx = GetAvailableQuestIdx();
+        Transform questTransform = questList[questDataJson.Idx];
+        questTransform.GetChild(2).GetComponent<Image>().sprite = dialougeQuest.Image;
+        questTransform.GetChild(1).GetComponent<Text>().text = dialougeQuest.Name;
 
         Transform questBox = questTransform.GetChild(0);
-        questBox.GetChild(0).GetComponent<Text>().text = questContent;
-        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = questRewards;
+        questBox.GetChild(0).GetComponent<Text>().text = dialougeQuest.Content;
+        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = dialougeQuest.Exp.ToString() + " Exp";
         plusContent.y += 305.0f;
         content.sizeDelta = plusContent;
-        questState = newState;
-        DataManager.dataInst.SaveQuestData(questState, questName);
+        questDataJson.questState = QuestState.QuestTake;
+        DataManager.dataInst.SaveQuestData(QuestState.QuestTake, dialougeQuest.Name, questDataJson.Idx);
         questTransform.gameObject.SetActive(true);
     }
 
-    public void AddQuest_02(ref int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, string mutantName, int mutantKillCount,
-        int mutantClearCount, ref QuestState questState, QuestState newState)
+    public void AddQuest_02(ref MutantKillQuest mutantKillQuest, ref QuestDataJson questDataJson)
     {
-        questIdx = GetAvailableQuestIdx();
-        Transform questTransform = questList[questIdx];
-        questTransform.GetChild(2).GetComponent<Image>().sprite = questSprite;
-        questTransform.GetChild(1).GetComponent<Text>().text = questName;
+        questDataJson.Idx = GetAvailableQuestIdx();
+        Transform questTransform = questList[questDataJson.Idx];
+        questTransform.GetChild(2).GetComponent<Image>().sprite = mutantKillQuest.Image;
+        questTransform.GetChild(1).GetComponent<Text>().text = mutantKillQuest.Name;
 
         Transform questBox = questTransform.GetChild(0);
-        questBox.GetChild(0).GetComponent<Text>().text = questContent;
-        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = questRewards;
-        questBox.GetChild(3).gameObject.SetActive(true);
-        questBox.GetChild(1).GetComponent<Text>().text = $"{mutantKillCount} / {mutantClearCount}";
-        questBox.GetChild(1).GetChild(0).GetComponent<Text>().text = mutantName;
+        questBox.GetChild(0).GetComponent<Text>().text = mutantKillQuest.Content;
+        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = $"{mutantKillQuest.Gold} Gold {mutantKillQuest.Exp} Exp";
+        questBox.GetChild(1).GetComponent<Text>().text = $"{questDataJson.KillCount} / {mutantKillQuest.ClearCount}";
+        questBox.GetChild(1).GetChild(0).GetComponent<Text>().text = mutantKillQuest.MutantName;
         questBox.GetChild(1).gameObject.SetActive(true);
         plusContent.y += 305.0f;
         content.sizeDelta = plusContent;
-        questState = newState;
-        DataManager.dataInst.SaveQuestData(questState, questName);
+        questDataJson.questState = QuestState.QuestTake;
+        DataManager.dataInst.SaveQuestData(QuestState.QuestTake, mutantKillQuest.Name, questDataJson.Idx);
         questTransform.gameObject.SetActive(true);
     }
-    public void AddQuest_03(ref int questIdx, Sprite questSprite, string questName, string questContent, string questRewards, Sprite questReward01, Sprite questReward02, string mutantName, string bossName, int mutatntKillCount,
-        int mutantClearCount, int bossKillCount, int bossClearCount, ref QuestState questState, QuestState newState)
+    public void AddQuest_03(ref MutantKillerQuest mutantKillerQuest, ref QuestDataJson questDataJson)
     {
-        questIdx = GetAvailableQuestIdx();
-        Transform questTransform = questList[questIdx];
+        questDataJson.Idx = GetAvailableQuestIdx();
+        Transform questTransform = questList[questDataJson.Idx];
 
-        questTransform.GetChild(2).GetComponent<Image>().sprite = questSprite;
-        questTransform.GetChild(1).GetComponent<Text>().text = questName;
+        questTransform.GetChild(2).GetComponent<Image>().sprite = mutantKillerQuest.Image;
+        questTransform.GetChild(1).GetComponent<Text>().text = mutantKillerQuest.Name;
 
         Transform questBox = questTransform.GetChild(0);
-        questBox.GetChild(0).GetComponent<Text>().text = questContent;
-        questBox.GetChild(3).GetChild(0).GetComponent<Image>().sprite = questReward01;
-        questBox.GetChild(3).GetChild(1).GetComponent<Image>().sprite = questReward02;
-        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = questRewards;
-        questBox.GetChild(3).gameObject.SetActive(true);
-        questBox.GetChild(1).GetComponent<Text>().text = $"{mutatntKillCount} / {mutantClearCount}";
-        questBox.GetChild(1).GetChild(0).GetComponent<Text>().text = mutantName;
+        questBox.GetChild(0).GetComponent<Text>().text = mutantKillerQuest.Content;
+        questBox.GetChild(3).GetChild(0).GetComponent<Image>().sprite = mutantKillerQuest.RewardImage_01;
+        questBox.GetChild(3).GetChild(1).GetComponent<Image>().sprite = mutantKillerQuest.RewardImage_02;
+        questBox.GetChild(3).GetChild(0).gameObject.SetActive(true);
+        questBox.GetChild(3).GetChild(1).gameObject.SetActive(true);
+        questBox.GetChild(3).GetChild(2).GetComponent<Text>().text = $"{mutantKillerQuest.Gold} Gold {mutantKillerQuest.Exp} Exp";
+        questBox.GetChild(1).GetComponent<Text>().text = $"{questDataJson.KillCount} / {mutantKillerQuest.ClearCount}";
+        questBox.GetChild(1).GetChild(0).GetComponent<Text>().text = mutantKillerQuest.MutantName;
         questBox.GetChild(1).gameObject.SetActive(true);
-        questBox.GetChild(2).GetComponent<Text>().text = $"{bossKillCount} / {bossClearCount}";
-        questBox.GetChild(2).GetChild(0).GetComponent<Text>().text = bossName;
+        questBox.GetChild(2).GetComponent<Text>().text = $"{questDataJson.bossKillCount} / {mutantKillerQuest.BossClearCount}";
+        questBox.GetChild(2).GetChild(0).GetComponent<Text>().text = mutantKillerQuest.BossName;
         questBox.GetChild(2).gameObject.SetActive(true);
         plusContent.y += 305.0f;
         content.sizeDelta = plusContent;
-        questState = newState;
-        DataManager.dataInst.SaveQuestData(questState, questName);
+        questDataJson.questState = QuestState.QuestTake;
+        DataManager.dataInst.SaveQuestData(QuestState.QuestTake, mutantKillerQuest.Name, questDataJson.Idx);
         questTransform.gameObject.SetActive(true);
     }
     // 사용 가능한 퀘스트 인덱스를 반환
@@ -274,24 +226,23 @@ public class QuestManager : MonoBehaviour
 
 
     // 퀘스트 완료 처리 (QuestState)
-    public void CompleteQuest(int questIdx, ref QuestState questState, int exp, string questName)
+    public void CompleteQuest(int exp, string questName, ref QuestDataJson questDataJson)
     {
-        questList[questIdx].gameObject.SetActive(false);
-        questState = QuestState.None;
-        DataManager.dataInst.SaveQuestData(questState, questName);
+        questList[questDataJson.Idx].gameObject.SetActive(false);
+        questDataJson.questState = QuestState.None;
+        DataManager.dataInst.SaveQuestData(QuestState.None, questName, questDataJson.Idx);
         GameManager.GM.ExpUp(exp);
     }
-    public void CompleteQuest(int questIdx, ref QuestState questState, int exp, int gold, string questName)
+    public void CompleteQuest(int exp, int gold, string questName, ref QuestDataJson questDataJson)
     {
-        Transform quest = questList[questIdx].GetChild(0);
+        Transform quest = questList[questDataJson.Idx].GetChild(0);
         quest.GetChild(1).gameObject.SetActive(false);
         quest.GetChild(2).gameObject.SetActive(false);
         quest.GetChild(3).GetChild(0).gameObject.SetActive(false);
         quest.GetChild(3).GetChild(1).gameObject.SetActive(false);
-        quest.GetChild(3).gameObject.SetActive(false);
-        questList[questIdx].gameObject.SetActive(false);
-        questState = QuestState.None;
-        DataManager.dataInst.SaveQuestData(questState, questName);
+        questList[questDataJson.Idx].gameObject.SetActive(false);
+        questDataJson.questState = QuestState.None;
+        DataManager.dataInst.SaveQuestData(QuestState.None, questName, questDataJson.Idx);
         GameManager.GM.ExpUp(exp);
         ItemManager.itemInst.GoldPlus(gold);
     }
@@ -302,53 +253,59 @@ public class QuestManager : MonoBehaviour
         switch (questIdx)
         {
             case 0:
-                IncrementKillCount(ref mariaQuest_01.KillCount, mariaQuest_01.ClearCount, mariaQuest_01.Idx, ref mariaQuest_01.questState, mariaQuest_01.Name);
+                IncrementKillCount(ref dataManager.mariaQuest_01DataJson, mariaQuest_01.ClearCount);
                 break;
             case 1:
-                IncrementKillCount(ref mutantKillerQuest_01.KillCount, mutantKillerQuest_01.ClearCount, mutantKillerQuest_01.Idx, ref mutantKillerQuest_01.questState, mutantKillerQuest_01.Name);
+                IncrementKillCount(ref dataManager.mutantKillerQuest_01DataJson, mutantKillerQuest_01.ClearCount);
                 break;
             case 2:
-                IncrementBossKillCount(ref mutantKillerQuest_02.KillCount, mutantKillerQuest_02.ClearCount, ref mutantKillerQuest_02.BossKillCount, mutantKillerQuest_02.BossClearCount, mutantKillerQuest_02.Idx, ref mutantKillerQuest_02.questState, mutantKillerQuest_02.Name, boss);
+                IncrementBossKillCount(ref dataManager.mutantKillerQuest_02DataJson, mutantKillerQuest_02.ClearCount, mutantKillerQuest_02.BossClearCount, boss);
                 break;
             case 3:
-                IncrementBossKillCount(ref mutantKillerQuest_03.KillCount, mutantKillerQuest_03.ClearCount, ref mutantKillerQuest_03.BossKillCount, mutantKillerQuest_03.BossClearCount, mutantKillerQuest_03.Idx, ref mutantKillerQuest_03.questState, mutantKillerQuest_03.Name, boss);
+                IncrementBossKillCount(ref dataManager.mutantKillerQuest_03DataJson, mutantKillerQuest_03.ClearCount, mutantKillerQuest_03.BossClearCount, boss);
                 break;
             case 4:
-                IncrementBossKillCount(ref mutantKillerQuest_04.KillCount, mutantKillerQuest_04.ClearCount, ref mutantKillerQuest_04.BossKillCount, mutantKillerQuest_04.BossClearCount, mutantKillerQuest_04.Idx, ref mutantKillerQuest_04.questState, mutantKillerQuest_04.Name, boss);
+                IncrementBossKillCount(ref dataManager.mutantKillerQuest_04DataJson, mutantKillerQuest_04.ClearCount, mutantKillerQuest_04.BossClearCount, boss);
                 break;
 
         }
     }
 
     // 퀘스트의 킬 카운트를 증가시키는 메소드 (QuestState)
-    private void IncrementKillCount(ref int killCount, int clearCount, int idx, ref QuestState state, string questName)
+    private void IncrementKillCount(ref QuestDataJson questDataJson, int clearCount)
     {
-        if (state == QuestState.QuestTake)
+        if (questDataJson.questState == QuestState.QuestTake)
         {
-            killCount++;
-            UpdateQuestProgress(idx, killCount, clearCount);
-            DataManager.dataInst.SaveQuestData(state, questName);
+            questDataJson.KillCount++;
 
-            if (killCount >= clearCount)
+            UpdateQuestProgress(questDataJson.Idx, questDataJson.KillCount, clearCount);
+            DataManager.dataInst.SaveQuestData(questDataJson.questState, questDataJson.Name, questDataJson.Idx, questDataJson.KillCount);
+
+            if (questDataJson.KillCount >= clearCount)
             {
-                state = QuestState.QuestClear;
+                questDataJson.KillCount = clearCount;
+                DataManager.dataInst.SaveQuestData(QuestState.QuestClear, questDataJson.Name, questDataJson.Idx, questDataJson.KillCount);
             }
         }
     }
 
-    private void IncrementBossKillCount(ref int killCount, int clearCount, ref int bossKillCount, int bossClearCount, int idx, ref QuestState state, string questName, bool boss = false)
+
+    private void IncrementBossKillCount(ref QuestDataJson questData, int clearCount, int bossClearCount, bool boss = false)
     {
-        if (state == QuestState.QuestTake)
+        if (questData.questState == QuestState.QuestTake)
         {
-            if (!boss) killCount++;
-            else bossKillCount++;
+            if (!boss) questData.KillCount++;
+            else questData.bossKillCount++;
 
-            UpdateQuestProgress(idx, killCount, clearCount, bossKillCount, bossClearCount);
-            DataManager.dataInst.SaveQuestData(state, questName);
+            UpdateQuestProgress(questData.Idx, questData.KillCount, clearCount, questData.bossKillCount, bossClearCount);
+            DataManager.dataInst.SaveQuestData(questData.questState, questData.Name, questData.Idx, questData.KillCount, questData.bossKillCount);
 
-            if (killCount >= clearCount && bossKillCount >= bossClearCount)
+            if (questData.KillCount >= clearCount && questData.bossKillCount >= bossClearCount)
             {
-                state = QuestState.QuestClear;
+                questData.KillCount = clearCount;
+                questData.bossKillCount = bossClearCount;
+                questData.questState = QuestState.QuestClear;
+                DataManager.dataInst.SaveQuestData(questData.questState, questData.Name, questData.Idx, questData.KillCount, questData.bossKillCount);
             }
         }
     }
@@ -362,5 +319,5 @@ public class QuestManager : MonoBehaviour
         questList[questIdx].GetChild(0).GetChild(1).GetComponent<Text>().text = $"{mutantKillCount} / {mutantClearCount}";
         questList[questIdx].GetChild(0).GetChild(2).GetComponent<Text>().text = $"{bossKillCount} / {bossClearCount}";
     }
-    public void PlayerLevel30() { mutantKillerQuest_04.questState = QuestState.QuestHave; }
+    public void PlayerLevel30() { dataManager.mutantKillerQuest_04DataJson.questState = QuestState.QuestNormal; }
 }

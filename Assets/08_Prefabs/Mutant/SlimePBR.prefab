@@ -515,7 +515,7 @@ MonoBehaviour:
   dieClip: {fileID: 8300000, guid: 39184877571abd24489b543e6ea0d1da, type: 3}
   mutantKindIdx: 0
   mutantAttackKindIdx: 0
-  damage: 5
+  damage: 10
   attackRadius: 2
   bossImage: {fileID: 0}
   state: 0
@@ -532,13 +532,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpImage: {fileID: 1664944285132002465}
-  maxHp: 30
+  maxHp: 60
   hitClip: {fileID: 8300000, guid: 804060a6134c444478707906af48750f, type: 3}
   itemDropClip: {fileID: 8300000, guid: cabdd2029e85b0b41b8474aff74205ea, type: 3}
   hpText: {fileID: 0}
   exp: 60
   questDataIdx: 0
   boss: 0
+  sceneBackPotal: {fileID: 0}
+  shieldClip: {fileID: 0}
+  goldValue: 30
 --- !u!135 &7393997962076491690
 SphereCollider:
   m_ObjectHideFlags: 0

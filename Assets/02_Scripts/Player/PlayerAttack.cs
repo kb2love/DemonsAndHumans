@@ -1,4 +1,5 @@
 
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -21,8 +22,8 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime;       // 현재시간을 저장할 공격한 시간
     private float stopLastAttackTime;   // 현재시간을 저장할 공격을 멈출 시간
     [SerializeField] private float[] levelSkillTime = new float[5]; // 스킬 쿨타임
-    private float levelLastSkilTime;      // 얼음 스킬을 날린 마지막시간을 저장할 시간
-    SkillManager skillManager;
+    [SerializeField] Image[] skillImages;
+    private float[] levelLastSkilTime = new float[5];      // 얼음 스킬을 날린 마지막시간을 저장할 시간
     private bool isStop;
     private bool isEquip;
     private bool isInven;
@@ -34,12 +35,10 @@ public class PlayerAttack : MonoBehaviour
         aniEvent = GetComponentInChildren<PlayerAniEvent>();
         controller = GetComponent<PlayerController>();
         plDamage = GetComponent<PlayerDamage>();
-        skillManager = SkillManager.skillInst;
         if (GameObject.FindWithTag("Paladin") != null)
             dialouge = GameObject.FindWithTag("Paladin").GetComponent<NPCPaladinDialouge>();
         else
             dialouge = null;
-        mpImage.fillAmount = playerData.MP / playerData.MaxMP;
     }
 
     void Update()
@@ -113,77 +112,35 @@ public class PlayerAttack : MonoBehaviour
     }
     public void SkillAdd(int qucikIdx, int levelIdx)
     {
-        switch(levelIdx)
+        switch (levelIdx)
         {
             case 0: skillAction[qucikIdx] = Level05SkillCasting; break;
             case 1: skillAction[qucikIdx] = Level10SkillCasting; break;
-            case 2: skillAction[qucikIdx] = Level20_01SkillCasting; break;
-            case 3: skillAction[qucikIdx] = Level20_02SkillCasting; break;
+            case 2: skillAction[qucikIdx] = Level20SkillCasting; break;
+            case 3: skillAction[qucikIdx] = Level25SkillCasting; break;
             case 4: skillAction[qucikIdx] = Level30SkillCasting; break;
         }
     }
 
-    private void Level05SkillCasting()
-    {
-        if (Time.time - levelLastSkilTime > levelSkillTime[0])
-        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
-            controller.IsStop(true);
-            animator.SetTrigger("Lv05SkillTrigger");
-            playerData.MP -= 20;
-            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
-            Invoke("IsMove", 1.0f);
-            levelLastSkilTime = Time.time;
-        }
+    private void Level05SkillCasting() { if (Time.time - levelLastSkilTime[0] > levelSkillTime[0] && GameManager.GM.playerDataJson.MP >= 20) SkillCasting("Lv05SkillTrigger", 0, 20, 1, 0); }
+    private void Level10SkillCasting() { if (Time.time - levelLastSkilTime[1] > levelSkillTime[1] && GameManager.GM.playerDataJson.MP >= 50) SkillCasting("Lv10SkillTrigger", 1, 50, 1.5f, 1); }
+    private void Level20SkillCasting() { if (Time.time - levelLastSkilTime[2] > levelSkillTime[2] && GameManager.GM.playerDataJson.MP >= 100) SkillCasting("Lv20SkillTrigger", 2, 100, 1, 2); }
+    private void Level25SkillCasting() { if (Time.time - levelLastSkilTime[3] > levelSkillTime[3] && GameManager.GM.playerDataJson.MP >= 100) SkillCasting("Lv25SkillTrigger", 3, 100, 2, 3); }
+    private void Level30SkillCasting() { if (Time.time - levelLastSkilTime[4] > levelSkillTime[4] && GameManager.GM.playerDataJson.MP >= 200) SkillCasting("Lv30SkillTrigger", 4, 200, 2, 4); }
+    private void SkillCasting(string aniTriggerName, int imageIdx, int mp, float stopeTime, int lastSkillTimeIdx)
+    {//플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
+        controller.IsStop(true);
+        animator.SetTrigger(aniTriggerName);
+        skillImages[imageIdx].fillAmount = 0;
+        DOTween.To(() => skillImages[imageIdx].fillAmount, x => skillImages[imageIdx].fillAmount = x, 1f, levelSkillTime[imageIdx])
+       .SetEase(Ease.Linear); // 선형 보간을 사용하여 일정한 속도로 변화
+        GameManager.GM.playerDataJson.MP -= mp;
+        mpImage.fillAmount = GameManager.GM.playerDataJson.MP / GameManager.GM.playerDataJson.MaxMP;
+        DataManager.dataInst.PlayerDataSave(GameManager.GM.playerDataJson);
+        Invoke("IsMove", stopeTime);
+        levelLastSkilTime[lastSkillTimeIdx] = Time.time;
     }
-    private void Level10SkillCasting()
-    {
-        if (Time.time - levelLastSkilTime > levelSkillTime[1])
-        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
-            controller.IsStop(true);
-            animator.SetTrigger("Lv10SkillTrigger");
-            playerData.MP -= 50;
-            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
-            Invoke("IsMove", 1.0f);
-            levelLastSkilTime = Time.time;
-        }
-    
-    }
-    private void Level20_01SkillCasting()
-    {
-        if (Time.time - levelLastSkilTime > levelSkillTime[2])
-        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
-            controller.IsStop(true);
-            animator.SetTrigger("Lv20_01SkillTrigger");
-            playerData.MP -= 100;
-            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
-            Invoke("IsMove", 1.0f);
-            levelLastSkilTime = Time.time;
-        }
-    }
-    private void Level20_02SkillCasting()
-    {
-        if (Time.time - levelLastSkilTime > levelSkillTime[3])
-        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
-            controller.IsStop(true);
-            animator.SetTrigger("Lv20_02SkillTrigger");
-            playerData.MP -= 100;
-            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
-            Invoke("IsMove", 1.0f);
-            levelLastSkilTime = Time.time;
-        }
-    }
-    private void Level30SkillCasting()
-    {
-        if (Time.time - levelLastSkilTime > levelSkillTime[5])
-        {   //플레이어가 찍은 레벨스킬로 스킬을 코루틴을 정하고 애니메이션을 실행시킨다
-            controller.IsStop(true);
-            animator.SetTrigger("Lv30SkillTrigger");
-            playerData.MP -= 200;
-            mpImage.fillAmount = playerData.MP / playerData.MaxMP;
-            Invoke("IsMove", 1.0f);
-            levelLastSkilTime = Time.time;
-        }
-    }
+    public void SkillImageChange(int level, Sprite skillImage) { skillImages[level].sprite = skillImage; }
     void TriggerAttackAnimation()
     {
         switch (attackCount)

@@ -19,14 +19,14 @@ MonoBehaviour:
   - 25
   - 10
   Idx_01: 7
-  Count_01: 1
+  Count_01: 0
   Name_02: "\uB9C8\uC871\uC758 \uB0A0\uAC1C"
   Image_02: {fileID: 21300000, guid: 322b8eeb974289a49b5beeeb53f4f4e5, type: 3}
   Value_02:
   - 75
   - 75
   - 35
-  Idx_02: 0
+  Idx_02: 8
   Count_02: 0
   Name_03: "\uC601\uC6C5\uC758 \uB9DD\uD1A0"
   Image_03: {fileID: 21300000, guid: 333c91b20b6cec54d9a460817d49cf5d, type: 3}
@@ -34,10 +34,10 @@ MonoBehaviour:
   - 100
   - 100
   - 50
-  Idx_03: 0
+  Idx_03: 9
   Count_03: 0
   Name_04: 
   Image_04: {fileID: 0}
   Value_04: []
   Idx_04: 0
-  Count_04: 0
+  Count_04: 1

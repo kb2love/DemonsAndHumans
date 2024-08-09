@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Playables;
 public class SceneMove : MonoBehaviour
 {
     public static SceneMove SceneInst;
@@ -71,8 +72,11 @@ public class SceneMove : MonoBehaviour
         if (sceneIdx == 2) material = castleSkyBox;
         StartCoroutine(LoadSceneAsync(sceneIdx, material, gameData));
     }
-
-    private IEnumerator LoadSceneAsync(int sceneIdx, Material skybox, GameData gameData = null, bool resetGame = false)
+    public void DeathScene()
+    {
+        StartCoroutine(LoadSceneAsync(2, castleSkyBox));
+    }
+    private IEnumerator LoadSceneAsync(int sceneIdx, Material skybox, GameData gameData = null, bool resetGame = false, bool isDie = false)
     {
         loadingWindow.SetActive(true);
         loadingBar.fillAmount = 0f;
@@ -98,17 +102,27 @@ public class SceneMove : MonoBehaviour
 
         // PlayerScene을 활성화
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("PlayerScene"));
-
         if (resetGame)
         {
-            QuestManager.questInst.QuestReset();
             DataManager.dataInst.DeleteSaveData();
-            ItemManager.itemInst.ReSetGame();
+            QuestManager.questInst.QuestReset();
+            GameManager.GM.playerDataJson = DataManager.dataInst.PlayerDataLoad();
+            GameManager.GM.ReSetGame();
+            GameManager.GM.Initialize();
         }
-        else { DataManager.dataInst.DataLoad(); }
+        else 
+        { 
+            DataManager.dataInst.DataLoad();
+            GameManager.GM.playerDataJson = DataManager.dataInst.PlayerDataLoad();
+            if(isDie)
+            {
+                GameManager.GM.playerDataJson.HP = GameManager.GM.playerDataJson.MaxHP;
+                GameManager.GM.playerDataJson.MP = GameManager.GM.playerDataJson.MaxHP;
+            }
+            GameManager.GM.Initialize();
+        }
         DialogueManager.dialogueInst.Initialize();
         ObjectPoolingManager.objInst.Initialize();
-        GameManager.GM.Initialize();
         // 초기화 메서드 호출
         InitializeNPCDialogue();
         InitializeMutantAI();
@@ -118,7 +132,7 @@ public class SceneMove : MonoBehaviour
         PlayerStartPoint playerStartPoint = FindObjectOfType<PlayerStartPoint>();
         if (gameData != null && gameData.playerPosition != null && gameData.playerRotation != null)
         {
-            Transform playerTransform = playerStartPoint.transform.GetChild(playerData.playerSceneIdx).transform;
+            Transform playerTransform = playerStartPoint.transform.GetChild(GameManager.GM.playerDataJson.currentSceneIdx).transform;
             playerTransform.position = new Vector3(gameData.playerPosition[0], gameData.playerPosition[1], gameData.playerPosition[2]);
             playerTransform.rotation = Quaternion.Euler(gameData.playerRotation[0], gameData.playerRotation[1], gameData.playerRotation[2]);
         }

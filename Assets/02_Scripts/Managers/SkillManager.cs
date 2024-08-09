@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using static Cinemachine.DocumentationSortingAttribute;
 // 신이 넘어가거나 게임을 시작할때 스킬을 초기화하는 걸 만들자
 public class SkillManager : MonoBehaviour
 {
@@ -12,8 +11,8 @@ public class SkillManager : MonoBehaviour
     [SerializeField] PlayerData playerData;
     [SerializeField] SkillData lv05SkillData;
     [SerializeField] SkillData lv10SkillData;
-    [SerializeField] SkillData lv20_01SkillData;
-    [SerializeField] SkillData lv20_02SkillData;
+    [SerializeField] SkillData lv20SkillData;
+    [SerializeField] SkillData lv25SkillData;
     [SerializeField] SkillData lv30SkillData;
     [SerializeField] Transform iceSkillImage;
     [SerializeField] Transform fireSkillImage;
@@ -24,51 +23,48 @@ public class SkillManager : MonoBehaviour
     List<Image> electroSkillImageList = new List<Image>();
     [SerializeField] List<Image> skillQuickList = new List<Image>();
     [SerializeField] Image[] saveImages = new Image[5];
-    [SerializeField] Image lastImage;
+    [SerializeField] Text skillPointText;
     // 인트로 하지말고 State로 하자
     PlayerAniEvent aniEvent;
     PlayerAttack playerAttack;
     bool isSelec = false;
-    private List<SkillData> skillDataList = new List<SkillData>();
+    SkillDataJson[] skillDataJson = new SkillDataJson[5];
+    GameManager GM;
     private void Awake()
     {
         skillInst = this;
     }
     public void Initialize()
     {
+        GM = GameManager.GM;
         for (int i = 1; i < iceSkillImage.childCount; i++) { iceSkillImageList.Add(iceSkillImage.GetChild(i).GetComponent<Image>()); }
         for (int i = 1; i < fireSkillImage.childCount; i++) { fireSkillImageList.Add(fireSkillImage.GetChild(i).GetComponent<Image>()); }
         for (int i = 1; i < electroSkillImage.childCount; i++) { electroSkillImageList.Add(electroSkillImage.GetChild(i).GetComponent<Image>()); }
         aniEvent = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerAniEvent>();
         playerAttack = aniEvent.GetComponentInParent<PlayerAttack>();
+        skillDataJson[0] = DataManager.dataInst.FindSkill(lv05SkillData.DataName);
+        skillDataJson[1] = DataManager.dataInst.FindSkill(lv10SkillData.DataName);
+        skillDataJson[2] = DataManager.dataInst.FindSkill(lv20SkillData.DataName);
+        skillDataJson[3] = DataManager.dataInst.FindSkill(lv25SkillData.DataName);
+        skillDataJson[4] = DataManager.dataInst.FindSkill(lv30SkillData.DataName);
         // 스킬 포인트 및 레벨에 따라 스킬 선택
-        if (playerData.levelSkillPoint > 0)
+        if (GM.playerDataJson.levelSkillPoint > 0)
         {
-            if (playerData.Level >= 30 && lv05SkillData.SkillState == SkillState.None) LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 4);
-            else if (playerData.Level >= 20 && lv20_01SkillData.SkillState == SkillState.None && lv20_02SkillData.SkillState == SkillState.None)
-            {
-                LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 3);
-                LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 2);
-            }
-            else if (playerData.Level >= 20 && lv20_01SkillData.SkillState == SkillState.None) LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 3);
-            else if (playerData.Level >= 20 && lv20_02SkillData.SkillState == SkillState.None) LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 2);
-            else if (playerData.Level >= 10 && lv20_02SkillData.SkillState == SkillState.None) LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 1);
-            else if (playerData.Level >= 5 && lv30SkillData.SkillState == SkillState.None) LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 0);
+            if (GM.playerDataJson.Level >= 30 && skillDataJson[4].SkillState == SkillState.None) LevelUpSelectSkill(4);
+            else if (GM.playerDataJson.Level >= 25 && skillDataJson[3].SkillState == SkillState.None) LevelUpSelectSkill(3);
+            else if (GM.playerDataJson.Level >= 20 && skillDataJson[2].SkillState == SkillState.None) LevelUpSelectSkill(2);
+            else if (GM.playerDataJson.Level >= 10 && skillDataJson[1].SkillState == SkillState.None) LevelUpSelectSkill(1);
+            else if (GM.playerDataJson.Level >= 5 && skillDataJson[0].SkillState == SkillState.None) LevelUpSelectSkill(0);
         }
         DataManager.dataInst.LoadSkillData();
-        lv05SkillData = DataManager.dataInst.GetSkillDataByName("Lv05SkillData", lv05SkillData);
-        lv10SkillData = DataManager.dataInst.GetSkillDataByName("Lv10SkillData", lv10SkillData);
-        lv20_01SkillData = DataManager.dataInst.GetSkillDataByName("Lv20_01SkillData", lv20_01SkillData);
-        lv20_02SkillData = DataManager.dataInst.GetSkillDataByName("Lv20_02SkillData", lv20_02SkillData);
-        lv30SkillData = DataManager.dataInst.GetSkillDataByName("Lv30SkillData", lv30SkillData);
-        if (lv05SkillData.SkillState != SkillState.None) { SkillCheck(0, lv05SkillData, SkillLevelState.Lv05); }
-        if (lv10SkillData.SkillState != SkillState.None) { SkillCheck(1, lv10SkillData, SkillLevelState.Lv10); }
-        if (lv20_01SkillData.SkillState != SkillState.None) { SkillCheck(2, lv20_01SkillData, SkillLevelState.Lv20_01); }
-        if (lv20_02SkillData.SkillState != SkillState.None) { SkillCheck(3, lv20_02SkillData, SkillLevelState.Lv20_02); }
-        if (lv30SkillData.SkillState != SkillState.None) { SkillCheck(4, lv30SkillData, SkillLevelState.Lv30); }
-    }// 찍은스킬이 무슨스킬인지 알아야하고 어디에 넣었는지 알아야함 넣지않았는지 넣었는지 넣었다면 어디에 넣었는지
-    void SkillCheck(int level, SkillData skillData, SkillLevelState skillLevelState)
-    {//찍은스킬이 뭔지는 알았어 이제 어디에 넣어야되는지만 찾으면돼
+        if (skillDataJson[0].SkillState != SkillState.None) { SkillCheck(0, skillDataJson[0], lv05SkillData, SkillLevelState.Lv05); }
+        if (skillDataJson[1].SkillState != SkillState.None) { SkillCheck(1, skillDataJson[1], lv10SkillData, SkillLevelState.Lv10); }
+        if (skillDataJson[2].SkillState != SkillState.None) { SkillCheck(2, skillDataJson[2], lv20SkillData, SkillLevelState.Lv20); }
+        if (skillDataJson[3].SkillState != SkillState.None) { SkillCheck(3, skillDataJson[3], lv25SkillData, SkillLevelState.Lv25); }
+        if (skillDataJson[4].SkillState != SkillState.None) { SkillCheck(4, skillDataJson[4], lv30SkillData, SkillLevelState.Lv30); }
+    }
+    void SkillCheck(int level, SkillDataJson skillData, SkillData skillData02, SkillLevelState skillLevelState)
+    {// 스킬을 이미찍었다면 확인한다면
         int quickIdx = 0;
         switch (skillData.SkillSelecState)
         {
@@ -80,9 +76,18 @@ public class SkillManager : MonoBehaviour
         }
         switch (skillData.SkillState)
         {// 퀵슬롯 skillList에 추가할 스킬 Image
-            case SkillState.Ice: skillQuickList[quickIdx].sprite = skillData.IceImage; break;
-            case SkillState.Fire: skillQuickList[quickIdx].sprite = skillData.FireImage; break;
-            case SkillState.Electro: skillQuickList[quickIdx].sprite = skillData.ElectroImage; break;
+            case SkillState.Ice:
+                skillQuickList[quickIdx].sprite = skillData02.IceImage;
+                playerAttack.SkillImageChange(level, skillData02.IceImage);
+                skillQuickList[quickIdx].transform.GetChild(0).GetComponent<Image>().sprite = skillData02.IceImage; break;
+            case SkillState.Fire:
+                skillQuickList[quickIdx].sprite = skillData02.FireImage;
+                playerAttack.SkillImageChange(level, skillData02.FireImage);
+                skillQuickList[quickIdx].transform.GetChild(0).GetComponent<Image>().sprite = skillData02.FireImage; break;
+            case SkillState.Electro:
+                skillQuickList[quickIdx].sprite = skillData02.ElectroImage;
+                playerAttack.SkillImageChange(level, skillData02.ElectroImage);
+                skillQuickList[quickIdx].transform.GetChild(0).GetComponent<Image>().sprite = skillData02.ElectroImage; break;
         }
         switch (skillData.SkillSelecState)
         {
@@ -92,49 +97,53 @@ public class SkillManager : MonoBehaviour
             case SkillSelecState.F: playerAttack.SkillAdd(3, level); break;
             case SkillSelecState.C: playerAttack.SkillAdd(4, level); break;
         }
+        AlreadySkillSelec(level, skillData.SkillState);
         aniEvent.LevelSkillChange(skillData.SkillState, skillLevelState);
-
-        lastImage = skillQuickList[quickIdx];
-
     }
     public void Level5()
     {
-        playerData.levelSkillPoint++;
-        LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 0);
+        GM.playerDataJson.levelSkillPoint++;
+        LevelUpSelectSkill(0);
     }
 
     public void Level10()
     {
-        playerData.levelSkillPoint++;
-        LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 1);
+        GM.playerDataJson.levelSkillPoint++;
+        LevelUpSelectSkill(1);
     }
     public void Level20()
     {
-        playerData.levelSkillPoint++;
-        if (lv20_01SkillData.SkillState == SkillState.None) LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 2);
-        if (lv20_02SkillData.SkillState == SkillState.None) LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 3);
+        GM.playerDataJson.levelSkillPoint++;
+        LevelUpSelectSkill(2);
+
+    }
+    public void Level25()
+    {
+        GM.playerDataJson.levelSkillPoint++;
+        LevelUpSelectSkill(3);
     }
     public void Level30()
     {
-        playerData.levelSkillPoint++;
-        LevelUpSelectSkill(iceSkillImageList, fireSkillImageList, electroSkillImageList, 4);
+        GM.playerDataJson.levelSkillPoint++;
+        LevelUpSelectSkill(4);
     }
-    public void IceSpear_05() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 0, SkillState.Ice, ref lv05SkillData.SkillState, SkillLevelState.Lv05, SkillSelec_05, lv05SkillData); }
-    public void FireBall_05() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 0, SkillState.Fire, ref lv05SkillData.SkillState, SkillLevelState.Lv05, SkillSelec_05, lv05SkillData); }
-    public void ElectroBall_05() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 0, SkillState.Electro, ref lv05SkillData.SkillState, SkillLevelState.Lv05, SkillSelec_05, lv05SkillData); }
-    public void IceBall_10() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 1, SkillState.Ice, ref lv10SkillData.SkillState, SkillLevelState.Lv10, SkillSelec_10, lv05SkillData); }
-    public void FireBoom_10() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 1, SkillState.Fire, ref lv10SkillData.SkillState, SkillLevelState.Lv10, SkillSelec_10, lv05SkillData); }
-    public void ElectroBoom_10() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 1, SkillState.Electro, ref lv10SkillData.SkillState, SkillLevelState.Lv10, SkillSelec_10, lv05SkillData); }
-    public void IceAura_20_01() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 2, SkillState.Ice, ref lv20_01SkillData.SkillState, SkillLevelState.Lv20_01, SkillSelec_20_01, lv05SkillData); }
-    public void FireWIng_20_01() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 2, SkillState.Fire, ref lv20_01SkillData.SkillState, SkillLevelState.Lv20_01, SkillSelec_20_01, lv05SkillData); }
-    public void ElectroAura_20_1() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 2, SkillState.Electro, ref lv20_01SkillData.SkillState, SkillLevelState.Lv20_01, SkillSelec_20_01, lv05SkillData); }
-    public void IceKunai_20_02() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 3, SkillState.Ice, ref lv20_02SkillData.SkillState, SkillLevelState.Lv20_02, SkillSelec_20_02, lv05SkillData); }
-    public void FireStrike_20_02() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 3, SkillState.Fire, ref lv20_02SkillData.SkillState, SkillLevelState.Lv20_02, SkillSelec_20_02, lv05SkillData); }
-    public void ElectroStrike_20_02() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 3, SkillState.Electro, ref lv20_02SkillData.SkillState, SkillLevelState.Lv20_02, SkillSelec_20_02, lv05SkillData); }
-    public void IceLaser_30() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 4, SkillState.Ice, ref lv30SkillData.SkillState, SkillLevelState.Lv30, SkillSelec_30, lv05SkillData); }
-    public void FireMeteor_30() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 4, SkillState.Fire, ref lv30SkillData.SkillState, SkillLevelState.Lv30, SkillSelec_30, lv05SkillData); }
-    public void ElectroArrow_30() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 4, SkillState.Electro, ref lv30SkillData.SkillState,SkillLevelState.Lv30, SkillSelec_30, lv05SkillData); }
-    void LeveUplSkillSelect(List<Image> noneSelecList_01, List<Image> noneSelectList_02, List<Image> SelecList, int level, SkillState skillState, ref SkillState state, SkillLevelState skillLevelStatee, UnityAction buttonAction, SkillData skillData)
+
+    public void IceSpear_05() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 0, SkillState.Ice, ref skillDataJson[0], SkillLevelState.Lv05, SkillSelec_05, lv05SkillData); }
+    public void FireBall_05() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 0, SkillState.Fire, ref skillDataJson[0], SkillLevelState.Lv05, SkillSelec_05, lv05SkillData); }
+    public void ElectroBall_05() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 0, SkillState.Electro, ref skillDataJson[0], SkillLevelState.Lv05, SkillSelec_05, lv05SkillData); }
+    public void IceBall_10() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 1, SkillState.Ice, ref skillDataJson[1], SkillLevelState.Lv10, SkillSelec_10, lv10SkillData); }
+    public void FireBoom_10() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 1, SkillState.Fire, ref skillDataJson[1], SkillLevelState.Lv10, SkillSelec_10, lv10SkillData); }
+    public void ElectroBoom_10() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 1, SkillState.Electro, ref skillDataJson[1], SkillLevelState.Lv10, SkillSelec_10, lv10SkillData); }
+    public void IceAura_20() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 2, SkillState.Ice, ref skillDataJson[2], SkillLevelState.Lv20, SkillSelec_20, lv20SkillData); }
+    public void FireWIng_20() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 2, SkillState.Fire, ref skillDataJson[2], SkillLevelState.Lv20, SkillSelec_20, lv20SkillData); }
+    public void ElectroAura_20() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 2, SkillState.Electro, ref skillDataJson[2], SkillLevelState.Lv20, SkillSelec_20, lv20SkillData); }
+    public void IceKunai_25() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 3, SkillState.Ice, ref skillDataJson[3], SkillLevelState.Lv25, SkillSelec_25, lv25SkillData); }
+    public void FireStrike_25() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 3, SkillState.Fire, ref skillDataJson[3], SkillLevelState.Lv25, SkillSelec_25, lv25SkillData); }
+    public void ElectroStrike_25() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 3, SkillState.Electro, ref skillDataJson[3], SkillLevelState.Lv25, SkillSelec_25, lv25SkillData); }
+    public void IceLaser_30() { LeveUplSkillSelect(fireSkillImageList, electroSkillImageList, iceSkillImageList, 4, SkillState.Ice, ref skillDataJson[4], SkillLevelState.Lv30, SkillSelec_30, lv30SkillData); }
+    public void FireMeteor_30() { LeveUplSkillSelect(iceSkillImageList, electroSkillImageList, fireSkillImageList, 4, SkillState.Fire, ref skillDataJson[4], SkillLevelState.Lv30, SkillSelec_30, lv30SkillData); }
+    public void ElectroArrow_30() { LeveUplSkillSelect(fireSkillImageList, iceSkillImageList, electroSkillImageList, 4, SkillState.Electro, ref skillDataJson[4], SkillLevelState.Lv30, SkillSelec_30, lv30SkillData); }
+    void LeveUplSkillSelect(List<Image> noneSelecList_01, List<Image> noneSelectList_02, List<Image> SelecList, int level, SkillState skillState, ref SkillDataJson skillDataJson, SkillLevelState skillLevelStatee, UnityAction buttonAction, SkillData skillData)
     {// 레벨업을 해서 스킬을 고르면
         noneSelecList_01[level].color = new Color(1, 1, 1, 0.4f);
         noneSelectList_02[level].color = new Color(1, 1, 1, 0.4f);
@@ -142,86 +151,107 @@ public class SkillManager : MonoBehaviour
         noneSelectList_02[level].GetComponent<Button>().enabled = false;
         isSelec = false;
         saveImages[level] = SelecList[level];
-        SaveSKillData(skillData);
         SelecList[level].GetComponent<Button>().onClick.AddListener(buttonAction);  // 이 버튼을 추가함
-        state = skillState;
-        aniEvent.LevelSkillChange(state, skillLevelStatee);
-        playerData.levelSkillPoint--;
+        skillDataJson.SkillState = skillState;
+        Debug.Log(skillDataJson);
+        Debug.Log(skillData.DataName);
+        DataManager.dataInst.SaveSkillData(skillData.DataName, skillDataJson.SkillState, skillDataJson.SkillSelecState);
+        aniEvent.LevelSkillChange(skillDataJson.SkillState, skillLevelStatee);
+        if (GM.playerDataJson.levelSkillPoint > 0)
+        {
+            GM.playerDataJson.levelSkillPoint--;
+            skillPointText.text = "스킬포인트 : " + GM.playerDataJson.levelSkillPoint;
+        }
+    }
+    void AlreadySkillSelec(int level, SkillState skillState)
+    {
+        switch (skillState)
+        {
+            case SkillState.Ice: AlreadySkillSelecMethod(level, 1, 0.4f, 0.4f); break;
+            case SkillState.Fire: AlreadySkillSelecMethod(level, 0.4f, 1, 0.4f); break;
+            case SkillState.Electro: AlreadySkillSelecMethod(level, 0.4f, 0.4f, 1); break;
+        }
     }
 
-    void LevelUpSelectSkill(List<Image> iceList, List<Image> fireList, List<Image> electroList, int idx)
+    private void AlreadySkillSelecMethod(int level, float ice, float fire, float electro)
     {
-        iceList[idx].color = new Color(1, 1, 1, 1);
-        fireList[idx].color = new Color(1, 1, 1, 1);
-        electroList[idx].color = new Color(1, 1, 1, 1);
-        iceList[idx].GetComponent<Button>().enabled = true;
-        fireList[idx].GetComponent<Button>().enabled = true;
-        electroList[idx].GetComponent<Button>().enabled = true;
+        iceSkillImageList[level].color = new Color(1, 1, 1, ice);
+        fireSkillImageList[level].color = new Color(1, 1, 1, fire);
+        electroSkillImageList[level].color = new Color(1, 1, 1, electro);
+    }
+
+    void LevelUpSelectSkill(int idx)
+    {
+        iceSkillImageList[idx].color = new Color(1, 1, 1, 1);
+        fireSkillImageList[idx].color = new Color(1, 1, 1, 1);
+        electroSkillImageList[idx].color = new Color(1, 1, 1, 1);
+        iceSkillImageList[idx].GetComponent<Button>().enabled = true;
+        fireSkillImageList[idx].GetComponent<Button>().enabled = true;
+        electroSkillImageList[idx].GetComponent<Button>().enabled = true;
     }
     #region 스킬을 배우고 나서 그 스킬의 버튼에 들어갈 UnityAction들
     public void SkillSelec_05()
     {// 스킬트리에 있는 스킬을 클릭하여 사용창으로 넣는 메서드
-        StartCoroutine(SkillSelecButton(SkillSelec_05, 0, lv05SkillData));
+        StartCoroutine(SkillSelecButton(SkillSelec_05, 0, lv05SkillData, skillDataJson[0]));
         // 스타트 코루틴을 시작하는동안 추가 코루틴을 발생시키지 않도록 버튼에 코루틴 추가 리스너를 삭제한다
         saveImages[0].GetComponent<Button>().onClick.RemoveListener(SkillSelec_05);
     }
     public void SkillSelec_10()
     {
-        StartCoroutine(SkillSelecButton(SkillSelec_10, 1, lv10SkillData));
+        StartCoroutine(SkillSelecButton(SkillSelec_10, 1, lv10SkillData, skillDataJson[1]));
         saveImages[1].GetComponent<Button>().onClick.RemoveListener(SkillSelec_10);
     }
-    public void SkillSelec_20_01()
+    public void SkillSelec_20()
     {
-        StartCoroutine(SkillSelecButton(SkillSelec_20_01, 2, lv20_01SkillData));
-        saveImages[2].GetComponent<Button>().onClick.RemoveListener(SkillSelec_20_01);
+        StartCoroutine(SkillSelecButton(SkillSelec_20, 2, lv20SkillData, skillDataJson[2]));
+        saveImages[2].GetComponent<Button>().onClick.RemoveListener(SkillSelec_20);
     }
-    public void SkillSelec_20_02()
+    public void SkillSelec_25()
     {
-        StartCoroutine(SkillSelecButton(SkillSelec_20_02, 3, lv20_02SkillData));
-        saveImages[3].GetComponent<Button>().onClick.RemoveListener(SkillSelec_20_02);
+        StartCoroutine(SkillSelecButton(SkillSelec_25, 3, lv25SkillData, skillDataJson[3]));
+        saveImages[3].GetComponent<Button>().onClick.RemoveListener(SkillSelec_25);
     }
     public void SkillSelec_30()
     {
-        StartCoroutine(SkillSelecButton( SkillSelec_30, 4, lv30SkillData));
+        StartCoroutine(SkillSelecButton(SkillSelec_30, 4, lv30SkillData, skillDataJson[4]));
         saveImages[4].GetComponent<Button>().onClick.RemoveListener(SkillSelec_30);
     }
     #endregion
-    IEnumerator SkillSelecButton( UnityAction buttonAction, int level, SkillData skillData)
+    IEnumerator SkillSelecButton(UnityAction buttonAction, int level, SkillData skillData, SkillDataJson skillDataJson)
     {
         while (!isSelec)
         {
             yield return null;
-            if (Input.GetKeyDown(KeyCode.Q)) { Selec(0, buttonAction, level,ref skillData, SkillSelecState.Q); break; }
-            else if (Input.GetKeyDown(KeyCode.E)) { Selec(1, buttonAction, level,ref skillData, SkillSelecState.E); break; }
-            else if (Input.GetKeyDown(KeyCode.R)) { Selec(2, buttonAction, level,ref skillData, SkillSelecState.R); break; }
-            else if (Input.GetKeyDown(KeyCode.F)) { Selec(3, buttonAction, level,ref skillData, SkillSelecState.F); break; }
-            else if (Input.GetKeyDown(KeyCode.C)) { Selec(4, buttonAction, level,ref skillData, SkillSelecState.C); break; }
+            if (Input.GetKeyDown(KeyCode.Q)) { Selec(0, buttonAction, level, ref skillData,ref skillDataJson, SkillSelecState.Q); break; }
+            else if (Input.GetKeyDown(KeyCode.E)) { Selec(1, buttonAction, level, ref skillData, ref skillDataJson, SkillSelecState.E); break; }
+            else if (Input.GetKeyDown(KeyCode.R)) { Selec(2, buttonAction, level, ref skillData, ref skillDataJson, SkillSelecState.R); break; }
+            else if (Input.GetKeyDown(KeyCode.F)) { Selec(3, buttonAction, level, ref skillData, ref skillDataJson, SkillSelecState.F); break; }
+            else if (Input.GetKeyDown(KeyCode.C)) { Selec(4, buttonAction, level, ref skillData, ref skillDataJson, SkillSelecState.C); break; }
         }
     }
-    private void Selec(int quickIdx,  UnityAction buttonAction, int levelIdx, ref SkillData skillData, SkillSelecState skillLevelState)
+    private void Selec(int quickIdx, UnityAction buttonAction, int levelIdx, ref SkillData skillData,ref SkillDataJson skillDataJson, SkillSelecState skillLevelState)
     {
         // 스킬을 이미 배치해논적이 있다면 그전에 배치했던곳은 빈칸으로 채운다
-        switch (skillData.SkillState)
-        { // 퀵슬롯 skillList에 추가할 스킬 Image
-            case SkillState.Ice: skillQuickList[quickIdx].sprite = skillData.IceImage; break;
-            case SkillState.Fire: skillQuickList[quickIdx].sprite = skillData.FireImage; break;
-            case SkillState.Electro: skillQuickList[quickIdx].sprite = skillData.ElectroImage; break;
+
+        switch (skillDataJson.SkillState)
+        {// 퀵슬롯 skillList에 추가할 스킬 Image
+            case SkillState.Ice:
+                skillQuickList[quickIdx].sprite = skillData.IceImage;
+                playerAttack.SkillImageChange(quickIdx, skillData.IceImage);
+                skillQuickList[quickIdx].transform.GetChild(0).GetComponent<Image>().sprite = skillData.IceImage; break;
+            case SkillState.Fire:
+                skillQuickList[quickIdx].sprite = skillData.FireImage;
+                playerAttack.SkillImageChange(quickIdx, skillData.FireImage);
+                skillQuickList[quickIdx].transform.GetChild(0).GetComponent<Image>().sprite = skillData.FireImage; break;
+            case SkillState.Electro:
+                skillQuickList[quickIdx].sprite = skillData.ElectroImage;
+                playerAttack.SkillImageChange(quickIdx, skillData.ElectroImage);
+                skillQuickList[quickIdx].transform.GetChild(0).GetComponent<Image>().sprite = skillData.ElectroImage; break;
         }
-        skillData.SkillSelecState = skillLevelState;
-        lastImage = skillQuickList[quickIdx];
+        skillDataJson.SkillSelecState = skillLevelState;
         playerAttack.SkillAdd(quickIdx, levelIdx);
-        SaveSKillData(skillData);
+        DataManager.dataInst.SaveSkillData( skillData.DataName, skillDataJson.SkillState, skillDataJson.SkillSelecState);
         saveImages[levelIdx].GetComponent<Button>().onClick.AddListener(buttonAction);
         isSelec = true;
     }
-    private void SaveSKillData(SkillData skillData)
-    {
-        // 기존 데이터 리스트에서 동일한 이름의 데이터를 제거하고 새로운 데이터를 추가합니다.
-        skillDataList.RemoveAll(data => data.DataName == skillData.DataName);
-        skillDataList.Add(skillData);
-        Debug.Log(skillDataList);
-        Debug.Log(skillData);
-        DataManager.dataInst.SaveSkillData(skillDataList);
-    }
-
 }

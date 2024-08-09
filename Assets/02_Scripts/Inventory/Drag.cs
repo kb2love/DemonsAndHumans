@@ -1,4 +1,3 @@
-using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -24,9 +23,12 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public int price = 0;
     bool isEquip;
     Transform parent;
+    GameManager GM;
+    public ItemDataJson itemDataJson = new ItemDataJson();
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        GM = GameManager.GM;
         itemTr = GetComponent<RectTransform>();
     }
     private void OnEnable()
@@ -71,8 +73,9 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                     ItemTypeSelect(itemInfo.type, true);
                 StatUp();
                 isEquip = true;
-                GameManager.GM.AllStatUpdata();
-                ItemManager.itemInst.AllItemSave();
+                GM.AllStatUpdata();
+                ItemManager.itemInst.ItemSave(itemDataJson);
+                Debug.Log(itemDataJson.Name);
             }
             else if (transform.parent.GetComponent<ItemInfo>().type != itemInfo.type)
             {
@@ -82,8 +85,9 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
                 if (isEquip)
                     StatDown();
                 isEquip = false;
-                GameManager.GM.AllStatUpdata();
-                ItemManager.itemInst.AllItemSave();
+                GM.AllStatUpdata();
+                ItemManager.itemInst.ItemSave(itemDataJson);
+                Debug.Log(itemDataJson.Name);
             }
         }
         else
@@ -93,30 +97,32 @@ public class Drag : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             if (isEquip)
                 StatDown();
             isEquip = false;
-            GameManager.GM.AllStatUpdata();
-            ItemManager.itemInst.AllItemSave();
+            GM.AllStatUpdata();
+            ItemManager.itemInst.ItemSave(itemDataJson);
         }
     }
 
     private void StatUp()
     {
-        playerData.HP += hp;
-        playerData.MP += mp;
-        playerData.AttackValue += damage;
-        playerData.DefenceValue += defence;
-        playerData.MagicAttackValue += magicDamage;
-        playerData.FatalProbability += fatalProbabillity;
-        playerData.FatalValue += fatalValue;
+        GM.playerDataJson.HP += hp;
+        GM.playerDataJson.MP += mp;
+        GM.playerDataJson.AttackValue += damage;
+        GM.playerDataJson.DefenceValue += defence;
+        GM.playerDataJson.MagicAttackValue += magicDamage;
+        GM.playerDataJson.FatalProbability += fatalProbabillity;
+        GM.playerDataJson.FatalAttackValue += fatalValue;
+        DataManager.dataInst.PlayerDataSave(GameManager.GM.playerDataJson);
     }
     private void StatDown()
     {
-        playerData.HP -= hp;
-        playerData.MP -= mp;
-        playerData.AttackValue -= damage;
-        playerData.DefenceValue -= defence;
-        playerData.MagicAttackValue -= magicDamage;
-        playerData.FatalProbability -= fatalProbabillity;
-        playerData.FatalValue -= fatalValue;
+        GM.playerDataJson.HP -= hp;
+        GM.playerDataJson.MP -= mp;
+        GM.playerDataJson.AttackValue -= damage;
+        GM.playerDataJson.DefenceValue -= defence;
+        GM.playerDataJson.MagicAttackValue -= magicDamage;
+        GM.playerDataJson.FatalProbability -= fatalProbabillity;
+        GM.playerDataJson.FatalAttackValue -= fatalValue;
+        DataManager.dataInst.PlayerDataSave(GameManager.GM.playerDataJson);
     }
 
 

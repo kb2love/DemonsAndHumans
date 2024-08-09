@@ -6,17 +6,17 @@ public class NPCPaladinDialouge : NPCDialogue
     [SerializeField] private Transform gate02;
     [SerializeField] GameObject nextDoor;
     [SerializeField] DialougeQuest paladinQuest;
-
+    DataManager dataManager;
     public override void Initialize()
     {
-        switch(paladinQuest.questState)
+        dataManager = DataManager.dataInst;
+        switch (dataManager.paladinQuestDataJson.questState)
         {
             case QuestState.QuestHave:
                 QuestAdd();
                 break;
             case QuestState.QuestTake:
                 QuestEnd();
-                QuestManager.questInst.AddQuest_01(ref paladinQuest.Idx, paladinQuest.Image, paladinQuest.Name, paladinQuest.Content, paladinQuest.Exp.ToString() + " Exp", ref paladinQuest.questState, QuestState.QuestTake); 
                 break;
             case QuestState.QuestClear:
                 QuestClear();
@@ -31,7 +31,7 @@ public class NPCPaladinDialouge : NPCDialogue
 
     protected override void StartDialogue()
     {
-        switch (paladinQuest.questState)
+        switch (dataManager.paladinQuestDataJson.questState)
         {
             case QuestState.QuestHave: dialogueIdx = 0; break;
             case QuestState.QuestTake: dialogueIdx = 1; break;
@@ -43,13 +43,12 @@ public class NPCPaladinDialouge : NPCDialogue
 
     protected override void EndDialogue()
     {
-        switch (paladinQuest.questState)
+        switch (dataManager.paladinQuestDataJson.questState)
         {
             case QuestState.QuestHave:
                 ItemManager.itemInst.GetSword01();
                 ItemManager.itemInst.GetShield01();
-                ItemManager.itemInst.AllItemSave();
-                QuestManager.questInst.AddQuest_01(ref paladinQuest.Idx, paladinQuest.Image, paladinQuest.Name, paladinQuest.Content, paladinQuest.Exp.ToString() + " Exp", ref paladinQuest.questState, QuestState.QuestTake);
+                QuestManager.questInst.AddQuest_01(ref paladinQuest, ref dataManager.paladinQuestDataJson);
                 QuestAdd();
                 break;
             case QuestState.QuestTake:
@@ -58,7 +57,7 @@ public class NPCPaladinDialouge : NPCDialogue
             case QuestState.QuestClear:
                 OpenDoor();
                 QuestEnd();
-                QuestManager.questInst.CompleteQuest(paladinQuest.Idx, ref paladinQuest.questState, paladinQuest.Exp, paladinQuest.Name);
+                QuestManager.questInst.CompleteQuest(paladinQuest.Exp,  paladinQuest.Exp, paladinQuest.Name, ref dataManager.paladinQuestDataJson);
                 break;
             case QuestState.None: break;
         }
@@ -75,9 +74,9 @@ public class NPCPaladinDialouge : NPCDialogue
 
     public void WeaponWear()
     {
-        if (paladinQuest.questState == QuestState.QuestTake)
+        if (dataManager.paladinQuestDataJson.questState == QuestState.QuestTake)
         {
-            paladinQuest.questState = QuestState.QuestClear;
+            dataManager.paladinQuestDataJson.questState = QuestState.QuestClear;
             QuestClear();
         };
     }

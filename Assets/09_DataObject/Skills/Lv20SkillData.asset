@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67debb67ffbfc214aad180cfa8dab9ae, type: 3}
-  m_Name: Lv20_01SkillData
+  m_Name: Lv20SkillData
   m_EditorClassIdentifier: 
-  DataName: Lv20_01SkillData
-  SkillState: 1
-  SkillSelecState: 3
+  DataName: Lv20SkillData
+  SkillState: 0
+  SkillSelecState: 0
   IceImage: {fileID: 21300000, guid: d7bbc824ff10e88468e5144e2cd06176, type: 3}
   IceSkillName: "\uC11C\uB9AC\uC655\uC758 \uC228\uACB0"
   IceClip: {fileID: 8300000, guid: c43537fe076c1c648aa1a7a2c48ce7e5, type: 3}

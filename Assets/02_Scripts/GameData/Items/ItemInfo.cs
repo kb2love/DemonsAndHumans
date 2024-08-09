@@ -3,5 +3,5 @@ using UnityEngine;
 public class ItemInfo : MonoBehaviour
 {
     [SerializeField] public ItemType type;
-    public string itemName;
+    public int goldValue;
 }

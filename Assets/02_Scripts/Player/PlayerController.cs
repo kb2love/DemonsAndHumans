@@ -4,11 +4,11 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float walkSpeed = 2.5f;
-    [SerializeField] float runSpeed = 5.0f;
+    float walkSpeed = 2.5f;
+    float runSpeed = 5.0f;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip runSound;
-    [SerializeField] AudioSource audioSource;
+    private AudioSource audioSource;
     private float moveSpeed = 0;
     private Camera _camera;
     private Animator animator;
@@ -74,11 +74,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isRunning)
         {
-            SoundManager.soundInst.EffectSoundPlay(audioSource,runSound);
+            SoundManager.soundInst.EffectSoundPlay(audioSource, runSound);
         }
         else
         {
-            SoundManager.soundInst.EffectSoundPlay(audioSource,walkSound);
+            SoundManager.soundInst.EffectSoundPlay(audioSource, walkSound);
         }
     }
     private void LateUpdate()

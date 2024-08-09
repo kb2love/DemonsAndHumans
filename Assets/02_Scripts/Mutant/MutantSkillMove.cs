@@ -6,6 +6,7 @@ public class MutantSkillMove : MonoBehaviour
     [SerializeField] float speed = 2.0f;
     [SerializeField] GameObject meteorField;
     [SerializeField] bool isMeteor;
+    [SerializeField] AudioClip boomClip;
     void OnEnable()
     {
         if(isMeteor)
@@ -14,6 +15,8 @@ public class MutantSkillMove : MonoBehaviour
             transform.DOMove(playerPos, speed).OnComplete(() =>
             {
                 gameObject.SetActive(false);
+                meteorField.transform.position = transform.position + (Vector3.up * 1.0f);
+                SoundManager.soundInst.EffectSoundPlay(boomClip);
                 meteorField.SetActive(true);
                 Attack(1.5f, 3.0f);
             });
@@ -24,20 +27,9 @@ public class MutantSkillMove : MonoBehaviour
             Vector3 dis = playerPos - transform.position;
             transform.rotation = Quaternion.LookRotation(dis);
             transform.DOMove(playerPos, speed).OnComplete(() => gameObject.SetActive(false));
+            Attack(1.0f, 2.0f);
         }
         
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            other.GetComponent<PlayerDamage>().HitDamage(damage);
-            gameObject.SetActive(false);
-        }
-    }
-    private void OnDisable()
-    {
-        transform.position = Vector3.zero;  
     }
     void Attack(float radiusValue, float damageValue)
     {

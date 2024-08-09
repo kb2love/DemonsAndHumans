@@ -17,8 +17,7 @@ public class NPCDialogue : MonoBehaviour
     [SerializeField] protected GameObject my2DNPCMark;
     [Header("NPC 보이스")]
     [SerializeField] AudioClip audioClip;
-    
-    public QuestState questState01 = QuestState.QuestHave;
+    [Header("퀘스트 데이터들")]
     protected GameObject textBGImage;
     protected Text dialogueText;
     protected Text characterName;

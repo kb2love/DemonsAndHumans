@@ -7,20 +7,18 @@ public class StoreBuyAndSell : MonoBehaviour
     [SerializeField] PlayerData playerData;
     [SerializeField] MaterialData materialData;
     ItemManager itemManger;
-
     private void Start()
     {
         itemManger = ItemManager.itemInst;
     }
-
-    // 아이템 구매를 위한 공통 메서드
     private void BuyItem(int cost, System.Action getItemAction)
     {
-        if (playerData.GoldValue >= cost)
+        if (GameManager.GM.playerDataJson.GoldValue >= cost)
         {
-            playerData.GoldValue -= cost;
+            GameManager.GM.playerDataJson.GoldValue -= cost;
             getItemAction.Invoke();
             itemManger.GoldUpdate();
+            DataManager.dataInst.PlayerDataSave(GameManager.GM.playerDataJson);
         }
     }
 
@@ -82,26 +80,27 @@ public class StoreBuyAndSell : MonoBehaviour
     public void BuyMPpotion03() => BuyItem(1000, itemManger.GetMPpotion03);
 
     // 재료 판매 메서드
-    private void SellMaterial(int materialIndex, int materialPrice, ref int materialCount)
+    private void SellMaterial( int materialPrice, ref ItemDataJson itemDataJson)
     {
-        if (materialCount > 0)
+        if (itemDataJson.Count > 0)
         {
-            playerData.GoldValue += materialPrice;
-            materialCount--;
+            GameManager.GM.playerDataJson.GoldValue += materialPrice;
+            itemDataJson.Count--;
             itemManger.GoldUpdate();
-            if (materialCount == 0)
+            if (itemDataJson.Count == 0)
             {
-                itemManger.ClearMaterial(materialIndex);
+                itemManger.ClearMaterial(itemDataJson.Idx);
             }
+            DataManager.dataInst.PlayerDataSave(GameManager.GM.playerDataJson);
         }
     }
 
-    public void SellMaterial01() => SellMaterial(materialData.material01Idx, materialData.material01Price, ref materialData.material01Count);
-    public void SellMaterial02() => SellMaterial(materialData.material02Idx, materialData.material02Price, ref materialData.material02Count);
-    public void SellMaterial03() => SellMaterial(materialData.material03Idx, materialData.material03Price, ref materialData.material03Count);
-    public void SellMaterial04() => SellMaterial(materialData.material04Idx, materialData.material04Price, ref materialData.material04Count);
-    public void SellMaterial05() => SellMaterial(materialData.material05Idx, materialData.material05Price, ref materialData.material05Count);
-    public void SellMaterial06() => SellMaterial(materialData.material06Idx, materialData.material06Price, ref materialData.material06Count);
-    public void SellMaterial07() => SellMaterial(materialData.material07Idx, materialData.material07Price, ref materialData.material07Count);
-    public void SellMaterial08() => SellMaterial(materialData.material08Idx, materialData.material08Price, ref materialData.material08Count);
+    public void SellMaterial01() => SellMaterial(materialData.material01Price, ref itemManger.materialJson[0]);
+    public void SellMaterial02() => SellMaterial(materialData.material02Price, ref itemManger.materialJson[1]);
+    public void SellMaterial03() => SellMaterial(materialData.material03Price, ref itemManger.materialJson[2]);
+    public void SellMaterial04() => SellMaterial(materialData.material04Price, ref itemManger.materialJson[3]);
+    public void SellMaterial05() => SellMaterial(materialData.material05Price, ref itemManger.materialJson[4]);
+    public void SellMaterial06() => SellMaterial(materialData.material06Price, ref itemManger.materialJson[5]);
+    public void SellMaterial07() => SellMaterial(materialData.material07Price, ref itemManger.materialJson[6]);
+    public void SellMaterial08() => SellMaterial(materialData.material08Price, ref itemManger.materialJson[7]);
 }

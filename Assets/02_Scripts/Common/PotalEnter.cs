@@ -13,11 +13,11 @@ public class PotalEnter : MonoBehaviour
     [SerializeField] PlayerData playerData;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player" && playerData.Level >= playerLevel)
+        if(other.gameObject.tag == "Player" && GameManager.GM.playerDataJson.Level >= playerLevel)
         {
-            ItemManager.itemInst.AllItemSave();
             DataManager.dataInst.DataSave();
-            playerData.playerSceneIdx = startPointIdx;
+            GameManager.GM.playerDataJson.currentSceneIdx = startPointIdx;
+            DataManager.dataInst.PlayerDataSave(GameManager.GM.playerDataJson);
             SceneMove.SceneInst.PotalMove(sceneIdx);
         }
     }

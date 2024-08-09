@@ -16,13 +16,13 @@ MonoBehaviour:
   Image_01: {fileID: 21300000, guid: 8fe0d52ff608d4241a1a5a42346c2291, type: 3}
   Value_01:
   - 10
-  Idx_01: 0
-  Count_01: 1
+  Idx_01: 1
+  Count_01: 0
   Name_02: "\uADF8\uB9AC\uD540\uC758 \uBC29\uD328"
   Image_02: {fileID: 21300000, guid: c0998869a06b72b4aa14e5999f3da890, type: 3}
   Value_02:
   - 25
-  Idx_02: 0
+  Idx_02: 2
   Count_02: 0
   Name_03: "\uB9C8\uC871\uC758 \uBC29\uD328"
   Image_03: {fileID: 21300000, guid: bc43179b7db39ad419317aa5b20d0328, type: 3}

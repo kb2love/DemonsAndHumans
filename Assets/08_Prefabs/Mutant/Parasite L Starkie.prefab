@@ -447,7 +447,7 @@ MonoBehaviour:
   respawnTr: {fileID: 0}
   attackClip: {fileID: 8300000, guid: cc47d394ade5def4dac3043b144bc740, type: 3}
   dieClip: {fileID: 8300000, guid: 8b92e318fbedb1645b76497c2b958fcc, type: 3}
-  mutantKindIdx: 0
+  mutantKindIdx: 1
   mutantAttackKindIdx: 0
   damage: 40
   attackRadius: 4
@@ -466,13 +466,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpImage: {fileID: 0}
-  maxHp: 200
+  maxHp: 400
   hitClip: {fileID: 8300000, guid: 2cc46cabf96c30b41aee8de58bffee1c, type: 3}
   itemDropClip: {fileID: 8300000, guid: cabdd2029e85b0b41b8474aff74205ea, type: 3}
   hpText: {fileID: 0}
   exp: 400
   questDataIdx: 3
   boss: 0
+  sceneBackPotal: {fileID: 0}
+  shieldClip: {fileID: 0}
+  goldValue: 200
 --- !u!82 &-2695160659828000523
 AudioSource:
   m_ObjectHideFlags: 0

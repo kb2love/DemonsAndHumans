@@ -19,7 +19,7 @@ MonoBehaviour:
     10\uB9C8\uB9AC \uC7A1\uC544\uC57C\uD55C\uB2E4 5Lv \uD3EC\uD0C8\uC744 \uD0C0\uACE0
     \uB4E4\uC5B4\uAC00\uBA74 \uB9C8\uC871\uBCD1\uC0AC\uB4E4\uC774 \uC788\uB2E4\uACE0\uD55C\uB2E4."
   MutantName: "\uB9C8\uC871\uBCD1\uC0AC"
-  KillCount: 10
+  KillCount: 0
   ClearCount: 10
   Exp: 1000
   Gold: 1000
